@@ -1,0 +1,12 @@
+node_modules
+test/dist
+.cache
+.DS_Store
+
+*.bak
+*.tem
+*.log
+*.temp
+#.swp
+*.*~
+~*.*
