@@ -43,15 +43,9 @@ module.exports = function create(options) {
       });
       return createTTF(options);
     })
-    .then(() => {
-      return createEOT(options);
-    })
-    .then(() => {
-      return createWOFF(options);
-    })
-    .then(() => {
-      return createWOFF2(options);
-    })
+    .then(() => createEOT(options))
+    .then(() => createWOFF(options))
+    .then(() => createWOFF2(options))
     .then(() => {
       // If you generate a font you need to generate a style.
       if (options.website) options.css = true;
@@ -59,7 +53,7 @@ module.exports = function create(options) {
         const font_temp = path.resolve(__dirname, "styles");
         return copyTemplate(font_temp, options.dist, {
           fontname: options.fontName,
-          cssString: cssString.join(''),
+          cssString: cssString.join(""),
           timestamp: new Date().getTime(),
           prefix: options.clssaNamePrefix || options.fontName
         });
@@ -68,13 +62,13 @@ module.exports = function create(options) {
     .then(filePaths => {
       // output log
       filePaths && filePaths.length > 0 && filePaths.forEach(filePath =>
-          console.log(`${'SUCCESS'.green} Created ${filePath} `)
+          console.log(`${"SUCCESS".green} Created ${filePath} `)
         );
     })
     .then(() => {
       if (options.website) {
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
-        this.tempData = { ...options.website, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(''), _title: options.website.title || options.fontName };
+        this.tempData = { ...options.website, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
@@ -85,11 +79,16 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str => fs.outputFileSync(htmlPath, minify(str, { collapseWhitespace: true, minifyCSS: true })))
-    .then(str => console.log(`${'SUCCESS'.green} Created ${htmlPath} `))
+    .then(str =>
+      fs.outputFileSync(
+        htmlPath,
+        minify(str, { collapseWhitespace: true, minifyCSS: true })
+      )
+    )
+    .then(str => console.log(`${"SUCCESS".green} Created ${htmlPath} `))
     .then(str => {
       if (options.website) {
-        this.tempData._IconHtml = unicodeHtml.join('');
+        this.tempData._IconHtml = unicodeHtml.join("");
         this.tempData._unicode = true;
         return createHTML({
           outPath: options.website.template,
@@ -97,6 +96,13 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str => fs.outputFileSync(unicodeHtmlPath, minify(str, { collapseWhitespace: true, minifyCSS: true })))
-    .then(str => console.log(`${'SUCCESS'.green} Created ${unicodeHtmlPath} `));
+    .then(str =>
+      fs.outputFileSync(
+        unicodeHtmlPath,
+        minify(str, { collapseWhitespace: true, minifyCSS: true })
+      )
+    )
+    .then(str =>
+      console.log(`${"SUCCESS".green} Created ${unicodeHtmlPath} `)
+    );
 }
