@@ -88,39 +88,43 @@ createSVG(options)
 
 ### dist
 
-Type: `String`  
-Default value: `dist`
+> Type: `String`  
+> Default value: `dist`  
+
+svg path
 
 ### src
 
-Type: `String`  
-Default value: `svg`
+> Type: `String`  
+> Default value: `svg`  
+
+output path
 
 ### fontName
 
-Type: `String`  
-Default value: `iconfont`
+> Type: `String`  
+> Default value: `iconfont`  
 
 The font family name you want.
 
 ### unicodeStart
 
-Type: `Number`  
-Default value: `10000`
+> Type: `Number`  
+> Default value: `10000`  
 
 unicode start number
 
 ### clssaNamePrefix
 
-Type: `String`  
-Default value: font name
+> Type: `String`  
+> Default value: font name  
 
 Create font class name prefix, default value font name.
 
 ### css
 
-Type: `Boolean`  
-Default value: `false`
+> Type: `Boolean`  
+> Default value: `false`  
 
 Create CSS/LESS files, default `true`.
 
@@ -131,69 +135,70 @@ This is the setting for [svgicons2svgfont](https://github.com/nfroidure/svgicons
 
 #### svgicons2svgfont.fontName
 
-Type: `String`
-Default value: `'iconfont'`
+> Type: `String`  
+> Default value: `'iconfont'`  
 
 The font family name you want.
 
 #### svgicons2svgfont.fontId
 
-Type: `String`
-Default value: the options.fontName value
+> Type: `String`  
+> Default value: the options.fontName value  
 
 The font id you want.
 
 #### svgicons2svgfont.fontStyle
 
-Type: `String`
-Default value: `''`
+> Type: `String`  
+> Default value: `''`
 
 The font style you want.
 
 #### svgicons2svgfont.fontWeight
 
-Type: `String`
-Default value: `''`
+> Type: `String`  
+> Default value: `''`
 
 The font weight you want.
 
 #### svgicons2svgfont.fixedWidth
 
-Type: `Boolean`
-Default value: `false`
+> Type: `Boolean`  
+> Default value: `false`  
 
 Creates a monospace font of the width of the largest input icon.
 
 #### svgicons2svgfont.centerHorizontally
 
-Type: `Boolean`
-Default value: `false`
+> Type: `Boolean`  
+> Default value: `false`  
 
 Calculate the bounds of a glyph and center it horizontally.
 
 #### svgicons2svgfont.normalize
 
-Type: `Boolean`
-Default value: `false`
+> Type: `Boolean`  
+> Default value: `false`  
 
 Normalize icons by scaling them to the height of the highest icon.
 
 #### svgicons2svgfont.fontHeight
 
-Type: `Number`
-Default value: `MAX(icons.height)`
+> Type: `Number`  
+> Default value: `MAX(icons.height)`  
 The outputted font height  (defaults to the height of the highest input icon).
 
 #### svgicons2svgfont.round
 
-Type: `Number`
-Default value: `10e12`
+> Type: `Number`  
+> Default value: `10e12`  
+
 Setup SVG path rounding.
 
 #### svgicons2svgfont.descent
 
-Type: `Number`
-Default value: `0`
+> Type: `Number`  
+> Default value: `0`  
 
 The font descent. It is usefull to fix the font baseline yourself.
 
@@ -201,24 +206,24 @@ The font descent. It is usefull to fix the font baseline yourself.
 
 #### svgicons2svgfont.ascent
 
-Type: `Number`
-Default value: `fontHeight - descent`
+> Type: `Number`  
+> Default value: `fontHeight - descent`  
 
 The font ascent. Use this options only if you know what you're doing. A suitable
  value for this is computed for you.
 
 #### svgicons2svgfont.metadata
 
-Type: `String`
-Default value: `undefined`
+> Type: `String`  
+> Default value: `undefined`  
 
 The font [metadata](http://www.w3.org/TR/SVG/metadata.html). You can set any
  character data in but it is the be suited place for a copyright mention.
 
 #### svgicons2svgfont.log
 
-Type: `Function`
-Default value: `console.log`
+> Type: `Function`  
+> Default value: `console.log`  
 
 Allows you to provide your own logging function. Set to `function(){}` to
  disable logging.
@@ -229,19 +234,19 @@ This is the setting for [svg2ttf](https://github.com/fontello/svg2ttf/tree/c33a1
 
 #### svg2ttf.copyright
 
-Type: `String`
+> Type: `String`
 
 copyright string
 
 #### svg2ttf.ts
 
-Type: `String`
+> Type: `String`
 
 Unix timestamp (in seconds) to override creation time 
 
 #### svg2ttf.version
 
-Type: `Number`
+> Type: `Number`
 
 font version string, can be Version `x.y` or `x.y`.
 
@@ -284,8 +289,8 @@ Define preview web content. Example:
 
 #### website.template
 
-Type: `String`  
-Default value: [index.ejs](src/website/index.ejs)
+> Type: `String`  
+> Default value: [index.ejs](src/website/index.ejs)  
 
 > Custom template can customize parameters.
 
