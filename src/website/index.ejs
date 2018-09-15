@@ -103,7 +103,7 @@
       <%-description || (meta && meta.description)%>
     </div>
     <p>
-      <%if(links && links.length > 0) { links.forEach((linkItem) => {%>
+      <%if(links && links.length > 0) { links.forEach((linkItem, index) => {%>
       <a href="<%-linkItem.url%>"><%-linkItem.title%></a><%if(links.length-1 !== index){%> · <%}%>
       <%})}%>
     </p>
