@@ -59,7 +59,7 @@ module.exports = function create(options) {
         const font_temp = path.resolve(__dirname, "styles");
         return copyTemplate(font_temp, options.dist, {
           fontname: options.fontName,
-          cssString: cssString.join(""),
+          cssString: cssString.join(''),
           timestamp: new Date().getTime(),
           prefix: options.clssaNamePrefix || options.fontName
         });
@@ -74,7 +74,7 @@ module.exports = function create(options) {
     .then(() => {
       if (options.website) {
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
-        this.tempData = { ...options.website, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(), _title: options.website.title || options.fontName };
+        this.tempData = { ...options.website, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(''), _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
@@ -89,7 +89,7 @@ module.exports = function create(options) {
     .then(str => console.log(`${'SUCCESS'.green} Created ${htmlPath} `))
     .then(str => {
       if (options.website) {
-        this.tempData._IconHtml = unicodeHtml.join();
+        this.tempData._IconHtml = unicodeHtml.join('');
         this.tempData._unicode = true;
         return createHTML({
           outPath: options.website.template,
