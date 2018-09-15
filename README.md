@@ -186,6 +186,7 @@ Normalize icons by scaling them to the height of the highest icon.
 
 > Type: `Number`  
 > Default value: `MAX(icons.height)`  
+
 The outputted font height  (defaults to the height of the highest input icon).
 
 #### svgicons2svgfont.round
@@ -256,6 +257,7 @@ Define preview web content. Example:
 
 ```js
 {
+  ...
   website: {
     title: "svgtofont",
     logo: path.resolve(process.cwd(), "svg", "git.svg"),
@@ -299,10 +301,16 @@ You can define your own template based on the [default template](src/website/ind
 ```js
 {
   website: {
-    template: path.join(__dirname, "my-template.ejs")
+    template: path.join(process.cwd(), "my-template.ejs")
   }
 }
 ```
+#### website.index
+
+> Type: `String`  
+> Default value: `font-class`, Enum{`font-class`, `unicode`, `symbol`}  
+
+Set default home page.
 
 ## License
 
