@@ -2,6 +2,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
+const minify = require("html-minifier").minify;
 require("colors-cli/toxic");
 const {
   createSVG,
@@ -84,7 +85,7 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str => str && fs.outputFileSync(htmlPath, str))
+    .then(str => fs.outputFileSync(htmlPath, minify(str, { collapseWhitespace: true, minifyCSS: true })))
     .then(str => console.log(`${'SUCCESS'.green} Created ${htmlPath} `))
     .then(str => {
       if (options.website) {
@@ -96,6 +97,6 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str => str && fs.outputFileSync(unicodeHtmlPath, str))
+    .then(str => fs.outputFileSync(unicodeHtmlPath, minify(str, { collapseWhitespace: true, minifyCSS: true })))
     .then(str => console.log(`${'SUCCESS'.green} Created ${unicodeHtmlPath} `));
 }
