@@ -21,11 +21,11 @@ svgtofont({
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   startNumber: 20000, // unicode start number
-  nodemo: true, // no demo html files
   svgicons2svgfont: {
     fontHeight: 1000,
     normalize: true
   },
+  // website = null, no demo html files
   website: {
     title: "svgtofont",
     // Must be a .svg format image.
@@ -258,6 +258,7 @@ Define preview web content. Example:
 ```js
 {
   ...
+  // website = null, no demo html files
   website: {
     title: "svgtofont",
     logo: path.resolve(process.cwd(), "svg", "git.svg"),

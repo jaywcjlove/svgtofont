@@ -10,11 +10,11 @@ svgtofont({
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   startNumber: 20000, // unicode start number
-  nodemo: true, // no demo html files
   svgicons2svgfont: {
     fontHeight: 1000,
     normalize: true
   },
+  // website = null, no demo html files
   website: {
     index: "unicode", // Enum{"font-class", "unicode", "symbol"}
     title: "svgtofont",
