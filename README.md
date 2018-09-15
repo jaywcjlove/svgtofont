@@ -16,8 +16,8 @@ const svgtofont = require("svgtofont");
 const path = require("path");
 
 svgtofont({
-  src: path.resolve(__dirname, "svg"), // svg path
-  dist: path.resolve(__dirname, "dist"), // output path
+  src: path.resolve(process.cwd(), "icon"), // svg path
+  dist: path.resolve(process.cwd(), "fonts"), // output path
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   startNumber: 20000, // unicode start number
@@ -29,7 +29,7 @@ svgtofont({
   website: {
     title: "svgtofont",
     // Must be a .svg format image.
-    logo: path.resolve(rootPath, "svg", "git.svg"),
+    logo: path.resolve(process.cwd(), "svg", "git.svg"),
     version: pkg.version,
     meta: {
       description: "Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format.",
@@ -258,7 +258,7 @@ Define preview web content. Example:
 {
   website: {
     title: "svgtofont",
-    logo: path.resolve(rootPath, "svg", "git.svg"),
+    logo: path.resolve(process.cwd(), "svg", "git.svg"),
     version: pkg.version,
     meta: {
       description: "Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format.",
