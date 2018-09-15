@@ -68,7 +68,7 @@ module.exports = function create(options) {
     .then(() => {
       if (options.website) {
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
-        this.tempData = { ...options.website, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
+        this.tempData = { ...options.website, prefix: options.clssaNamePrefix || options.fontName, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
