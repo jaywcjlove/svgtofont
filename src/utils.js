@@ -63,7 +63,7 @@ exports.createSVG = OPTIONS => {
     const DIST_PATH = path.join(OPTIONS.dist, OPTIONS.fontName + ".svg");
     // Setting the font destination
     fontStream.pipe(fs.createWriteStream(DIST_PATH)).on("finish", () => {
-      console.log(`${"SUCCESS".green} ${'SVG'.blue_bt} font successfully created! (${DIST_PATH})`);
+      console.log(`${"SUCCESS".green} ${'SVG'.blue_bt} font successfully created! ${DIST_PATH}`);
       resolve(UnicodeObj);
     }).on("error", (err) => {
       if (err) {
@@ -94,7 +94,7 @@ exports.createTTF = OPTIONS => {
       if (err) {
         return reject(err);
       }
-      console.log(`${"SUCCESS".green} ${"TTF".blue_bt} font successfully created! (${DIST_PATH})`);
+      console.log(`${"SUCCESS".green} ${"TTF".blue_bt} font successfully created! ${DIST_PATH}`);
       resolve(data);
     });
   });
@@ -112,7 +112,7 @@ exports.createEOT = OPTIONS => {
       if (err) {
         return reject(err);
       }
-      console.log(`${"SUCCESS".green} ${"EOT".blue_bt} font successfully created! (${DIST_PATH})`);
+      console.log(`${"SUCCESS".green} ${"EOT".blue_bt} font successfully created! ${DIST_PATH}`);
       resolve(data);
     });
   });
@@ -129,7 +129,7 @@ exports.createWOFF = OPTIONS => {
       if (err) {
         return reject(err);
       }
-      console.log(`${"SUCCESS".green} ${"WOFF".blue_bt} font successfully created! (${DIST_PATH})`);
+      console.log(`${"SUCCESS".green} ${"WOFF".blue_bt} font successfully created! ${DIST_PATH}`);
       resolve(data);
     });
   });
@@ -146,7 +146,7 @@ exports.createWOFF2 = OPTIONS => {
       if (err) {
         return reject(err);
       }
-      console.log(`${"SUCCESS".green} ${"WOFF2".blue_bt} font successfully created! (${DIST_PATH})`);
+      console.log(`${"SUCCESS".green} ${"WOFF2".blue_bt} font successfully created! ${DIST_PATH}`);
       resolve(data);
     });
   });

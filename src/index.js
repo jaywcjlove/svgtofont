@@ -29,8 +29,10 @@ module.exports = function create(options) {
   let cssString = [];
   let cssIconHtml = [];
   let unicodeHtml = [];
-  const htmlPath = path.join(options.dist, "index.html");
-  const unicodeHtmlPath = path.join(options.dist, "unicode.html");
+  const pageName = ["font-class", "unicode", "symbol"];
+  let fontClassPath = path.join(options.dist, "index.html");
+  let unicodePath = path.join(options.dist, "unicode.html");
+  let symbolPath = path.join(options.dist, "symbol.html");
 
   return createSVG(options)
     .then(UnicodeObject => {
@@ -67,7 +69,17 @@ module.exports = function create(options) {
     })
     .then(() => {
       if (options.website) {
+        // setting default home page.
+        const indexName = pageName.includes(options.website.index) ? pageName.indexOf(options.website.index) : 0;
+        pageName.forEach((name, index) => {
+          const _path = path.join(options.dist, indexName === index ? "index.html" : `${name}.html`);
+          if (name === 'font-class') fontClassPath = _path;
+          if (name === "unicode") unicodePath = _path;
+          if (name === "symbol") symbolPath = _path;
+        });
+        // default template
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
+        // template data
         this.tempData = { ...options.website, prefix: options.clssaNamePrefix || options.fontName, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
@@ -81,11 +93,11 @@ module.exports = function create(options) {
     })
     .then(str =>
       fs.outputFileSync(
-        htmlPath,
+        fontClassPath,
         minify(str, { collapseWhitespace: true, minifyCSS: true })
       )
     )
-    .then(str => console.log(`${"SUCCESS".green} Created ${htmlPath} `))
+    .then(str => console.log(`${"SUCCESS".green} Created ${fontClassPath} `))
     .then(str => {
       if (options.website) {
         this.tempData._IconHtml = unicodeHtml.join("");
@@ -98,11 +110,11 @@ module.exports = function create(options) {
     })
     .then(str =>
       fs.outputFileSync(
-        unicodeHtmlPath,
+        unicodePath,
         minify(str, { collapseWhitespace: true, minifyCSS: true })
       )
     )
     .then(str =>
-      console.log(`${"SUCCESS".green} Created ${unicodeHtmlPath} `)
+      console.log(`${"SUCCESS".green} Created ${unicodePath} `)
     );
 }

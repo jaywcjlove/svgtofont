@@ -16,6 +16,7 @@ svgtofont({
     normalize: true
   },
   website: {
+    index: "unicode", // Enum{"font-class", "unicode", "symbol"}
     title: "svgtofont",
     // Must be a .svg format image.
     logo: path.resolve(rootPath, "svg", "git.svg"),
