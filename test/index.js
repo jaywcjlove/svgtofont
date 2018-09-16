@@ -44,7 +44,7 @@ svgtofont({
         url: "unicode.html"
       }
     ],
-    footerInfo: `Licensed under MIT. (Yes it's free and <a href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`
+    footerInfo: `Licensed under MIT. (Yes it's free and <a target="_blank" href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`
   }
 }).then(() => {
   console.log("done!!!!");
