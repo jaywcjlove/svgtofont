@@ -3,6 +3,10 @@ svg to font
 
 Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.
 
+**Icon Font Created By svgtofont**
+
+- [file-icons](https://uiw-react.github.io/file-icons/) File icons in the file tree.
+
 ## Install
 
 ```bash
