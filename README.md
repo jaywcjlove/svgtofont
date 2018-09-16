@@ -1,7 +1,9 @@
 svg to font
 ---
 
-Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.
+Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font.
+
+[Install](#install) | [Usage](#usage) | [API](#api) | [options](#options) | [npm](http://npm.im/svgtofont) | [License](#license)
 
 **Icon Font Created By svgtofont**
 
@@ -13,7 +15,7 @@ Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.
 npm i svgtofont
 ```
 
-Usage svgtofont
+## Usage
 
 ```js
 const svgtofont = require("svgtofont");
