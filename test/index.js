@@ -18,6 +18,7 @@ svgtofont({
   website: {
     index: "unicode", // Enum{"font-class", "unicode", "symbol"}
     title: "svgtofont",
+    favicon: path.resolve(rootPath, "favicon.png"),
     // Must be a .svg format image.
     logo: path.resolve(rootPath, "svg", "git.svg"),
     version: pkg.version,
@@ -37,11 +38,11 @@ svgtofont({
       },
       {
         title: "Font Class",
-        url: "index.html"
+        url: "font-class.html"
       },
       {
         title: "Unicode",
-        url: "unicode.html"
+        url: "index.html"
       }
     ],
     footerInfo: `Licensed under MIT. (Yes it's free and <a target="_blank" href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`

@@ -2,6 +2,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
+const base64Img = require("base64-img");
 const minify = require("html-minifier").minify;
 require("colors-cli/toxic");
 const {
@@ -84,6 +85,10 @@ module.exports = function create(options) {
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
+        }
+        // website favicon
+        if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
+          tempData.favicon = base64Img.base64Sync(options.website.favicon);
         }
         return createHTML({
           outPath: options.website.template,

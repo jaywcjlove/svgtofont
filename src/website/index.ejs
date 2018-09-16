@@ -7,6 +7,9 @@
   <%if (meta && Object.keys(meta).length > 0) { Object.keys(meta).forEach((metaName) => { %> 
   <meta name="<%=metaName%>" content="<%=meta[metaName]%>">
   <%})}%>
+  <%if(favicon) {%>
+  <link rel="icon" type="image/x-icon" href="<%-favicon%>">
+  <%}%>
   <%if(!_unicode && _link) {%>
   <link rel="stylesheet" href="<%=_link%>" />
   <%}%>
@@ -73,11 +76,12 @@
       /* IE9*/
       src: url("<%-_fontname%>.eot#iefix") format("embedded-opentype"),
       /* IE6-IE8 */
-      url("<%-_fontname%>.woff") format("woff"),
+      url("<%-_fontname%>.woff2?<%-(new Date()).getTime()%>") format("woff2"),
+      url("<%-_fontname%>.woff?<%-(new Date()).getTime()%>") format("woff"),
       /* chrome, firefox */
-      url("<%-_fontname%>.ttf") format("truetype"),
+      url("<%-_fontname%>.ttf?<%-(new Date()).getTime()%>") format("truetype"),
       /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-      url("<%-_fontname%>.svg#<%-_fontname%>") format("svg");
+      url("<%-_fontname%>.svg#<%-_fontname%>?<%-(new Date()).getTime()%>") format("svg");
       /* iOS 4.1- */
     }
 

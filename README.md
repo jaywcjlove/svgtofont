@@ -1,13 +1,20 @@
 svg to font
 ---
 
-Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font.
+Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.
 
 [Install](#install) | [Usage](#usage) | [API](#api) | [options](#options) | [npm](http://npm.im/svgtofont) | [License](#license)
+
+Features:  
+
+- Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
+- Allows to use custom templates (example `css`, `less` and etc).
+- Automatically generate a preview site.
 
 **Icon Font Created By svgtofont**
 
 - [file-icons](https://uiw-react.github.io/file-icons/) File icons in the file tree.
+- [uiw-iconfont](https://github.com/uiw-react/icons) The premium icon font for [@uiw-react](https://github.com/uiw-react) Component Library..
 
 ## Install
 
@@ -16,6 +23,21 @@ npm i svgtofont
 ```
 
 ## Usage
+
+```js
+const svgtofont = require("svgtofont");
+ 
+svgtofont({
+  src: path.resolve(process.cwd(), "icon"), // svg path
+  dist: path.resolve(process.cwd(), "fonts"), // output path
+  fontName: "svgtofont", // font name
+  css: true, // Create CSS files.
+}).then(() => {
+  console.log('done!');
+});
+```
+
+Or
 
 ```js
 const svgtofont = require("svgtofont");
@@ -73,19 +95,11 @@ svgtofont({
 const { createSVG, createTTF, createEOT, createWOFF, createWOFF2 } = require("svgtofont/src/utils");
 const options = { ... };
 
-createSVG(options)
-  .then(UnicodeObjChar => {
-    return createTTF(options);
-  })
-  .then(() => {
-    return createEOT(options);
-  })
-  .then(() => {
-    return createWOFF(options);
-  })
-  .then(() => {
-    return createWOFF2(options);
-  })
+createSVG(options) // SVG => SVG Font
+  .then(UnicodeObjChar => createTTF(options)) // SVG Font => TTF
+  .then(() => createEOT(options)) // TTF => EOT
+  .then(() => createWOFF(options)) // TTF => WOFF
+  .then(() => createWOFF2(options)) // TTF => WOFF2
 ```
 
 ## options
@@ -301,9 +315,7 @@ Define preview web content. Example:
 > Type: `String`  
 > Default value: [index.ejs](src/website/index.ejs)  
 
-> Custom template can customize parameters.
-
-You can define your own template based on the [default template](src/website/index.ejs).
+Custom template can customize parameters. You can define your own template based on the [default template](src/website/index.ejs).
 
 ```js
 {

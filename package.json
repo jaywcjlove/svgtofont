@@ -32,6 +32,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "base64-img": "^1.0.4",
     "colors-cli": "^1.0.18",
     "copy-template-dir": "^1.4.0",
     "ejs": "^2.6.1",
