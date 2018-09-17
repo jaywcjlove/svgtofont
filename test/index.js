@@ -37,11 +37,15 @@ svgtofont({
         url: "https://github.com/jaywcjlove/svgtofont/issues"
       },
       {
-        title: "Font Class",
+        title: "Font Class Demo",
         url: "font-class.html"
       },
       {
-        title: "Unicode",
+        title: "Symbol Demo",
+        url: "symbol.html"
+      },
+      {
+        title: "Unicode Demo",
         url: "index.html"
       }
     ],

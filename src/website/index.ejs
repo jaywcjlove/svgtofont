@@ -10,7 +10,7 @@
   <%if(favicon) {%>
   <link rel="icon" type="image/x-icon" href="<%-favicon%>">
   <%}%>
-  <%if(!_unicode && _link) {%>
+  <%if(_type === 'font-class' && _link) {%>
   <link rel="stylesheet" href="<%=_link%>" />
   <%}%>
   <style>
@@ -60,16 +60,18 @@
     .icons ul li:hover h4 { opacity: 1; }
     .icons ul li svg { width: 24px; height: 24px; }
     .icons ul li:hover { color: #3c75e4; }
-    .icons ul .unicode-icon span { display: block; }
-    .icons ul .unicode-icon h4 { font-size: 12px; }
-    .icons ul li.class-icon { font-size: 21px; line-height: 21px; padding-bottom: 20px; }
-    .icons ul li.class-icon p{ font-size: 12px; }
-    .icons ul li.class-icon [class^="<%=prefix%>-"]{ font-size: 26px; }
     .footer { text-align: center; padding: 10px 0 90px 0; }
     .footer a { text-align: center; padding: 10px 0 90px 0; color: #696969;}
     .footer a:hover { color: #0949d1; }
     .links { text-align: center; padding: 50px 0 0 0; font-size: 14px; }
-    <%if(_unicode) {%>
+    <%if(_type === 'font-class') {%>
+    .icons ul li.class-icon { font-size: 21px; line-height: 21px; padding-bottom: 20px; }
+    .icons ul li.class-icon p{ font-size: 12px; }
+    .icons ul li.class-icon [class^="<%=prefix%>-"]{ font-size: 26px; }
+    <%}%>
+    <%if(_type === 'unicode') {%>
+    .icons ul .unicode-icon span { display: block; }
+    .icons ul .unicode-icon h4 { font-size: 12px; }
     @font-face {
       font-family: "<%-_fontname%>";
       src: url("<%-_fontname%>.eot");
@@ -84,7 +86,6 @@
       url("<%-_fontname%>.svg#<%-_fontname%>?<%-(new Date()).getTime()%>") format("svg");
       /* iOS 4.1- */
     }
-
     .iconfont {
       font-family: "<%-_fontname%>" !important;
       font-size: 26px;
@@ -93,6 +94,11 @@
       -webkit-text-stroke-width: 0.2px;
       -moz-osx-font-smoothing: grayscale;
     }
+    <%}%>
+    <%if(_type === 'symbol') {%>
+    .icons ul li.symbol {padding: 28px 10px 16px 10px; width: 100px;}
+    .icons ul li.symbol svg {width: 34px; height: 34px;}
+    .icons ul li.symbol h4 {font-size: 12px;}
     <%}%>
   </style>
 </head>

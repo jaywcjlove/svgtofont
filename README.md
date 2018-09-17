@@ -8,6 +8,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 Features:  
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
+- Support SVG Symbol file.
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
 
@@ -100,6 +101,7 @@ createSVG(options) // SVG => SVG Font
   .then(() => createEOT(options)) // TTF => EOT
   .then(() => createWOFF(options)) // TTF => WOFF
   .then(() => createWOFF2(options)) // TTF => WOFF2
+  .then(() => createSvgSymbol(options)) // SVG Files => SVG Symbol
 ```
 
 ## options
@@ -330,6 +332,41 @@ Custom template can customize parameters. You can define your own template based
 > Default value: `font-class`, Enum{`font-class`, `unicode`, `symbol`}  
 
 Set default home page.
+
+## Font Usage
+
+### symbol svg
+
+```xml
+<svg class="icon" aria-hidden="true">
+  <use xlink:href="svgtofont.symbol.svg#svgtofont-git"></use>
+</svg>
+```
+
+### Unicode
+
+```html
+<style>
+.iconfont {
+  font-family: "svgtofont-iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+<span class="iconfont">&#59907;</span>
+```
+
+### Class Name
+
+Support for `.less` and `.css` styles references.
+
+```html
+<link rel="stylesheet" type="text/css" href="node_modules/fonts/svgtofont.css">
+<i class="svgtofont-apple"></i>
+```
 
 ## License
 

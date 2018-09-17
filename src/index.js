@@ -11,6 +11,7 @@ const {
   createEOT,
   createWOFF,
   createWOFF2,
+  createSvgSymbol,
   createHTML,
   copyTemplate
 } = require("./utils");
@@ -21,15 +22,17 @@ module.exports = function create(options) {
   options.src = options.src || path.join(process.cwd(), "svg");
   options.unicodeStart = options.unicodeStart || 10000;
   options.svg2ttf = options.svg2ttf || {};
+  options.fontName = options.fontName || "iconfont";
   options.svgicons2svgfont = options.svgicons2svgfont || {};
-  options.svgicons2svgfont.fontName = options.fontName || "iconfont";
-  options.clssaNamePrefix = options.clssaNamePrefix || options.svgicons2svgfont.fontName;
+  options.svgicons2svgfont.fontName = options.fontName;
+  options.clssaNamePrefix = options.clssaNamePrefix || options.fontName;
   let dist = options.dist;
 
   fs.emptyDirSync(dist);
   let cssString = [];
   let cssIconHtml = [];
   let unicodeHtml = [];
+  let symbolHtml = [];
   const pageName = ["font-class", "unicode", "symbol"];
   let fontClassPath = path.join(options.dist, "index.html");
   let unicodePath = path.join(options.dist, "unicode.html");
@@ -42,6 +45,14 @@ module.exports = function create(options) {
         let _num = _code.charCodeAt(0).toString(16);
         cssIconHtml.push(`<li class="class-icon"><i class="${options.clssaNamePrefix}-${name}"></i><p class="name">${name}</p></li>`);
         unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${_code.charCodeAt(0)};</span></li>`);
+        symbolHtml.push(`
+          <li class="symbol">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="svgtofont.symbol.svg#${options.clssaNamePrefix}-${name}"></use>
+            </svg>
+            <h4>${options.clssaNamePrefix}-${name}</h4>
+          </li>
+        `);
         cssString.push(`.${options.clssaNamePrefix}-${name}:before { content: "\\${_num}"; }\n`);
       });
       return createTTF(options);
@@ -49,6 +60,7 @@ module.exports = function create(options) {
     .then(() => createEOT(options))
     .then(() => createWOFF(options))
     .then(() => createWOFF2(options))
+    .then(() => createSvgSymbol(options))
     .then(() => {
       // If you generate a font you need to generate a style.
       if (options.website) options.css = true;
@@ -74,14 +86,14 @@ module.exports = function create(options) {
         const indexName = pageName.includes(options.website.index) ? pageName.indexOf(options.website.index) : 0;
         pageName.forEach((name, index) => {
           const _path = path.join(options.dist, indexName === index ? "index.html" : `${name}.html`);
-          if (name === 'font-class') fontClassPath = _path;
+          if (name === "font-class") fontClassPath = _path;
           if (name === "unicode") unicodePath = _path;
           if (name === "symbol") symbolPath = _path;
         });
         // default template
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
         // template data
-        this.tempData = { ...options.website, prefix: options.clssaNamePrefix || options.fontName, _fontname: options.fontName, _unicode: false, _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
+        this.tempData = { ...options.website, prefix: options.clssaNamePrefix || options.fontName, _fontname: options.fontName, _type: "font-class", _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
@@ -106,7 +118,7 @@ module.exports = function create(options) {
     .then(str => {
       if (options.website) {
         this.tempData._IconHtml = unicodeHtml.join("");
-        this.tempData._unicode = true;
+        this.tempData._type = "unicode";
         return createHTML({
           outPath: options.website.template,
           data: this.tempData
@@ -119,7 +131,22 @@ module.exports = function create(options) {
         minify(str, { collapseWhitespace: true, minifyCSS: true })
       )
     )
+    .then(str => console.log(`${"SUCCESS".green} Created ${unicodePath} `))
+    .then(str => {
+      if (options.website) {
+        this.tempData._IconHtml = symbolHtml.join("");
+        this.tempData._type = "symbol";
+        return createHTML({
+          outPath: options.website.template,
+          data: this.tempData
+        });
+      }
+    })
     .then(str =>
-      console.log(`${"SUCCESS".green} Created ${unicodePath} `)
-    );
+      fs.outputFileSync(
+        symbolPath,
+        minify(str, { collapseWhitespace: true, minifyCSS: true })
+      )
+    )
+    .then(str => console.log(`${"SUCCESS".green} Created ${symbolPath} `));
 }
