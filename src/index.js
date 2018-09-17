@@ -48,7 +48,7 @@ module.exports = function create(options) {
         symbolHtml.push(`
           <li class="symbol">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="svgtofont.symbol.svg#${options.clssaNamePrefix}-${name}"></use>
+              <use xlink:href="${options.fontName}.symbol.svg#${options.clssaNamePrefix}-${name}"></use>
             </svg>
             <h4>${options.clssaNamePrefix}-${name}</h4>
           </li>
@@ -97,10 +97,14 @@ module.exports = function create(options) {
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);
+        } else {
+          this.tempData._logo = false;
         }
         // website favicon
         if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
-          tempData.favicon = base64Img.base64Sync(options.website.favicon);
+          this.tempData.favicon = base64Img.base64Sync(options.website.favicon);
+        } else {
+          this.tempData.favicon = false;
         }
         return createHTML({
           outPath: options.website.template,
