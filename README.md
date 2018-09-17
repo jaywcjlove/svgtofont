@@ -3,7 +3,7 @@ svg to font
 
 Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.
 
-[Install](#install) | [Usage](#usage) | [API](#api) | [options](#options) | [npm](http://npm.im/svgtofont) | [License](#license)
+[Install](#install) | [Usage](#usage) | [Font Usage](#font-usage) | [API](#api) | [options](#options) | [npm](http://npm.im/svgtofont) | [License](#license)
 
 Features:  
 
@@ -334,6 +334,24 @@ Custom template can customize parameters. You can define your own template based
 Set default home page.
 
 ## Font Usage
+
+Suppose the font name is defined as `svgtofont`, The default home page is `unicode`, Will generate: 
+
+```bash
+font-class.html
+index.html
+symbol.html
+svgtofont.css
+svgtofont.eot
+svgtofont.less
+svgtofont.svg
+svgtofont.symbol.svg
+svgtofont.ttf
+svgtofont.woff
+svgtofont.woff2
+```
+
+Preview demo `font-class.html`, `symbol.html` annd `index.html`. Automatically generated style `svgtofont.css` and `svgtofont.less`.
 
 ### symbol svg
 
