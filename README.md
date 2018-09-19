@@ -351,7 +351,7 @@ svgtofont.woff
 svgtofont.woff2
 ```
 
-Preview demo `font-class.html`, `symbol.html` annd `index.html`. Automatically generated style `svgtofont.css` and `svgtofont.less`.
+Preview demo `font-class.html`, `symbol.html` and `index.html`. Automatically generated style `svgtofont.css` and `svgtofont.less`.
 
 ### symbol svg
 
