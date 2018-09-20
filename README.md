@@ -93,7 +93,15 @@ svgtofont({
 ## API
 
 ```js
-const { createSVG, createTTF, createEOT, createWOFF, createWOFF2 } = require("svgtofont/src/utils");
+const {
+  createSVG, 
+  createTTF, 
+  createEOT, 
+  createWOFF, 
+  createWOFF2, 
+  createSvgSymbol
+} = require("svgtofont/src/utils");
+
 const options = { ... };
 
 createSVG(options) // SVG => SVG Font
