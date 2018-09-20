@@ -39,10 +39,9 @@ module.exports = function create(options) {
   let symbolPath = path.join(options.dist, "symbol.html");
 
   return createSVG(options)
-    .then(UnicodeObject => {
+    .then((UnicodeObject) => {
       Object.keys(UnicodeObject).forEach(name => {
         let _code = UnicodeObject[name];
-        let _num = _code.charCodeAt(0).toString(16);
         cssIconHtml.push(`<li class="class-icon"><i class="${options.clssaNamePrefix}-${name}"></i><p class="name">${name}</p></li>`);
         unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${_code.charCodeAt(0)};</span></li>`);
         symbolHtml.push(`
@@ -53,10 +52,10 @@ module.exports = function create(options) {
             <h4>${options.clssaNamePrefix}-${name}</h4>
           </li>
         `);
-        cssString.push(`.${options.clssaNamePrefix}-${name}:before { content: "\\${_num}"; }\n`);
+        cssString.push(`.${options.clssaNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
       });
-      return createTTF(options);
     })
+    .then(()=> createTTF(options))
     .then(() => createEOT(options))
     .then(() => createWOFF(options))
     .then(() => createWOFF2(options))
