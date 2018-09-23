@@ -231,7 +231,7 @@ Setup SVG path rounding.
 > Type: `Number`  
 > Default value: `0`  
 
-The font descent. It is usefull to fix the font baseline yourself.
+The font descent. It is useful to fix the font baseline yourself.
 
 **Warning:**  The descent is a positive value!
 
