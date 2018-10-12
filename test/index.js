@@ -7,6 +7,7 @@ const rootPath = path.resolve(process.cwd(), "test");
 svgtofont({
   src: path.resolve(rootPath, "svg"), // svg path
   dist: path.resolve(rootPath, "dist"), // output path
+  // emptyDist: true, // Clear output directory contents
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   startNumber: 20000, // unicode start number

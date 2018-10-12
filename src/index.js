@@ -22,13 +22,14 @@ module.exports = function create(options) {
   options.src = options.src || path.join(process.cwd(), "svg");
   options.unicodeStart = options.unicodeStart || 10000;
   options.svg2ttf = options.svg2ttf || {};
+  options.emptyDist = options.emptyDist;
   options.fontName = options.fontName || "iconfont";
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
   options.clssaNamePrefix = options.clssaNamePrefix || options.fontName;
-  let dist = options.dist;
+  
+  if (options.emptyDist) fs.emptyDirSync(options.dist);
 
-  fs.emptyDirSync(dist);
   let cssString = [];
   let cssIconHtml = [];
   let unicodeHtml = [];

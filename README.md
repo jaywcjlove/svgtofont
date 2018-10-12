@@ -130,6 +130,13 @@ svg path
 
 output path
 
+### emptyDist
+
+> Type: `String`  
+> Default value: `false`  
+
+Clear output directory contents
+
 ### fontName
 
 > Type: `String`  
