@@ -119,7 +119,7 @@ createSVG(options) // SVG => SVG Font
 ### dist
 
 > Type: `String`  
-> Default value: `dist`  
+> Default value: ~~`dist`~~ => `fonts`  
 
 svg path
 

@@ -18,7 +18,7 @@ const {
 
 module.exports = function create(options) {
   if (!options) options = {};
-  options.dist = options.dist || path.join(process.cwd(), "dist");
+  options.dist = options.dist || path.join(process.cwd(), "fonts");
   options.src = options.src || path.join(process.cwd(), "svg");
   options.unicodeStart = options.unicodeStart || 10000;
   options.svg2ttf = options.svg2ttf || {};
