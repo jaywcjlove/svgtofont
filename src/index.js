@@ -112,13 +112,15 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str =>
-      fs.outputFileSync(
-        fontClassPath,
-        minify(str, { collapseWhitespace: true, minifyCSS: true })
-      )
-    )
-    .then(str => console.log(`${"SUCCESS".green} Created ${fontClassPath} `))
+    .then(str => {
+      if (options.website) {
+        fs.outputFileSync(
+          fontClassPath,
+          minify(str, { collapseWhitespace: true, minifyCSS: true })
+        );
+        console.log(`${"SUCCESS".green} Created ${fontClassPath} `);
+      }
+    })
     .then(str => {
       if (options.website) {
         this.tempData._IconHtml = unicodeHtml.join("");
@@ -129,13 +131,15 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str =>
-      fs.outputFileSync(
-        unicodePath,
-        minify(str, { collapseWhitespace: true, minifyCSS: true })
-      )
-    )
-    .then(str => console.log(`${"SUCCESS".green} Created ${unicodePath} `))
+    .then(str => {
+      if (options.website) {
+        fs.outputFileSync(
+          unicodePath,
+          minify(str, { collapseWhitespace: true, minifyCSS: true })
+        );
+        console.log(`${"SUCCESS".green} Created ${unicodePath} `);
+      }
+    })
     .then(str => {
       if (options.website) {
         this.tempData._IconHtml = symbolHtml.join("");
@@ -146,11 +150,13 @@ module.exports = function create(options) {
         });
       }
     })
-    .then(str =>
-      fs.outputFileSync(
-        symbolPath,
-        minify(str, { collapseWhitespace: true, minifyCSS: true })
-      )
-    )
-    .then(str => console.log(`${"SUCCESS".green} Created ${symbolPath} `));
+    .then(str => {
+      if (options.website) {
+        fs.outputFileSync(
+          symbolPath,
+          minify(str, { collapseWhitespace: true, minifyCSS: true })
+        )
+        console.log(`${"SUCCESS".green} Created ${symbolPath} `)
+      }
+    });
 }
