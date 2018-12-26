@@ -40,7 +40,7 @@
     "fs-extra": "^7.0.0",
     "html-minifier": "^3.5.20",
     "svg2ttf": "^4.1.0",
-    "svgicons2svgfont": "^9.0.3",
+    "svgicons2svgfont": "^9.0.4",
     "svgo": "^1.1.1",
     "ttf2eot": "^2.0.0",
     "ttf2woff": "^2.0.1",
