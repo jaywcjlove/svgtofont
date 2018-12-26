@@ -91,23 +91,6 @@ svgtofont({
 });;
 ```
 
-## Create SVG Path
-
-```js
-const { generateIconsSource } = require('svgtofont/generate');
-const path = require('path');
-
-async function generate () {
-  const outPath = await generateIconsSource({
-    src: path.resolve(process.cwd(), 'svg'),
-    dist: path.resolve(process.cwd(), 'dist'),
-    fontName: 'svgtofont',
-  });
-}
-
-generate();
-```
-
 ## API
 
 ```js
