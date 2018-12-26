@@ -1,9 +1,10 @@
+const path = require('path');
 const svgtofont = require("../src");
-const path = require("path");
-const pkg = require('../package.json')
+const pkg = require('../package.json');
+const generate = require('../generate');
+const color = require('colors-cli');
 
 const rootPath = path.resolve(process.cwd(), "test");
-
 
 svgtofont({
   src: path.resolve(rootPath, "svg"), // svg path
@@ -53,6 +54,11 @@ svgtofont({
     ],
     footerInfo: `Licensed under MIT. (Yes it's free and <a target="_blank" href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`
   }
-}).then(() => {
-  console.log("done!!!!");
+})
+.then(async(options) => {
+  const outPath = await generate.generateIconsSource(options);
+  console.log(`${color.green('SUCCESS')} Created ${outPath} `);
+})
+.then(() => {
+  console.log("done!");
 });

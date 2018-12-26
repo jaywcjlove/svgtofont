@@ -28,7 +28,7 @@ function getIconUnicode(name) {
  * Filter svg files
  * @return {Array} svg files
  */
-function filterSvgFiles(svgFolderPath) {
+exports.filterSvgFiles = (svgFolderPath) => {
   let files = fs.readdirSync(svgFolderPath, 'utf-8');
   let svgArr = [];
   if (!files) {
@@ -72,7 +72,7 @@ exports.createSVG = OPTIONS => {
         reject(err);
       }
     });
-    filterSvgFiles(OPTIONS.src).forEach(svg => {
+    this.filterSvgFiles(OPTIONS.src).forEach(svg => {
       if (typeof svg !== "string") return false;
       writeFontStream(svg);
     });
@@ -184,7 +184,7 @@ exports.createSvgSymbol = OPTIONS => {
   const DIST_PATH = path.join(OPTIONS.dist, `${OPTIONS.fontName}.symbol.svg`);
   const $ = cheerio.load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>');
   return new Promise((resolve, reject) => {
-    filterSvgFiles(OPTIONS.src).forEach(svgPath => {
+    this.filterSvgFiles(OPTIONS.src).forEach(svgPath => {
       const fileName = path.basename(svgPath, path.extname(svgPath));
       const file = fs.readFileSync(svgPath, "utf8");
       const svgNode = $(file);

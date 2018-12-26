@@ -5,6 +5,7 @@ const path = require("path");
 const base64Img = require("base64-img");
 const minify = require("html-minifier").minify;
 require("colors-cli/toxic");
+
 const {
   createSVG,
   createTTF,
@@ -158,5 +159,6 @@ module.exports = function create(options) {
         )
         console.log(`${"SUCCESS".green} Created ${symbolPath} `)
       }
+      return options;
     });
 }
