@@ -106,12 +106,6 @@ async function generate () {
 }
 
 generate();
-// output => ./dist/svgtofont.json
-// {
-//   "adobe": ["M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z...."],
-//   "git": ["M2.6 10.59L8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1..."],
-//   "stylelint": ["M129.74 243.648c28-100.109 27.188-100.5.816c2.65..."]
-// }
 ```
 
 ## API
@@ -146,6 +140,21 @@ createSVG(options) // SVG => SVG Font
 > Default value: ~~`dist`~~ => `fonts`  
 
 svg path
+
+### outSVGPath
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+Output `./dist/svgtofont.json`, The content is as follows:
+
+```js
+{
+  "adobe": ["M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z...."],
+  "git": ["M2.6 10.59L8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1..."],
+  "stylelint": ["M129.74 243.648c28-100.109 27.188-100.5.816c2.65..."]
+}
+```
 
 ### src
 

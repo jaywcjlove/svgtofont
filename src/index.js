@@ -5,6 +5,8 @@ const path = require("path");
 const base64Img = require("base64-img");
 const minify = require("html-minifier").minify;
 require("colors-cli/toxic");
+const generate = require('./generate');
+const color = require('colors-cli');
 
 const {
   createSVG,
@@ -158,6 +160,12 @@ module.exports = function create(options) {
           minify(str, { collapseWhitespace: true, minifyCSS: true })
         )
         console.log(`${"SUCCESS".green} Created ${symbolPath} `)
+      }
+    })
+    .then(async () => {
+      if (options.outSVGPath) {
+        const outPath = await generate.generateIconsSource(options);
+        console.log(`${color.green('SUCCESS')} Created ${outPath} `);
       }
       return options;
     });
