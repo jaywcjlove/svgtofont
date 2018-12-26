@@ -139,6 +139,23 @@ Output `./dist/svgtofont.json`, The content is as follows:
 }
 ```
 
+Or you can generate the file separately: 
+
+```js
+const { generateIconsSource } = require('svgtofont/src/generate');	
+const path = require('path');	
+
+async function generate () {	
+  const outPath = await generateIconsSource({	
+    src: path.resolve(process.cwd(), 'svg'),	
+    dist: path.resolve(process.cwd(), 'dist'),	
+    fontName: 'svgtofont',	
+  });	
+}	
+
+generate();
+```
+
 ### src
 
 > Type: `String`  
