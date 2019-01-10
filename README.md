@@ -388,15 +388,16 @@ Suppose the font name is defined as `svgtofont`, The default home page is `unico
 ```bash
 font-class.html
 index.html
-symbol.html
 svgtofont.css
 svgtofont.eot
+svgtofont.json
 svgtofont.less
 svgtofont.svg
 svgtofont.symbol.svg
 svgtofont.ttf
 svgtofont.woff
 svgtofont.woff2
+symbol.html
 ```
 
 Preview demo `font-class.html`, `symbol.html` and `index.html`. Automatically generated style `svgtofont.css` and `svgtofont.less`.
