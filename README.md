@@ -1,6 +1,11 @@
 svg to font
 ---
 
+[![](https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+[![](https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/network)
+[![](https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/stargazers)
+[![](https://img.shields.io/github/release/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+
 Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.
 
 [Install](#install) · [Usage](#usage) · [Font Usage](#font-usage) · [API](#api) · [options](#options) · [npm](http://npm.im/svgtofont) · [License](#license)
