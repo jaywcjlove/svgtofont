@@ -90,7 +90,7 @@ exports.createTTF = OPTIONS => {
     OPTIONS.svg2ttf = OPTIONS.svg2ttf || {};
     const DIST_PATH = path.join(OPTIONS.dist, OPTIONS.fontName + ".ttf");
     let ttf = svg2ttf(fs.readFileSync(path.join(OPTIONS.dist, OPTIONS.fontName + ".svg"), "utf8"), OPTIONS.svg2ttf);
-    ttf = this.ttf = new Buffer(ttf.buffer);
+    ttf = this.ttf = Buffer.from(ttf.buffer);
     fs.writeFile(DIST_PATH, ttf, (err, data) => {
       if (err) {
         return reject(err);
@@ -107,7 +107,7 @@ exports.createTTF = OPTIONS => {
 exports.createEOT = OPTIONS => {
   return new Promise((resolve, reject) => {
     const DIST_PATH = path.join(OPTIONS.dist, OPTIONS.fontName + '.eot');
-    const eot = new Buffer(ttf2eot(this.ttf).buffer);
+    const eot = Buffer.from(ttf2eot(this.ttf).buffer);
 
     fs.writeFile(DIST_PATH, eot, (err, data) => {
       if (err) {
@@ -125,7 +125,7 @@ exports.createEOT = OPTIONS => {
 exports.createWOFF = OPTIONS => {
   return new Promise((resolve, reject) => {
     const DIST_PATH = path.join(OPTIONS.dist, OPTIONS.fontName + ".woff");
-    const woff = new Buffer(ttf2woff(this.ttf).buffer);
+    const woff = Buffer.from(ttf2woff(this.ttf).buffer);
     fs.writeFile(DIST_PATH, woff, (err, data) => {
       if (err) {
         return reject(err);
@@ -142,7 +142,7 @@ exports.createWOFF = OPTIONS => {
 exports.createWOFF2 = OPTIONS => {
   return new Promise((resolve, reject) => {
     const DIST_PATH = path.join(OPTIONS.dist, OPTIONS.fontName + ".woff2");
-    const woff2 = new Buffer(ttf2woff2(this.ttf).buffer);
+    const woff2 = Buffer.from(ttf2woff2(this.ttf).buffer);
     fs.writeFile(DIST_PATH, woff2, (err, data) => {
       if (err) {
         return reject(err);
