@@ -127,7 +127,25 @@ createSVG(options) // SVG => SVG Font
 > Type: `String`  
 > Default value: ~~`dist`~~ => `fonts`  
 
-svg path
+The output directory.
+
+### outSVGReact
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+Output `./dist/react/`, SVG generates `react` components.
+
+```js
+git/git.svg
+
+// ↓↓↓↓↓↓↓↓↓↓
+
+import React from 'react';
+export const Git = props => (
+  <svg viewBox="0 0 20 20" {...props}><path d="M2.6 10.59L8.38 4.8l1.69 -." fillRule="evenodd" /></svg>
+);
+```
 
 ### outSVGPath
 
