@@ -167,6 +167,10 @@ module.exports = function create(options) {
         const outPath = await generate.generateIconsSource(options);
         console.log(`${color.green('SUCCESS')} Created ${outPath} `);
       }
+      if (options.outSVGReact) {
+        const outPath = await generate.generateReactIcons(options);
+        console.log(`${color.green('SUCCESS')} Created React Components. `);
+      }
       return options;
     });
 }

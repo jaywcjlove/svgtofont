@@ -10,6 +10,7 @@ svgtofont({
   // emptyDist: true, // Clear output directory contents
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
+  outSVGReact: true,
   outSVGPath: true,
   startNumber: 20000, // unicode start number
   svgicons2svgfont: {
