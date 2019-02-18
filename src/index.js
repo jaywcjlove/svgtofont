@@ -19,7 +19,7 @@ const {
   copyTemplate
 } = require("./utils");
 
-module.exports = function create(options) {
+module.exports = async function create(options) {
   if (!options) options = {};
   options.dist = options.dist || path.join(process.cwd(), "fonts");
   options.src = options.src || path.join(process.cwd(), "svg");
@@ -30,9 +30,12 @@ module.exports = function create(options) {
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
   options.clssaNamePrefix = options.clssaNamePrefix || options.fontName;
-  
-  if (options.emptyDist) fs.emptyDirSync(options.dist);
 
+  if (options.emptyDist) {
+    await fs.emptyDir(options.dist);
+  }
+  // Ensures that the directory exists.
+  await fs.ensureDir(options.dist);
   let cssString = [];
   let cssIconHtml = [];
   let unicodeHtml = [];
