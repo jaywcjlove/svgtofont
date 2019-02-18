@@ -19,8 +19,8 @@ Features:
 
 **Icon Font Created By svgtofont**
 
-- [file-icons](https://uiw-react.github.io/file-icons/) File icons in the file tree.
-- [uiw-iconfont](https://github.com/uiw-react/icons) The premium icon font for [@uiw-react](https://github.com/uiw-react) Component Library..
+- [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
+- [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library..
 
 ## Install
 
