@@ -20,7 +20,8 @@ Features:
 **Icon Font Created By svgtofont**
 
 - [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
-- [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library..
+- [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library.
+- [test example](./test) For a simple test example, run `npm run test` in the root directory to see the results.
 
 ## Install
 
