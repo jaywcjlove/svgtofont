@@ -47,6 +47,7 @@ exports.filterSvgFiles = (svgFolderPath) => {
  * SVG to SVG font
  */
 exports.createSVG = OPTIONS => {
+  UnicodeObj = {};
   number = OPTIONS.unicodeStart;
   return new Promise((resolve, reject) => {
     // init
