@@ -416,6 +416,7 @@ svgtofont.css
 svgtofont.eot
 svgtofont.json
 svgtofont.less
+svgtofont.module.less
 svgtofont.svg
 svgtofont.symbol.svg
 svgtofont.ttf
