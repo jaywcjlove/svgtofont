@@ -17,6 +17,22 @@ Features:
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
 
+```bash
+                                ┌────────────────────┐
+                                │      Project       │
+                                │                    │
+┌────────┐                      │   ┌───────────┐    │
+│iconfont│──┐                   │   │    svg    │──┐ │
+└────────┘  │  ┌────────────┐   │   └───────────┘  │ │
+            ├─▶│download svg│──▶│   ┌───────────┐  │ │
+┌────────┐  │  └────────────┘   │┌──│create font│◀─┘ │
+│icomoon │──┘                   ││  └───────────┘    │
+└────────┘                      ││  ┌───────────┐    │
+                                │└─▶│ use font  │    │
+                                │   └───────────┘    │
+                                └────────────────────┘
+```
+
 **Icon Font Created By svgtofont**
 
 - [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
