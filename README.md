@@ -8,9 +8,9 @@ svg to font
 
 Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.
 
-[Install](#install) · [Usage](#usage) · [Font Usage](#font-usage) · [API](#api) · [options](#options) · [npm](http://npm.im/svgtofont) · [License](#license)
+[Install](#install) · [Usage](#usage) · [Command](#using-command) · [Font Usage](#font-usage) · [API](#api) · [options](#options) · [npm](http://npm.im/svgtofont) · [License](#license)
 
-Features:  
+**Features:**  
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
 - Support SVG Symbol file.
@@ -45,7 +45,17 @@ Features:
 npm i svgtofont
 ```
 
-## Usage
+### Using With Command
+
+```json
+{
+  "scripts": {
+    "font": "svgtofont --sources ./svg --output ./font --fontName uiw-font"
+  },
+}
+```
+
+### Using With Nodejs
 
 ```js
 const svgtofont = require('svgtofont');
