@@ -106,6 +106,7 @@ module.exports = async function create(options) {
         } else {
           this.tempData._logo = false;
         }
+        // const faviconPath = 
         // website favicon
         if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
           this.tempData.favicon = base64Img.base64Sync(options.website.favicon);
