@@ -388,7 +388,15 @@ Define preview web content. Example:
       keywords: "svgtofont,TTF,EOT,WOFF,WOFF2,SVG",
       favicon: "./favicon.png"
     },
-    footerLinks: [
+    // Add a Github corner to your website
+    // Like: https://github.com/uiwjs/react-github-corners
+    corners: {
+      url: 'https://github.com/jaywcjlove/svgtofont',
+      width: 62, // default: 60
+      height: 62, // default: 60
+      bgColor: '#dc3545' // default: '#151513'
+    },
+    links: [
       {
         title: "GitHub",
         url: "https://github.com/jaywcjlove/svgtofont"

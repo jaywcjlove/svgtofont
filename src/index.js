@@ -99,7 +99,20 @@ module.exports = async function create(options) {
         // default template
         options.website.template = options.website.template || path.join(__dirname, "website", "index.ejs");
         // template data
-        this.tempData = { ...options.website, prefix: options.clssaNamePrefix || options.fontName, _fontname: options.fontName, _type: "font-class", _logo: options.website.logo, _link: `${options.fontName}.css`, _IconHtml: cssIconHtml.join(""), _title: options.website.title || options.fontName };
+        this.tempData = {
+          meta: null,
+          links: null,
+          corners: null,
+          description: null,
+          footerInfo: null,
+          ...options.website,
+          prefix: options.clssaNamePrefix || options.fontName,
+          _fontname: options.fontName,
+          _type: "font-class",
+          _logo: options.website.logo,
+          _link: `${options.fontName}.css`,
+          _IconHtml: cssIconHtml.join(""),
+          _title: options.website.title || options.fontName };
         // website logo
         if (options.website.logo && fs.pathExistsSync(options.website.logo) && path.extname(options.website.logo) === ".svg") {
           this.tempData._logo = fs.readFileSync(options.website.logo);

@@ -19,6 +19,14 @@ svgtofont({
   },
   // website = null, no demo html files
   website: {
+    // Add a Github corner to your website
+    // Like: https://github.com/uiwjs/react-github-corners
+    corners: {
+      url: 'https://github.com/jaywcjlove/svgtofont',
+      width: 62, // default: 60
+      height: 62, // default: 60
+      bgColor: '#dc3545' // default: '#151513'
+    },
     index: "unicode", // Enum{"font-class", "unicode", "symbol"}
     title: "svgtofont",
     favicon: path.resolve(rootPath, "favicon.png"),
