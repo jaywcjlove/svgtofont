@@ -1,6 +1,6 @@
 {
   "name": "svgtofont",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
   "main": "src/index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   },
   "keywords": [
     "webfont",
+    "font",
     "icon",
     "iconfont",
     "font-face",
