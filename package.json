@@ -42,7 +42,7 @@
     "colors-cli": "^1.0.26",
     "copy-template-dir": "^1.4.0",
     "ejs": "^3.0.1",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "html-minifier": "^4.0.0",
     "svg2ttf": "^4.3.0",
     "svgicons2svgfont": "^9.1.1",
