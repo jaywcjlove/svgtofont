@@ -1,6 +1,6 @@
 {
   "name": "svgtofont",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
   "main": "src/index.js",
   "scripts": {
@@ -50,6 +50,6 @@
     "ttf2eot": "^2.0.0",
     "ttf2woff": "^2.0.1",
     "ttf2woff2": "^3.0.0",
-    "yargs": "^15.0.2"
+    "yargs": "^15.3.1"
   }
 }
