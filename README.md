@@ -45,7 +45,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 npm i svgtofont
 ```
 
-### Using With Command
+#### Using With Command
 
 ```json
 {
@@ -55,7 +55,7 @@ npm i svgtofont
 }
 ```
 
-### Using With Nodejs
+#### Using With Nodejs
 
 ```js
 const svgtofont = require('svgtofont');
