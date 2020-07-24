@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
   "main": "src/index.js",
+  "bin" : { 
+    "svgtofont" : "./bin/cli.js" 
+  },
   "scripts": {
     "test": "node test/index.js"
   },
