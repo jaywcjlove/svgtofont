@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test/index.js"
   },
+  "bin": {
+    "svgtofont": "./bin/cli.js"
+  },
   "author": "Kenny <wowohoo@qq.com>",
   "repository": {
     "type": "git",
