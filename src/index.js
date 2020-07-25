@@ -29,7 +29,7 @@ module.exports = async function create(options) {
   options.fontName = options.fontName || "iconfont";
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
-  options.clssaNamePrefix = options.clssaNamePrefix || options.fontName;
+  options.classNamePrefix = options.classNamePrefix || options.fontName;
 
   if (options.emptyDist) {
     await fs.emptyDir(options.dist);
@@ -49,17 +49,17 @@ module.exports = async function create(options) {
     .then((UnicodeObject) => {
       Object.keys(UnicodeObject).forEach(name => {
         let _code = UnicodeObject[name];
-        cssIconHtml.push(`<li class="class-icon"><i class="${options.clssaNamePrefix}-${name}"></i><p class="name">${name}</p></li>`);
+        cssIconHtml.push(`<li class="class-icon"><i class="${options.classNamePrefix}-${name}"></i><p class="name">${name}</p></li>`);
         unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${_code.charCodeAt(0)};</span></li>`);
         symbolHtml.push(`
           <li class="symbol">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="${options.fontName}.symbol.svg#${options.clssaNamePrefix}-${name}"></use>
+              <use xlink:href="${options.fontName}.symbol.svg#${options.classNamePrefix}-${name}"></use>
             </svg>
-            <h4>${options.clssaNamePrefix}-${name}</h4>
+            <h4>${options.classNamePrefix}-${name}</h4>
           </li>
         `);
-        cssString.push(`.${options.clssaNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
+        cssString.push(`.${options.classNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
       });
     })
     .then(()=> createTTF(options))
@@ -76,7 +76,7 @@ module.exports = async function create(options) {
           fontname: options.fontName,
           cssString: cssString.join(""),
           timestamp: new Date().getTime(),
-          prefix: options.clssaNamePrefix || options.fontName
+          prefix: options.classNamePrefix || options.fontName
         });
       }
     })
@@ -106,7 +106,7 @@ module.exports = async function create(options) {
           description: null,
           footerInfo: null,
           ...options.website,
-          prefix: options.clssaNamePrefix || options.fontName,
+          prefix: options.classNamePrefix || options.fontName,
           _fontname: options.fontName,
           _type: "font-class",
           _logo: options.website.logo,

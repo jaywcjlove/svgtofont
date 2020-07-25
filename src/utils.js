@@ -191,7 +191,7 @@ exports.createSvgSymbol = OPTIONS => {
       const svgNode = $(file);
       symbolNode = $("<symbol></symbol>");
       symbolNode.attr("viewBox", svgNode.attr("viewBox"));
-      symbolNode.attr("id", `${OPTIONS.clssaNamePrefix}-${fileName}`);
+      symbolNode.attr("id", `${OPTIONS.classNamePrefix}-${fileName}`);
       symbolNode.append(svgNode.contents());
       $('svg').append(symbolNode);
     });

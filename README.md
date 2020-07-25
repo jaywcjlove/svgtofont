@@ -242,7 +242,7 @@ The font family name you want.
 
 unicode start number
 
-### clssaNamePrefix
+### classNamePrefix
 
 > Type: `String`  
 > Default value: font name  
