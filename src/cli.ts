@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-const FS = require('fs-extra');
-const path = require('path');
-const svgtofont = require('../');
-const argv = require('yargs')
+import FS from 'fs-extra';
+import yargs from 'yargs';
+import path from 'path';
+import svgtofont from './';
+
+const argv = yargs
   .alias('s', 'sources')
   .describe('s', 'The root from which all sources are relative.')
   .alias('o', 'output')
@@ -16,8 +18,8 @@ const argv = require('yargs')
   .epilog('copyright 2019')
   .argv;
 
-const sourcesPath = path.join(process.cwd(), argv.sources);
-const outputPath = path.join(process.cwd(), argv.output);
+const sourcesPath = path.join(process.cwd(), argv.sources as string);
+const outputPath = path.join(process.cwd(), argv.output as string);
 
 if (!FS.pathExistsSync(sourcesPath)) {
   console.error('The directory does not exist!', sourcesPath);
@@ -32,7 +34,7 @@ svgtofont({
   src: sourcesPath, // svg path
   dist: outputPath, // output path
   // emptyDist: true, // Clear output directory contents
-  fontName: argv.fontName || "svgfont", // font name
+  fontName: (argv.fontName as string) || "svgfont", // font name
   css: true, // Create CSS files.
   outSVGReact: true,
   outSVGPath: true,
@@ -43,5 +45,7 @@ svgtofont({
   },
 })
 .then(() => {
-  console.log("done!");
+  console.log('done!');
+}).catch((err) => {
+  console.log('SvgToFont:ERR:', err);
 });

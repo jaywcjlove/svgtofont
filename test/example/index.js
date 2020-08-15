@@ -1,8 +1,8 @@
 const path = require('path');
-const svgtofont = require("../src");
-const pkg = require('../package.json');
+const svgtofont = require("../../lib");
+const pkg = require('../../package.json');
 
-const rootPath = path.resolve(process.cwd(), "test");
+const rootPath = path.resolve(process.cwd(), "test", "example");
 
 svgtofont({
   src: path.resolve(rootPath, "svg"), // svg path

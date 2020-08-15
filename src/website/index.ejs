@@ -67,27 +67,27 @@
     <%if(_type === 'font-class') {%>
     .icons ul li.class-icon { font-size: 21px; line-height: 21px; padding-bottom: 20px; }
     .icons ul li.class-icon p{ font-size: 12px; }
-    .icons ul li.class-icon [class^="<%=prefix%>-"]{ font-size: 26px; }
+    .icons ul li.class-icon [class^="<%=classNamePrefix%>-"]{ font-size: 26px; }
     <%}%>
     <%if(_type === 'unicode') {%>
     .icons ul .unicode-icon span { display: block; }
     .icons ul .unicode-icon h4 { font-size: 12px; }
     @font-face {
-      font-family: "<%-_fontname%>";
-      src: url("<%-_fontname%>.eot");
+      font-family: "<%-fontname%>";
+      src: url("<%-fontname%>.eot");
       /* IE9*/
-      src: url("<%-_fontname%>.eot#iefix") format("embedded-opentype"),
+      src: url("<%-fontname%>.eot#iefix") format("embedded-opentype"),
       /* IE6-IE8 */
-      url("<%-_fontname%>.woff2?<%-(new Date()).getTime()%>") format("woff2"),
-      url("<%-_fontname%>.woff?<%-(new Date()).getTime()%>") format("woff"),
+      url("<%-fontname%>.woff2?<%-(new Date()).getTime()%>") format("woff2"),
+      url("<%-fontname%>.woff?<%-(new Date()).getTime()%>") format("woff"),
       /* chrome, firefox */
-      url("<%-_fontname%>.ttf?<%-(new Date()).getTime()%>") format("truetype"),
+      url("<%-fontname%>.ttf?<%-(new Date()).getTime()%>") format("truetype"),
       /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-      url("<%-_fontname%>.svg#<%-_fontname%>?<%-(new Date()).getTime()%>") format("svg");
+      url("<%-fontname%>.svg#<%-fontname%>?<%-(new Date()).getTime()%>") format("svg");
       /* iOS 4.1- */
     }
     .iconfont {
-      font-family: "<%-_fontname%>" !important;
+      font-family: "<%-fontname%>" !important;
       font-size: 26px;
       font-style: normal;
       -webkit-font-smoothing: antialiased;
@@ -129,9 +129,9 @@
     </a>
   <%}%>
   <div class="header">
-    <%if(_logo) {%>
+    <%if(logo) {%>
     <div class="logo">
-      <a href="./"><%-_logo%></a>
+      <a href="./"><%-logo%></a>
     </div>
     <%}%>
     <h1><%=_title%><sup><%-version%></sup></h1>

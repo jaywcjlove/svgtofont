@@ -16,4 +16,4 @@ jobs:
         registry-url: https://registry.npmjs.org/
 
     - run: npm install
-    - run: npm test
+    - run: npm run coverage

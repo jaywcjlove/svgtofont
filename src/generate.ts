@@ -1,7 +1,8 @@
-const fs = require("fs-extra");
-const path = require('path');
-const SVGO = require('svgo');
-const { filterSvgFiles } = require('./utils');
+import fs from 'fs-extra';
+import path from 'path';
+import SVGO from 'svgo';
+import { filterSvgFiles } from './utils';
+import { SvgToFontOptions } from './';
 
 const svgo = new SVGO({
   plugins: [{
@@ -13,7 +14,7 @@ const svgo = new SVGO({
  * Generate Icon SVG Path Source
  * <font-name>.json
  */
-module.exports.generateIconsSource = async (options) => {
+export async function generateIconsSource(options: SvgToFontOptions = {}){
   const ICONS_PATH = filterSvgFiles(options.src)
   const data = await buildPathsObject(ICONS_PATH);
   const outPath = path.join(options.dist, `${options.fontName}.json`);
@@ -26,7 +27,7 @@ module.exports.generateIconsSource = async (options) => {
  * and constructs map of icon name to array of path strings.
  * @param {array} files
  */
-async function buildPathsObject(files) {
+async function buildPathsObject(files: string[]) {
   return Promise.all(
     files.map(async filepath => {
       const name = path.basename(filepath, '.svg');
@@ -39,7 +40,7 @@ async function buildPathsObject(files) {
   );
 }
 
-const reactSource = (name, source) => `
+const reactSource = (name: string, source: string) => `
 import React from 'react';
 
 export const ${name} = props => (
@@ -50,14 +51,13 @@ export const ${name} = props => (
  * Generate React Icon
  * <font-name>.json
  */
-module.exports.generateReactIcons = async (options) => {
+export async function generateReactIcons(options: SvgToFontOptions = {}) {
   const ICONS_PATH = filterSvgFiles(options.src);
   const data = await outputReactFile(ICONS_PATH, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
   return outPath;
 }
-
 
 const reactsvgo = new SVGO({
   plugins: [
@@ -72,9 +72,9 @@ const reactsvgo = new SVGO({
   ],
 });
 
-const capitalizeEveryWord = str => str.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase()).replace(/^(\w)/g, ($0, $1) => $1.toUpperCase());
+const capitalizeEveryWord = (str: string) => str.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase()).replace(/^(\w)/g, ($0, $1) => $1.toUpperCase());
 
-async function outputReactFile(files, options) {
+async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
   return Promise.all(
     files.map(async filepath => {
       const name = capitalizeEveryWord(path.basename(filepath, '.svg'));

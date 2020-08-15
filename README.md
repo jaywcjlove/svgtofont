@@ -135,23 +135,18 @@ svgtofont({
 ## API
 
 ```js
-const {
-  createSVG, 
-  createTTF, 
-  createEOT, 
-  createWOFF, 
-  createWOFF2, 
-  createSvgSymbol
-} = require("svgtofont/src/utils");
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, createHTML } from 'svgtofont/lib/utils';
 
 const options = { ... };
 
-createSVG(options) // SVG => SVG Font
-  .then(UnicodeObjChar => createTTF(options)) // SVG Font => TTF
-  .then(() => createEOT(options)) // TTF => EOT
-  .then(() => createWOFF(options)) // TTF => WOFF
-  .then(() => createWOFF2(options)) // TTF => WOFF2
-  .then(() => createSvgSymbol(options)) // SVG Files => SVG Symbol
+async function creatFont() {
+  const unicodeObject = await createSVG(options); 
+  const ttf = await createTTF(options); // SVG Font => TTF
+  await createEOT(options, ttf); // TTF => EOT
+  await createWOFF(options, ttf); // TTF => WOFF
+  await createWOFF2(options, ttf); // TTF => WOFF2
+  await createSvgSymbol(options); // SVG Files => SVG Symbol
+}
 ```
 
 ## options
