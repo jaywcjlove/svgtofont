@@ -14,6 +14,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
 - Support SVG Symbol file.
+- Support [`Less`](https://github.com/less/less.js)/[`Sass`](https://github.com/sass/sass)/[`Stylus`](https://github.com/stylus/stylus).
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
 
