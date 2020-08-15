@@ -71,7 +71,7 @@
     "ttf2eot": "2.0.0",
     "ttf2woff": "2.0.1",
     "ttf2woff2": "3.0.0",
-    "yargs": "15.3.1"
+    "yargs": "15.4.1"
   },
   "devDependencies": {
     "@types/jest": "26.0.10",
