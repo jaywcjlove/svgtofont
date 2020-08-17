@@ -61,7 +61,7 @@ module.exports = async function create(options) {
           </li>
         `);
         cssString.push(`.${options.classNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
-        cssToVars.push(`$icon-${name}: "\\${_code.charCodeAt(0).toString(16)}";\n`);
+        cssToVars.push(`$${options.classNamePrefix}-${name}: "\\${_code.charCodeAt(0).toString(16)}";\n`);
       });
     })
     .then(()=> createTTF(options))
