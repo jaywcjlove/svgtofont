@@ -13,7 +13,7 @@ export type SvgToFontOptions = {
   /**
    * The output directory.
    * @default fonts
-   * @example 
+   * @example
    * ```
    * path.join(process.cwd(), 'fonts')
    * ```
@@ -22,7 +22,7 @@ export type SvgToFontOptions = {
   /**
    * svg path
    * @default svg
-   * @example 
+   * @example
    * ```
    * path.join(process.cwd(), 'svg')
    * ```
@@ -113,7 +113,7 @@ export type SvgToFontOptions = {
      */
     title?: string;
     /**
-     * @example 
+     * @example
      * ```js
      * path.resolve(rootPath, "favicon.png")
      * ```
@@ -121,7 +121,7 @@ export type SvgToFontOptions = {
     favicon?: string;
     /**
      * Must be a .svg format image.
-     * @example 
+     * @example
      * ```js
      * path.resolve(rootPath, "svg", "git.svg")
      * ```
@@ -165,6 +165,7 @@ export default async (options: SvgToFontOptions = {}) => {
     const unicodeObject = await createSVG(options);
 
     let cssString: string[] = [];
+    let cssToVars: string[] = [];
     let cssIconHtml: string[] = [];
     let unicodeHtml: string[] = [];
     let symbolHtml: string[] = [];
@@ -181,6 +182,7 @@ export default async (options: SvgToFontOptions = {}) => {
         </li>
       `);
       cssString.push(`.${options.classNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
+      cssToVars.push(`$${options.classNamePrefix}-${name}: "\\${_code.charCodeAt(0).toString(16)}";\n`);
     });
     const ttf = await createTTF(options);
     await createEOT(options, ttf);
@@ -192,6 +194,7 @@ export default async (options: SvgToFontOptions = {}) => {
       await copyTemplate(path.resolve(__dirname, 'styles'), options.dist, {
         fontname: options.fontName,
         cssString: cssString.join(''),
+        cssToVars: cssToVars.join(''),
         timestamp: new Date().getTime(),
         prefix: options.classNamePrefix || options.fontName
       });
