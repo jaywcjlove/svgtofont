@@ -37,6 +37,7 @@ module.exports = async function create(options) {
   // Ensures that the directory exists.
   await fs.ensureDir(options.dist);
   let cssString = [];
+  let cssToVars = [];
   let cssIconHtml = [];
   let unicodeHtml = [];
   let symbolHtml = [];
@@ -60,6 +61,7 @@ module.exports = async function create(options) {
           </li>
         `);
         cssString.push(`.${options.classNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
+        cssToVars.push(`$icon-${name}: "\\${_code.charCodeAt(0).toString(16)}";\n`);
       });
     })
     .then(()=> createTTF(options))
@@ -75,6 +77,7 @@ module.exports = async function create(options) {
         return copyTemplate(font_temp, options.dist, {
           fontname: options.fontName,
           cssString: cssString.join(""),
+          cssToVars: cssToVars.join(""),
           timestamp: new Date().getTime(),
           prefix: options.classNamePrefix || options.fontName
         });
@@ -119,7 +122,7 @@ module.exports = async function create(options) {
         } else {
           this.tempData._logo = false;
         }
-        // const faviconPath = 
+        // const faviconPath =
         // website favicon
         if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
           this.tempData.favicon = base64Img.base64Sync(options.website.favicon);
