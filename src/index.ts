@@ -245,10 +245,9 @@ export default async (options: SvgToFontOptions = {}) => {
       // website favicon
       if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
         tempData.favicon = image2uri(options.website.favicon);
+      } else {
+        tempData.favicon = '';
       }
-      // else {
-      //   tempData.favicon = false;
-      // }
       const classHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(
         fontClassPath,
