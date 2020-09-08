@@ -38,6 +38,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 
 - [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
 - [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library.
+- [Bootstrap Icons Font](https://github.com/uiwjs/bootstrap-icons) Official open source SVG icon library for Bootstrap.
 - [test example](./test) For a simple test example, run `npm run test` in the root directory to see the results.
 
 ## Install
