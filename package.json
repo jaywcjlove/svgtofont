@@ -74,7 +74,7 @@
     "yargs": "15.4.1"
   },
   "devDependencies": {
-    "@types/jest": "26.0.10",
+    "@types/jest": "26.0.14",
     "@types/svg2ttf": "5.0.0",
     "tsbb": "1.7.6"
   }
