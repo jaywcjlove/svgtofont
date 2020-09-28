@@ -143,6 +143,14 @@ export type SvgToFontOptions = {
 }
 
 export default async (options: SvgToFontOptions = {}) => {
+  const pkgPath = path.join(process.cwd(), 'package.json');
+  if (fs.pathExistsSync(pkgPath)) {
+    const pkg = require(pkgPath);
+    if (pkg.svgtofont) {
+      options = { ...options, ...pkg.svgtofont }
+    }
+  }
+
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
   options.unicodeStart = options.unicodeStart || 10000;
