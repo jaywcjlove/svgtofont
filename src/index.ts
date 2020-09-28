@@ -66,12 +66,7 @@ export type SvgToFontOptions = {
    * unicode start number
    * @default 10000
    */
-  unicodeStart?: number;
-  /**
-   * unicode start number
-   * @default 20000
-   */
-  startNumber?: number;
+  startUnicode?: number;
   /**
    * Clear output directory contents
    * @default false
@@ -153,7 +148,7 @@ export default async (options: SvgToFontOptions = {}) => {
 
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
-  options.unicodeStart = options.unicodeStart || 10000;
+  options.startUnicode = options.startUnicode || 0xea01;
   options.svg2ttf = options.svg2ttf || {};
   options.emptyDist = options.emptyDist;
   options.fontName = options.fontName || 'iconfont';

@@ -22,6 +22,7 @@ let startUnicode = 0xea01;
  * SVG to SVG font
  */
 export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string, string>> {
+  startUnicode = options.startUnicode
   return new Promise((resolve, reject) => {
     // init
     const fontStream = new SVGIcons2SVGFont({

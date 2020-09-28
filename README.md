@@ -86,7 +86,7 @@ svgtofont({
   dist: path.resolve(process.cwd(), "fonts"), // output path
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
-  startNumber: 20000, // unicode start number
+  startUnicode: 0xea01, // unicode start number
   svgicons2svgfont: {
     fontHeight: 1000,
     normalize: true
@@ -234,10 +234,10 @@ Clear output directory contents
 
 The font family name you want.
 
-### unicodeStart
+### startUnicode
 
 > Type: `Number`  
-> Default value: `10000`  
+> Default value: `0xea01`  
 
 unicode start number
 
