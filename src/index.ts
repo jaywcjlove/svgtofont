@@ -7,7 +7,7 @@ import htmlMinifier from 'html-minifier';
 import { SVGIcons2SVGFontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { generateIconsSource, generateReactIcons } from './generate';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, createHTML } from './utils';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML } from './utils';
 
 export type SvgToFontOptions = {
   /**
@@ -36,7 +36,7 @@ export type SvgToFontOptions = {
   /**
    * Create CSS/LESS/Scss/Styl files, default `true`.
    */
-  css?: boolean;
+  css?: boolean | CSSOptions;
   /**
    * Output `./dist/react/`, SVG generates `react` components.
    */
@@ -155,7 +155,6 @@ export default async (options: SvgToFontOptions = {}) => {
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
   options.classNamePrefix = options.classNamePrefix || options.fontName;
-
   // If you generate a font you need to generate a style.
   if (options.website) options.css = true;
 
@@ -199,7 +198,8 @@ export default async (options: SvgToFontOptions = {}) => {
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),
         timestamp: new Date().getTime(),
-        prefix: options.classNamePrefix || options.fontName
+        prefix: options.classNamePrefix || options.fontName,
+        _opts: typeof options.css === 'boolean' ? {} : {...options.css}
       });
     }
 

@@ -9,6 +9,8 @@ import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import copy from 'copy-template-dir';
+import del from 'del';
+import moveFile from 'move-file';
 import { SvgToFontOptions } from './';
 
 let UnicodeObj: Record<string, string> = {};
@@ -189,16 +191,37 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
   });
 };
 
+export type CSSOptions = {
+  output?: string;
+  include?: RegExp;
+}
+
 /**
  * Copy template files
  */
-export function copyTemplate(inDir: string, outDir: string, vars: Record<string, any>) {
+export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: Record<string, any> & { _opts: CSSOptions}) {
+  const removeFiles: Array<string> = [];
   return new Promise((resolve, reject) => {
-    copy(inDir, outDir, vars, (err, createdFiles) => {
+    copy(inDir, outDir, vars, async (err, createdFiles) => {
       if (err) reject(err);
-      createdFiles.forEach(filePath =>
-        console.log(`${color.green('SUCCESS')} Created ${filePath} `)
-      );
+      createdFiles = createdFiles.map(filePath => {
+        if (_opts.include && (new RegExp(_opts.include)).test(filePath) || !_opts.include) {
+          return filePath;
+        } else {
+          removeFiles.push(filePath);
+        }
+      }).filter(Boolean);
+      if (removeFiles.length > 0) {
+        await del([...removeFiles]);
+      }
+      if (_opts.output) {
+        const output = path.join(process.cwd(), _opts.output);
+        await Promise.all(createdFiles.map(async (file) => {
+          await moveFile(file, path.join(output, path.basename(file)));
+          return null;
+        }));
+      }
+      createdFiles.forEach(filePath => console.log(`${color.green('SUCCESS')} Created ${filePath} `));
       resolve(createdFiles);
     })
   });
