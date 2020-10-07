@@ -192,8 +192,18 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
 };
 
 export type CSSOptions = {
+  /**
+   * Output the css file to the specified directory
+   */
   output?: string;
+  /**
+   * Which files are exported.
+   */
   include?: RegExp;
+  /**
+   * Setting font size.
+   */
+  fontSize?: string;
 }
 
 /**

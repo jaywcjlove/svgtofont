@@ -155,6 +155,7 @@ export default async (options: SvgToFontOptions = {}) => {
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
   options.classNamePrefix = options.classNamePrefix || options.fontName;
+  const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
   // If you generate a font you need to generate a style.
   if (options.website) options.css = true;
 
@@ -193,10 +194,12 @@ export default async (options: SvgToFontOptions = {}) => {
     await createSvgSymbol(options);
 
     if (options.css) {
+      console.log('fontSize::', fontSize)
       await copyTemplate(path.resolve(__dirname, 'styles'), options.dist, {
         fontname: options.fontName,
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),
+        fontSize: fontSize,
         timestamp: new Date().getTime(),
         prefix: options.classNamePrefix || options.fontName,
         _opts: typeof options.css === 'boolean' ? {} : {...options.css}

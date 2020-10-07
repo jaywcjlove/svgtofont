@@ -25,6 +25,11 @@
     "url": "https://github.com/jaywcjlove/svgtofont.git"
   },
   "jest": {},
+  "svgtofont": {
+    "css": {
+      "fontSize": "12px"
+    }
+  },
   "keywords": [
     "webfont",
     "font",

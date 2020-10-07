@@ -250,10 +250,27 @@ Create font class name prefix, default value font name.
 
 ### css
 
-> Type: `Boolean`  
+> Type: `Boolean|CSSOptions`  
 > Default value: `false`  
 
 Create CSS/LESS files, default `true`.
+
+```ts
+type CSSOptions = {
+  /**
+   * Output the css file to the specified directory
+   */
+  output?: string;
+  /**
+   * Which files are exported.
+   */
+  include?: RegExp;
+  /**
+   * Setting font size.
+   */
+  fontSize?: string;
+}
+```
 
 ### svgicons2svgfont
 
