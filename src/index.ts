@@ -201,7 +201,7 @@ export default async (options: SvgToFontOptions = {}) => {
         fontSize: fontSize,
         timestamp: new Date().getTime(),
         prefix: options.classNamePrefix || options.fontName,
-        _opts: typeof options.css === 'boolean' ? {} : {...options.css}
+        _opts: typeof options.css === 'boolean' ? {} : { ...options.css }
       });
     }
 
@@ -239,7 +239,7 @@ export default async (options: SvgToFontOptions = {}) => {
         fontname: options.fontName,
         classNamePrefix: options.classNamePrefix,
         _type: 'font-class',
-        _link: `${options.fontName}.css`,
+        _link: `${(options.css && typeof options.css !== 'boolean' && options.css.fileName) || options.fontName}.css`,
         _IconHtml: cssIconHtml.join(''),
         _title: options.website.title || options.fontName
       };

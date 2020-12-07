@@ -27,7 +27,8 @@
   "jest": {},
   "svgtofont": {
     "css": {
-      "fontSize": "12px"
+      "fontSize": "12px",
+      "fileName": "wcj"
     }
   },
   "keywords": [

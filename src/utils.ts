@@ -214,6 +214,11 @@ export type CSSOptions = {
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
   cssPath?: string
+  /**
+   * Set file name
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  fileName?: string
 }
 
 /**
@@ -223,8 +228,9 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
   const removeFiles: Array<string> = [];
   return new Promise((resolve, reject) => {
     copy(inDir, outDir, {
+      ...vars,
       cssPath: _opts.cssPath || '',
-      ...vars
+      filename: _opts.fileName || vars.fontname,
     }, async (err, createdFiles) => {
       if (err) reject(err);
       createdFiles = createdFiles.map(filePath => {
