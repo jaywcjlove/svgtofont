@@ -124,7 +124,7 @@ export function createEOT(options: SvgToFontOptions = {}, ttf: Buffer) {
         return reject(err);
       }
       console.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
-      resolve();
+      resolve(eot);
     });
   });
 };
@@ -141,7 +141,7 @@ export function createWOFF(options: SvgToFontOptions = {}, ttf: Buffer) {
         return reject(err);
       }
       console.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
-      resolve();
+      resolve(woff);
     });
   });
 };
@@ -158,7 +158,9 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
         return reject(err);
       }
       console.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
-      resolve();
+      resolve({
+        path: DIST_PATH
+      });
     });
   });
 };
@@ -186,7 +188,10 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
         return reject(err);
       }
       console.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
-      resolve();
+      resolve({
+        path: DIST_PATH,
+        svg: $.html("svg")
+      });
     });
   });
 };
@@ -204,6 +209,11 @@ export type CSSOptions = {
    * Setting font size.
    */
   fontSize?: string;
+  /**
+   * Set the path in the css file
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  cssPath?: string
 }
 
 /**
@@ -212,7 +222,10 @@ export type CSSOptions = {
 export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: Record<string, any> & { _opts: CSSOptions}) {
   const removeFiles: Array<string> = [];
   return new Promise((resolve, reject) => {
-    copy(inDir, outDir, vars, async (err, createdFiles) => {
+    copy(inDir, outDir, {
+      cssPath: _opts.cssPath || '',
+      ...vars
+    }, async (err, createdFiles) => {
       if (err) reject(err);
       createdFiles = createdFiles.map(filePath => {
         if (_opts.include && (new RegExp(_opts.include)).test(filePath) || !_opts.include) {

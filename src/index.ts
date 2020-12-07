@@ -157,7 +157,7 @@ export default async (options: SvgToFontOptions = {}) => {
   options.classNamePrefix = options.classNamePrefix || options.fontName;
   const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
   // If you generate a font you need to generate a style.
-  if (options.website) options.css = true;
+  if (options.website && !options.css) options.css = true;
 
   try {
     if (options.emptyDist) {
@@ -194,7 +194,6 @@ export default async (options: SvgToFontOptions = {}) => {
     await createSvgSymbol(options);
 
     if (options.css) {
-      console.log('fontSize::', fontSize)
       await copyTemplate(path.resolve(__dirname, 'styles'), options.dist, {
         fontname: options.fontName,
         cssString: cssString.join(''),
