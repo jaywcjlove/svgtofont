@@ -269,6 +269,16 @@ type CSSOptions = {
    * Setting font size.
    */
   fontSize?: string;
+  /**
+   * Set the path in the css file
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  cssPath?: string
+  /**
+   * Set file name
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  fileName?: string
 }
 ```
 
