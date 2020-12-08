@@ -58,7 +58,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.11.2",
-    "@types/cheerio": "0.22.22",
+    "@types/cheerio": "0.22.23",
     "@types/ejs": "3.0.4",
     "@types/fs-extra": "9.0.1",
     "@types/html-minifier": "4.0.0",
