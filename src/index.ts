@@ -63,6 +63,10 @@ export type SvgToFontOptions = {
    */
   classNamePrefix?: SvgToFontOptions['fontName'];
   /**
+  * Directory of custom templates.
+  */
+  styleTemplates?: string;
+  /**
    * unicode start number
    * @default 10000
    */
@@ -194,7 +198,7 @@ export default async (options: SvgToFontOptions = {}) => {
     await createSvgSymbol(options);
 
     if (options.css) {
-      await copyTemplate(path.resolve(__dirname, 'styles'), options.dist, {
+      await copyTemplate(options.styleTemplates || path.resolve(__dirname, 'styles'), options.dist, {
         fontname: options.fontName,
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),

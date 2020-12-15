@@ -213,12 +213,16 @@ export type CSSOptions = {
    * Set the path in the css file
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
-  cssPath?: string
+  cssPath?: string;
   /**
    * Set file name
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
-  fileName?: string
+  fileName?: string;
+  /**
+  * Setting class name.
+  */
+  className?: string;
 }
 
 /**
@@ -243,6 +247,11 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
       if (removeFiles.length > 0) {
         await del([...removeFiles]);
       }
+      createdFiles = await Promise.all(createdFiles.map(async (file) => {
+        const changedFileName = file.replace('.template', '');
+        await moveFile(file, changedFileName);
+        return changedFileName;
+      }));
       if (_opts.output) {
         const output = path.join(process.cwd(), _opts.output);
         await Promise.all(createdFiles.map(async (file) => {
