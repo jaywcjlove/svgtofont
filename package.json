@@ -15,6 +15,7 @@
     "build:ts": "tsbb build",
     "build:types": "tsbb types",
     "example": "node test/example/index.js",
+    "example:templates": "node test/templates/index.js",
     "pretest": "npm run example",
     "test": "tsbb test",
     "coverage": "npm run example && tsbb test --coverage"

@@ -84,6 +84,7 @@ const path = require("path");
 svgtofont({
   src: path.resolve(process.cwd(), "icon"), // svg path
   dist: path.resolve(process.cwd(), "fonts"), // output path
+  styleTemplates: path.resolve(rootPath, "styles"), // file templates path (optional)
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   startUnicode: 0xea01, // unicode start number
@@ -230,9 +231,17 @@ Clear output directory contents
 ### fontName
 
 > Type: `String`  
-> Default value: `iconfont`  
+> Default value: `iconfont`
 
 The font family name you want.
+
+### styleTemplates
+
+> Type: `String`
+> Default value: `undefined`
+
+The path of the file templates, see `src/styles` or `test/templates/styles` to get reference about 
+  how to create a template, file names can have the extension .template, like a `filename.scss.template`
 
 ### startUnicode
 
