@@ -240,7 +240,7 @@ The font family name you want.
 > Type: `String`
 > Default value: `undefined`
 
-The path of the file templates, see `src/styles` or `test/templates/styles` to get reference about 
+The path of the templates, see `src/styles` or `test/templates/styles` to get reference about 
   how to create a template, file names can have the extension .template, like a `filename.scss.template`
 
 ### startUnicode
