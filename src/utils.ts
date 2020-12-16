@@ -219,10 +219,6 @@ export type CSSOptions = {
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
   fileName?: string;
-  /**
-  * Setting class name.
-  */
-  className?: string;
 }
 
 /**
