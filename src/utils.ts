@@ -244,9 +244,13 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
         await del([...removeFiles]);
       }
       createdFiles = await Promise.all(createdFiles.map(async (file) => {
-        const changedFileName = file.replace('.template', '');
-        await moveFile(file, changedFileName);
-        return changedFileName;
+        if (!file.endsWith('.template')) {
+          return file;
+        }
+
+        const changedFile = file.replace('.template', '');
+        await moveFile(file, changedFile);
+        return changedFile;
       }));
       if (_opts.output) {
         const output = path.join(process.cwd(), _opts.output);
