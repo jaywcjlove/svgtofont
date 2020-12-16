@@ -27,7 +27,7 @@ it('Support Less/Sass/Stylus.', async () => {
 });
 
 it('Support templates.', async () => {
-  const dir = await fs.readdir(path.join(__dirname, 'example', 'dist'));
+  const dir = await fs.readdir(path.join(__dirname, 'templates', 'dist'));
   if (dir && Array.isArray(dir)) {
     expect([...dir]).toEqual(
       expect.arrayContaining([

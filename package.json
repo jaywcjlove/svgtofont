@@ -16,9 +16,9 @@
     "build:types": "tsbb types",
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
-    "pretest": "npm run example",
+    "pretest": "npm run example && npm run example:templates",
     "test": "tsbb test",
-    "coverage": "npm run example && tsbb test --coverage"
+    "coverage": "npm run example && npm run example:templates && tsbb test --coverage"
   },
   "author": "Kenny <wowohoo@qq.com>",
   "repository": {
