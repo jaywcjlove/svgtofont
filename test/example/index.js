@@ -17,6 +17,7 @@ svgtofont({
     fontHeight: 1000,
     normalize: true
   },
+  typescript: true,
   // website = null, no demo html files
   website: {
     // Add a Github corner to your website

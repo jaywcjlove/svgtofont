@@ -81,6 +81,38 @@ export function filterSvgFiles(svgFolderPath: string): string[] {
   return svgArr;
 }
 
+export function snakeToUppercase(str: string) {
+  return str.split(/[-_]/)
+    .map(partial => partial.charAt(0).toUpperCase() + partial.slice(1))
+    .join('')
+}
+
+export type TypescriptOptions = {
+  extension?: 'ts' | 'tsx',
+  enumName?: string,
+  unionName?: string
+}
+
+/**
+ * Create typescript declarations for icon classnames
+ */
+export async function createTypescript(options: Omit<SvgToFontOptions, 'typescript'> & { typescript: TypescriptOptions | true }) {
+  const tsOptions = options.typescript === true ? {} : options.typescript;
+  const uppercaseFontName = snakeToUppercase(options.fontName);
+  const { extension = 'ts', enumName = uppercaseFontName, unionName = `${uppercaseFontName}Classname` } = tsOptions;
+  const DIST_PATH = path.join(options.dist, `${options.fontName}.${extension}`);
+  const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
+
+  await fs.writeFile(
+    DIST_PATH,
+    `export enum ${enumName} {\n` +
+      fileNames.map(name => `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}"`).join(',\n') +
+    '\n}\n\n' +
+    `export type ${unionName} = keyof typeof ${enumName}`
+  );
+  console.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
+}
+
 /*
  * Get icon unicode
  * @return {Array} unicode array

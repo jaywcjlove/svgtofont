@@ -7,7 +7,7 @@ import htmlMinifier from 'html-minifier';
 import { SVGIcons2SVGFontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { generateIconsSource, generateReactIcons } from './generate';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML } from './utils';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 
 export type SvgToFontOptions = {
   /**
@@ -139,6 +139,12 @@ export type SvgToFontOptions = {
       url: string;
     }>;
   };
+
+  /**
+   * Create typescript file with declarations for icon classnames
+   * @default false
+   */
+  typescript?: boolean | TypescriptOptions
 }
 
 export default async (options: SvgToFontOptions = {}) => {
@@ -209,6 +215,9 @@ export default async (options: SvgToFontOptions = {}) => {
       });
     }
 
+    if (options.typescript) {
+      await createTypescript({ ...options, typescript: options.typescript })
+    }
 
     if (options.website) {
       const pageName = ['font-class', 'unicode', 'symbol'];
