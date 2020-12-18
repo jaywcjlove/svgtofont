@@ -22,7 +22,7 @@ it('Support Less/Sass/Stylus.', async () => {
         expect.stringMatching(/index.html$/),
       ]),
     );
-    expect(dir.length).toEqual(16);
+    expect(dir.length).toEqual(17);
   }
 });
 
