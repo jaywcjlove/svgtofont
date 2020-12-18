@@ -89,8 +89,7 @@ export function snakeToUppercase(str: string) {
 
 export type TypescriptOptions = {
   extension?: 'ts' | 'tsx',
-  enumName?: string,
-  unionName?: string
+  enumName?: string
 }
 
 /**
@@ -99,7 +98,7 @@ export type TypescriptOptions = {
 export async function createTypescript(options: Omit<SvgToFontOptions, 'typescript'> & { typescript: TypescriptOptions | true }) {
   const tsOptions = options.typescript === true ? {} : options.typescript;
   const uppercaseFontName = snakeToUppercase(options.fontName);
-  const { extension = 'ts', enumName = uppercaseFontName, unionName = `${uppercaseFontName}Classname` } = tsOptions;
+  const { extension = 'ts', enumName = uppercaseFontName } = tsOptions;
   const DIST_PATH = path.join(options.dist, `${options.fontName}.${extension}`);
   const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
 
@@ -108,7 +107,9 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
     `export enum ${enumName} {\n` +
       fileNames.map(name => `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}"`).join(',\n') +
     '\n}\n\n' +
-    `export type ${unionName} = keyof typeof ${enumName}`
+    `export type ${enumName}Classname = ${fileNames.map(name => `"${options.classNamePrefix}-${name}"`).join(' | ')}\n` +
+    `export type ${enumName}Icon = ${fileNames.map(name => `"${name}"`).join(' | ')}\n` +
+    `export const ${enumName}Prefix = "${options.classNamePrefix}-"`
   );
   console.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
