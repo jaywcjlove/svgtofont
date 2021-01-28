@@ -56,6 +56,9 @@
     "lib",
     "src"
   ],
+  "engines": {
+    "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
+  },
   "dependencies": {
     "@types/cheerio": "0.22.23",
     "@types/ejs": "3.0.4",
