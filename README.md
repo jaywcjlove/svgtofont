@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/jaywcjlove/svgtofont/actions">
-    <img src="https://github.com/svgtofont/workflows/Build%20and%20Deploy/badge.svg" alt="Build & Deploy">
+    <img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build & Deploy">
   </a>
   <a href="https://gitee.com/jaywcjlove/svgtofont">
     <img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
