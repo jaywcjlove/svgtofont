@@ -1,4 +1,4 @@
-name: Svgtofont test
+name: Build
 on:
   push:
     branches:
@@ -9,6 +9,15 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Generate Changelog
+      id: changelog
+      uses: jaywcjlove/changelog-generator@v1.3.9
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        head-ref: ${{steps.create_tag.outputs.version}}
+        filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
+        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
@@ -17,3 +26,33 @@ jobs:
 
     - run: npm install
     - run: npm run coverage
+
+    - name: Create Tag
+      id: create_tag
+      uses: jaywcjlove/create-tag-action@v1.1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        package-path: ./package.json
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      if: steps.create_tag.outputs.successful
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.create_tag.outputs.version }}
+        release_name: ${{ steps.create_tag.outputs.version }}
+        body: |
+          [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont/file/README.md)
+          [![](https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+          [![](https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/network)
+          [![](https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/stargazers)
+          [![](https://img.shields.io/github/release/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+          ```bash
+          npm i svgtofont
+          ```
+          ${{ steps.changelog.outputs.compareurl }}
+          ${{ steps.changelog.outputs.changelog }}
+        draft: false
+        prerelease: false
