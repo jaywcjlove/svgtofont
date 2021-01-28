@@ -1,10 +1,33 @@
-svg to font
----
+<p align="center">
+  <a href="https://github.com/jaywcjlove/svgtofont/">
+    <img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" height="80px" alt="SVG To Font" />
+  </a>
+</p>
+<h3 align="center">SVG To Font</h3>
 
-[![](https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
-[![](https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/network)
-[![](https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/stargazers)
-[![](https://img.shields.io/github/release/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+<p align="center">
+  <a href="https://github.com/jaywcjlove/svgtofont/actions">
+    <img src="https://github.com/svgtofont/workflows/Build%20and%20Deploy/badge.svg" alt="Build & Deploy">
+  </a>
+  <a href="https://gitee.com/jaywcjlove/svgtofont">
+    <img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
+  </a>
+  <a href="https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont/file/README.md">
+    <img src="https://img.shields.io/badge/Open%20in-unpkg-blue" alt="Open in unpkg">
+  </a>
+  <a href="https://github.com/svgtofont/issues">
+    <img src="https://img.shields.io/github/issues/svgtofont.svg" alt="Issues">
+  </a>
+  <a href="https://github.com/svgtofont/network">
+    <img src="https://img.shields.io/github/forks/svgtofont.svg" alt="Forks">
+  </a>
+  <a href="https://github.com/svgtofont/stargazers">
+    <img src="https://img.shields.io/github/stars/svgtofont.svg" alt="Stars">
+  </a>
+  <a href="https://www.npmjs.com/package/svgtofont">
+    <img src="https://img.shields.io/npm/v/svgtofont.svg" alt="npm version">
+  </a>
+</p>
 
 Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.
 
