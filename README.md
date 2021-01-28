@@ -1,9 +1,8 @@
 <p align="center">
   <a href="https://github.com/jaywcjlove/svgtofont/">
-    <img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" height="80px" alt="SVG To Font" />
+    <img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" alt="SVG To Font" />
   </a>
 </p>
-<h3 align="center">SVG To Font</h3>
 
 <p align="center">
   <a href="https://github.com/jaywcjlove/svgtofont/actions">
