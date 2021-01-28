@@ -16,13 +16,13 @@
     <img src="https://img.shields.io/badge/Open%20in-unpkg-blue" alt="Open in unpkg">
   </a>
   <a href="https://github.com/svgtofont/issues">
-    <img src="https://img.shields.io/github/issues/svgtofont.svg" alt="Issues">
+    <img src="https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg" alt="Issues">
   </a>
   <a href="https://github.com/svgtofont/network">
-    <img src="https://img.shields.io/github/forks/svgtofont.svg" alt="Forks">
+    <img src="https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg" alt="Forks">
   </a>
   <a href="https://github.com/svgtofont/stargazers">
-    <img src="https://img.shields.io/github/stars/svgtofont.svg" alt="Stars">
+    <img src="https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg" alt="Stars">
   </a>
   <a href="https://www.npmjs.com/package/svgtofont">
     <img src="https://img.shields.io/npm/v/svgtofont.svg" alt="npm version">
