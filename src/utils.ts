@@ -212,7 +212,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
       const symbolNode = $("<symbol></symbol>");
       symbolNode.attr("viewBox", svgNode.attr("viewBox"));
       symbolNode.attr("id", `${options.classNamePrefix}-${fileName}`);
-      symbolNode.append(svgNode.contents());
+      symbolNode.append(svgNode.html());
       $('svg').append(symbolNode);
     });
 

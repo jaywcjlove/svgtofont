@@ -303,6 +303,6 @@ export default async (options: SvgToFontOptions = {}) => {
     }
 
   } catch (error) {
-    console.log('SvgToFont:ERR:', error);
+    console.log('SvgToFont:CLI:ERR:', error);
   }
 }
