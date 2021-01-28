@@ -44,7 +44,7 @@ jobs:
         tag_name: ${{ steps.create_tag.outputs.version }}
         release_name: ${{ steps.create_tag.outputs.version }}
         body: |
-          [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont@${{versionNumber}}/file/README.md) [![](https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases) [![](https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/network) [![](https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/stargazers) [![](https://img.shields.io/github/release/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
+          [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont@${{steps.create_tag.outputs.versionNumber}}/file/README.md) [![](https://img.shields.io/github/issues/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases) [![](https://img.shields.io/github/forks/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/network) [![](https://img.shields.io/github/stars/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/stargazers) [![](https://img.shields.io/github/release/jaywcjlove/svgtofont.svg)](https://github.com/jaywcjlove/svgtofont/releases)
 
           ```bash
           npm i svgtofont
