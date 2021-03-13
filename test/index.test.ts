@@ -17,6 +17,7 @@ it('Support Less/Sass/Stylus.', async () => {
         expect.stringMatching(/svgtofont\.woff$/),
         expect.stringMatching(/svgtofont\.woff2$/),
         expect.stringMatching(/svgtofont\.symbol\.svg$/),
+        expect.stringMatching(/svgtofont\.d\.ts$/),
         expect.stringMatching(/symbol.html$/),
         expect.stringMatching(/font-class.html$/),
         expect.stringMatching(/index.html$/),
