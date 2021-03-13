@@ -88,7 +88,7 @@ export function snakeToUppercase(str: string) {
 }
 
 export type TypescriptOptions = {
-  extension?: 'ts' | 'tsx',
+  extension?: 'd.ts' | 'ts' | 'tsx',
   enumName?: string
 }
 
@@ -98,10 +98,9 @@ export type TypescriptOptions = {
 export async function createTypescript(options: Omit<SvgToFontOptions, 'typescript'> & { typescript: TypescriptOptions | true }) {
   const tsOptions = options.typescript === true ? {} : options.typescript;
   const uppercaseFontName = snakeToUppercase(options.fontName);
-  const { extension = 'ts', enumName = uppercaseFontName } = tsOptions;
+  const { extension = 'd.ts', enumName = uppercaseFontName } = tsOptions;
   const DIST_PATH = path.join(options.dist, `${options.fontName}.${extension}`);
   const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
-
   await fs.writeFile(
     DIST_PATH,
     `export enum ${enumName} {\n` +

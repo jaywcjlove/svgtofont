@@ -1,14 +1,8 @@
 import fs from 'fs-extra';
 import path from 'path';
-import SVGO from 'svgo';
+import { optimize } from 'svgo';
 import { filterSvgFiles } from './utils';
 import { SvgToFontOptions } from './';
-
-const svgo = new SVGO({
-  plugins: [{
-    convertShapeToPath: { convertArcs: true },
-  }],
-});
 
 /**
  * Generate Icon SVG Path Source
@@ -32,10 +26,14 @@ async function buildPathsObject(files: string[]) {
     files.map(async filepath => {
       const name = path.basename(filepath, '.svg');
       const svg = fs.readFileSync(filepath, 'utf-8');
-      const pathStrings = await svgo.optimize(svg, { path: filepath })
-        .then(({ data }) => data.match(/ d="[^"]+"/g) || [])
-        .then(paths => paths.map(s => s.slice(3)));
-      return `"${name}": [${pathStrings.join(',\n')}]`;
+      const pathStrings = optimize(svg, {
+        path: filepath,
+        plugins: [
+          // 'convertShapeToPath'
+        ],
+      });
+      const str: string[] = (pathStrings.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
+      return `"${name}": [${str.join(',\n')}]`;
     }),
   );
 }
@@ -59,19 +57,6 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
   return outPath;
 }
 
-const reactsvgo = new SVGO({
-  plugins: [
-    {
-      convertShapeToPath: { convertArcs: true }
-    },
-    { removeXMLNS: true },
-    // { removeDimensions: true, },
-    { removeViewBox: false },
-    { removeEmptyAttrs: true },
-    // { removeUnknownsAndDefaults: true },
-  ],
-});
-
 const capitalizeEveryWord = (str: string) => str.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase()).replace(/^(\w)/g, ($0, $1) => $1.toUpperCase());
 
 async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
@@ -79,12 +64,18 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
     files.map(async filepath => {
       const name = capitalizeEveryWord(path.basename(filepath, '.svg'));
       const svg = fs.readFileSync(filepath, 'utf-8');
-      let pathStrings = await reactsvgo.optimize(svg, { path: filepath })
-        .then(({ data }) => data.match(/ d="[^"]+"/g) || [])
-        .then(paths => paths.map(s => s.slice(3)));
-        
+      const pathData = optimize(svg, {
+        path: filepath,
+        plugins: [
+          'removeXMLNS',
+          'removeEmptyAttrs',
+          // 'convertShapeToPath',
+          // 'removeViewBox'
+        ]
+      });
+      const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
-      pathStrings = pathStrings.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
+      const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
       fs.outputFileSync(outDistPath, reactSource(name, pathStrings.join(',\n')));
       return `export * from './${name}';`;
     }),
