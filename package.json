@@ -60,7 +60,7 @@
     "node": "^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0"
   },
   "dependencies": {
-    "@types/cheerio": "0.22.27",
+    "@types/cheerio": "0.22.28",
     "@types/ejs": "3.0.6",
     "@types/fs-extra": "9.0.8",
     "@types/html-minifier": "4.0.0",
