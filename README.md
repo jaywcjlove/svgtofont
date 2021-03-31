@@ -414,6 +414,12 @@ The font [metadata](http://www.w3.org/TR/SVG/metadata.html). You can set any
 Allows you to provide your own logging function. Set to `function(){}` to
  disable logging.
 
+### svgoOptions
+
+> Type: `OptimizeOptions`
+> Default value: `undefined` 
+
+Some options can be configured with `svgoOptions` though it. [svgo](https://github.com/svg/svgo#configuration)
 ### svg2ttf
 
 This is the setting for [svg2ttf](https://github.com/fontello/svg2ttf/tree/c33a126920f46b030e8ce960cc7a0e38a6946bbc#svg2ttfsvgfontstring-options---buf)

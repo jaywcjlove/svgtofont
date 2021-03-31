@@ -6,6 +6,7 @@ import image2uri from 'image2uri';
 import htmlMinifier from 'html-minifier';
 import { SVGIcons2SVGFontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
+import { OptimizeOptions } from 'svgo';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 
@@ -57,6 +58,8 @@ export type SvgToFontOptions = {
    * This is the setting for [svgicons2svgfont](https://github.com/nfroidure/svgicons2svgfont/tree/dd713bea4f97afa59f7dba6a21ff7f22db565bcf#api)
    */
   svgicons2svgfont?: SVGIcons2SVGFontOptions;
+  /** Some options can be configured with svgoOptions though it. [svgo](https://github.com/svg/svgo#configuration) */
+  svgoOptions?: OptimizeOptions;
   /**
    * Create font class name prefix, default value font name.
    * @default fontName

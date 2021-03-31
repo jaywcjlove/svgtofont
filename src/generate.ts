@@ -60,17 +60,20 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
 const capitalizeEveryWord = (str: string) => str.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase()).replace(/^(\w)/g, ($0, $1) => $1.toUpperCase());
 
 async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
+  const svgoOptions = options.svgoOptions || {}
   return Promise.all(
     files.map(async filepath => {
       const name = capitalizeEveryWord(path.basename(filepath, '.svg'));
       const svg = fs.readFileSync(filepath, 'utf-8');
       const pathData = optimize(svg, {
         path: filepath,
+        ...svgoOptions,
         plugins: [
           'removeXMLNS',
           'removeEmptyAttrs',
           // 'convertShapeToPath',
           // 'removeViewBox'
+          ...(svgoOptions.plugins || [])
         ]
       });
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
