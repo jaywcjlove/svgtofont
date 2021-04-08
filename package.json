@@ -66,7 +66,7 @@
     "@types/html-minifier": "4.0.0",
     "@types/svgo": "2.3.0",
     "@types/ttf2woff2": "2.0.0",
-    "cheerio": "1.0.0-rc.5",
+    "cheerio": "1.0.0-rc.6",
     "colors-cli": "1.0.27",
     "copy-template-dir": "1.4.0",
     "del": "6.0.0",
