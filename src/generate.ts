@@ -10,7 +10,7 @@ import { SvgToFontOptions } from './';
  */
 export async function generateIconsSource(options: SvgToFontOptions = {}){
   const ICONS_PATH = filterSvgFiles(options.src)
-  const data = await buildPathsObject(ICONS_PATH);
+  const data = await buildPathsObject(ICONS_PATH, options);
   const outPath = path.join(options.dist, `${options.fontName}.json`);
   await fs.outputFile(outPath, `{${data}\n}`);
   return outPath;
@@ -21,14 +21,18 @@ export async function generateIconsSource(options: SvgToFontOptions = {}){
  * and constructs map of icon name to array of path strings.
  * @param {array} files
  */
-async function buildPathsObject(files: string[]) {
+async function buildPathsObject(files: string[], options: SvgToFontOptions = {}) {
+  const svgoOptions = options.svgoOptions || {};
   return Promise.all(
     files.map(async filepath => {
       const name = path.basename(filepath, '.svg');
       const svg = fs.readFileSync(filepath, 'utf-8');
       const pathStrings = optimize(svg, {
         path: filepath,
+        ...options,
         plugins: [
+          'convertTransform',
+          ...(svgoOptions.plugins || [])
           // 'convertShapeToPath'
         ],
       });
@@ -71,6 +75,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
         plugins: [
           'removeXMLNS',
           'removeEmptyAttrs',
+          'convertTransform',
           // 'convertShapeToPath',
           // 'removeViewBox'
           ...(svgoOptions.plugins || [])
