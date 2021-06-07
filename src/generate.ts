@@ -12,7 +12,7 @@ export async function generateIconsSource(options: SvgToFontOptions = {}){
   const ICONS_PATH = filterSvgFiles(options.src)
   const data = await buildPathsObject(ICONS_PATH);
   const outPath = path.join(options.dist, `${options.fontName}.json`);
-  await fs.outputFile(outPath, `{${data}}`);
+  await fs.outputFile(outPath, `{${data}\n}`);
   return outPath;
 }
 
@@ -33,7 +33,7 @@ async function buildPathsObject(files: string[]) {
         ],
       });
       const str: string[] = (pathStrings.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
-      return `"${name}": [${str.join(',\n')}]`;
+      return `\n"${name}": [${str.join(',\n')}]`;
     }),
   );
 }
