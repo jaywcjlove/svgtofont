@@ -3,7 +3,6 @@
 import path from 'path';
 import fs from 'fs-extra';
 import image2uri from 'image2uri';
-import htmlMinifier from 'html-minifier';
 import { SVGIcons2SVGFontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { OptimizeOptions } from 'svgo';
@@ -270,31 +269,21 @@ export default async (options: SvgToFontOptions = {}) => {
         tempData.favicon = '';
       }
       const classHtmlStr = await createHTML(options.website.template, tempData);
-      fs.outputFileSync(
-        fontClassPath,
-        htmlMinifier.minify(classHtmlStr as string, { collapseWhitespace: true, minifyCSS: true })
-      );
+      fs.outputFileSync(fontClassPath, classHtmlStr);
       console.log(`${color.green('SUCCESS')} Created ${fontClassPath} `);
 
       tempData._IconHtml = unicodeHtml.join('');
       tempData._type = 'unicode';
       const unicodeHtmlStr = await createHTML(options.website.template, tempData);
-      fs.outputFileSync(
-        unicodePath,
-        htmlMinifier.minify(unicodeHtmlStr, { collapseWhitespace: true, minifyCSS: true })
-      );
+      fs.outputFileSync(unicodePath, unicodeHtmlStr);
       console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
 
       tempData._IconHtml = symbolHtml.join('');
       tempData._type = 'symbol';
       const symbolHtmlStr = await createHTML(options.website.template, tempData);
-      fs.outputFileSync(
-        symbolPath,
-        htmlMinifier.minify(symbolHtmlStr, { collapseWhitespace: true, minifyCSS: true })
-      );
+      fs.outputFileSync(symbolPath, unicodeHtmlStr);
       console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
     }
-
 
     if (options.outSVGPath) {
       const outPath = await generateIconsSource(options);
