@@ -66,7 +66,7 @@
     "@types/svgo": "2.3.0",
     "@types/svg2ttf": "5.0.0",
     "@types/ttf2woff2": "2.0.0",
-    "cheerio": "1.0.0-rc.9",
+    "cheerio": "1.0.0-rc.10",
     "colors-cli": "1.0.27",
     "copy-template-dir": "1.4.0",
     "del": "6.0.0",
