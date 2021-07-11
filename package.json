@@ -60,9 +60,9 @@
     "node": "^12.13.0 || ^14.15.0 || >=15.0.0"
   },
   "dependencies": {
-    "@types/cheerio": "0.22.29",
-    "@types/ejs": "3.0.6",
-    "@types/fs-extra": "9.0.11",
+    "@types/cheerio": "0.22.30",
+    "@types/ejs": "3.0.7",
+    "@types/fs-extra": "9.0.12",
     "@types/svgo": "2.3.1",
     "@types/svg2ttf": "5.0.1",
     "@types/ttf2woff2": "2.0.0",
@@ -83,7 +83,7 @@
     "yargs": "17.0.1"
   },
   "devDependencies": {
-    "@types/jest": "26.0.23",
+    "@types/jest": "26.0.24",
     "tsbb": "2.2.1"
   }
 }
