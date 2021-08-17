@@ -281,7 +281,7 @@ export default async (options: SvgToFontOptions = {}) => {
       tempData._IconHtml = symbolHtml.join('');
       tempData._type = 'symbol';
       const symbolHtmlStr = await createHTML(options.website.template, tempData);
-      fs.outputFileSync(symbolPath, unicodeHtmlStr);
+      fs.outputFileSync(symbolPath, symbolHtmlStr);
       console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
     }
 
