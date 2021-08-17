@@ -73,7 +73,7 @@
     "ejs": "3.1.6",
     "fs-extra": "10.0.0",
     "image2uri": "1.0.4",
-    "move-file": "3.0.0",
+    "move-file": "2.1.0",
     "svg2ttf": "6.0.2",
     "svgicons2svgfont": "10.0.3",
     "svgo": "2.4.0",
