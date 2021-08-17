@@ -10,7 +10,7 @@ import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import copy from 'copy-template-dir';
 import del from 'del';
-import moveFile from 'move-file';
+import { moveFile } from 'move-file';
 import { SvgToFontOptions } from './';
 
 let UnicodeObj: Record<string, string> = {};
