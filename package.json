@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@types/cheerio": "0.22.30",
-    "@types/ejs": "3.0.7",
+    "@types/ejs": "3.1.0",
     "@types/fs-extra": "9.0.12",
     "@types/svgo": "2.3.1",
     "@types/svg2ttf": "5.0.1",
