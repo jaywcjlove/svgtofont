@@ -15,14 +15,13 @@
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
     "test": "npm run example && npm run example:templates && tsbb test",
-    "coverage": "npm run example && npm run example:templates && tsbb test --coverage"
+    "coverage": "tsbb test --coverage"
   },
   "author": "Kenny <wowohoo@qq.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/jaywcjlove/svgtofont.git"
   },
-  "jest": {},
   "svgtofont": {
     "css": {
       "fontSize": "12px"
@@ -55,6 +54,11 @@
   ],
   "engines": {
     "node": "^12.13.0 || ^14.15.0 || >=15.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/*.test.{js,ts}"
+    ]
   },
   "dependencies": {
     "@types/cheerio": "0.22.30",
