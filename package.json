@@ -85,6 +85,6 @@
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
-    "tsbb": "3.2.0"
+    "tsbb": "3.1.11"
   }
 }
