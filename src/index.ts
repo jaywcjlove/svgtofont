@@ -298,3 +298,8 @@ export default async (options: SvgToFontOptions = {}) => {
     console.log('SvgToFont:CLI:ERR:', error);
   }
 }
+
+/**
+ * https://github.com/Microsoft/TypeScript/issues/5565#issuecomment-155226290
+ */
+module.exports = exports["default"];
