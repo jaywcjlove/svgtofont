@@ -9,8 +9,8 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "node lib/index.js",
-    "watch": "tsbb watch --no-esm --disable-babel",
-    "build": "tsbb build --no-esm --disable-babel",
+    "watch": "tsbb watch --disable-babel --file-names src/index.ts --file-names src/cli.ts",
+    "build": "tsbb build --disable-babel --file-names src/index.ts --file-names src/cli.ts",
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
@@ -85,6 +85,6 @@
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
-    "tsbb": "3.1.11"
+    "tsbb": "3.2.0"
   }
 }
