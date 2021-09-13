@@ -9,15 +9,12 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "node lib/index.js",
-    "watch": "npm run watch:ts & npm run build:types -- --watch",
-    "watch:ts": "tsbb watch",
-    "build": "npm run build:ts && npm run build:types",
-    "build:ts": "tsbb build",
-    "build:types": "tsbb types",
+    "watch": "tsbb watch --no-esm --disable-babel",
+    "build": "tsbb build --no-esm --disable-babel",
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
-    "test": "tsbb test",
+    "test": "npm run example && npm run example:templates && tsbb test",
     "coverage": "npm run example && npm run example:templates && tsbb test --coverage"
   },
   "author": "Kenny <wowohoo@qq.com>",
@@ -84,6 +81,6 @@
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
-    "tsbb": "3.1.9"
+    "tsbb": "3.1.11"
   }
 }
