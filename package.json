@@ -15,7 +15,7 @@
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
     "test": "npm run example && npm run example:templates && tsbb test",
-    "coverage": "tsbb test --coverage"
+    "coverage": "npm run example && npm run example:templates && tsbb test --coverage"
   },
   "author": "Kenny <wowohoo@qq.com>",
   "repository": {
