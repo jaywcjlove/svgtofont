@@ -10,11 +10,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Look Changelog
-      uses: jaywcjlove/changelog-generator@v1.4.3
+      uses: jaywcjlove/changelog-generator@v1.4.6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         head-ref: ${{steps.create_tag.outputs.version}}
-        filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|@renovate\[bot\]|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
     - name: Setup Node
@@ -27,19 +26,18 @@ jobs:
 
     - name: Create Tag
       id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.2.0
+      uses: jaywcjlove/create-tag-action@v1.2.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         package-path: ./package.json
 
     - name: Generate Changelog
       id: changelog
-      uses: jaywcjlove/changelog-generator@v1.4.3
+      uses: jaywcjlove/changelog-generator@v1.4.6
       if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         head-ref: ${{steps.create_tag.outputs.version}}
-        filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
     - name: Create Release
@@ -56,6 +54,7 @@ jobs:
           npm i svgtofont
           ```
           ${{ steps.changelog.outputs.compareurl }}
+
           ${{ steps.changelog.outputs.changelog }}
 
     - run: npm install @jsdevtools/npm-publish -g
