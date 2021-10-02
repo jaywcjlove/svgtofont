@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>svgtofont</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta description="Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.">
+    <meta keywords="webfont,font,icon,iconfont,font-face,compress,minify,font-cli,ttf,woff,eot,svg,ttf2eot,ttf2woff,ttf2svg,svg2ttf,css,base64">
+    <style>.task-list-item { list-style-type: none;}.task-list-item label { font-weight: 400;}.task-list-item.enabled label { cursor: pointer;}.task-list-item+.task-list-item { margin-top: 3px;}.task-list-item .handle { display: none;}.task-list-item-checkbox { margin: 0 .2em .25em -1.6em; vertical-align: middle;}.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 { font-weight: 600; line-height: 1.25; margin-bottom: 16px; margin-top: 24px;}.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1;}.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link { visibility: hidden; vertical-align: middle;}.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link { visibility: visible;}.github-corner:hover .octo-arm { -webkit-animation: octocat-wave .56s ease-in-out; animation: octocat-wave .56s ease-in-out;}@-webkit-keyframes octocat-wave { 0%, to { -webkit-transform: rotate(0); transform: rotate(0); } 20%, 60% { -webkit-transform: rotate(-25deg); transform: rotate(-25deg); } 40%, 80% { -webkit-transform: rotate(10deg); transform: rotate(10deg); }}@keyframes octocat-wave { 0%, to { -webkit-transform: rotate(0); transform: rotate(0) } 20%, 60% { -webkit-transform: rotate(-25deg); transform: rotate(-25deg); } 40%, 80% { -webkit-transform: rotate(10deg); transform: rotate(10deg); }}.wmde-markdown { font-size: 16px; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji; max-width: 1024px; margin: 28px auto 60px auto;}.wmde-markdown > :first-child { margin-top: 0 !important;}.wmde-markdown > :last-child { margin-bottom: 0 !important;}.wmde-markdown code[class*="language-"],.wmde-markdown pre[class*="language-"] { color: black; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; word-wrap: normal; -webkit-hyphens: none; hyphens: none;}.wmde-markdown pre code { background: none; overflow-wrap: normal; white-space: inherit; -moz-tab-size: 2; tab-size: 2; padding: 16px; font-size: 95%; line-height: 1.5; display: block; text-shadow: 0 1px #fff;}.wmde-markdown pre { margin-bottom: 18px; font-size: 85%; line-height: 1.45; position: relative; overflow-x: auto; background-color: #f6f8fa; border-radius: 3px;}.wmde-markdown code,.wmde-markdown tt { background-color: rgba(27, 31, 35, 0.05); border-radius: 3px; font-size: 85%; margin: 0; padding: 0.2em 0.4em;}.wmde-markdown pre,.wmde-markdown code,.wmde-markdown tt { font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;}.wmde-markdown img { max-width: 100%;}.wmde-markdown input { vertical-align: middle; margin: 0 0.2em 0.25em -1.6em;}.wmde-markdown input + p { display: inline;}.wmde-markdown h1,.wmde-markdown h2 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em;}.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 { font-weight: 600; line-height: 1.25; margin-bottom: 16px; margin-top: 24px;}.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1;}.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link { visibility: hidden; vertical-align: middle;}.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link { visibility: visible;}.wmde-markdown h1 { font-size: 2em;}.wmde-markdown h2 { font-size: 1.5em;}.wmde-markdown h3 { font-size: 1.25em;}.wmde-markdown h4 { font-size: 1em;}.wmde-markdown h5 { font-size: 0.875em;}.wmde-markdown h6 { font-size: 0.85em;}.wmde-markdown ol,.wmde-markdown ul { padding-left: 2em;}.wmde-markdown ol > p,.wmde-markdown ul > p { margin-bottom: 0;}.wmde-markdown ul { margin-bottom: 16px; margin-top: 0; list-style: initial;}.wmde-markdown > blockquote,.wmde-markdown > blockquote blockquote { margin: 0; border-left: 0.25em solid #dfe2e5; color: #6a737d; padding: 0 1em;}.wmde-markdown > blockquote > :last-child,.wmde-markdown > blockquote blockquote > :last-child { margin-bottom: 0;}.wmde-markdown > blockquote > :first-child,.wmde-markdown > blockquote blockquote > :first-child { margin-top: 0;}.wmde-markdown hr { margin: 1.5em auto; border: 0; border-top: 2px dotted #eee; height: 1px;}.wmde-markdown > table,.wmde-markdown > blockquote table { display: block; overflow: auto; width: 100%; border-collapse: collapse; border-spacing: 0; font-size: 14px;}.wmde-markdown > table tr,.wmde-markdown > blockquote table tr { background-color: #fff; border-top: 1px solid #c6cbd1;}.wmde-markdown > table td,.wmde-markdown > blockquote table td,.wmde-markdown > table th,.wmde-markdown > blockquote table th { border: 1px solid #dfe2e5; padding: 6px 13px;}.wmde-markdown blockquote,.wmde-markdown details,.wmde-markdown dl,.wmde-markdown ol,.wmde-markdown p,.wmde-markdown pre,.wmde-markdown table,.wmde-markdown ul { margin-bottom: 16px; margin-top: 0;}.wmde-markdown a { color: #0366d6; text-decoration: none;}.wmde-markdown a:hover { text-decoration: underline;}.wmde-markdown .namespace { opacity: 0.7;}.wmde-markdown .token.important { font-weight: normal;}.wmde-markdown .token.bold { font-weight: bold;}.wmde-markdown .token.italic { font-style: italic;}.wmde-markdown .token.entity { cursor: help;}.wmde-markdown kbd { background-color: #fafbfc; border-bottom-color: #d1d5da; border: 1px solid #d1d5da; border-radius: 3px; box-shadow: inset 0 -1px 0 #d1d5da; color: #56595d; display: inline-block; font-size: 10px; font-family: ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace; line-height: 10px; padding: 2px 4px; vertical-align: middle;}.wmde-markdown .token.tag .attr-value { color: #032f62;}.wmde-markdown .token.property,.wmde-markdown .token.tag,.wmde-markdown .token.boolean,.wmde-markdown .token.number,.wmde-markdown .token.function-name,.wmde-markdown .token.constant,.wmde-markdown .token.symbol,.wmde-markdown .token.deleted { color: #0060c9;}.wmde-markdown .token.punctuation { color: #a0a0a0;}.wmde-markdown code[class*="language-"] { color: black;}.wmde-markdown code[class*="language-"] .token.selector,.wmde-markdown code[class*="language-"] .token.attr-name,.wmde-markdown code[class*="language-"] .token.string,.wmde-markdown code[class*="language-"] .token.char,.wmde-markdown code[class*="language-"] .token.function,.wmde-markdown code[class*="language-"] .token.builtin { color: #6f42c1;}.wmde-markdown code[class*="language-"] .token.inserted { color: #22863a; background-color: #f0fff4;}.wmde-markdown code[class*="language-"] .token.deleted { color: #b31d28; background-color: #ffeef0;}.wmde-markdown code[class*="language-"] .token.class-name { color: #6f42c1;}.wmde-markdown code[class*="language-"] .code-block { color: #032f62;}.wmde-markdown code[class*="language-"] .token.comment,.wmde-markdown code[class*="language-"] .token.block-comment,.wmde-markdown code[class*="language-"] .token.prolog,.wmde-markdown code[class*="language-"] .token.doctype,.wmde-markdown code[class*="language-"] .token.cdata { color: #7D8B99;}.wmde-markdown code[class*="language-"] .token.punctuation { color: #a0a0a0;}.wmde-markdown code[class*="language-"] .token.operator,.wmde-markdown code[class*="language-"] .token.entity,.wmde-markdown code[class*="language-"] .token.url,.wmde-markdown code[class*="language-"] .token.variable { color: #d73a49; background: rgba(255, 255, 255, 0.5);}.wmde-markdown code[class*="language-"] .token.atrule,.wmde-markdown code[class*="language-"] .token.attr-value { color: #004698;}.wmde-markdown code[class*="language-"] .token.keyword { color: #d63200;}.wmde-markdown code[class*="language-"] .token.regex,.wmde-markdown code[class*="language-"] .token.important { color: #e90;}.wmde-markdown code[class*="language-"] .token.string { color: #0a53c1;}</style>
+    <style></style>
+  </head>
+  <body><div class="wmde-markdown"><a aria-label="View source on GitHub" target="__blank" class="github-corner" href="https://github.com/jaywcjlove/svgtofont.git"><svg width="54" height="54" viewBox="0 0 250 250" aria-hidden="true" style="fill: rgb(32, 34, 37); color: rgb(255, 255, 255); position: fixed; z-index: 99999; border: 0px; top: 0px; right: 0px;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path style="transform-origin: 130px 106px;" class="octo-arm" fill="currentColor" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"></path><path class="octo-body" fill="currentColor" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path></svg></a>
+    <p align="center"><a href="https://github.com/jaywcjlove/svgtofont/"><img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" alt="SVG To Font"></a></p>
+    <p align="center"><a href="https://github.com/jaywcjlove/svgtofont/actions"><img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build &#x26; Deploy">
+</a><a href="https://jaywcjlove.github.io/svgtofont/lcov-report/"><img src="https://jaywcjlove.github.io/svgtofont/badges.svg" alt="Coverage Status">
+</a><a href="https://gitee.com/jaywcjlove/svgtofont"><img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
+</a><a href="https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont/file/README.md"><img src="https://img.shields.io/badge/Open%20in-unpkg-blue" alt="Open in unpkg">
+</a><a href="https://www.npmjs.com/package/svgtofont"><img src="https://img.shields.io/npm/dm/svgtofont.svg?style=flat" alt="NPM Download">
+</a><a href="https://www.npmjs.com/package/svgtofont"><img src="https://img.shields.io/npm/v/svgtofont.svg" alt="npm version"></a></p>
+    <p>Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.</p>
+    <p><a href="#install">Install</a> · <a href="#using-with-nodejs">Usage</a> · <a href="#using-with-command">Command</a> · <a href="#font-usage">Font Usage</a> · <a href="#api">API</a> · <a href="#options">options</a> · <a href="http://npm.im/svgtofont">npm</a> · <a href="#license">License</a></p>
+    <p><strong>Features:</strong></p>
+    <ul>
+      <li>Supported font formats: <code>WOFF2</code>, <code>WOFF</code>, <code>EOT</code>, <code>TTF</code> and <code>SVG</code>.</li>
+      <li>Support SVG Symbol file.</li>
+      <li>Support <a href="https://github.com/less/less.js"><code>Less</code></a>/<a href="https://github.com/sass/sass"><code>Sass</code></a>/<a href="https://github.com/stylus/stylus"><code>Stylus</code></a>.</li>
+      <li>Allows to use custom templates (example <code>css</code>, <code>less</code> and etc).</li>
+      <li>Automatically generate a preview site.</li>
+    </ul>
+    <pre class="language-bash"><code class="language-bash">                                ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
+                                ┆      Project       ┆
+                                ┆                    ┆
+╭┈┈┈┈┈┈┈┈╮                      ┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮    ┆
+┆iconfont┆┈┈╮                   ┆   ┆    svg    ┆┈┈╮ ┆
+╰┈┈┈┈┈┈┈┈╯  ┆  ╭┈┈┈┈┈┈┈┈┈┈┈┈╮   ┆   ╰┈┈┈┈┈┈┈┈┈┈┈╯  ┆ ┆
+            ├┈▶┆download svg┆┈┈▶┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮  ┆ ┆
+╭┈┈┈┈┈┈┈┈╮  ┆  ╰┈┈┈┈┈┈┈┈┈┈┈┈╯   ┆╭┈┈┆create font┆◀┈╯ ┆
+┆icomoon ┆┈┈╯                   ┆┆  ╰┈┈┈┈┈┈┈┈┈┈┈╯    ┆
+╰┈┈┈┈┈┈┈┈╯                      ┆┆  ╭┈┈┈┈┈┈┈┈┈┈┈╮    ┆
+                                ┆╰┈▶┆ use font  ┆    ┆
+                                ┆   ╰┈┈┈┈┈┈┈┈┈┈┈╯    ┆
+                                ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯
+</code></pre>
+    <p><strong>Icon Font Created By svgtofont</strong></p>
+    <ul>
+      <li><a href="https://uiwjs.github.io/file-icons/">file-icons</a> File icons in the file tree.</li>
+      <li><a href="https://github.com/uiwjs/icons">uiw-iconfont</a> The premium icon font for <a href="https://github.com/uiwjs">@uiwjs</a> Component Library.</li>
+      <li><a href="https://github.com/uiwjs/bootstrap-icons">Bootstrap Icons Font</a> Official open source SVG icon library for Bootstrap.</li>
+      <li><a href="./test">test example</a> For a simple test example, run <code>npm run test</code> in the root directory to see the results.</li>
+    </ul>
+    <h2 id="install"><a class="anchor" aria-hidden="true" tabindex="-1" href="#install"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Install</h2>
+    <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> i svgtofont
+</code></pre>
+    <h4 id="using-with-command"><a class="anchor" aria-hidden="true" tabindex="-1" href="#using-with-command"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Using With Command</h4>
+    <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"font"</span><span class="token operator">:</span> <span class="token string">"svgtofont --sources ./svg --output ./font --fontName uiw-font"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <p>You can add configuration to package.json. <a href="https://github.com/jaywcjlove/svgtofont/issues/48">#48</a></p>
+    <h4 id="using-with-nodejs"><a class="anchor" aria-hidden="true" tabindex="-1" href="#using-with-nodejs"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Using With Nodejs</h4>
+    <pre class="language-js"><code class="language-js"><span class="token keyword">const</span> svgtofont <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'svgtofont'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token function">svgtofont</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'icon'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
+  dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'fonts'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
+  fontName<span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
+  css<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'done!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <p>Or</p>
+    <pre class="language-js"><code class="language-js"><span class="token keyword">const</span> svgtofont <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"svgtofont"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">svgtofont</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"icon"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
+  dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"fonts"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
+  styleTemplates<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>rootPath<span class="token punctuation">,</span> <span class="token string">"styles"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// file templates path (optional)</span>
+  fontName<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
+  css<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
+  startUnicode<span class="token operator">:</span> <span class="token number">0xea01</span><span class="token punctuation">,</span> <span class="token comment">// unicode start number</span>
+  svgicons2svgfont<span class="token operator">:</span> <span class="token punctuation">{</span>
+    fontHeight<span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    normalize<span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// website = null, no demo html files</span>
+  website<span class="token operator">:</span> <span class="token punctuation">{</span>
+    title<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
+    <span class="token comment">// Must be a .svg format image.</span>
+    logo<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    version<span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
+    meta<span class="token operator">:</span> <span class="token punctuation">{</span>
+      description<span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
+      keywords<span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    description<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    <span class="token comment">// Add a Github corner to your website</span>
+    <span class="token comment">// Like: https://github.com/uiwjs/react-github-corners</span>
+    corners<span class="token operator">:</span> <span class="token punctuation">{</span>
+      url<span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
+      width<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      height<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      bgColor<span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    links<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"index.html"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"unicode.html"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    footerInfo<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Licensed under MIT. (Yes it's free and &#x3C;a href="https://github.com/jaywcjlove/svgtofont">open-sourced&#x3C;/a></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'done!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+</code></pre>
+    <h2 id="api"><a class="anchor" aria-hidden="true" tabindex="-1" href="#api"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>API</h2>
+    <pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> createSVG<span class="token punctuation">,</span> createTTF<span class="token punctuation">,</span> createEOT<span class="token punctuation">,</span> createWOFF<span class="token punctuation">,</span> createWOFF2<span class="token punctuation">,</span> createSvgSymbol<span class="token punctuation">,</span> copyTemplate<span class="token punctuation">,</span> createHTML <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'svgtofont/lib/utils'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token spread operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">creatFont</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> unicodeObject <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">createSVG</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token keyword">const</span> ttf <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">createTTF</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// SVG Font => TTF</span>
+  <span class="token keyword control-flow">await</span> <span class="token function">createEOT</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> ttf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TTF => EOT</span>
+  <span class="token keyword control-flow">await</span> <span class="token function">createWOFF</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> ttf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TTF => WOFF</span>
+  <span class="token keyword control-flow">await</span> <span class="token function">createWOFF2</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> ttf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TTF => WOFF2</span>
+  <span class="token keyword control-flow">await</span> <span class="token function">createSvgSymbol</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// SVG Files => SVG Symbol</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <h2 id="options"><a class="anchor" aria-hidden="true" tabindex="-1" href="#options"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>options</h2>
+    <blockquote>
+      <p>svgtofont(options)</p>
+    </blockquote>
+    <h3 id="dist"><a class="anchor" aria-hidden="true" tabindex="-1" href="#dist"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>dist</h3>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <del><code>dist</code></del> => <code>fonts</code></p>
+    </blockquote>
+    <p>The output directory.</p>
+    <h3 id="outsvgreact"><a class="anchor" aria-hidden="true" tabindex="-1" href="#outsvgreact"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>outSVGReact</h3>
+    <blockquote>
+      <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Output <code>./dist/react/</code>, SVG generates <code>react</code> components.</p>
+    <pre class="language-js"><code class="language-js">git<span class="token operator">/</span>git<span class="token punctuation">.</span><span class="token property-access">svg</span>
+
+<span class="token comment">// ↓↓↓↓↓↓↓↓↓↓</span>
+
+<span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">Git</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=></span> <span class="token punctuation">(</span>
+  <span class="token operator">&#x3C;</span>svg viewBox<span class="token operator">=</span><span class="token string">"0 0 20 20"</span> <span class="token punctuation">{</span><span class="token spread operator">...</span>props<span class="token punctuation">}</span><span class="token operator">></span><span class="token operator">&#x3C;</span>path d<span class="token operator">=</span><span class="token string">"M2.6 10.59L8.38 4.8l1.69 -."</span> fillRule<span class="token operator">=</span><span class="token string">"evenodd"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&#x3C;</span><span class="token operator">/</span>svg<span class="token operator">></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <h3 id="outsvgpath"><a class="anchor" aria-hidden="true" tabindex="-1" href="#outsvgpath"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>outSVGPath</h3>
+    <blockquote>
+      <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Output <code>./dist/svgtofont.json</code>, The content is as follows:</p>
+    <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token string">"adobe"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z...."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"git"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M2.6 10.59L8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1..."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"stylelint"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M129.74 243.648c28-100.109 27.188-100.5.816c2.65..."</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <p>Or you can generate the file separately:</p>
+    <pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> generateIconsSource <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'svgtofont/src/generate'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">generate</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>	
+  <span class="token keyword">const</span> outPath <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">generateIconsSource</span><span class="token punctuation">(</span><span class="token punctuation">{</span>	
+    src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'svg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
+    dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
+    fontName<span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span>	
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
+<span class="token punctuation">}</span>	
+
+<span class="token function">generate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <h3 id="src"><a class="anchor" aria-hidden="true" tabindex="-1" href="#src"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>src</h3>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>svg</code></p>
+    </blockquote>
+    <p>output path</p>
+    <h3 id="emptydist"><a class="anchor" aria-hidden="true" tabindex="-1" href="#emptydist"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>emptyDist</h3>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Clear output directory contents</p>
+    <h3 id="fontname"><a class="anchor" aria-hidden="true" tabindex="-1" href="#fontname"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>fontName</h3>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>iconfont</code></p>
+    </blockquote>
+    <p>The font family name you want.</p>
+    <h3 id="styletemplates"><a class="anchor" aria-hidden="true" tabindex="-1" href="#styletemplates"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>styleTemplates</h3>
+    <blockquote>
+      <p>
+        Type: <code>String</code>
+        Default value: <code>undefined</code>
+      </p>
+    </blockquote>
+    <p>
+      The path of the templates, see <code>src/styles</code> or <code>test/templates/styles</code> to get reference about
+      how to create a template, file names can have the extension .template, like a <code>filename.scss.template</code>
+    </p>
+    <h3 id="startunicode"><a class="anchor" aria-hidden="true" tabindex="-1" href="#startunicode"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>startUnicode</h3>
+    <blockquote>
+      <p>Type: <code>Number</code><br>Default value: <code>0xea01</code></p>
+    </blockquote>
+    <p>unicode start number</p>
+    <h3 id="classnameprefix"><a class="anchor" aria-hidden="true" tabindex="-1" href="#classnameprefix"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>classNamePrefix</h3>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: font name</p>
+    </blockquote>
+    <p>Create font class name prefix, default value font name.</p>
+    <h3 id="css"><a class="anchor" aria-hidden="true" tabindex="-1" href="#css"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>css</h3>
+    <blockquote>
+      <p>Type: <code>Boolean|CSSOptions</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Create CSS/LESS files, default <code>true</code>.</p>
+    <pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">CSSOptions</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token doc-comment comment">/**
+   * Output the css file to the specified directory
+   */</span>
+  output<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  <span class="token doc-comment comment">/**
+   * Which files are exported.
+   */</span>
+  include<span class="token operator">?</span><span class="token operator">:</span> <span class="token known-class-name class-name">RegExp</span><span class="token punctuation">;</span>
+  <span class="token doc-comment comment">/**
+   * Setting font size.
+   */</span>
+  fontSize<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  <span class="token doc-comment comment">/**
+   * Set the path in the css file
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */</span>
+  cssPath<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token doc-comment comment">/**
+   * Set file name
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */</span>
+  fileName<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <h3 id="svgicons2svgfont"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfont"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont</h3>
+    <p>This is the setting for <a href="https://github.com/nfroidure/svgicons2svgfont/tree/dd713bea4f97afa59f7dba6a21ff7f22db565bcf#api">svgicons2svgfont</a></p>
+    <h4 id="svgicons2svgfontfontname"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfontname"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fontName</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>'iconfont'</code></p>
+    </blockquote>
+    <p>The font family name you want.</p>
+    <h4 id="svgicons2svgfontfontid"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfontid"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fontId</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: the options.fontName value</p>
+    </blockquote>
+    <p>The font id you want.</p>
+    <h4 id="svgicons2svgfontfontstyle"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfontstyle"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fontStyle</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>''</code></p>
+    </blockquote>
+    <p>The font style you want.</p>
+    <h4 id="svgicons2svgfontfontweight"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfontweight"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fontWeight</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>''</code></p>
+    </blockquote>
+    <p>The font weight you want.</p>
+    <h4 id="svgicons2svgfontfixedwidth"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfixedwidth"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fixedWidth</h4>
+    <blockquote>
+      <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Creates a monospace font of the width of the largest input icon.</p>
+    <h4 id="svgicons2svgfontcenterhorizontally"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontcenterhorizontally"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.centerHorizontally</h4>
+    <blockquote>
+      <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Calculate the bounds of a glyph and center it horizontally.</p>
+    <h4 id="svgicons2svgfontnormalize"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontnormalize"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.normalize</h4>
+    <blockquote>
+      <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+    </blockquote>
+    <p>Normalize icons by scaling them to the height of the highest icon.</p>
+    <h4 id="svgicons2svgfontfontheight"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontfontheight"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.fontHeight</h4>
+    <blockquote>
+      <p>Type: <code>Number</code><br>Default value: <code>MAX(icons.height)</code></p>
+    </blockquote>
+    <p>The outputted font height (defaults to the height of the highest input icon).</p>
+    <h4 id="svgicons2svgfontround"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontround"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.round</h4>
+    <blockquote>
+      <p>Type: <code>Number</code><br>Default value: <code>10e12</code></p>
+    </blockquote>
+    <p>Setup SVG path rounding.</p>
+    <h4 id="svgicons2svgfontdescent"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontdescent"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.descent</h4>
+    <blockquote>
+      <p>Type: <code>Number</code><br>Default value: <code>0</code></p>
+    </blockquote>
+    <p>The font descent. It is useful to fix the font baseline yourself.</p>
+    <p><strong>Warning:</strong> The descent is a positive value!</p>
+    <h4 id="svgicons2svgfontascent"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontascent"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.ascent</h4>
+    <blockquote>
+      <p>Type: <code>Number</code><br>Default value: <code>fontHeight - descent</code></p>
+    </blockquote>
+    <p>
+      The font ascent. Use this options only if you know what you're doing. A suitable
+      value for this is computed for you.
+    </p>
+    <h4 id="svgicons2svgfontmetadata"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontmetadata"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.metadata</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>undefined</code></p>
+    </blockquote>
+    <p>
+      The font <a href="http://www.w3.org/TR/SVG/metadata.html">metadata</a>. You can set any
+      character data in but it is the be suited place for a copyright mention.
+    </p>
+    <h4 id="svgicons2svgfontlog"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgicons2svgfontlog"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgicons2svgfont.log</h4>
+    <blockquote>
+      <p>Type: <code>Function</code><br>Default value: <code>console.log</code></p>
+    </blockquote>
+    <p>
+      Allows you to provide your own logging function. Set to <code>function(){}</code> to
+      disable logging.
+    </p>
+    <h3 id="svgooptions"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svgooptions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svgoOptions</h3>
+    <blockquote>
+      <p>
+        Type: <code>OptimizeOptions</code>
+        Default value: <code>undefined</code>
+      </p>
+    </blockquote>
+    <p>Some options can be configured with <code>svgoOptions</code> though it. <a href="https://github.com/svg/svgo#configuration">svgo</a></p>
+    <h3 id="svg2ttf"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svg2ttf"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svg2ttf</h3>
+    <p>This is the setting for <a href="https://github.com/fontello/svg2ttf/tree/c33a126920f46b030e8ce960cc7a0e38a6946bbc#svg2ttfsvgfontstring-options---buf">svg2ttf</a></p>
+    <h4 id="svg2ttfcopyright"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svg2ttfcopyright"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svg2ttf.copyright</h4>
+    <blockquote>
+      <p>Type: <code>String</code></p>
+    </blockquote>
+    <p>copyright string</p>
+    <h4 id="svg2ttfts"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svg2ttfts"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svg2ttf.ts</h4>
+    <blockquote>
+      <p>Type: <code>String</code></p>
+    </blockquote>
+    <p>Unix timestamp (in seconds) to override creation time</p>
+    <h4 id="svg2ttfversion"><a class="anchor" aria-hidden="true" tabindex="-1" href="#svg2ttfversion"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>svg2ttf.version</h4>
+    <blockquote>
+      <p>Type: <code>Number</code></p>
+    </blockquote>
+    <p>font version string, can be Version <code>x.y</code> or <code>x.y</code>.</p>
+    <h3 id="website"><a class="anchor" aria-hidden="true" tabindex="-1" href="#website"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>website</h3>
+    <p>Define preview web content. Example:</p>
+    <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token spread operator">...</span>
+  <span class="token comment">// website = null, no demo html files</span>
+  website<span class="token operator">:</span> <span class="token punctuation">{</span>
+    title<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
+    logo<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    version<span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
+    meta<span class="token operator">:</span> <span class="token punctuation">{</span>
+      description<span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
+      keywords<span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span><span class="token punctuation">,</span>
+      favicon<span class="token operator">:</span> <span class="token string">"./favicon.png"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// Add a Github corner to your website</span>
+    <span class="token comment">// Like: https://github.com/uiwjs/react-github-corners</span>
+    corners<span class="token operator">:</span> <span class="token punctuation">{</span>
+      url<span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
+      width<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      height<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      bgColor<span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    links<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"index.html"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        title<span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
+        url<span class="token operator">:</span> <span class="token string">"unicode.html"</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <h4 id="websitetemplate"><a class="anchor" aria-hidden="true" tabindex="-1" href="#websitetemplate"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>website.template</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <a href="src/website/index.ejs">index.ejs</a></p>
+    </blockquote>
+    <p>Custom template can customize parameters. You can define your own template based on the <a href="src/website/index.ejs">default template</a>.</p>
+    <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+  website<span class="token operator">:</span> <span class="token punctuation">{</span>
+    template<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">join</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"my-template.ejs"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <h4 id="websiteindex"><a class="anchor" aria-hidden="true" tabindex="-1" href="#websiteindex"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>website.index</h4>
+    <blockquote>
+      <p>Type: <code>String</code><br>Default value: <code>font-class</code>, Enum{<code>font-class</code>, <code>unicode</code>, <code>symbol</code>}</p>
+    </blockquote>
+    <p>Set default home page.</p>
+    <h2 id="font-usage"><a class="anchor" aria-hidden="true" tabindex="-1" href="#font-usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Font Usage</h2>
+    <p>Suppose the font name is defined as <code>svgtofont</code>, The default home page is <code>unicode</code>, Will generate:</p>
+    <pre class="language-bash"><code class="language-bash">font-class.html
+index.html
+svgtofont.css
+svgtofont.eot
+svgtofont.json
+svgtofont.less
+svgtofont.module.less
+svgtofont.scss
+svgtofont.styl
+svgtofont.svg
+svgtofont.symbol.svg
+svgtofont.ttf
+svgtofont.woff
+svgtofont.woff2
+symbol.html
+</code></pre>
+    <p>Preview demo <code>font-class.html</code>, <code>symbol.html</code> and <code>index.html</code>. Automatically generated style <code>svgtofont.css</code> and <code>svgtofont.less</code>.</p>
+    <h3 id="symbol-svg"><a class="anchor" aria-hidden="true" tabindex="-1" href="#symbol-svg"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>symbol svg</h3>
+    <pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>svg</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icon<span class="token punctuation">"</span></span> <span class="token attr-name">aria-hidden</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>use</span> <span class="token attr-name"><span class="token namespace">xlink:</span>href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>svgtofont.symbol.svg#svgtofont-git<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>use</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>svg</span><span class="token punctuation">></span></span>
+</code></pre>
+    <h3 id="unicode"><a class="anchor" aria-hidden="true" tabindex="-1" href="#unicode"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Unicode</h3>
+    <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token selector"><span class="token class">.iconfont</span></span> <span class="token punctuation">{</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">"svgtofont-iconfont"</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">font-style</span><span class="token punctuation">:</span> normal<span class="token punctuation">;</span>
+  <span class="token property">-webkit-font-smoothing</span><span class="token punctuation">:</span> antialiased<span class="token punctuation">;</span>
+  <span class="token property">-webkit-text-stroke-width</span><span class="token punctuation">:</span> <span class="token number">0.2</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">-moz-osx-font-smoothing</span><span class="token punctuation">:</span> grayscale<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity" title="">&#x26;#59907;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>span</span><span class="token punctuation">></span></span>
+</code></pre>
+    <h3 id="class-name"><a class="anchor" aria-hidden="true" tabindex="-1" href="#class-name"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Class Name</h3>
+    <p>Support for <code>.less</code> and <code>.css</code> styles references.</p>
+    <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>node_modules/fonts/svgtofont.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>svgtofont-apple<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>i</span><span class="token punctuation">></span></span>
+</code></pre>
+    <h2 id="license"><a class="anchor" aria-hidden="true" tabindex="-1" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>License</h2>
+    <p>Licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+  </div></body>
+</html>
