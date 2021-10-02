@@ -2,6 +2,7 @@
   "name": "svgtofont",
   "version": "3.12.7",
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
+  "homepage": "https://jaywcjlove.github.io/svgtofont/",
   "main": "lib/index.js",
   "bin": {
     "svgtofont": "lib/cli.js"
@@ -9,8 +10,8 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "node lib/index.js",
-    "watch": "tsbb watch --disable-babel --file-names src/index.ts --file-names src/cli.ts",
-    "build": "tsbb build --disable-babel --file-names src/index.ts --file-names src/cli.ts",
+    "watch": "tsbb watch --disable-babel -f src/index.ts -f src/cli.ts",
+    "build": "tsbb build --disable-babel -f src/index.ts -f src/cli.ts",
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
@@ -84,7 +85,6 @@
     "yargs": "17.1.1"
   },
   "devDependencies": {
-    "@types/jest": "27.0.1",
-    "tsbb": "3.2.1"
+    "tsbb": "3.4.0"
   }
 }
