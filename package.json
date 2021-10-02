@@ -64,7 +64,7 @@
   "dependencies": {
     "@types/cheerio": "0.22.30",
     "@types/ejs": "3.1.0",
-    "@types/fs-extra": "9.0.12",
+    "@types/fs-extra": "9.0.13",
     "@types/svgo": "2.4.2",
     "@types/svg2ttf": "5.0.1",
     "@types/ttf2woff2": "2.0.0",
