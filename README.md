@@ -564,6 +564,49 @@ Support for `.less` and `.css` styles references.
 <i class="svgtofont-apple"></i>
 ```
 
+### Using With React
+
+#### In the project created by [create-react-app](https://github.com/facebook/create-react-app)
+
+```jsx
+import logo from './logo.svg';
+
+<img src={logo}  />
+```
+
+```jsx
+import { ReactComponent as ComLogo } from './logo.svg';
+
+<ComLogo />
+```
+
+#### In the project created by [webpack](https://github.com/webpack/webpack)
+
+```bash
+yarn add babel-plugin-named-asset-import
+yarn add @svgr/webpack
+```
+
+```js
+// webpack.config.js
+[
+  require.resolve('babel-plugin-named-asset-import'),
+  {
+    loaderMap: {
+      svg: {
+        ReactComponent: '@svgr/webpack?-svgo,+ref![path]',
+      },
+    },
+  },
+],
+```
+
+```jsx
+import { ReactComponent as ComLogo } from './logo.svg';
+
+<ComLogo />
+```
+
 ## License
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
