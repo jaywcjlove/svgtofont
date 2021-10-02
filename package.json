@@ -78,11 +78,11 @@
     "move-file": "2.1.0",
     "svg2ttf": "6.0.3",
     "svgicons2svgfont": "10.0.5",
-    "svgo": "2.6.1",
+    "svgo": "2.7.0",
     "ttf2eot": "3.0.0",
     "ttf2woff": "3.0.0",
     "ttf2woff2": "4.0.4",
-    "yargs": "17.1.1"
+    "yargs": "17.2.1"
   },
   "devDependencies": {
     "tsbb": "3.4.0"
