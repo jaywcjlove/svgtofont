@@ -24,6 +24,10 @@ jobs:
     - run: npm install
     - run: npm run coverage
 
+    - run: npm i markdown-to-html-cli coverage-badges-cli -g
+    - run: coverage-badges
+    - run: markdown-to-html --output coverage/index.html
+
     - name: Create Tag
       id: create_tag
       uses: jaywcjlove/create-tag-action@v1.2.1
@@ -53,6 +57,7 @@ jobs:
           ```bash
           npm i svgtofont
           ```
+
           ${{ steps.changelog.outputs.compareurl }}
 
           ${{ steps.changelog.outputs.changelog }}
