@@ -1,0 +1,6 @@
+{"total": {"lines":{"total":243,"covered":0,"skipped":0,"pct":0},"statements":{"total":260,"covered":0,"skipped":0,"pct":0},"functions":{"total":59,"covered":0,"skipped":0,"pct":0},"branches":{"total":148,"covered":0,"skipped":0,"pct":0}}
+,"/home/runner/work/svgtofont/svgtofont/src/cli.ts": {"lines":{"total":11,"covered":0,"skipped":0,"pct":0},"functions":{"total":2,"covered":0,"skipped":0,"pct":0},"statements":{"total":11,"covered":0,"skipped":0,"pct":0},"branches":{"total":6,"covered":0,"skipped":0,"pct":0}}
+,"/home/runner/work/svgtofont/svgtofont/src/generate.ts": {"lines":{"total":29,"covered":0,"skipped":0,"pct":0},"functions":{"total":13,"covered":0,"skipped":0,"pct":0},"statements":{"total":36,"covered":0,"skipped":0,"pct":0},"branches":{"total":16,"covered":0,"skipped":0,"pct":0}}
+,"/home/runner/work/svgtofont/svgtofont/src/index.ts": {"lines":{"total":81,"covered":0,"skipped":0,"pct":0},"functions":{"total":3,"covered":0,"skipped":0,"pct":0},"statements":{"total":85,"covered":0,"skipped":0,"pct":0},"branches":{"total":73,"covered":0,"skipped":0,"pct":0}}
+,"/home/runner/work/svgtofont/svgtofont/src/utils.ts": {"lines":{"total":122,"covered":0,"skipped":0,"pct":0},"functions":{"total":41,"covered":0,"skipped":0,"pct":0},"statements":{"total":128,"covered":0,"skipped":0,"pct":0},"branches":{"total":53,"covered":0,"skipped":0,"pct":0}}
+}
