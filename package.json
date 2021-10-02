@@ -84,7 +84,7 @@
     "yargs": "17.1.1"
   },
   "devDependencies": {
-    "@types/jest": "27.0.1",
+    "@types/jest": "27.0.2",
     "tsbb": "3.2.1"
   }
 }
