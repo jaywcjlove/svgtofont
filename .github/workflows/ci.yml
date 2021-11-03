@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Look Changelog
-      uses: jaywcjlove/changelog-generator@v1.4.6
+      uses: jaywcjlove/changelog-generator@v1.4.8
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         head-ref: ${{steps.create_tag.outputs.version}}
@@ -43,7 +43,7 @@ jobs:
 
     - name: Generate Changelog
       id: changelog
-      uses: jaywcjlove/changelog-generator@v1.4.6
+      uses: jaywcjlove/changelog-generator@v1.4.8
       if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
