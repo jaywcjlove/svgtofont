@@ -269,6 +269,40 @@ The path of the templates, see `src/styles` or `test/templates/styles` to get re
 
 unicode start number
 
+### useNameAsUnicode
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+should the name(file name) be used as unicode? this switch allows for the support of ligatures.
+
+let's say you have an svg with a file name of `add` and you want to use ligatures for it. you would set up your processing as mentioned above and turn on this switch.
+```js
+{
+  ...
+  useNameAsUnicode: true
+}
+```
+while processing, instead of using a single sequential char for the unicode, it uses the file name. using the file name as the unicode allows the following code to work as expected.
+```css
+.icons {
+  font-family: 'your-font-icon-name' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+```html
+<i class="icons">add</i>
+```
+as you add more svgs and process them into your font you would just use the same pattern.
+```html
+<i class="icons">add</i>
+<i class="icons">remove</i>
+<i class="icons">edit</i>
+```
+
 ### classNamePrefix
 
 > Type: `String`  
