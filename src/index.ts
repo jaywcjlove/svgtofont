@@ -74,7 +74,7 @@ export type SvgToFontOptions = {
    */
   startUnicode?: number;
   /**
-   * should the name be used as unicode, for supporting ligatures
+   * should the name(file name) be used as unicode? this switch allows for the support of ligatures.
    * @default false
    */
    useNameAsUnicode?: boolean;
