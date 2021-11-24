@@ -228,6 +228,33 @@
         <p>Type: <code>Number</code><br>Default value: <code>0xea01</code></p>
       </blockquote>
       <p>unicode start number</p>
+      <h3 id="usenameasunicode"><a class="anchor" aria-hidden="true" tabindex="-1" href="#usenameasunicode"><span class="octicon octicon-link"></span></a>useNameAsUnicode</h3>
+      <blockquote>
+        <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+      </blockquote>
+      <p>should the name(file name) be used as unicode? this switch allows for the support of ligatures.</p>
+      <p>let's say you have an svg with a file name of <code>add</code> and you want to use ligatures for it. you would set up your processing as mentioned above and turn on this switch.</p>
+      <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token spread operator">...</span>
+  useNameAsUnicode<span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      <p>while processing, instead of using a single sequential char for the unicode, it uses the file name. using the file name as the unicode allows the following code to work as expected.</p>
+      <pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.icons</span></span> <span class="token punctuation">{</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'your-font-icon-name'</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">font-style</span><span class="token punctuation">:</span> normal<span class="token punctuation">;</span>
+  <span class="token property">-webkit-font-smoothing</span><span class="token punctuation">:</span> antialiased<span class="token punctuation">;</span>
+  <span class="token property">-moz-osx-font-smoothing</span><span class="token punctuation">:</span> grayscale<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>add<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>i</span><span class="token punctuation">></span></span>
+</code></pre>
+      <p>as you add more svgs and process them into your font you would just use the same pattern.</p>
+      <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>add<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>i</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>remove<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>i</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>edit<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>i</span><span class="token punctuation">></span></span>
+</code></pre>
       <h3 id="classnameprefix"><a class="anchor" aria-hidden="true" tabindex="-1" href="#classnameprefix"><span class="octicon octicon-link"></span></a>classNamePrefix</h3>
       <blockquote>
         <p>Type: <code>String</code><br>Default value: font name</p>
