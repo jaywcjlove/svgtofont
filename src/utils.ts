@@ -36,7 +36,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       // file name
       let _name = path.basename(svgPath, ".svg");
       const glyph = fs.createReadStream(svgPath) as Glyphs;
-      glyph.metadata = { unicode: getIconUnicode(_name), name: _name };
+      glyph.metadata = { unicode: getIconUnicode(_name, options.useNameAsUnicode), name: _name };
       fontStream.write(glyph);
     }
 
@@ -118,8 +118,8 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
  * Get icon unicode
  * @return {Array} unicode array
  */
-function getIconUnicode(name: string) {
-  let unicode = String.fromCharCode(startUnicode++);
+function getIconUnicode(name: string, useNameAsUnicode: boolean) {
+  let unicode = !useNameAsUnicode ? String.fromCharCode(startUnicode++) : name;
   UnicodeObj[name] = unicode;
   return [unicode];
 }
