@@ -4,7 +4,7 @@ import svgtofont from '../src';
 import pkg from '../package.json';
 
 console.log = jest.fn();
-/* 
+
 it('example test case.', async () => {
   const dist = path.resolve(process.cwd(), 'test', 'example', 'dist');
   await fs.emptyDir(dist);
@@ -145,7 +145,7 @@ it('templates simple test case.', async () => {
   expect(css.toString().indexOf('Hello CSS!') > -1).toBeTruthy();
   await fs.emptyDir(dist);
 });
- */
+ 
 it('example simple test case for useNameAsUnicode.', async () => {
   const dist = path.resolve(process.cwd(), 'test', 'example', 'dist');
   await fs.emptyDir(dist);
