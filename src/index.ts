@@ -77,7 +77,7 @@ export type SvgToFontOptions = {
    * should the name(file name) be used as unicode? this switch allows for the support of ligatures.
    * @default false
    */
-   useNameAsUnicode?: boolean;
+  useNameAsUnicode?: boolean;
   /**
    * Clear output directory contents
    * @default false
@@ -189,21 +189,35 @@ export default async (options: SvgToFontOptions = {}) => {
     let cssIconHtml: string[] = [];
     let unicodeHtml: string[] = [];
     let symbolHtml: string[] = [];
+    const prefix = options.classNamePrefix || options.fontName;
+
     Object.keys(unicodeObject).forEach(name => {
-      let _code = unicodeObject[name];
-      cssIconHtml.push(`<li class="class-icon"><i class="${options.classNamePrefix}-${name}"></i><p class="name">${name}</p></li>`);
-      unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${_code.charCodeAt(0)};</span></li>`);
+      const _code = unicodeObject[name];
+      let symbolName = options.classNamePrefix + '-' + name
+      let iconPart = symbolName + '">';
+      let encodedCodes: string | number = _code.charCodeAt(0);
+
+      if (options.useNameAsUnicode) {
+        symbolName = name;
+        iconPart = prefix + '">' + name;
+        encodedCodes = _code.split('').map(x => x.charCodeAt(0)).join(';&amp;#');
+      } else {
+        cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
+        cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
+      }
+
+      cssIconHtml.push(`<li class="class-icon"><i class="${iconPart}</i><p class="name">${name}</p></li>`);
+      unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${encodedCodes};</span></li>`);
       symbolHtml.push(`
         <li class="symbol">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="${options.fontName}.symbol.svg#${options.classNamePrefix}-${name}"></use>
+            <use xlink:href="${options.fontName}.symbol.svg#${symbolName}"></use>
           </svg>
-          <h4>${options.classNamePrefix}-${name}</h4>
+          <h4>${symbolName}</h4>
         </li>
       `);
-      cssString.push(`.${options.classNamePrefix}-${name}:before { content: "\\${_code.charCodeAt(0).toString(16)}"; }\n`);
-      cssToVars.push(`$${options.classNamePrefix}-${name}: "\\${_code.charCodeAt(0).toString(16)}";\n`);
     });
+
     const ttf = await createTTF(options);
     await createEOT(options, ttf);
     await createWOFF(options, ttf);
@@ -211,13 +225,14 @@ export default async (options: SvgToFontOptions = {}) => {
     await createSvgSymbol(options);
 
     if (options.css) {
-      await copyTemplate(options.styleTemplates || path.resolve(__dirname, 'styles'), options.dist, {
+      const styleTemplatePath = options.styleTemplates || (!options.useNameAsUnicode ? path.resolve(__dirname, 'styles') : path.resolve(__dirname, 'ligature-styles'));
+      await copyTemplate(styleTemplatePath, options.dist, {
         fontname: options.fontName,
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),
         fontSize: fontSize,
         timestamp: new Date().getTime(),
-        prefix: options.classNamePrefix || options.fontName,
+        prefix,
         _opts: typeof options.css === 'boolean' ? {} : { ...options.css }
       });
     }

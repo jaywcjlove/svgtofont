@@ -4,7 +4,7 @@ import svgtofont from '../src';
 import pkg from '../package.json';
 
 console.log = jest.fn();
-
+/* 
 it('example test case.', async () => {
   const dist = path.resolve(process.cwd(), 'test', 'example', 'dist');
   await fs.emptyDir(dist);
@@ -143,5 +143,41 @@ it('templates simple test case.', async () => {
   ]);
   const css = await fs.readFile(path.resolve(dist, 'svgtofont.css'));
   expect(css.toString().indexOf('Hello CSS!') > -1).toBeTruthy();
+  await fs.emptyDir(dist);
+});
+ */
+it('example simple test case for useNameAsUnicode.', async () => {
+  const dist = path.resolve(process.cwd(), 'test', 'example', 'dist');
+  await fs.emptyDir(dist);
+  await svgtofont({
+    src: path.resolve(process.cwd(), 'test', 'example', 'svg'),
+    dist: dist,
+    fontName: 'nameAsUnicode',
+    css: false,
+    classNamePrefix: 'my-icons',
+    useNameAsUnicode: true,
+    emptyDist: true,
+    typescript: true,
+  });
+  const fileNames = await fs.readdir(dist);
+  expect(fileNames).toEqual([
+    'nameAsUnicode.css',
+    'nameAsUnicode.d.ts',
+    'nameAsUnicode.eot',
+    'nameAsUnicode.less',
+    'nameAsUnicode.module.less',
+    'nameAsUnicode.scss',
+    'nameAsUnicode.styl',
+    'nameAsUnicode.svg',
+    'nameAsUnicode.symbol.svg',
+    'nameAsUnicode.ttf',
+    'nameAsUnicode.woff',
+    'nameAsUnicode.woff2',
+  ]);
+  const css = await fs.readFile(path.resolve(dist, 'nameAsUnicode.css'));
+  // should contain a class with the prefix or the font name, in this case we provided a prefix so we should get that
+  expect(css.toString().indexOf('.my-icons') > -1).toBeTruthy();
+  // should not contain any variables
+  expect(css.toString().indexOf('$') === -1).toBeTruthy();
   await fs.emptyDir(dist);
 });
