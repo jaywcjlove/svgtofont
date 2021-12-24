@@ -82,7 +82,7 @@
     "ttf2eot": "3.0.0",
     "ttf2woff": "3.0.0",
     "ttf2woff2": "4.0.4",
-    "yargs": "17.2.1"
+    "yargs": "17.3.1"
   },
   "devDependencies": {
     "tsbb": "3.4.4"
