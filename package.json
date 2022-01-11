@@ -85,6 +85,6 @@
     "yargs": "17.2.1"
   },
   "devDependencies": {
-    "tsbb": "3.4.4"
+    "tsbb": "3.5.4"
   }
 }
