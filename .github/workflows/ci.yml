@@ -32,6 +32,7 @@ jobs:
       uses: jaywcjlove/github-action-contributors@main
       with:
         filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
+        avatarSize: 42
         output: coverage/CONTRIBUTORS.svg
 
     - name: Deploy
