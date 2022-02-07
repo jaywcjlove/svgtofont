@@ -641,6 +641,12 @@ import { ReactComponent as ComLogo } from './logo.svg';
 <ComLogo />
 ```
 
+## Contributors
+
+<a href="https://github.com/jaywcjlove/svgtofont/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/svgtofont/CONTRIBUTORS.svg" />
+</a>
+
 ## License
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
