@@ -28,6 +28,12 @@ jobs:
     - run: coverage-badges
     - run: markdown-to-html --output coverage/index.html
 
+    - name: Generate Contributors Images
+      uses: jaywcjlove/github-action-contributors@main
+      with:
+        filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
+        output: coverage/CONTRIBUTORS.svg
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
