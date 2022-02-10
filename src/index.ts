@@ -163,6 +163,14 @@ export default async (options: SvgToFontOptions = {}) => {
     }
   }
 
+  const confPath = path.join(process.cwd(), '.svgtofontrc');
+  if (fs.pathExistsSync(confPath)) {
+    const pkg = require(confPath);
+    if (pkg.svgtofont) {
+      options = { ...options, ...pkg.svgtofont }
+    }
+  }
+
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
   options.startUnicode = options.startUnicode || 0xea01;

@@ -74,10 +74,26 @@ npm i svgtofont
   "scripts": {
     "font": "svgtofont --sources ./svg --output ./font --fontName uiw-font"
   },
+  "svgtofont": {
+    "css": {
+      "fontSize": "12px"
+    }
+  }
 }
 ```
 
 You can add configuration to package.json. [#48](https://github.com/jaywcjlove/svgtofont/issues/48)
+
+Supports `.svgtofontc` Configuration File.
+
+```js
+{
+  "src": "./icon",
+  "dist": "./fonts",
+  "fontName": "svgtofont",
+  "css": true
+}
+```
 
 #### Using With Nodejs
 
