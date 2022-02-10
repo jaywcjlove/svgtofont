@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.22% </span>
+                <span class="strong">97.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/36</span>
+                <span class='fraction'>39/40</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.3% </span>
+                <span class="strong">92.85% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>12/13</span>
+                <span class='fraction'>13/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/29</span>
+                <span class='fraction'>32/32</span>
             </div>
         
             
@@ -154,7 +154,13 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,11 +211,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -237,6 +248,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -247,7 +259,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fs from 'fs-extra';
 import path from 'path';
-import { optimize } from 'svgo';
+import { optimize, OptimizedSvg } from 'svgo';
 import { filterSvgFiles } from './utils';
 import { SvgToFontOptions } from './';
 &nbsp;
@@ -282,7 +294,7 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = <sp
           ...(svgoOptions.plugins || [])
           // 'convertShapeToPath'
         ],
-      });
+      }) as OptimizedSvg;
       const str: string[] = (pathStrings.data.match(/ d="[^"]+"/g) || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>.map(s =&gt; s.slice(3));
       return `\n"${name}": [${str.join(',\n')}]`;
     }),
@@ -291,11 +303,15 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = <sp
 &nbsp;
 const reactSource = (name: string, source: string) =&gt; `
 import React from 'react';
-&nbsp;
 export const ${name} = props =&gt; (
   &lt;svg viewBox="0 0 20 20" {...props}&gt;${source}&lt;/svg&gt;
 );
 `;
+&nbsp;
+const reactTypeSource = (name: string) =&gt; `import React from 'react';
+export declare const ${name}: (props: React.HTMLAttributes&lt;HTMLOrSVGElement&gt;) =&gt; JSX.Element;
+`;
+&nbsp;
 /**
  * Generate React Icon
  * &lt;font-name&gt;.json
@@ -305,6 +321,7 @@ export async function generateReactIcons(options: SvgToFontOptions = <span class
   const data = await outputReactFile(ICONS_PATH, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
+  fs.outputFileSync(outPath.replace(/\.js$/, 'd.ts'), data.join('\n'));
   return outPath;
 }
 &nbsp;
@@ -327,11 +344,12 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = <spa
           // 'removeViewBox'
           ...(svgoOptions.plugins || [])
         ]
-      });
+      }) as OptimizedSvg;
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>.map(s =&gt; s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) =&gt; `&lt;path d=${d} fillRule="evenodd" /&gt;`);
       fs.outputFileSync(outDistPath, reactSource(name, pathStrings.join(',\n')));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, 'd.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
   );
@@ -343,7 +361,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = <spa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Feb 10 2022 10:32:22 GMT+0000 (Coordinated Universal Time)
+                at Thu Feb 10 2022 10:46:15 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="prettify.js"></script>
         <script>
