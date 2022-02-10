@@ -1,5 +1,5 @@
-import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
-import fs from 'fs-extra';
+import SVGIcons2SVGFont from 'svgicons2svgfont';
+import fs, { ReadStream } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 import color from 'colors-cli';
@@ -35,7 +35,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
     function writeFontStream(svgPath: string) {
       // file name
       let _name = path.basename(svgPath, ".svg");
-      const glyph = fs.createReadStream(svgPath) as Glyphs;
+      const glyph = fs.createReadStream(svgPath) as ReadStream & { metadata: { unicode: string[], name: string } };
       glyph.metadata = { unicode: getIconUnicode(_name, options.useNameAsUnicode), name: _name };
       fontStream.write(glyph);
     }
