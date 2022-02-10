@@ -155,6 +155,12 @@ export type SvgToFontOptions = {
 }
 
 export default async (options: SvgToFontOptions = {}) => {
+  const confPath = path.join(process.cwd(), '.svgtofontrc');
+  if (fs.pathExistsSync(confPath)) {
+    const conf = await fs.readJson(confPath);
+    options = { ...options, ...conf };
+  }
+
   const pkgPath = path.join(process.cwd(), 'package.json');
   if (fs.pathExistsSync(pkgPath)) {
     const pkg = require(pkgPath);
@@ -164,12 +170,6 @@ export default async (options: SvgToFontOptions = {}) => {
     if (options.website && pkg.version) {
       options.website.version = pkg.version;
     }
-  }
-
-  const confPath = path.join(process.cwd(), '.svgtofontrc');
-  if (fs.pathExistsSync(confPath)) {
-    const conf = await fs.readJson(confPath);
-    options = { ...options, ...conf };
   }
 
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
