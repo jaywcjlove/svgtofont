@@ -165,10 +165,8 @@ export default async (options: SvgToFontOptions = {}) => {
 
   const confPath = path.join(process.cwd(), '.svgtofontrc');
   if (fs.pathExistsSync(confPath)) {
-    const pkg = require(confPath);
-    if (pkg.svgtofont) {
-      options = { ...options, ...pkg.svgtofont }
-    }
+    const conf = await fs.readJson(confPath);
+    options = { ...options, ...conf };
   }
 
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
