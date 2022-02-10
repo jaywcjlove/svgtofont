@@ -617,6 +617,15 @@ Support for `.less` and `.css` styles references.
 
 ### Using With React
 
+Icons are used as components. `v3.16.7+` support.
+
+```jsx
+import { Adobe, Alipay } from '@uiw/icons';
+
+<Adobe style={{ fill: 'red' }} />
+<Alipay height="36" />
+```
+
 #### In the project created by [create-react-app](https://github.com/facebook/create-react-app)
 
 ```jsx
