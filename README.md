@@ -33,6 +33,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
 - Support SVG Symbol file.
+- Support [`React`](https://github.com/facebook/react) & [`TypeScript`](https://github.com/microsoft/TypeScript).
 - Support [`Less`](https://github.com/less/less.js)/[`Sass`](https://github.com/sass/sass)/[`Stylus`](https://github.com/stylus/stylus).
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
@@ -56,7 +57,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 **Icon Font Created By svgtofont**
 
 - [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
-- [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library.
+- [uiw-iconfont](https://github.com/uiwjs/icons) The premium icon font for [@uiwjs](https://github.com/uiwjs) Component Library. Support [`React`](https://github.com/facebook/react) & [`TypeScript`](https://github.com/microsoft/TypeScript).
 - [Bootstrap Icons Font](https://github.com/uiwjs/bootstrap-icons) Official open source SVG icon library for Bootstrap.
 - [test example](./test) For a simple test example, run `npm run test` in the root directory to see the results.
 
