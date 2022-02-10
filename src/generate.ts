@@ -42,9 +42,9 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
   );
 }
 
-const reactSource = (name: string, size: string, source: string) => `import React from 'react';
+const reactSource = (name: string, size: string, fontName: string, source: string) => `import React from 'react';
 export const ${name} = props => (
-  <svg viewBox="0 0 20 20" width="${size}" height="${size}" {...props}>${source}</svg>
+  <svg viewBox="0 0 20 20" width="${size}" height="${size}" {...props} className={\`${fontName} \${props.className ? props.className : ''}\`}>${source}</svg>
 );
 `;
 
@@ -70,6 +70,7 @@ const capitalizeEveryWord = (str: string) => str.replace(/-(\w)/g, ($0, $1) => $
 async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
   const svgoOptions = options.svgoOptions || {}
   const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
+  const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
     files.map(async filepath => {
       const name = capitalizeEveryWord(path.basename(filepath, '.svg'));
@@ -89,7 +90,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
-      fs.outputFileSync(outDistPath, reactSource(name, fontSize, pathStrings.join(',\n')));
+      fs.outputFileSync(outDistPath, reactSource(name, fontSize, fontName, pathStrings.join(',\n')));
       fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
