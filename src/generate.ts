@@ -62,7 +62,7 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
   const data = await outputReactFile(ICONS_PATH, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
-  fs.outputFileSync(outPath.replace(/\.js$/, 'd.ts'), data.join('\n'));
+  fs.outputFileSync(outPath.replace(/\.js$/, '.d.ts'), data.join('\n'));
   return outPath;
 }
 
@@ -90,7 +90,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
       fs.outputFileSync(outDistPath, reactSource(name, pathStrings.join(',\n')));
-      fs.outputFileSync(outDistPath.replace(/\.js$/, 'd.ts'), reactTypeSource(name));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
   );
