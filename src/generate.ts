@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { optimize, OptimizedSvg } from 'svgo';
-import { filterSvgFiles } from './utils';
+import { filterSvgFiles, toPascalCase } from './utils';
 import { SvgToFontOptions } from './';
 
 /**
@@ -65,15 +65,13 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
   return outPath;
 }
 
-const capitalizeEveryWord = (str: string) => str.replace(/-(\w)/g, ($0, $1) => $1.toUpperCase()).replace(/^(\w)/g, ($0, $1) => $1.toUpperCase());
-
 async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
   const svgoOptions = options.svgoOptions || {}
   const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
   const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
     files.map(async filepath => {
-      const name = capitalizeEveryWord(path.basename(filepath, '.svg'));
+      const name = toPascalCase(path.basename(filepath, '.svg'));
       const svg = fs.readFileSync(filepath, 'utf-8');
       const pathData = optimize(svg, {
         path: filepath,
@@ -90,7 +88,8 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
-      fs.outputFileSync(outDistPath, reactSource(name, fontSize, fontName, pathStrings.join(',\n')));
+      const comName = isNaN(Number(name.charAt(0))) ? name : toPascalCase(fontName) + name;
+      fs.outputFileSync(outDistPath, reactSource(comName, fontSize, fontName, pathStrings.join(',\n')));
       fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
