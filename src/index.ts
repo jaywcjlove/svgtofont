@@ -161,6 +161,9 @@ export default async (options: SvgToFontOptions = {}) => {
     if (pkg.svgtofont) {
       options = { ...options, ...pkg.svgtofont }
     }
+    if (options.website && pkg.version) {
+      options.website.version = pkg.version;
+    }
   }
 
   const confPath = path.join(process.cwd(), '.svgtofontrc');
