@@ -42,15 +42,14 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
   );
 }
 
-const reactSource = (name: string, source: string) => `
-import React from 'react';
+const reactSource = (name: string, source: string) => `import React from 'react';
 export const ${name} = props => (
-  <svg viewBox="0 0 20 20" {...props}>${source}</svg>
+  <svg viewBox="0 0 20 20" width="20" height="20" {...props}>${source}</svg>
 );
 `;
 
 const reactTypeSource = (name: string) => `import React from 'react';
-export declare const ${name}: (props: React.HTMLAttributes<HTMLOrSVGElement>) => JSX.Element;
+export declare const ${name}: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 `;
 
 /**
