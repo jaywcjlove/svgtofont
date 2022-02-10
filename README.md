@@ -84,7 +84,7 @@ npm i svgtofont
 
 You can add configuration to package.json. [#48](https://github.com/jaywcjlove/svgtofont/issues/48)
 
-Supports `.svgtofontc` Configuration File.
+Supports `.svgtofontrc` Configuration File.
 
 ```js
 {
