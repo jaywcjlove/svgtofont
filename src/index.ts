@@ -3,7 +3,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import image2uri from 'image2uri';
-import { SVGIcons2SVGFontOptions } from 'svgicons2svgfont';
+import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { OptimizeOptions } from 'svgo';
 import { generateIconsSource, generateReactIcons } from './generate';
@@ -56,7 +56,7 @@ export type SvgToFontOptions = {
   /**
    * This is the setting for [svgicons2svgfont](https://github.com/nfroidure/svgicons2svgfont/tree/dd713bea4f97afa59f7dba6a21ff7f22db565bcf#api)
    */
-  svgicons2svgfont?: SVGIcons2SVGFontOptions;
+  svgicons2svgfont?: SvgIcons2FontOptions;
   /** Some options can be configured with svgoOptions though it. [svgo](https://github.com/svg/svgo#configuration) */
   svgoOptions?: OptimizeOptions;
   /**
