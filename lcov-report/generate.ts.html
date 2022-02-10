@@ -23,23 +23,23 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.61% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/42</span>
+                <span class='fraction'>39/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.21% </span>
+                <span class="strong">64% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/23</span>
+                <span class='fraction'>16/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>13/14</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -160,8 +160,7 @@
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,8 +227,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -250,6 +247,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -262,7 +260,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fs from 'fs-extra';
 import path from 'path';
 import { optimize, OptimizedSvg } from 'svgo';
-import { filterSvgFiles } from './utils';
+import { filterSvgFiles, toPascalCase } from './utils';
 import { SvgToFontOptions } from './';
 &nbsp;
 /**
@@ -326,15 +324,13 @@ export async function generateReactIcons(options: SvgToFontOptions = <span class
   return outPath;
 }
 &nbsp;
-const capitalizeEveryWord = (str: string) =&gt; str.replace(/-(\w)/g, <span class="fstat-no" title="function not covered" >($</span>0, $1) =&gt; <span class="cstat-no" title="statement not covered" >$1.toUpperCase())</span>.replace(/^(\w)/g, ($0, $1) =&gt; $1.toUpperCase());
-&nbsp;
 async function outputReactFile(files: string[], options: SvgToFontOptions = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
   const svgoOptions = options.svgoOptions || {}
   const fontSize = options.css &amp;&amp; typeof options.css !== 'boolean' &amp;&amp; options.css.fontSize ? options.css.fontSize : <span class="branch-1 cbranch-no" title="branch not covered" >'16px';</span>
   const fontName = options.classNamePrefix || <span class="branch-1 cbranch-no" title="branch not covered" >options.fontName</span>
   return Promise.all(
     files.map(async filepath =&gt; {
-      const name = capitalizeEveryWord(path.basename(filepath, '.svg'));
+      const name = toPascalCase(path.basename(filepath, '.svg'));
       const svg = fs.readFileSync(filepath, 'utf-8');
       const pathData = optimize(svg, {
         path: filepath,
@@ -351,7 +347,8 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = <spa
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>.map(s =&gt; s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) =&gt; `&lt;path d=${d} fillRule="evenodd" /&gt;`);
-      fs.outputFileSync(outDistPath, reactSource(name, fontSize, fontName, pathStrings.join(',\n')));
+      const comName = isNaN(Number(name.charAt(0))) ? name : <span class="branch-1 cbranch-no" title="branch not covered" >toPascalCase(fontName) + name;</span>
+      fs.outputFileSync(outDistPath, reactSource(comName, fontSize, fontName, pathStrings.join(',\n')));
       fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
@@ -364,7 +361,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = <spa
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Feb 10 2022 16:51:48 GMT+0000 (Coordinated Universal Time)
+                at Thu Feb 10 2022 17:19:39 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="prettify.js"></script>
         <script>
