@@ -88,8 +88,6 @@ Supports `.svgtofontrc` Configuration File.
 
 ```js
 {
-  "src": "./icon",
-  "dist": "./fonts",
   "fontName": "svgtofont",
   "css": true
 }
