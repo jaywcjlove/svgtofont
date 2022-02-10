@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { optimize } from 'svgo';
+import { optimize, OptimizedSvg } from 'svgo';
 import { filterSvgFiles } from './utils';
 import { SvgToFontOptions } from './';
 
@@ -35,7 +35,7 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
           ...(svgoOptions.plugins || [])
           // 'convertShapeToPath'
         ],
-      });
+      }) as OptimizedSvg;
       const str: string[] = (pathStrings.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       return `\n"${name}": [${str.join(',\n')}]`;
     }),
@@ -44,11 +44,15 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
 
 const reactSource = (name: string, source: string) => `
 import React from 'react';
-
 export const ${name} = props => (
   <svg viewBox="0 0 20 20" {...props}>${source}</svg>
 );
 `;
+
+const reactTypeSource = (name: string) => `import React from 'react';
+export declare const ${name}: (props: React.HTMLAttributes<HTMLOrSVGElement>) => JSX.Element;
+`;
+
 /**
  * Generate React Icon
  * <font-name>.json
@@ -58,6 +62,7 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
   const data = await outputReactFile(ICONS_PATH, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
+  fs.outputFileSync(outPath.replace(/\.js$/, 'd.ts'), data.join('\n'));
   return outPath;
 }
 
@@ -80,11 +85,12 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
           // 'removeViewBox'
           ...(svgoOptions.plugins || [])
         ]
-      });
+      }) as OptimizedSvg;
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
       fs.outputFileSync(outDistPath, reactSource(name, pathStrings.join(',\n')));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, 'd.ts'), reactTypeSource(name));
       return `export * from './${name}';`;
     }),
   );
