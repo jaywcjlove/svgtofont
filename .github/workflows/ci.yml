@@ -8,25 +8,20 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-
-    - name: Look Changelog
-      uses: jaywcjlove/changelog-generator@v1.4.8
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        head-ref: ${{steps.create_tag.outputs.version}}
-        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
-
-    - name: Setup Node
-      uses: actions/setup-node@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: 14
 
     - run: npm install
     - run: npm run coverage
 
-    - run: npm i markdown-to-html-cli coverage-badges-cli -g
-    - run: coverage-badges
-    - run: markdown-to-html --output coverage/index.html
+    - name: Converts Markdown to HTML
+      uses: jaywcjlove/markdown-to-html-cli@main
+      with:
+        output: coverage/index.html
+        github-corners: https://github.com/jaywcjlove/svgtofont.git
+
+    - uses: jaywcjlove/coverage-badges-cli@main
 
     - name: Generate Contributors Images
       uses: jaywcjlove/github-action-contributors@main
@@ -35,24 +30,28 @@ jobs:
         avatarSize: 42
         output: coverage/CONTRIBUTORS.svg
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./coverage
-
     - name: Create Tag
       id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.3.5
+      uses: jaywcjlove/create-tag-action@v1.3.6
       with:
         package-path: ./package.json
 
+    - name: get tag version
+      id: tag_version
+      uses: jaywcjlove/changelog-generator@v1.5.0
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./coverage
+
     - name: Generate Changelog
       id: changelog
-      uses: jaywcjlove/changelog-generator@v1.4.8
+      uses: jaywcjlove/changelog-generator@v1.5.0
       if: steps.create_tag.outputs.successful
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
         head-ref: ${{steps.create_tag.outputs.version}}
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
@@ -66,13 +65,17 @@ jobs:
         body: |
           [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont@${{steps.create_tag.outputs.versionNumber}}/file/README.md) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/svgtofont)](https://bundlephobia.com/result?p=svgtofont@${{steps.create_tag.outputs.versionNumber}}) [![npm version](https://img.shields.io/npm/v/svgtofont.svg)](https://www.npmjs.com/package/svgtofont)
 
+          Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/svgtofont/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
+          Comparing Changes: ${{ steps.changelog.outputs.compareurl }} 
+
           ```bash
           npm i svgtofont
           ```
 
-          ${{ steps.changelog.outputs.compareurl }}
-
           ${{ steps.changelog.outputs.changelog }}
 
-    - run: npm install @jsdevtools/npm-publish -g
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
+    - name: 📦 svgtofont publish to NPM
+      uses: JS-DevTools/npm-publish@v1
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
+        package: ./package.json
