@@ -71,7 +71,10 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
   const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
     files.map(async filepath => {
-      const name = toPascalCase(path.basename(filepath, '.svg'));
+      let name = toPascalCase(path.basename(filepath, '.svg'));
+      if (/^[rR]eact$/.test(name)) {
+        name = name + toPascalCase(fontName);
+      }
       const svg = fs.readFileSync(filepath, 'utf-8');
       const pathData = optimize(svg, {
         path: filepath,
