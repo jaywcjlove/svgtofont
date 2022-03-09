@@ -6,8 +6,805 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta description="Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.">
     <meta keywords="webfont,font,icon,iconfont,font-face,compress,minify,font-cli,ttf,woff,eot,svg,ttf2eot,ttf2woff,ttf2svg,svg2ttf,css,base64">
-    <style>body { margin: 0; }.markdown-body { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; max-width: 960px; margin: 28px auto 60px auto; padding: 8px; color: #24292f; background-color: #ffffff; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"; font-size: 16px; line-height: 1.5; word-wrap: break-word;}.markdown-body .octicon { display: inline-block; fill: currentColor; vertical-align: text-bottom;}.markdown-body pre { position: relative;}.markdown-body pre .copied { visibility: hidden; display: flex; position: absolute; cursor: pointer; color: #a5afbb; top: 6px; right: 6px; border-radius: 5px; background: #e3e3e3; padding: 6px; font-size: 12px; transition: all .3s;}.markdown-body pre:hover .copied { visibility: visible;}.markdown-body pre:hover .copied:hover { background: #4caf50; color: #fff;}.markdown-body pre:hover .copied:active,.markdown-body pre .copied.active { background: #2e9b33; color: #fff;}.markdown-body pre .copied .octicon-copy { display: block;}.markdown-body pre .copied .octicon-check { display: none;}.markdown-body pre .active .octicon-copy { display: none;}.markdown-body pre .active .octicon-check { display: block;}.markdown-body .octicon-video { border: 1px solid #d0d7de !important; border-radius: 6px !important; display: block;}.markdown-body .octicon-video summary { border-bottom: 1px solid #d0d7de !important; padding: 8px 16px !important; cursor: pointer;}.markdown-body .octicon-video > video { display: block !important; max-width: 100% !important; padding: 2px; box-sizing: border-box; border-bottom-right-radius: 6px !important; border-bottom-left-radius: 6px !important;}.markdown-body details.octicon-video:not([open])>*:not(summary) { display: none !important;}.markdown-body details.octicon-video:not([open]) > summary { border-bottom: 0 !important;}.markdown-body .octicon-video summary > svg + span { margin: 4px !important;}.markdown-body h1:hover a.anchor .octicon-link:before,.markdown-body h2:hover a.anchor .octicon-link:before,.markdown-body h3:hover a.anchor .octicon-link:before,.markdown-body h4:hover a.anchor .octicon-link:before,.markdown-body h5:hover a.anchor .octicon-link:before,.markdown-body h6:hover a.anchor .octicon-link:before { width: 16px; height: 16px; content: ' '; display: inline-block; background-color: currentColor; -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>"); mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");}.markdown-body a.anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1; min-width: 16px;}.markdown-body a.anchor:focus { outline: none;}.markdown-body h1:hover a.anchor,.markdown-body h2:hover a.anchor,.markdown-body h3:hover a.anchor,.markdown-body h4:hover a.anchor,.markdown-body h5:hover a.anchor,.markdown-body h6:hover a.anchor { text-decoration: none;}.markdown-body h1:hover a.anchor .octicon-link,.markdown-body h2:hover a.anchor .octicon-link,.markdown-body h3:hover a.anchor .octicon-link,.markdown-body h4:hover a.anchor .octicon-link,.markdown-body h5:hover a.anchor .octicon-link,.markdown-body h6:hover a.anchor .octicon-link { visibility: visible;}.markdown-body details,.markdown-body figcaption,.markdown-body figure { display: block;}.markdown-body summary { display: list-item;}.markdown-body a { background-color: transparent; color: #0969da; text-decoration: none;}.markdown-body a:active,.markdown-body a:hover { outline-width: 0;}.markdown-body abbr[title] { border-bottom: none; -webkit-text-decoration: underline dotted; text-decoration: underline dotted;}.markdown-body b,.markdown-body strong { font-weight: 600;}.markdown-body dfn { font-style: italic;}.markdown-body h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid hsla(210,18%,87%,1);}.markdown-body mark { background-color: #ff0; color: #24292f;}.markdown-body small { font-size: 90%;}.markdown-body sub,.markdown-body sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline;}.markdown-body sub { bottom: -0.25em;}.markdown-body sup { top: -0.5em;}.markdown-body img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: #ffffff;}.markdown-body code,.markdown-body kbd,.markdown-body pre,.markdown-body samp { font-family: monospace,monospace; font-size: 1em;}.markdown-body figure { margin: 1em 40px;}.markdown-body hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid hsla(210,18%,87%,1); height: .25em; padding: 0; margin: 24px 0; background-color: #d0d7de; border: 0;}.markdown-body html [type=button],.markdown-body [type=reset],.markdown-body [type=submit] { -webkit-appearance: button;}.markdown-body [type=button]::-moz-focus-inner,.markdown-body [type=reset]::-moz-focus-inner,.markdown-body [type=submit]::-moz-focus-inner { border-style: none; padding: 0;}.markdown-body [type=button]:-moz-focusring,.markdown-body [type=reset]:-moz-focusring,.markdown-body [type=submit]:-moz-focusring { outline: 1px dotted ButtonText;}.markdown-body [type=checkbox],.markdown-body [type=radio] { box-sizing: border-box; padding: 0;}.markdown-body [type=number]::-webkit-inner-spin-button,.markdown-body [type=number]::-webkit-outer-spin-button { height: auto;}.markdown-body [type=search] { -webkit-appearance: textfield; outline-offset: -2px;}.markdown-body [type=search]::-webkit-search-cancel-button,.markdown-body [type=search]::-webkit-search-decoration { -webkit-appearance: none;}.markdown-body ::-webkit-input-placeholder { color: inherit; opacity: .54;}.markdown-body ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit;}.markdown-body a:hover { text-decoration: underline;}.markdown-body hr::before { display: table; content: "";}.markdown-body hr::after { display: table; clear: both; content: "";}.markdown-body table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto;}.markdown-body td,.markdown-body th { padding: 0;}.markdown-body details summary { cursor: pointer;}.markdown-body details:not([open])>*:not(summary) { display: none !important;}.markdown-body kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: #24292f; vertical-align: middle; background-color: #f6f8fa; border: solid 1px rgba(175,184,193,0.2); border-bottom-color: rgba(175,184,193,0.2); border-radius: 6px; box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25;}.markdown-body h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid hsla(210,18%,87%,1);}.markdown-body h3 { font-weight: 600; font-size: 1.25em;}.markdown-body h4 { font-weight: 600; font-size: 1em;}.markdown-body h5 { font-weight: 600; font-size: .875em;}.markdown-body h6 { font-weight: 600; font-size: .85em; color: #57606a;}.markdown-body p { margin-top: 0; margin-bottom: 10px;}.markdown-body blockquote { margin: 0; padding: 0 1em; color: #57606a; border-left: .25em solid #d0d7de;}.markdown-body ul,.markdown-body ol { margin-top: 0; margin-bottom: 0; padding-left: 2em;}.markdown-body ol ol,.markdown-body ul ol { list-style-type: lower-roman;}.markdown-body ul ul ol,.markdown-body ul ol ol,.markdown-body ol ul ol,.markdown-body ol ol ol { list-style-type: lower-alpha;}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul { margin-top: 0; margin-bottom: 0;}.markdown-body dd { margin-left: 0;}.markdown-body tt,.markdown-body code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px;}.markdown-body pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; word-wrap: normal;}.markdown-body :-ms-input-placeholder { color: #6e7781; opacity: 1;}.markdown-body ::-ms-input-placeholder { color: #6e7781; opacity: 1;}.markdown-body ::placeholder { color: #6e7781; opacity: 1;}.markdown-body [data-catalyst] { display: block;}.markdown-body g-emoji { font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em;}.markdown-body g-emoji img { width: 1em; height: 1em;}.markdown-body::before { display: table; content: "";}.markdown-body::after { display: table; clear: both; content: "";}.markdown-body>*:first-child { margin-top: 0 !important;}.markdown-body>*:last-child { margin-bottom: 0 !important;}.markdown-body a:not([href]) { color: inherit; text-decoration: none;}.markdown-body .absent { color: #cf222e;}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre,.markdown-body details { margin-top: 0; margin-bottom: 16px;}.markdown-body blockquote>:first-child { margin-top: 0;}.markdown-body blockquote>:last-child { margin-bottom: 0;}.markdown-body sup>a::before { content: "[";}.markdown-body sup>a::after { content: "]";}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link { color: #24292f; vertical-align: middle; visibility: hidden;}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code { padding: 0 .2em; font-size: inherit;}.markdown-body ul.no-list,.markdown-body ol.no-list { padding: 0; list-style-type: none;}.markdown-body ol[type="1"] { list-style-type: decimal;}.markdown-body ol[type=a] { list-style-type: lower-alpha;}.markdown-body ol[type=i] { list-style-type: lower-roman;}.markdown-body div>ol:not([type]) { list-style-type: decimal;}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul { margin-top: 0; margin-bottom: 0;}.markdown-body li>p { margin-top: 16px;}.markdown-body li+li { margin-top: .25em;}.markdown-body dl { padding: 0;}.markdown-body dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600;}.markdown-body dl dd { padding: 0 16px; margin-bottom: 16px;}.markdown-body table th { font-weight: 600;}.markdown-body table th,.markdown-body table td { padding: 6px 13px; border: 1px solid #d0d7de;}.markdown-body table tr { background-color: #ffffff; border-top: 1px solid hsla(210,18%,87%,1);}.markdown-body table tr:nth-child(2n) { background-color: #f6f8fa;}.markdown-body table img { background-color: transparent;}.markdown-body img[align=right] { padding-left: 20px;}.markdown-body img[align=left] { padding-right: 20px;}.markdown-body .emoji { max-width: none; vertical-align: text-top; background-color: transparent;}.markdown-body span.frame { display: block; overflow: hidden;}.markdown-body span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid #d0d7de;}.markdown-body span.frame span img { display: block; float: left;}.markdown-body span.frame span span { display: block; padding: 5px 0 0; clear: both; color: #24292f;}.markdown-body span.align-center { display: block; overflow: hidden; clear: both;}.markdown-body span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center;}.markdown-body span.align-center span img { margin: 0 auto; text-align: center;}.markdown-body span.align-right { display: block; overflow: hidden; clear: both;}.markdown-body span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right;}.markdown-body span.align-right span img { margin: 0; text-align: right;}.markdown-body span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden;}.markdown-body span.float-left span { margin: 13px 0 0;}.markdown-body span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden;}.markdown-body span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right;}.markdown-body code,.markdown-body tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: rgba(175,184,193,0.2); border-radius: 6px;}.markdown-body code br,.markdown-body tt br { display: none;}.markdown-body del code { text-decoration: inherit;}.markdown-body pre code { font-size: 100%;}.markdown-body pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0;}.markdown-body .highlight { margin-bottom: 16px;}.markdown-body .highlight pre { margin-bottom: 0; word-break: normal;}.markdown-body pre code { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; background-color: #f6f8fa; border-radius: 6px;}.markdown-body pre code,.markdown-body pre tt { display: block; margin: 0; word-wrap: normal; border: 0;}.markdown-body .csv-data td,.markdown-body .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap;}.markdown-body .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: #ffffff; border: 0;}.markdown-body .csv-data tr { border-top: 0;}.markdown-body .csv-data th { font-weight: 600; background: #f6f8fa; border-top: 0;}.markdown-body .footnotes { font-size: 12px; color: #57606a; border-top: 1px solid #d0d7de;}.markdown-body .footnotes ol { padding-left: 16px;}.markdown-body .footnotes li { position: relative;}.markdown-body .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: ""; border: 2px solid #0969da; border-radius: 6px;}.markdown-body .footnotes li:target { color: #24292f;}.markdown-body .footnotes .data-footnote-backref g-emoji { font-family: monospace;}.markdown-body [hidden] { display: none !important;}.markdown-body ::-webkit-calendar-picker-indicator { filter: invert(50%);}/** language color **/.markdown-body .token.tag .attr-value { color: #032f62;}.markdown-body .token.property,.markdown-body .token.tag,.markdown-body .token.boolean,.markdown-body .token.number,.markdown-body .token.function-name,.markdown-body .token.constant,.markdown-body .token.symbol,.markdown-body .token.deleted { color: #0060c9;}.markdown-body .token.punctuation { color: #a0a0a0;}.markdown-body code[class*="language-"] { color: black;}.markdown-body code[class*="language-"] .token.selector,.markdown-body code[class*="language-"] .token.string,.markdown-body code[class*="language-"] .token.attr-name,.markdown-body code[class*="language-"] .token.content,.markdown-body code[class*="language-"] .token.char,.markdown-body code[class*="language-"] .token.class-name,.markdown-body code[class*="language-"] .token.function,.markdown-body code[class*="language-"] .token.builtin { color: #6f42c1;}.markdown-body code[class*="language-"] .token.inserted { color: #22863a; background-color: #f0fff4;}.markdown-body code[class*="language-"] .token.deleted { color: #b31d28; background-color: #ffeef0;}.markdown-body code[class*="language-"] .code-block { color: #032f62;}.markdown-body code[class*="language-"] .token.comment,.markdown-body code[class*="language-"] .token.block-comment,.markdown-body code[class*="language-"] .token.prolog,.markdown-body code[class*="language-"] .token.doctype,.markdown-body code[class*="language-"] .token.cdata { color: #7D8B99;}.markdown-body code[class*="language-"] .token.punctuation { color: #a0a0a0;}.markdown-body code[class*="language-"] .token.operator,.markdown-body code[class*="language-"] .token.entity,.markdown-body code[class*="language-"] .token.variable { color: #d73a49; background: rgba(255, 255, 255, 0.5);}.markdown-body code[class*="language-"] .token.url { color: #0027ff;}.markdown-body code[class*="language-"] .token.atrule,.markdown-body code[class*="language-"] .token.attr-value { color: #004698;}.markdown-body code[class*="language-"] .token.keyword { color: #d63200;}.markdown-body code[class*="language-"] .token.regex,.markdown-body code[class*="language-"] .token.important { color: #e90;}.markdown-body code[class*="language-"] .token.string { color: #0a53c1;}</style>
     <style></style>
+    <style>body { margin: 0; }
+.markdown-body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+max-width: 960px;
+margin: 28px auto 60px auto;
+padding: 8px;
+color: #24292f;
+background-color: #ffffff;
+font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+}
+.markdown-body .octicon {
+display: inline-block;
+fill: currentColor;
+vertical-align: text-bottom;
+}
+.markdown-body pre {
+position: relative;
+}
+.markdown-body pre .copied {
+visibility: hidden;
+display: flex;
+position: absolute;
+cursor: pointer;
+color: #a5afbb;
+top: 6px;
+right: 6px;
+border-radius: 5px;
+background: #e3e3e3;
+padding: 6px;
+font-size: 12px;
+transition: all .3s;
+}
+.markdown-body pre:hover .copied {
+visibility: visible;
+}
+.markdown-body pre:hover .copied:hover {
+background: #4caf50;
+color: #fff;
+}
+.markdown-body pre:hover .copied:active,
+.markdown-body pre .copied.active {
+background: #2e9b33;
+color: #fff;
+}
+.markdown-body pre .copied .octicon-copy {
+display: block;
+}
+.markdown-body pre .copied .octicon-check {
+display: none;
+}
+.markdown-body pre .active .octicon-copy {
+display: none;
+}
+.markdown-body pre .active .octicon-check {
+display: block;
+}
+.markdown-body .octicon-video {
+border: 1px solid #d0d7de !important;
+border-radius: 6px !important;
+display: block;
+}
+.markdown-body .octicon-video summary {
+border-bottom: 1px solid #d0d7de !important;
+padding: 8px 16px !important;
+cursor: pointer;
+}
+.markdown-body .octicon-video > video {
+display: block !important;
+max-width: 100% !important;
+padding: 2px;
+box-sizing: border-box;
+border-bottom-right-radius: 6px !important;
+border-bottom-left-radius: 6px !important;
+}
+.markdown-body details.octicon-video:not([open])>*:not(summary) {
+display: none !important;
+}
+.markdown-body details.octicon-video:not([open]) > summary {
+border-bottom: 0 !important;
+}
+.markdown-body .octicon-video summary > svg + span {
+margin: 4px !important;
+}
+.markdown-body h1:hover a.anchor .octicon-link:before,
+.markdown-body h2:hover a.anchor .octicon-link:before,
+.markdown-body h3:hover a.anchor .octicon-link:before,
+.markdown-body h4:hover a.anchor .octicon-link:before,
+.markdown-body h5:hover a.anchor .octicon-link:before,
+.markdown-body h6:hover a.anchor .octicon-link:before {
+width: 16px;
+height: 16px;
+content: ' ';
+display: inline-block;
+background-color: currentColor;
+-webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+}
+.markdown-body a.anchor {
+float: left;
+padding-right: 4px;
+margin-left: -20px;
+line-height: 1;
+min-width: 16px;
+}
+.markdown-body a.anchor:focus {
+outline: none;
+}
+.markdown-body h1:hover a.anchor,
+.markdown-body h2:hover a.anchor,
+.markdown-body h3:hover a.anchor,
+.markdown-body h4:hover a.anchor,
+.markdown-body h5:hover a.anchor,
+.markdown-body h6:hover a.anchor {
+text-decoration: none;
+}
+.markdown-body h1:hover a.anchor .octicon-link,
+.markdown-body h2:hover a.anchor .octicon-link,
+.markdown-body h3:hover a.anchor .octicon-link,
+.markdown-body h4:hover a.anchor .octicon-link,
+.markdown-body h5:hover a.anchor .octicon-link,
+.markdown-body h6:hover a.anchor .octicon-link {
+visibility: visible;
+}
+.markdown-body details,
+.markdown-body figcaption,
+.markdown-body figure {
+display: block;
+}
+.markdown-body summary {
+display: list-item;
+}
+.markdown-body a {
+background-color: transparent;
+color: #0969da;
+text-decoration: none;
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+outline-width: 0;
+}
+.markdown-body abbr[title] {
+border-bottom: none;
+-webkit-text-decoration: underline dotted;
+text-decoration: underline dotted;
+}
+.markdown-body b,
+.markdown-body strong {
+font-weight: 600;
+}
+.markdown-body dfn {
+font-style: italic;
+}
+.markdown-body h1 {
+margin: .67em 0;
+font-weight: 600;
+padding-bottom: .3em;
+font-size: 2em;
+border-bottom: 1px solid hsla(210,18%,87%,1);
+}
+.markdown-body mark {
+background-color: #ff0;
+color: #24292f;
+}
+.markdown-body small {
+font-size: 90%;
+}
+.markdown-body sub,
+.markdown-body sup {
+font-size: 75%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+}
+.markdown-body sub {
+bottom: -0.25em;
+}
+.markdown-body sup {
+top: -0.5em;
+}
+.markdown-body img {
+border-style: none;
+max-width: 100%;
+box-sizing: content-box;
+background-color: #ffffff;
+}
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+font-family: monospace,monospace;
+font-size: 1em;
+}
+.markdown-body figure {
+margin: 1em 40px;
+}
+.markdown-body hr {
+box-sizing: content-box;
+overflow: hidden;
+background: transparent;
+border-bottom: 1px solid hsla(210,18%,87%,1);
+height: .25em;
+padding: 0;
+margin: 24px 0;
+background-color: #d0d7de;
+border: 0;
+}
+.markdown-body html [type=button],
+.markdown-body [type=reset],
+.markdown-body [type=submit] {
+-webkit-appearance: button;
+}
+.markdown-body [type=button]::-moz-focus-inner,
+.markdown-body [type=reset]::-moz-focus-inner,
+.markdown-body [type=submit]::-moz-focus-inner {
+border-style: none;
+padding: 0;
+}
+.markdown-body [type=button]:-moz-focusring,
+.markdown-body [type=reset]:-moz-focusring,
+.markdown-body [type=submit]:-moz-focusring {
+outline: 1px dotted ButtonText;
+}
+.markdown-body [type=checkbox],
+.markdown-body [type=radio] {
+box-sizing: border-box;
+padding: 0;
+}
+.markdown-body [type=number]::-webkit-inner-spin-button,
+.markdown-body [type=number]::-webkit-outer-spin-button {
+height: auto;
+}
+.markdown-body [type=search] {
+-webkit-appearance: textfield;
+outline-offset: -2px;
+}
+.markdown-body [type=search]::-webkit-search-cancel-button,
+.markdown-body [type=search]::-webkit-search-decoration {
+-webkit-appearance: none;
+}
+.markdown-body ::-webkit-input-placeholder {
+color: inherit;
+opacity: .54;
+}
+.markdown-body ::-webkit-file-upload-button {
+-webkit-appearance: button;
+font: inherit;
+}
+.markdown-body a:hover {
+text-decoration: underline;
+}
+.markdown-body hr::before {
+display: table;
+content: "";
+}
+.markdown-body hr::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body table {
+border-spacing: 0;
+border-collapse: collapse;
+display: block;
+width: max-content;
+max-width: 100%;
+overflow: auto;
+}
+.markdown-body td,
+.markdown-body th {
+padding: 0;
+}
+.markdown-body details summary {
+cursor: pointer;
+}
+.markdown-body details:not([open])>*:not(summary) {
+display: none !important;
+}
+.markdown-body kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+line-height: 10px;
+color: #24292f;
+vertical-align: middle;
+background-color: #f6f8fa;
+border: solid 1px rgba(175,184,193,0.2);
+border-bottom-color: rgba(175,184,193,0.2);
+border-radius: 6px;
+box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+margin-top: 24px;
+margin-bottom: 16px;
+font-weight: 600;
+line-height: 1.25;
+}
+.markdown-body h2 {
+font-weight: 600;
+padding-bottom: .3em;
+font-size: 1.5em;
+border-bottom: 1px solid hsla(210,18%,87%,1);
+}
+.markdown-body h3 {
+font-weight: 600;
+font-size: 1.25em;
+}
+.markdown-body h4 {
+font-weight: 600;
+font-size: 1em;
+}
+.markdown-body h5 {
+font-weight: 600;
+font-size: .875em;
+}
+.markdown-body h6 {
+font-weight: 600;
+font-size: .85em;
+color: #57606a;
+}
+.markdown-body p {
+margin-top: 0;
+margin-bottom: 10px;
+}
+.markdown-body blockquote {
+margin: 0;
+padding: 0 1em;
+color: #57606a;
+border-left: .25em solid #d0d7de;
+}
+.markdown-body ul,
+.markdown-body ol {
+margin-top: 0;
+margin-bottom: 0;
+padding-left: 2em;
+}
+.markdown-body ol ol,
+.markdown-body ul ol {
+list-style-type: lower-roman;
+}
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+list-style-type: lower-alpha;
+}
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+.markdown-body dd {
+margin-left: 0;
+}
+.markdown-body tt,
+.markdown-body code {
+font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+font-size: 12px;
+}
+.markdown-body pre {
+margin-top: 0;
+margin-bottom: 0;
+font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+word-wrap: normal;
+}
+.markdown-body :-ms-input-placeholder {
+color: #6e7781;
+opacity: 1;
+}
+.markdown-body ::-ms-input-placeholder {
+color: #6e7781;
+opacity: 1;
+}
+.markdown-body ::placeholder {
+color: #6e7781;
+opacity: 1;
+}
+.markdown-body [data-catalyst] {
+display: block;
+}
+.markdown-body g-emoji {
+font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+font-size: 1em;
+font-style: normal !important;
+font-weight: 400;
+line-height: 1;
+vertical-align: -0.075em;
+}
+.markdown-body g-emoji img {
+width: 1em;
+height: 1em;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+.markdown-body a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.markdown-body .absent {
+color: #cf222e;
+}
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body details {
+margin-top: 0;
+margin-bottom: 16px;
+}
+.markdown-body blockquote>:first-child {
+margin-top: 0;
+}
+.markdown-body blockquote>:last-child {
+margin-bottom: 0;
+}
+.markdown-body sup>a::before {
+content: "[";
+}
+.markdown-body sup>a::after {
+content: "]";
+}
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+color: #24292f;
+vertical-align: middle;
+visibility: hidden;
+}
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+padding: 0 .2em;
+font-size: inherit;
+}
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+padding: 0;
+list-style-type: none;
+}
+.markdown-body ol[type="1"] {
+list-style-type: decimal;
+}
+.markdown-body ol[type=a] {
+list-style-type: lower-alpha;
+}
+.markdown-body ol[type=i] {
+list-style-type: lower-roman;
+}
+.markdown-body div>ol:not([type]) {
+list-style-type: decimal;
+}
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+.markdown-body li>p {
+margin-top: 16px;
+}
+.markdown-body li+li {
+margin-top: .25em;
+}
+.markdown-body dl {
+padding: 0;
+}
+.markdown-body dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: 600;
+}
+.markdown-body dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+.markdown-body table th {
+font-weight: 600;
+}
+.markdown-body table th,
+.markdown-body table td {
+padding: 6px 13px;
+border: 1px solid #d0d7de;
+}
+.markdown-body table tr {
+background-color: #ffffff;
+border-top: 1px solid hsla(210,18%,87%,1);
+}
+.markdown-body table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+.markdown-body table img {
+background-color: transparent;
+}
+.markdown-body img[align=right] {
+padding-left: 20px;
+}
+.markdown-body img[align=left] {
+padding-right: 20px;
+}
+.markdown-body .emoji {
+max-width: none;
+vertical-align: text-top;
+background-color: transparent;
+}
+.markdown-body span.frame {
+display: block;
+overflow: hidden;
+}
+.markdown-body span.frame>span {
+display: block;
+float: left;
+width: auto;
+padding: 7px;
+margin: 13px 0 0;
+overflow: hidden;
+border: 1px solid #d0d7de;
+}
+.markdown-body span.frame span img {
+display: block;
+float: left;
+}
+.markdown-body span.frame span span {
+display: block;
+padding: 5px 0 0;
+clear: both;
+color: #24292f;
+}
+.markdown-body span.align-center {
+display: block;
+overflow: hidden;
+clear: both;
+}
+.markdown-body span.align-center>span {
+display: block;
+margin: 13px auto 0;
+overflow: hidden;
+text-align: center;
+}
+.markdown-body span.align-center span img {
+margin: 0 auto;
+text-align: center;
+}
+.markdown-body span.align-right {
+display: block;
+overflow: hidden;
+clear: both;
+}
+.markdown-body span.align-right>span {
+display: block;
+margin: 13px 0 0;
+overflow: hidden;
+text-align: right;
+}
+.markdown-body span.align-right span img {
+margin: 0;
+text-align: right;
+}
+.markdown-body span.float-left {
+display: block;
+float: left;
+margin-right: 13px;
+overflow: hidden;
+}
+.markdown-body span.float-left span {
+margin: 13px 0 0;
+}
+.markdown-body span.float-right {
+display: block;
+float: right;
+margin-left: 13px;
+overflow: hidden;
+}
+.markdown-body span.float-right>span {
+display: block;
+margin: 13px auto 0;
+overflow: hidden;
+text-align: right;
+}
+.markdown-body code,
+.markdown-body tt {
+padding: .2em .4em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(175,184,193,0.2);
+border-radius: 6px;
+}
+.markdown-body code br,
+.markdown-body tt br {
+display: none;
+}
+.markdown-body del code {
+text-decoration: inherit;
+}
+.markdown-body pre code {
+font-size: 100%;
+}
+.markdown-body pre>code {
+padding: 0;
+margin: 0;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.markdown-body .highlight {
+margin-bottom: 16px;
+}
+.markdown-body .highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.markdown-body pre code {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 6px;
+}
+.markdown-body pre code,
+.markdown-body pre tt {
+display: block;
+margin: 0;
+word-wrap: normal;
+border: 0;
+}
+.markdown-body .csv-data td,
+.markdown-body .csv-data th {
+padding: 5px;
+overflow: hidden;
+font-size: 12px;
+line-height: 1;
+text-align: left;
+white-space: nowrap;
+}
+.markdown-body .csv-data .blob-num {
+padding: 10px 8px 9px;
+text-align: right;
+background: #ffffff;
+border: 0;
+}
+.markdown-body .csv-data tr {
+border-top: 0;
+}
+.markdown-body .csv-data th {
+font-weight: 600;
+background: #f6f8fa;
+border-top: 0;
+}
+.markdown-body .footnotes {
+font-size: 12px;
+color: #57606a;
+border-top: 1px solid #d0d7de;
+}
+.markdown-body .footnotes ol {
+padding-left: 16px;
+}
+.markdown-body .footnotes li {
+position: relative;
+}
+.markdown-body .footnotes li:target::before {
+position: absolute;
+top: -8px;
+right: -8px;
+bottom: -8px;
+left: -24px;
+pointer-events: none;
+content: "";
+border: 2px solid #0969da;
+border-radius: 6px;
+}
+.markdown-body .footnotes li:target {
+color: #24292f;
+}
+.markdown-body .footnotes .data-footnote-backref g-emoji {
+font-family: monospace;
+}
+.markdown-body [hidden] {
+display: none !important;
+}
+.markdown-body ::-webkit-calendar-picker-indicator {
+filter: invert(50%);
+}
+/** language color **/
+.markdown-body .token.tag .attr-value {
+color: #032f62;
+}
+.markdown-body .token.property,
+.markdown-body .token.tag,
+.markdown-body .token.boolean,
+.markdown-body .token.number,
+.markdown-body .token.function-name,
+.markdown-body .token.constant,
+.markdown-body .token.symbol,
+.markdown-body .token.deleted {
+color: #0060c9;
+}
+.markdown-body .token.punctuation {
+color: #a0a0a0;
+}
+.markdown-body code[class*="language-"] {
+color: black;
+}
+.markdown-body code[class*="language-"] .token.selector,
+.markdown-body code[class*="language-"] .token.string,
+.markdown-body code[class*="language-"] .token.attr-name,
+.markdown-body code[class*="language-"] .token.content,
+.markdown-body code[class*="language-"] .token.char,
+.markdown-body code[class*="language-"] .token.class-name,
+.markdown-body code[class*="language-"] .token.function,
+.markdown-body code[class*="language-"] .token.builtin {
+color: #6f42c1;
+}
+.markdown-body code[class*="language-"] .token.inserted {
+color: #22863a;
+background-color: #f0fff4;
+}
+.markdown-body code[class*="language-"] .token.deleted {
+color: #b31d28;
+background-color: #ffeef0;
+}
+.markdown-body code[class*="language-"] .code-block {
+color: #032f62;
+}
+.markdown-body code[class*="language-"] .token.comment,
+.markdown-body code[class*="language-"] .token.block-comment,
+.markdown-body code[class*="language-"] .token.prolog,
+.markdown-body code[class*="language-"] .token.doctype,
+.markdown-body code[class*="language-"] .token.cdata {
+color: #7D8B99;
+}
+.markdown-body code[class*="language-"] .token.punctuation {
+color: #a0a0a0;
+}
+.markdown-body code[class*="language-"] .token.operator,
+.markdown-body code[class*="language-"] .token.entity,
+.markdown-body code[class*="language-"] .token.variable {
+color: #d73a49;
+background: rgba(255, 255, 255, 0.5);
+}
+.markdown-body code[class*="language-"] .token.url {
+color: #0027ff;
+}
+.markdown-body code[class*="language-"] .token.atrule,
+.markdown-body code[class*="language-"] .token.attr-value {
+color: #004698;
+}
+.markdown-body code[class*="language-"] .token.keyword {
+color: #d63200;
+}
+.markdown-body code[class*="language-"] .token.regex,
+.markdown-body code[class*="language-"] .token.important {
+color: #e90;
+}
+.markdown-body code[class*="language-"] .token.string {
+color: #0a53c1;
+}</style>
   </head>
   <body><a aria-label="View source on GitHub" target="__blank" class="github-corner" href="https://github.com/jaywcjlove/svgtofont.git"><svg width="54" height="54" viewBox="0 0 250 250" aria-hidden="true" style="fill: rgb(32, 34, 37); color: rgb(255, 255, 255); position: fixed; z-index: 99999; border: 0px; top: 0px; right: 0px;">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -96,8 +893,8 @@
       <p>You can add configuration to package.json. <a href="https://github.com/jaywcjlove/svgtofont/issues/48">#48</a></p>
       <p>Supports <code>.svgtofontrc</code> Configuration File.</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"fontName"</span><span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
-  <span class="token string">"css"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token string-property property">"fontName"</span><span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"css"</span><span class="token operator">:</span> <span class="token boolean">true</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
   &#x22;fontName&#x22;: &#x22;svgtofont&#x22;,
@@ -109,10 +906,10 @@
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
  
 <span class="token function">svgtofont</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'icon'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
-  dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'fonts'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
-  fontName<span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
-  css<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
+  <span class="token literal-property property">src</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'icon'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
+  <span class="token literal-property property">dist</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'fonts'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
+  <span class="token literal-property property">fontName</span><span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
+  <span class="token literal-property property">css</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'done!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -133,54 +930,54 @@ svgtofont({
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token function">svgtofont</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"icon"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
-  dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"fonts"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
-  styleTemplates<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>rootPath<span class="token punctuation">,</span> <span class="token string">"styles"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// file templates path (optional)</span>
-  fontName<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
-  css<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
-  startUnicode<span class="token operator">:</span> <span class="token number">0xea01</span><span class="token punctuation">,</span> <span class="token comment">// unicode start number</span>
-  svgicons2svgfont<span class="token operator">:</span> <span class="token punctuation">{</span>
-    fontHeight<span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
-    normalize<span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token literal-property property">src</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"icon"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// svg path</span>
+  <span class="token literal-property property">dist</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"fonts"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// output path</span>
+  <span class="token literal-property property">styleTemplates</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>rootPath<span class="token punctuation">,</span> <span class="token string">"styles"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// file templates path (optional)</span>
+  <span class="token literal-property property">fontName</span><span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span> <span class="token comment">// font name</span>
+  <span class="token literal-property property">css</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Create CSS files.</span>
+  <span class="token literal-property property">startUnicode</span><span class="token operator">:</span> <span class="token number">0xea01</span><span class="token punctuation">,</span> <span class="token comment">// unicode start number</span>
+  <span class="token literal-property property">svgicons2svgfont</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">fontHeight</span><span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">normalize</span><span class="token operator">:</span> <span class="token boolean">true</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment">// website = null, no demo html files</span>
-  website<span class="token operator">:</span> <span class="token punctuation">{</span>
-    title<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">website</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
     <span class="token comment">// Must be a .svg format image.</span>
-    logo<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    version<span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
-    meta<span class="token operator">:</span> <span class="token punctuation">{</span>
-      description<span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
-      keywords<span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span>
+    <span class="token literal-property property">logo</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">version</span><span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">keywords</span><span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    description<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
     <span class="token comment">// Add a Github corner to your website</span>
     <span class="token comment">// Like: https://github.com/uiwjs/react-github-corners</span>
-    corners<span class="token operator">:</span> <span class="token punctuation">{</span>
-      url<span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
-      width<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
-      height<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
-      bgColor<span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
+    <span class="token literal-property property">corners</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      <span class="token literal-property property">bgColor</span><span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    links<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token literal-property property">links</span><span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"index.html"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"index.html"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"unicode.html"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"unicode.html"</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    footerInfo<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Licensed under MIT. (Yes it's free and &#x3C;a href="https://github.com/jaywcjlove/svgtofont">open-sourced&#x3C;/a></span><span class="token template-punctuation string">`</span></span>
+    <span class="token literal-property property">footerInfo</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Licensed under MIT. (Yes it's free and &#x3C;a href="https://github.com/jaywcjlove/svgtofont">open-sourced&#x3C;/a></span><span class="token template-punctuation string">`</span></span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'done!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -305,9 +1102,9 @@ export const Git = props => (
       </blockquote>
       <p>Output <code>./dist/svgtofont.json</code>, The content is as follows:</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"adobe"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z...."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token string">"git"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M2.6 10.59L8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1..."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token string">"stylelint"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M129.74 243.648c28-100.109 27.188-100.5.816c2.65..."</span><span class="token punctuation">]</span>
+  <span class="token string-property property">"adobe"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z...."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"git"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M2.6 10.59L8.38 4.8l1.69 1.7c-.24.85.15 1.78.93 2.23v5.54c-.6.34-1 .99-1..."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string-property property">"stylelint"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"M129.74 243.648c28-100.109 27.188-100.5.816c2.65..."</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
   &#x22;adobe&#x22;: [&#x22;M14.868 3H23v19L14.868 3zM1 3h8.138L1 22V3zm.182 11.997H13.79l-1.551-3.82H8.447z....&#x22;],
@@ -321,9 +1118,9 @@ export const Git = props => (
 
 <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">generate</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>	
   <span class="token keyword">const</span> outPath <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">generateIconsSource</span><span class="token punctuation">(</span><span class="token punctuation">{</span>	
-    src<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'svg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
-    dist<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
-    fontName<span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span>	
+    <span class="token literal-property property">src</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'svg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
+    <span class="token literal-property property">dist</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>	
+    <span class="token literal-property property">fontName</span><span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span>	
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
 <span class="token punctuation">}</span>	
 
@@ -380,7 +1177,7 @@ generate();
       <p>let's say you have an svg with a file name of <code>add</code> and you want to use ligatures for it. you would set up your processing as mentioned above and turn on this switch.</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token spread operator">...</span>
-  useNameAsUnicode<span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token literal-property property">useNameAsUnicode</span><span class="token operator">:</span> <span class="token boolean">true</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
   ...
@@ -580,39 +1377,39 @@ generate();
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token spread operator">...</span>
   <span class="token comment">// website = null, no demo html files</span>
-  website<span class="token operator">:</span> <span class="token punctuation">{</span>
-    title<span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
-    logo<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    version<span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
-    meta<span class="token operator">:</span> <span class="token punctuation">{</span>
-      description<span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
-      keywords<span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span><span class="token punctuation">,</span>
-      favicon<span class="token operator">:</span> <span class="token string">"./favicon.png"</span>
+  <span class="token literal-property property">website</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"svgtofont"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">logo</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"svg"</span><span class="token punctuation">,</span> <span class="token string">"git.svg"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">version</span><span class="token operator">:</span> pkg<span class="token punctuation">.</span><span class="token property-access">version</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">meta</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">"Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format."</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">keywords</span><span class="token operator">:</span> <span class="token string">"svgtofont,TTF,EOT,WOFF,WOFF2,SVG"</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">favicon</span><span class="token operator">:</span> <span class="token string">"./favicon.png"</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token comment">// Add a Github corner to your website</span>
     <span class="token comment">// Like: https://github.com/uiwjs/react-github-corners</span>
-    corners<span class="token operator">:</span> <span class="token punctuation">{</span>
-      url<span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
-      width<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
-      height<span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
-      bgColor<span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
+    <span class="token literal-property property">corners</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'https://github.com/jaywcjlove/svgtofont'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">62</span><span class="token punctuation">,</span> <span class="token comment">// default: 60</span>
+      <span class="token literal-property property">bgColor</span><span class="token operator">:</span> <span class="token string">'#dc3545'</span> <span class="token comment">// default: '#151513'</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    links<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token literal-property property">links</span><span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"GitHub"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Feedback"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/svgtofont/issues"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"index.html"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Font Class"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"index.html"</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        title<span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
-        url<span class="token operator">:</span> <span class="token string">"unicode.html"</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"Unicode"</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"unicode.html"</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
@@ -664,8 +1461,8 @@ generate();
       </blockquote>
       <p>Custom template can customize parameters. You can define your own template based on the <a href="src/website/index.ejs">default template</a>.</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  website<span class="token operator">:</span> <span class="token punctuation">{</span>
-    template<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">join</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"my-template.ejs"</span><span class="token punctuation">)</span>
+  <span class="token literal-property property">website</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">template</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token method function property-access">join</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token method function property-access">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"my-template.ejs"</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
@@ -756,7 +1553,7 @@ symbol.html
       <p>Icons are used as components. <code>v3.16.7+</code> support.</p>
       <pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">Adobe</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Alipay</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'@uiw/icons'</span><span class="token punctuation">;</span>
 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Adobe</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fill<span class="token operator">:</span> <span class="token string">'red'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Adobe</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token literal-property property">fill</span><span class="token operator">:</span> <span class="token string">'red'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Alipay</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>36<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 </code><div onclick="copied(this)" data-code="import { Adobe, Alipay } from &#x27;@uiw/icons&#x27;;
 
@@ -788,9 +1585,9 @@ yarn add @svgr/webpack
 <span class="token punctuation">[</span>
   require<span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token string">'babel-plugin-named-asset-import'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">{</span>
-    loaderMap<span class="token operator">:</span> <span class="token punctuation">{</span>
-      svg<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token maybe-class-name">ReactComponent</span><span class="token operator">:</span> <span class="token string">'@svgr/webpack?-svgo,+ref![path]'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">loaderMap</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">svg</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">ReactComponent</span><span class="token operator">:</span> <span class="token string">'@svgr/webpack?-svgo,+ref![path]'</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
