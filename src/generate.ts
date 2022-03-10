@@ -93,7 +93,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
       const comName = isNaN(Number(name.charAt(0))) ? name : toPascalCase(fontName) + name;
       fs.outputFileSync(outDistPath, reactSource(comName, fontSize, fontName, pathStrings.join(',\n')));
-      fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(name));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(comName));
       return `export * from './${name}';`;
     }),
   );
