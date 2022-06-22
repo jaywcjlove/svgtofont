@@ -1,6 +1,6 @@
 {
   "name": "svgtofont",
-  "version": "3.17.6",
+  "version": "3.17.7",
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
   "homepage": "https://jaywcjlove.github.io/svgtofont/",
   "main": "lib/index.js",
