@@ -65,6 +65,10 @@ export type SvgToFontOptions = {
    */
   classNamePrefix?: SvgToFontOptions['fontName'];
   /**
+   * Symbol Name Delimiter, @default `-`
+   */
+  symbolNameDelimiter?: string;
+  /**
   * Directory of custom templates.
   */
   styleTemplates?: string;
@@ -180,6 +184,7 @@ export default async (options: SvgToFontOptions = {}) => {
   options.fontName = options.fontName || 'iconfont';
   options.svgicons2svgfont = options.svgicons2svgfont || {};
   options.svgicons2svgfont.fontName = options.fontName;
+  options.symbolNameDelimiter = options.symbolNameDelimiter || '-';
   options.classNamePrefix = options.classNamePrefix || options.fontName;
   const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
   // If you generate a font you need to generate a style.
@@ -202,7 +207,7 @@ export default async (options: SvgToFontOptions = {}) => {
 
     Object.keys(unicodeObject).forEach(name => {
       const _code = unicodeObject[name];
-      let symbolName = options.classNamePrefix + '-' + name
+      let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
       let iconPart = symbolName + '">';
       let encodedCodes: string | number = _code.charCodeAt(0);
 
