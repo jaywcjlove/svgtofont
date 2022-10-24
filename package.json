@@ -65,7 +65,6 @@
     "@types/cheerio": "~0.22.31",
     "@types/ejs": "~3.1.0",
     "@types/fs-extra": "~9.0.13",
-    "@types/svgo": "~2.6.1",
     "@types/svg2ttf": "~5.0.1",
     "@types/svgicons2svgfont": "~10.0.1",
     "@types/ttf2eot": "~2.0.0",
@@ -88,6 +87,6 @@
     "yargs": "~17.6.0"
   },
   "devDependencies": {
-    "tsbb": "~3.7.2"
+    "tsbb": "^3.7.8"
   }
 }

@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { optimize, OptimizedSvg } from 'svgo';
+import { optimize } from 'svgo';
 import { filterSvgFiles, toPascalCase } from './utils';
 import { SvgToFontOptions } from './';
 
@@ -35,7 +35,7 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
           ...(svgoOptions.plugins || [])
           // 'convertShapeToPath'
         ],
-      }) as OptimizedSvg;
+      });
       const str: string[] = (pathStrings.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       return `\n"${name}": [${str.join(',\n')}]`;
     }),
@@ -87,7 +87,7 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
           // 'removeViewBox'
           ...(svgoOptions.plugins || [])
         ]
-      }) as OptimizedSvg;
+      });
       const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
       const outDistPath = path.join(options.dist, 'react', `${name}.js`);
       const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
