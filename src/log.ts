@@ -10,13 +10,16 @@ export class Log {
     this._disabled = val;
   }
   log = (message?: any, ...optionalParams: any[]) => {
+    if (this.logger) this.logger(message);
     if (this.disabled) return () => {}
     return console.log(message, ...optionalParams)
   }
   error = (message?: any, ...optionalParams: any[]) => {
+    if (this.logger) this.logger(message);
     if (this.disabled) return () => {}
     return console.error(message, ...optionalParams)
   }
+  logger = (message?: string) => {}
 }
 
 export const log = new Log();

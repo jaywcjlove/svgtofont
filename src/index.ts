@@ -13,6 +13,8 @@ import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymb
 export type SvgToFontOptions = {
   /** A value of `false` disables logging */
   log?: boolean;
+  /** log callback function  */
+  logger?: (message: string) => void;
   /**
    * The output directory.
    * @default fonts
@@ -180,6 +182,8 @@ export default async (options: SvgToFontOptions = {}) => {
   }
 
   log.disabled = options.log || false;
+  console.log('options.logger::', options.logger)
+  if (options.logger && typeof options.logger === 'function') log.logger = options.logger;
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
   options.startUnicode = options.startUnicode || 0xea01;

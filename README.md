@@ -191,15 +191,17 @@ async function creatFont() {
 
 > svgtofont(options)
 
-
-
-    "log": false,
-
 ### log
 
 > Type: `Boolean`  
 
 A value of `false` disables logging
+
+### logger
+
+> Type: `(msg) => void`  
+
+log callback function
 
 ### dist
 
