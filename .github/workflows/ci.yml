@@ -13,6 +13,7 @@ jobs:
           node-version: 16
 
       - run: npm install
+      - run: npm run checked
       - run: npm run coverage
       - run: npm run example
       - run: npm run example:templates

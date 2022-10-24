@@ -15,6 +15,7 @@
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
+    "checked":"tsc --noEmit",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage"
   },
