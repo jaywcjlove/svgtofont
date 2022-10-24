@@ -191,6 +191,16 @@ async function creatFont() {
 
 > svgtofont(options)
 
+
+
+    "log": false,
+
+### log
+
+> Type: `Boolean`  
+
+A value of `false` disables logging
+
 ### dist
 
 > Type: `String`  

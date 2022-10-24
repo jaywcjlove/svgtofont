@@ -4,6 +4,7 @@ import FS from 'fs-extra';
 import yargs, { Arguments } from 'yargs';
 import path from 'path';
 import svgtofont from './';
+import { log } from './log';
 
 type ArgvResult = Arguments<{
   sources: string;
@@ -28,7 +29,7 @@ const sourcesPath = path.join(process.cwd(), argv.sources);
 const outputPath = path.join(process.cwd(), argv.output);
 
 if (!FS.pathExistsSync(sourcesPath)) {
-  console.error('The directory does not exist!', sourcesPath);
+  log.error('The directory does not exist!', sourcesPath);
   process.exit();
 }
 
@@ -50,7 +51,7 @@ svgtofont({
   },
 })
 .then(() => {
-  console.log('done!');
+  log.log('done!');
 }).catch((err) => {
-  console.log('SvgToFont:ERR:', err);
+  log.log('SvgToFont:ERR:', err);
 });

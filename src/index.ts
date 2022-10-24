@@ -6,10 +6,13 @@ import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { Config } from 'svgo';
+import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 
 export type SvgToFontOptions = {
+  /** A value of `false` disables logging */
+  log?: boolean;
   /**
    * The output directory.
    * @default fonts
@@ -176,6 +179,7 @@ export default async (options: SvgToFontOptions = {}) => {
     }
   }
 
+  log.disabled = options.log || false;
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
   options.startUnicode = options.startUnicode || 0xea01;
@@ -304,32 +308,32 @@ export default async (options: SvgToFontOptions = {}) => {
       }
       const classHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(fontClassPath, classHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${fontClassPath} `);
+      log.log(`${color.green('SUCCESS')} Created ${fontClassPath} `);
 
       tempData._IconHtml = unicodeHtml.join('');
       tempData._type = 'unicode';
       const unicodeHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(unicodePath, unicodeHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
+      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
 
       tempData._IconHtml = symbolHtml.join('');
       tempData._type = 'symbol';
       const symbolHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(symbolPath, symbolHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
+      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
     }
 
     if (options.outSVGPath) {
       const outPath = await generateIconsSource(options);
-      console.log(`${color.green('SUCCESS')} Created ${outPath} `);
+      log.log(`${color.green('SUCCESS')} Created ${outPath} `);
     }
     if (options.outSVGReact) {
       const outPath = await generateReactIcons(options);
-      console.log(`${color.green('SUCCESS')} Created React Components. `);
+      log.log(`${color.green('SUCCESS')} Created React Components. `);
     }
 
   } catch (error) {
-    console.log('SvgToFont:CLI:ERR:', error);
+    log.log('SvgToFont:CLI:ERR:', error);
   }
 }
 

@@ -12,6 +12,7 @@ import copy from 'copy-template-dir';
 import del from 'del';
 import moveFile from 'move-file';
 import { SvgToFontOptions } from './';
+import { log } from './log';
 
 let UnicodeObj: Record<string, string> = {};
 /**
@@ -44,7 +45,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
     // Setting the font destination
     fontStream.pipe(fs.createWriteStream(DIST_PATH))
       .on("finish", () => {
-        console.log(`${color.green('SUCCESS')} ${color.blue('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+        log.log(`${color.green('SUCCESS')} ${color.blue('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
         resolve(UnicodeObj);
       })
       .on("error", (err) => {
@@ -130,7 +131,7 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
     `export type ${enumName}Icon = ${fileNames.map(name => `"${name}"`).join(' | ')}\n` +
     `export const ${enumName}Prefix = "${options.classNamePrefix}-"`
   );
-  console.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
+  log.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
 
 /*
@@ -157,7 +158,7 @@ export function createTTF(options: SvgToFontOptions = {}): Promise<Buffer> {
       if (err) {
         return reject(err);
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(ttfBuf);
     });
   });
@@ -175,7 +176,7 @@ export function createEOT(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(eot);
     });
   });
@@ -192,7 +193,7 @@ export function createWOFF(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(woff);
     });
   });
@@ -209,7 +210,7 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH
       });
@@ -239,7 +240,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
       if (err) {
         return reject(err);
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH,
         svg: $.html("svg")
@@ -311,7 +312,7 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
           return null;
         }));
       }
-      createdFiles.forEach(filePath => console.log(`${color.green('SUCCESS')} Created ${filePath} `));
+      createdFiles.forEach(filePath => log.log(`${color.green('SUCCESS')} Created ${filePath} `));
       resolve(createdFiles);
     })
   });
