@@ -394,7 +394,9 @@
 <a name='L329'></a><a href='#L329'>329</a>
 <a name='L330'></a><a href='#L330'>330</a>
 <a name='L331'></a><a href='#L331'>331</a>
-<a name='L332'></a><a href='#L332'>332</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -739,6 +741,7 @@ import copy from 'copy-template-dir';
 import del from 'del';
 import moveFile from 'move-file';
 import { SvgToFontOptions } from './';
+import { log } from './log';
 &nbsp;
 let UnicodeObj: Record&lt;string, string&gt; = {};
 /**
@@ -771,7 +774,7 @@ export function createSVG(options: SvgToFontOptions = <span class="branch-0 cbra
     // Setting the font destination
     fontStream.pipe(fs.createWriteStream(DIST_PATH))
       .on("finish", () =&gt; {
-        console.log(`${color.green('SUCCESS')} ${color.blue('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+        log.log(`${color.green('SUCCESS')} ${color.blue('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
         resolve(UnicodeObj);
       })
       .on("error", <span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
@@ -857,7 +860,7 @@ export async function createTypescript(options: Omit&lt;SvgToFontOptions, 'types
     `export type ${enumName}Icon = ${fileNames.map(name =&gt; `"${name}"`).join(' | ')}\n` +
     `export const ${enumName}Prefix = "${options.classNamePrefix}-"`
   );
-  console.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
+  log.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
 &nbsp;
 /*
@@ -884,7 +887,7 @@ export function createTTF(options: SvgToFontOptions = <span class="branch-0 cbra
       <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >        return reject(err);</span>
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(ttfBuf);
     });
   });
@@ -902,7 +905,7 @@ export function createEOT(options: SvgToFontOptions = <span class="branch-0 cbra
       <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >        return reject(err);</span>
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(eot);
     });
   });
@@ -919,7 +922,7 @@ export function createWOFF(options: SvgToFontOptions = <span class="branch-0 cbr
       <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >        return reject(err);</span>
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(woff);
     });
   });
@@ -936,7 +939,7 @@ export function createWOFF2(options: SvgToFontOptions = <span class="branch-0 cb
       <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >        return reject(err);</span>
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH
       });
@@ -966,7 +969,7 @@ export function createSvgSymbol(options: SvgToFontOptions = <span class="branch-
       <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >        return reject(err);</span>
       }
-      console.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH,
         svg: $.html("svg")
@@ -1038,7 +1041,7 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
 <span class="cstat-no" title="statement not covered" >          return null;</span>
         }));
       }
-      createdFiles.forEach(filePath =&gt; console.log(`${color.green('SUCCESS')} Created ${filePath} `));
+      createdFiles.forEach(filePath =&gt; log.log(`${color.green('SUCCESS')} Created ${filePath} `));
       resolve(createdFiles);
     })
   });
@@ -1063,7 +1066,7 @@ export function createHTML(outPath: string,data: ejs.Data, options?: ejs.Options
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-24T09:25:19.170Z
+                at 2022-10-24T10:01:19.068Z
             </div>
         <script src="prettify.js"></script>
         <script>

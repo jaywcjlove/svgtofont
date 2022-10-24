@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.09% </span>
+                <span class="strong">95.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>97/102</span>
+                <span class='fraction'>98/103</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.17% </span>
+                <span class="strong">81.6% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>69/85</span>
+                <span class='fraction'>71/87</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.87% </span>
+                <span class="strong">95.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>93/97</span>
+                <span class='fraction'>94/98</span>
             </div>
         
             
@@ -401,7 +401,14 @@
 <a name='L336'></a><a href='#L336'>336</a>
 <a name='L337'></a><a href='#L337'>337</a>
 <a name='L338'></a><a href='#L338'>338</a>
-<a name='L339'></a><a href='#L339'>339</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -579,6 +586,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -747,10 +755,13 @@ import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { Config } from 'svgo';
+import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 &nbsp;
 export type SvgToFontOptions = {
+  /** A value of `false` disables logging */
+  log?: boolean;
   /**
    * The output directory.
    * @default fonts
@@ -917,6 +928,7 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
     }
   }
 &nbsp;
+  log.disabled = options.log || false;
   options.dist = options.dist || <span class="branch-1 cbranch-no" title="branch not covered" >path.join(process.cwd(), 'fonts');</span>
   options.src = options.src || <span class="branch-1 cbranch-no" title="branch not covered" >path.join(process.cwd(), 'svg');</span>
   options.startUnicode = options.startUnicode || 0xea01;
@@ -1045,32 +1057,32 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
       }
       const classHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(fontClassPath, classHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${fontClassPath} `);
+      log.log(`${color.green('SUCCESS')} Created ${fontClassPath} `);
 &nbsp;
       tempData._IconHtml = unicodeHtml.join('');
       tempData._type = 'unicode';
       const unicodeHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(unicodePath, unicodeHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
+      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
 &nbsp;
       tempData._IconHtml = symbolHtml.join('');
       tempData._type = 'symbol';
       const symbolHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(symbolPath, symbolHtmlStr);
-      console.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
+      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
     }
 &nbsp;
     if (options.outSVGPath) {
       const outPath = await generateIconsSource(options);
-      console.log(`${color.green('SUCCESS')} Created ${outPath} `);
+      log.log(`${color.green('SUCCESS')} Created ${outPath} `);
     }
     if (options.outSVGReact) {
       const outPath = await generateReactIcons(options);
-      console.log(`${color.green('SUCCESS')} Created React Components. `);
+      log.log(`${color.green('SUCCESS')} Created React Components. `);
     }
 &nbsp;
   } catch (error) {
-<span class="cstat-no" title="statement not covered" >    console.log('SvgToFont:CLI:ERR:', error);</span>
+<span class="cstat-no" title="statement not covered" >    log.log('SvgToFont:CLI:ERR:', error);</span>
   }
 }
 &nbsp;
@@ -1084,7 +1096,7 @@ module.exports = exports["default"];</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-24T09:25:19.170Z
+                at 2022-10-24T10:01:19.068Z
             </div>
         <script src="prettify.js"></script>
         <script>
