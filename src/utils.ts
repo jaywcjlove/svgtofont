@@ -30,6 +30,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
   return new Promise((resolve, reject) => {
     // init
     const fontStream = new SVGIcons2SVGFont({
+      log: (message) => log.log(message),
       ...options.svgicons2svgfont
     });
 

@@ -65,5 +65,5 @@ svgtofont({
   }
 })
 .then(() => {
-  console.log("done!");
+  console.log("Example::::done!");
 });

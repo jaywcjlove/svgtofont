@@ -180,9 +180,8 @@ export default async (options: SvgToFontOptions = {}) => {
       options.website.version = pkg.version;
     }
   }
-
-  log.disabled = options.log || false;
-  console.log('options.logger::', options.logger)
+  if (options.log === undefined) options.log = true;
+  log.disabled = !options.log;
   if (options.logger && typeof options.logger === 'function') log.logger = options.logger;
   options.dist = options.dist || path.join(process.cwd(), 'fonts');
   options.src = options.src || path.join(process.cwd(), 'svg');
