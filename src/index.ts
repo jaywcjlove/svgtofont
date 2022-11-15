@@ -183,8 +183,8 @@ export default async (options: SvgToFontOptions = {}) => {
   if (options.log === undefined) options.log = true;
   log.disabled = !options.log;
   if (options.logger && typeof options.logger === 'function') log.logger = options.logger;
-  options.dist = options.dist || path.join(process.cwd(), 'fonts');
-  options.src = options.src || path.join(process.cwd(), 'svg');
+  options.dist = options.dist || path.resolve(process.cwd(), 'fonts');
+  options.src = options.src || path.resolve(process.cwd(), 'svg');
   options.startUnicode = options.startUnicode || 0xea01;
   options.svg2ttf = options.svg2ttf || {};
   options.emptyDist = options.emptyDist;

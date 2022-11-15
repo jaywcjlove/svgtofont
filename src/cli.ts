@@ -25,8 +25,8 @@ const argv = yargs
   .epilog('copyright 2019')
   .argv as ArgvResult;
 
-const sourcesPath = path.join(process.cwd(), argv.sources);
-const outputPath = path.join(process.cwd(), argv.output);
+const sourcesPath = path.resolve(process.cwd(), argv.sources);
+const outputPath = path.resolve(process.cwd(), argv.output);
 
 if (!FS.pathExistsSync(sourcesPath)) {
   log.error('The directory does not exist!', sourcesPath);
