@@ -15,7 +15,7 @@
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
-    "checked":"tsc --noEmit",
+    "checked": "tsc --noEmit",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage"
   },
@@ -88,6 +88,7 @@
     "yargs": "~17.6.0"
   },
   "devDependencies": {
+    "@types/csso": "^5.0.0",
     "tsbb": "^3.7.8"
   }
 }
