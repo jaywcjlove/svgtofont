@@ -46,7 +46,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
     // Setting the font destination
     fontStream.pipe(fs.createWriteStream(DIST_PATH))
       .on("finish", () => {
-        log.log(`${color.green('SUCCESS')} ${color.blue('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+        log.log(`${color.green('SUCCESS')} ${color.blue_bt('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
         resolve(UnicodeObj);
       })
       .on("error", (err) => {
@@ -159,7 +159,7 @@ export function createTTF(options: SvgToFontOptions = {}): Promise<Buffer> {
       if (err) {
         return reject(err);
       }
-      log.log(`${color.green('SUCCESS')} ${color.blue('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue_bt('TTF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(ttfBuf);
     });
   });
@@ -177,7 +177,7 @@ export function createEOT(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      log.log(`${color.green('SUCCESS')} ${color.blue('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue_bt('EOT')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(eot);
     });
   });
@@ -194,7 +194,7 @@ export function createWOFF(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue_bt('WOFF')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve(woff);
     });
   });
@@ -211,7 +211,7 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
       if (err) {
         return reject(err);
       }
-      log.log(`${color.green('SUCCESS')} ${color.blue('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue_bt('WOFF2')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH
       });
@@ -241,7 +241,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
       if (err) {
         return reject(err);
       }
-      log.log(`${color.green('SUCCESS')} ${color.blue('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
+      log.log(`${color.green('SUCCESS')} ${color.blue_bt('Svg Symbol')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
       resolve({
         path: DIST_PATH,
         svg: $.html("svg")

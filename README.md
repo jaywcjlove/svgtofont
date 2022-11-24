@@ -260,6 +260,25 @@ async function generate () {
 generate();
 ```
 
+### generateInfoData
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+Output `./dist/info.json`, The content is as follows:
+
+```js
+{
+  "adobe": {
+    "encodedCode": "\\ea01",
+    "prefix": "svgtofont",
+    "className": "svgtofont-adobe",
+    "unicode": "&#59905;"
+  },
+  ...
+}
+```
+
 ### src
 
 > Type: `String`  

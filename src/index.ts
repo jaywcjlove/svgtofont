@@ -59,6 +59,22 @@ export type SvgToFontOptions = {
    */
   outSVGPath?: boolean;
   /**
+   * Output `./dist/info.json`, The content is as follows:
+   * @example
+   * ```js
+   * {
+   *    "adobe": {
+   *      "encodedCode": "\\ea01",
+   *      "prefix": "svgtofont",
+   *      "className": "svgtofont-adobe",
+   *      "unicode": "&#59905;"
+   *    },
+   *    .....
+   * }
+   * ```
+   */
+  generateInfoData?: boolean;
+  /**
    * This is the setting for [svgicons2svgfont](https://github.com/nfroidure/svgicons2svgfont/tree/dd713bea4f97afa59f7dba6a21ff7f22db565bcf#api)
    */
   svgicons2svgfont?: SvgIcons2FontOptions;
@@ -163,6 +179,15 @@ export type SvgToFontOptions = {
   typescript?: boolean | TypescriptOptions
 }
 
+export type IconInfo = {
+  prefix: string;
+  symbol: string;
+  unicode: string;
+  className: string;
+  encodedCode: string | number;
+}
+export type InfoData = Record<string, Partial<IconInfo>>
+
 export default async (options: SvgToFontOptions = {}) => {
   const confPath = path.join(process.cwd(), '.svgtofontrc');
   if (fs.pathExistsSync(confPath)) {
@@ -197,6 +222,7 @@ export default async (options: SvgToFontOptions = {}) => {
   // If you generate a font you need to generate a style.
   if (options.website && !options.css) options.css = true;
 
+  const infoDataPath = path.resolve(options.dist, 'info.json');
   try {
     if (options.emptyDist) {
       await fs.emptyDir(options.dist);
@@ -211,8 +237,9 @@ export default async (options: SvgToFontOptions = {}) => {
     let unicodeHtml: string[] = [];
     let symbolHtml: string[] = [];
     const prefix = options.classNamePrefix || options.fontName;
-
+    const infoData: InfoData = {}
     Object.keys(unicodeObject).forEach(name => {
+      if (!infoData[name]) infoData[name] = {};
       const _code = unicodeObject[name];
       let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
       let iconPart = symbolName + '">';
@@ -226,7 +253,10 @@ export default async (options: SvgToFontOptions = {}) => {
         cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
         cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
       }
-
+      infoData[name].encodedCode = `\\${encodedCodes.toString(16)}`;
+      infoData[name].prefix = prefix;
+      infoData[name].className = symbolName;
+      infoData[name].unicode = `&#${encodedCodes};`;
       cssIconHtml.push(`<li class="class-icon"><i class="${iconPart}</i><p class="name">${name}</p></li>`);
       unicodeHtml.push(`<li class="unicode-icon"><span class="iconfont">${_code}</span><h4>${name}</h4><span class="unicode">&amp;#${encodedCodes};</span></li>`);
       symbolHtml.push(`
@@ -238,7 +268,10 @@ export default async (options: SvgToFontOptions = {}) => {
         </li>
       `);
     });
-
+    if (options.generateInfoData) {
+      await fs.writeJSON(infoDataPath, infoData, { spaces: 2 });
+      log.log(`${color.green('SUCCESS')} Created ${infoDataPath} `);
+    }
     const ttf = await createTTF(options);
     await createEOT(options, ttf);
     await createWOFF(options, ttf);
