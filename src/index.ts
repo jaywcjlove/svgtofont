@@ -6,6 +6,7 @@ import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { Config } from 'svgo';
+import * as YAML from 'yaml';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
@@ -193,6 +194,13 @@ export default async (options: SvgToFontOptions = {}) => {
   if (fs.pathExistsSync(confPath)) {
     const conf = await fs.readJson(confPath);
     options = { ...options, ...conf };
+  } else {
+    // load yaml config
+    const confPath = path.join(process.cwd(), '.svgtofontrc.yaml');
+    if (fs.pathExistsSync(confPath)) {
+      const conf = await YAML.parse(fs.readFileSync(confPath, 'utf-8'));
+      options = { ...options, ...conf };
+    }
   }
 
   const pkgPath = path.join(process.cwd(), 'package.json');
