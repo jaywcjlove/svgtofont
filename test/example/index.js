@@ -1,4 +1,5 @@
 const path = require('path');
+/** @type {(option: import('../../').SvgToFontOptions) => void} */
 const svgtofont = require("../../lib");
 const pkg = require('../../package.json');
 
