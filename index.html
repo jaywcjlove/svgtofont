@@ -1,13 +1,13 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!doctype html><html lang="en"><head></head><body>
+
+  
     <meta charset="utf-8">
     <title>svgtofont</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta description="Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.">
     <meta keywords="webfont,font,icon,iconfont,font-face,compress,minify,font-cli,ttf,woff,eot,svg,ttf2eot,ttf2woff,ttf2svg,svg2ttf,css,base64">
-  </head>
-  <body><script type="module">const GITHUB_CORNERS_TEMPLATE = document.createElement("template");
+  
+  <script type="module">const GITHUB_CORNERS_TEMPLATE = document.createElement("template");
 GITHUB_CORNERS_TEMPLATE.innerHTML = `
 <style>
 :host a:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
@@ -71,7 +71,7 @@ export class GithubCorners extends HTMLElement {
         }
     }
 }
-customElements.define('github-corners', GithubCorners);</script><github-corners target="__blank" position="fixed" z-index="999" href="https://github.com/jaywcjlove/svgtofont.git"></github-corners><dark-mode permanent style="position: fixed; top: 8px; left: 10px; z-index: 999;" dark="Dark" light="Light"></dark-mode><script>const t=document;const e="_dark_mode_theme_";const s="permanent";const o="colorschemechange";const i="permanentcolorscheme";const h="light";const r="dark";const n=(t,e,s=e)=>{Object.defineProperty(t,s,{enumerable:true,get(){const t=this.getAttribute(e);return t===null?"":t},set(t){this.setAttribute(e,t)}})};const c=(t,e,s=e)=>{Object.defineProperty(t,s,{enumerable:true,get(){return this.hasAttribute(e)},set(t){if(t){this.setAttribute(e,"")}else{this.removeAttribute(e)}}})};class a extends HTMLElement{static get observedAttributes(){return["mode",h,r,s]}LOCAL_NANE=e;constructor(){super();this.t()}connectedCallback(){n(this,"mode");n(this,r);n(this,h);c(this,s);const a=localStorage.getItem(e);if(a&&[h,r].includes(a)){this.mode=a;this.permanent=true}if(this.permanent&&!a){localStorage.setItem(e,this.mode)}const l=[h,r].includes(a);if(this.permanent&&a){this.o()}else{if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){this.mode=r;this.o()}if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches){this.mode=h;this.o()}}if(!this.permanent&&!l){window.matchMedia("(prefers-color-scheme: light)").onchange=t=>{this.mode=t.matches?h:r;this.o()};window.matchMedia("(prefers-color-scheme: dark)").onchange=t=>{this.mode=t.matches?r:h;this.o()}}const d=new MutationObserver(((s,h)=>{this.mode=t.documentElement.dataset.colorMode;if(this.permanent&&l){localStorage.setItem(e,this.mode);this.i(i,{permanent:this.permanent})}this.h();this.i(o,{colorScheme:this.mode})}));d.observe(t.documentElement,{attributes:true});this.i(o,{colorScheme:this.mode});this.h()}attributeChangedCallback(t,s,o){if(t==="mode"&&s!==o&&[h,r].includes(o)){const t=localStorage.getItem(e);if(this.mode===t){this.mode=o;this.h();this.o()}else if(this.mode&&this.mode!==t){this.h();this.o()}}else if((t===h||t===r)&&s!==o){this.h()}if(t==="permanent"&&typeof this.permanent==="boolean"){this.permanent?localStorage.setItem(e,this.mode):localStorage.removeItem(e)}}o(){t.documentElement.setAttribute("data-color-mode",this.mode)}h(){this.icon.textContent=this.mode===h?"🌒":"🌞";this.text.textContent=this.mode===h?this.getAttribute(r):this.getAttribute(h)}t(){var s=this.attachShadow({mode:"open"});this.label=t.createElement("span");this.label.setAttribute("class","wrapper");this.label.onclick=()=>{this.mode=this.mode===h?r:h;if(this.permanent){localStorage.setItem(e,this.mode)}this.o();this.h()};s.appendChild(this.label);this.icon=t.createElement("span");this.label.appendChild(this.icon);this.text=t.createElement("span");this.label.appendChild(this.text);const o=`
+customElements.define('github-corners', GithubCorners);</script><github-corners target="__blank" position="fixed" z-index="999" href="https://github.com/jaywcjlove/svgtofont.git"></github-corners><dark-mode permanent="true" style="position: fixed; top: 8px; left: 10px; z-index: 999;" dark="Dark" light="Light"></dark-mode><script>const t=document;const e="_dark_mode_theme_";const s="permanent";const o="colorschemechange";const i="permanentcolorscheme";const h="light";const r="dark";const n=(t,e,s=e)=>{Object.defineProperty(t,s,{enumerable:true,get(){const t=this.getAttribute(e);return t===null?"":t},set(t){this.setAttribute(e,t)}})};const c=(t,e,s=e)=>{Object.defineProperty(t,s,{enumerable:true,get(){return this.hasAttribute(e)},set(t){if(t){this.setAttribute(e,"")}else{this.removeAttribute(e)}}})};class a extends HTMLElement{static get observedAttributes(){return["mode",h,r,s]}LOCAL_NANE=e;constructor(){super();this.t()}connectedCallback(){n(this,"mode");n(this,r);n(this,h);c(this,s);const a=localStorage.getItem(e);if(a&&[h,r].includes(a)){this.mode=a;this.permanent=true}if(this.permanent&&!a){localStorage.setItem(e,this.mode)}const l=[h,r].includes(a);if(this.permanent&&a){this.o()}else{if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){this.mode=r;this.o()}if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches){this.mode=h;this.o()}}if(!this.permanent&&!l){window.matchMedia("(prefers-color-scheme: light)").onchange=t=>{this.mode=t.matches?h:r;this.o()};window.matchMedia("(prefers-color-scheme: dark)").onchange=t=>{this.mode=t.matches?r:h;this.o()}}const d=new MutationObserver(((s,h)=>{this.mode=t.documentElement.dataset.colorMode;if(this.permanent&&l){localStorage.setItem(e,this.mode);this.i(i,{permanent:this.permanent})}this.h();this.i(o,{colorScheme:this.mode})}));d.observe(t.documentElement,{attributes:true});this.i(o,{colorScheme:this.mode});this.h()}attributeChangedCallback(t,s,o){if(t==="mode"&&s!==o&&[h,r].includes(o)){const t=localStorage.getItem(e);if(this.mode===t){this.mode=o;this.h();this.o()}else if(this.mode&&this.mode!==t){this.h();this.o()}}else if((t===h||t===r)&&s!==o){this.h()}if(t==="permanent"&&typeof this.permanent==="boolean"){this.permanent?localStorage.setItem(e,this.mode):localStorage.removeItem(e)}}o(){t.documentElement.setAttribute("data-color-mode",this.mode)}h(){this.icon.textContent=this.mode===h?"🌒":"🌞";this.text.textContent=this.mode===h?this.getAttribute(r):this.getAttribute(h)}t(){var s=this.attachShadow({mode:"open"});this.label=t.createElement("span");this.label.setAttribute("class","wrapper");this.label.onclick=()=>{this.mode=this.mode===h?r:h;if(this.permanent){localStorage.setItem(e,this.mode)}this.o();this.h()};s.appendChild(this.label);this.icon=t.createElement("span");this.label.appendChild(this.icon);this.text=t.createElement("span");this.label.appendChild(this.text);const o=`
 [data-color-mode*='dark'], [data-color-mode*='dark'] body {
   color-scheme: dark;
   --color-theme-bg: #0d1117;
@@ -156,13 +156,31 @@ class MarkdownStyle extends HTMLElement {
     }
 }
 customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px" class="markdown-style">
-    <p align="center"><a href="https://github.com/jaywcjlove/svgtofont/"><img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" alt="SVG To Font"></a></p>
-    <p align="center"><a href="https://github.com/jaywcjlove/svgtofont/actions"><img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build &#x26; Deploy">
-</a><a href="https://jaywcjlove.github.io/svgtofont/lcov-report/"><img src="https://jaywcjlove.github.io/svgtofont/badges.svg" alt="Coverage Status">
-</a><a href="https://gitee.com/jaywcjlove/svgtofont"><img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
-</a><a href="https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont/file/README.md"><img src="https://img.shields.io/badge/Open%20in-unpkg-blue" alt="Open in unpkg">
-</a><a href="https://www.npmjs.com/package/svgtofont"><img src="https://img.shields.io/npm/dm/svgtofont.svg?style=flat" alt="NPM Download">
-</a><a href="https://www.npmjs.com/package/svgtofont"><img src="https://img.shields.io/npm/v/svgtofont.svg" alt="npm version"></a></p>
+    <p align="center">
+  <a href="https://github.com/jaywcjlove/svgtofont/">
+    <img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" alt="SVG To Font">
+  </a>
+</p>
+    <p align="center">
+  <a href="https://github.com/jaywcjlove/svgtofont/actions">
+    <img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build &#x26; Deploy">
+  </a>
+  <a href="https://jaywcjlove.github.io/svgtofont/lcov-report/">
+    <img src="https://jaywcjlove.github.io/svgtofont/badges.svg" alt="Coverage Status">
+  </a>
+  <a href="https://gitee.com/jaywcjlove/svgtofont">
+    <img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
+  </a>
+  <a href="https://uiwjs.github.io/npm-unpkg/#/pkg/svgtofont/file/README.md">
+    <img src="https://img.shields.io/badge/Open%20in-unpkg-blue" alt="Open in unpkg">
+  </a>
+  <a href="https://www.npmjs.com/package/svgtofont">
+    <img src="https://img.shields.io/npm/dm/svgtofont.svg?style=flat" alt="NPM Download">
+  </a>
+  <a href="https://www.npmjs.com/package/svgtofont">
+    <img src="https://img.shields.io/npm/v/svgtofont.svg" alt="npm version">
+  </a>
+</p>
     <p>Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fonts from SVG icons.</p>
     <p><a href="#install">Install</a> · <a href="#using-with-nodejs">Usage</a> · <a href="#using-with-command">Command</a> · <a href="#font-usage">Font Usage</a> · <a href="#api">API</a> · <a href="#options">options</a> · <a href="http://npm.im/svgtofont">npm</a> · <a href="#license">License</a></p>
     <p><strong>Features:</strong></p>
@@ -990,7 +1008,9 @@ yarn add @svgr/webpack
 <ComLogo />
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <h2 id="contributors"><a class="anchor" aria-hidden="true" tabindex="-1" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
-    <p>As always, thanks to our amazing contributors!</p><a href="https://github.com/jaywcjlove/svgtofont/graphs/contributors"><img src="https://jaywcjlove.github.io/svgtofont/CONTRIBUTORS.svg"></a>
+    <p>As always, thanks to our amazing contributors!</p><a href="https://github.com/jaywcjlove/svgtofont/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/svgtofont/CONTRIBUTORS.svg">
+</a>
     <p>Made with <a href="https://github.com/jaywcjlove/github-action-contributors">contributors</a>.</p>
     <h2 id="license"><a class="anchor" aria-hidden="true" tabindex="-1" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
     <p>Licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
@@ -1043,5 +1063,6 @@ function copied(target, str) {
       target.classList.remove('active');
     }, 2000);
   });
-}</script></markdown-style></body>
-</html>
+}</script></markdown-style>
+
+</body></html>
