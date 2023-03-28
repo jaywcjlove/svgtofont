@@ -90,6 +90,6 @@
   },
   "devDependencies": {
     "@types/csso": "^5.0.0",
-    "tsbb": "^3.7.8"
+    "tsbb": "^4.0.0"
   }
 }
