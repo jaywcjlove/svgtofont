@@ -10,8 +10,8 @@
   "scripts": {
     "prepare": "npm run build",
     "start": "node lib/index.js",
-    "watch": "tsbb watch --disable-babel -f src/index.ts -f src/cli.ts",
-    "build": "tsbb build --disable-babel -f src/index.ts -f src/cli.ts",
+    "watch": "tsbb watch src/*.ts",
+    "build": "tsbb build src/*.ts",
     "example": "node test/example/index.js",
     "example:templates": "node test/templates/index.js",
     "pretest": "npm run example && npm run example:templates",
@@ -55,9 +55,12 @@
     "src"
   ],
   "engines": {
-    "node": "^12.13.0 || ^14.15.0 || >=15.0.0"
+    "node": ">=16.0.0"
   },
   "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/?!(.*)"
+    ],
     "testMatch": [
       "<rootDir>/test/*.test.{js,ts}"
     ]
@@ -65,7 +68,7 @@
   "dependencies": {
     "@types/cheerio": "~0.22.31",
     "@types/ejs": "~3.1.0",
-    "@types/fs-extra": "~9.0.13",
+    "@types/fs-extra": "^11.0.1",
     "@types/svg2ttf": "~5.0.1",
     "@types/svgicons2svgfont": "~10.0.1",
     "@types/ttf2eot": "~2.0.0",
@@ -86,10 +89,10 @@
     "ttf2woff": "~3.0.0",
     "ttf2woff2": "~5.0.0",
     "yaml": "^2.1.3",
-    "yargs": "~17.6.0"
+    "yargs": "~17.7.1"
   },
   "devDependencies": {
     "@types/csso": "^5.0.0",
-    "tsbb": "^3.7.8"
+    "tsbb": "^4.0.3"
   }
 }
