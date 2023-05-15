@@ -61,6 +61,9 @@ svgtofont({
         url: "index.html"
       }
     ],
+    options: {
+      useCSSVars: true,
+    },
     footerInfo: `Licensed under MIT. (Yes it's free and <a target="_blank" href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`
   }
 })
