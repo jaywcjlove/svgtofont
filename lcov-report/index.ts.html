@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.2% </span>
+                <span class="strong">86.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>114/125</span>
+                <span class='fraction'>117/135</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.45% </span>
+                <span class="strong">73.63% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>79/102</span>
+                <span class='fraction'>81/110</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.3% </span>
+                <span class="strong">88.8% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>108/117</span>
+                <span class='fraction'>111/125</span>
             </div>
         
             
@@ -453,7 +453,31 @@
 <a name='L388'></a><a href='#L388'>388</a>
 <a name='L389'></a><a href='#L389'>389</a>
 <a name='L390'></a><a href='#L390'>390</a>
-<a name='L391'></a><a href='#L391'>391</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -706,6 +730,8 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
@@ -719,6 +745,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
@@ -733,6 +766,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -950,6 +988,11 @@ export type SvgToFontOptions = {
    */
   useNameAsUnicode?: boolean;
   /**
+   * consoles whenever {{ cssString }} template outputs unicode characters or css vars 
+   * @default false
+   */
+  useCSSVars?: boolean;
+  /**
    * Clear output directory contents
    * @default false
    */
@@ -1088,14 +1131,16 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
     await fs.ensureDir(options.dist);
     const unicodeObject = await createSVG(options);
 &nbsp;
-    let cssString: string[] = [];
     let cssToVars: string[] = [];
+    let cssString: string[] = [];
+    let cssRootVars: string[] = [];
     let cssIconHtml: string[] = [];
     let unicodeHtml: string[] = [];
     let symbolHtml: string[] = [];
     const prefix = options.classNamePrefix || <span class="branch-1 cbranch-no" title="branch not covered" >options.fontName;</span>
     const infoData: InfoData = {}
-    Object.keys(unicodeObject).forEach(name =&gt; {
+&nbsp;
+    Object.keys(unicodeObject).forEach((name, index, self) =&gt; {
       <span class="missing-if-branch" title="else path not taken" >E</span>if (!infoData[name]) infoData[name] = {};
       const _code = unicodeObject[name];
       let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
@@ -1107,8 +1152,15 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
         iconPart = prefix + '"&gt;' + name;
         encodedCodes = _code.split('').map(x =&gt; x.charCodeAt(0)).join(';&amp;amp;#');
       } else {
-        cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
         cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (options.useCSSVars) {
+<span class="cstat-no" title="statement not covered" >          if (index === 0) <span class="cstat-no" title="statement not covered" >cssRootVars.push(`:root {\n`)</span></span>
+<span class="cstat-no" title="statement not covered" >          cssRootVars.push(`--${symbolName}: "\\${encodedCodes.toString(16)}";\n`);</span>
+<span class="cstat-no" title="statement not covered" >          cssString.push(`.${symbolName}:before { content: var(--${symbolName}); }\n`);</span>
+<span class="cstat-no" title="statement not covered" >          if (index === self.length - 1) <span class="cstat-no" title="statement not covered" >cssRootVars.push(`}\n`)</span></span>
+        } else {
+          cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
+        }
       }
       infoData[name].encodedCode = `\\${encodedCodes.toString(16)}`;
       infoData[name].prefix = prefix;
@@ -1125,6 +1177,11 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
         &lt;/li&gt;
       `);
     });
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (options.useCSSVars) {
+<span class="cstat-no" title="statement not covered" >      cssString = [...cssRootVars, ...cssString]</span>
+    }
+&nbsp;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (options.generateInfoData) {
 <span class="cstat-no" title="statement not covered" >      await fs.writeJSON(infoDataPath, infoData, { spaces: 2 });</span>
 <span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created ${infoDataPath} `);</span>
@@ -1240,7 +1297,7 @@ module.exports = exports["default"];</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-29T13:29:21.160Z
+                at 2023-05-16T01:51:46.696Z
             </div>
         <script src="prettify.js"></script>
         <script>

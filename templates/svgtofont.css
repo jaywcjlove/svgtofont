@@ -1,12 +1,12 @@
 /* Hello CSS! */
 @font-face {
   font-family: "svgtofont";
-  src: url('svgtofont.eot?t=1680096563268'); /* IE9*/
-  src: url('svgtofont.eot?t=1680096563268#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url("svgtofont.woff2?t=1680096563268") format("woff2"),
-  url("svgtofont.woff?t=1680096563268") format("woff"),
-  url('svgtofont.ttf?t=1680096563268') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('svgtofont.svg?t=1680096563268#svgtofont') format('svg'); /* iOS 4.1- */
+  src: url('svgtofont.eot?t=1684201908556'); /* IE9*/
+  src: url('svgtofont.eot?t=1684201908556#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("svgtofont.woff2?t=1684201908556") format("woff2"),
+  url("svgtofont.woff?t=1684201908556") format("woff"),
+  url('svgtofont.ttf?t=1684201908556') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('svgtofont.svg?t=1684201908556#svgtofont') format('svg'); /* iOS 4.1- */
 }
 
 [class^="svgtofont-"], [class*=" svgtofont-"] {
@@ -17,7 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .svgtofont-adobe:before { content: "\ea01"; }
 .svgtofont-git:before { content: "\ea02"; }
 .svgtofont-stylelint:before { content: "\ea03"; }
+
