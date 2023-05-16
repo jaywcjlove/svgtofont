@@ -54,6 +54,21 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
                                 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯
 ```
 
+```mermaid
+graph LR;
+    A[iconfont]-->C[Download SVG];
+    B[icomoon]-->C;
+    D[icongo]-->C;
+    click A "https://www.iconfont.cn" "阿里巴巴矢量图标库" _blank
+    click B "https://icomoon.io" "Pixel Perfect Icon Solutions" _blank
+    click D "https://icongo.github.io" "Include popular icons in your React projects easily icons." _blank
+    C.->ide1;
+    subgraph ide1 [Project]
+        svg -->a2[create font]
+        a2 .-> b3[use font]
+    end
+```
+
 **Icon Font Created By svgtofont**
 
 - [file-icons](https://uiwjs.github.io/file-icons/) File icons in the file tree.
