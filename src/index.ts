@@ -105,6 +105,11 @@ export type SvgToFontOptions = {
    */
   useNameAsUnicode?: boolean;
   /**
+   * consoles whenever {{ cssString }} template outputs unicode characters or css vars 
+   * @default false
+   */
+  useCSSVars?: boolean;
+  /**
    * Clear output directory contents
    * @default false
    */
@@ -243,14 +248,16 @@ export default async (options: SvgToFontOptions = {}) => {
     await fs.ensureDir(options.dist);
     const unicodeObject = await createSVG(options);
 
-    let cssString: string[] = [];
     let cssToVars: string[] = [];
+    let cssString: string[] = [];
+    let cssRootVars: string[] = [];
     let cssIconHtml: string[] = [];
     let unicodeHtml: string[] = [];
     let symbolHtml: string[] = [];
     const prefix = options.classNamePrefix || options.fontName;
     const infoData: InfoData = {}
-    Object.keys(unicodeObject).forEach(name => {
+
+    Object.keys(unicodeObject).forEach((name, index, self) => {
       if (!infoData[name]) infoData[name] = {};
       const _code = unicodeObject[name];
       let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
@@ -262,8 +269,15 @@ export default async (options: SvgToFontOptions = {}) => {
         iconPart = prefix + '">' + name;
         encodedCodes = _code.split('').map(x => x.charCodeAt(0)).join(';&amp;#');
       } else {
-        cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
         cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
+        if (options.useCSSVars) {
+          if (index === 0) cssRootVars.push(`:root {\n`)
+          cssRootVars.push(`--${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
+          cssString.push(`.${symbolName}:before { content: var(--${symbolName}); }\n`);
+          if (index === self.length - 1) cssRootVars.push(`}\n`)
+        } else {
+          cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
+        }
       }
       infoData[name].encodedCode = `\\${encodedCodes.toString(16)}`;
       infoData[name].prefix = prefix;
@@ -280,6 +294,11 @@ export default async (options: SvgToFontOptions = {}) => {
         </li>
       `);
     });
+
+    if (options.useCSSVars) {
+      cssString = [...cssRootVars, ...cssString]
+    }
+
     if (options.generateInfoData) {
       await fs.writeJSON(infoDataPath, infoData, { spaces: 2 });
       log.log(`${color.green('SUCCESS')} Created ${infoDataPath} `);
