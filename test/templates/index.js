@@ -3,8 +3,10 @@ const svgtofont = require("../../lib");
 const pkg = require('../../package.json');
 
 const rootPath = path.resolve(process.cwd(), "test", "templates");
-
-svgtofont({
+/**
+ * @type {import('../../lib').SvgToFontOptions}
+ */
+const options = {
   src: path.resolve(rootPath, "svg"), // svg path
   dist: path.resolve(rootPath, "dist"), // output path
   // emptyDist: true, // Clear output directory contents
@@ -18,6 +20,7 @@ svgtofont({
     fontHeight: 1000,
     normalize: true
   },
+  useCSSVars: true,
   // website = null, no demo html files
   website: {
     // Add a Github corner to your website
@@ -61,12 +64,10 @@ svgtofont({
         url: "index.html"
       }
     ],
-    options: {
-      useCSSVars: true,
-    },
     footerInfo: `Licensed under MIT. (Yes it's free and <a target="_blank" href="https://github.com/jaywcjlove/svgtofont">open-sourced</a>)`
   }
-})
-.then(() => {
+}
+
+svgtofont(options).then(() => {
   console.log("done!");
 });
