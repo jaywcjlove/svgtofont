@@ -349,6 +349,13 @@ as you add more svgs and process them into your font you would just use the same
 <i class="icons">edit</i>
 ```
 
+### useCSSVars
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+consoles whenever {{ cssString }} template outputs unicode characters or css vars
+
 ### classNamePrefix
 
 > Type: `String`  
