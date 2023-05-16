@@ -219,6 +219,31 @@ customElements.define('markdown-style', MarkdownStyle);</script><markdown-style 
                                 ┆   ╰┈┈┈┈┈┈┈┈┈┈┈╯    ┆
                                 ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <pre class="language-mermaid"><code class="language-mermaid code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">graph</span> LR<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2">    A<span class="token text string">[iconfont]</span><span class="token arrow operator">--></span>C<span class="token text string">[Download SVG]</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">    B<span class="token text string">[icomoon]</span><span class="token arrow operator">--></span>C<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">    D<span class="token text string">[icongo]</span><span class="token arrow operator">--></span>C<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5">    <span class="token keyword">click</span> A <span class="token string">"https://www.iconfont.cn"</span> <span class="token string">"阿里巴巴矢量图标库"</span> _blank
+</span><span class="code-line line-number" line="6">    <span class="token keyword">click</span> B <span class="token string">"https://icomoon.io"</span> <span class="token string">"Pixel Perfect Icon Solutions"</span> _blank
+</span><span class="code-line line-number" line="7">    <span class="token keyword">click</span> D <span class="token string">"https://icongo.github.io"</span> <span class="token string">"Include popular icons in your React projects easily icons."</span> _blank
+</span><span class="code-line line-number" line="8">    C.<span class="token arrow operator">-></span>ide1<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9">    <span class="token keyword">subgraph</span> ide1 <span class="token text string">[Project]</span>
+</span><span class="code-line line-number" line="10">        svg <span class="token arrow operator">--></span>a2<span class="token text string">[create font]</span>
+</span><span class="code-line line-number" line="11">        a2 .<span class="token arrow operator">-></span> b3<span class="token text string">[use font]</span>
+</span><span class="code-line line-number" line="12">    <span class="token keyword">end</span>
+</span></code><div onclick="copied(this)" data-code="graph LR;
+    A[iconfont]-->C[Download SVG];
+    B[icomoon]-->C;
+    D[icongo]-->C;
+    click A &#x22;https://www.iconfont.cn&#x22; &#x22;阿里巴巴矢量图标库&#x22; _blank
+    click B &#x22;https://icomoon.io&#x22; &#x22;Pixel Perfect Icon Solutions&#x22; _blank
+    click D &#x22;https://icongo.github.io&#x22; &#x22;Include popular icons in your React projects easily icons.&#x22; _blank
+    C.->ide1;
+    subgraph ide1 [Project]
+        svg -->a2[create font]
+        a2 .-> b3[use font]
+    end
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
     <p><strong>Icon Font Created By svgtofont</strong></p>
     <ul>
       <li><a href="https://uiwjs.github.io/file-icons/">file-icons</a> File icons in the file tree.</li>
