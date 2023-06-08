@@ -38,7 +38,21 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       // file name
       let _name = path.basename(svgPath, ".svg");
       const glyph = fs.createReadStream(svgPath) as ReadStream & { metadata: { unicode: string[], name: string } };
-      glyph.metadata = { unicode: getIconUnicode(_name, options.useNameAsUnicode), name: _name };
+
+      const curUnicode = String.fromCharCode(startUnicode);
+      const [_curUnicode, _startUnicode] = options.getIconUnicode 
+              ? (options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
+
+      if (_startUnicode) startUnicode = _startUnicode;
+
+      const unicode: string[] = [_curUnicode];
+      startUnicode++;
+      UnicodeObj[_name] = unicode[0];
+      if (!!options.useNameAsUnicode)  {
+        unicode[0] = _name;
+        UnicodeObj[_name] = _name;
+      }
+      glyph.metadata = { unicode , name: _name };
       fontStream.write(glyph);
     }
 
@@ -63,6 +77,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
     fontStream.end();
   });
 }
+
 /**
  * Converts a string to pascal case.
  * 
@@ -134,17 +149,6 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
   );
   log.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
-
-/*
- * Get icon unicode
- * @return {Array} unicode array
- */
-function getIconUnicode(name: string, useNameAsUnicode: boolean) {
-  let unicode = !useNameAsUnicode ? String.fromCharCode(startUnicode++) : name;
-  UnicodeObj[name] = unicode;
-  return [unicode];
-}
-
 
 /**
  * SVG font to TTF

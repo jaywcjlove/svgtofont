@@ -99,6 +99,8 @@ export type SvgToFontOptions = {
    * @default 10000
    */
   startUnicode?: number;
+  /** Get Icon Unicode */
+  getIconUnicode?: (name: string, unicode: string, startUnicode: number) => [string, number];
   /**
    * should the name(file name) be used as unicode? this switch allows for the support of ligatures.
    * @default false

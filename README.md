@@ -330,6 +330,15 @@ The path of the templates, see `src/styles` or `test/templates/styles` to get re
 
 unicode start number
 
+### getIconUnicode
+
+Get Icon Unicode
+
+```ts
+getIconUnicode?: (name: string, unicode: string, startUnicode: number) 
+      => [string, number];
+```
+
 ### useNameAsUnicode
 
 > Type: `Boolean`  
