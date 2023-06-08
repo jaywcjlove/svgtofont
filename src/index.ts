@@ -5,8 +5,8 @@ import fs from 'fs-extra';
 import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
+import { autoConf, merge } from 'auto-config-loader';
 import { Config } from 'svgo';
-import * as YAML from 'yaml';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
@@ -197,29 +197,25 @@ export type IconInfo = {
 export type InfoData = Record<string, Partial<IconInfo>>
 
 export default async (options: SvgToFontOptions = {}) => {
-  const confPath = path.join(process.cwd(), '.svgtofontrc');
-  if (fs.pathExistsSync(confPath)) {
-    const conf = await fs.readJson(confPath);
-    options = { ...options, ...conf };
-  } else {
-    // load yaml config
-    const confPath = path.join(process.cwd(), '.svgtofontrc.yaml');
-    if (fs.pathExistsSync(confPath)) {
-      const conf = await YAML.parse(fs.readFileSync(confPath, 'utf-8'));
-      options = { ...options, ...conf };
-    }
+  const defaultOptions: SvgToFontOptions = {
+    dist: path.resolve(process.cwd(), 'fonts'),
+    src: path.resolve(process.cwd(), 'svg'),
+    startUnicode: 0xea01,
+    svg2ttf: {},
+    svgicons2svgfont: {
+      fontName: 'iconfont',
+    },
+    fontName: 'iconfont',
+    symbolNameDelimiter: '-',
   }
-
+  const data = autoConf<SvgToFontOptions>('svgtofont', {
+    mustExist: true,
+    default: defaultOptions,
+  });
+  options = merge(defaultOptions, options, data);
   const pkgPath = path.join(process.cwd(), 'package.json');
   if (fs.pathExistsSync(pkgPath)) {
     const pkg = require(pkgPath);
-    if (pkg.svgtofont) {
-      const cssOptions = options.css
-      options = { ...options, ...pkg.svgtofont }
-      if (pkg.svgtofont.css && cssOptions && typeof cssOptions === 'object') {
-        options.css = { ...cssOptions, ...pkg.svgtofont.css }
-      }
-    }
     if (options.website && pkg.version) {
       options.website.version = pkg.version;
     }
@@ -227,16 +223,10 @@ export default async (options: SvgToFontOptions = {}) => {
   if (options.log === undefined) options.log = true;
   log.disabled = !options.log;
   if (options.logger && typeof options.logger === 'function') log.logger = options.logger;
-  options.dist = options.dist || path.resolve(process.cwd(), 'fonts');
-  options.src = options.src || path.resolve(process.cwd(), 'svg');
-  options.startUnicode = options.startUnicode || 0xea01;
-  options.svg2ttf = options.svg2ttf || {};
-  options.emptyDist = options.emptyDist;
-  options.fontName = options.fontName || 'iconfont';
-  options.svgicons2svgfont = options.svgicons2svgfont || {};
+
   options.svgicons2svgfont.fontName = options.fontName;
-  options.symbolNameDelimiter = options.symbolNameDelimiter || '-';
   options.classNamePrefix = options.classNamePrefix || options.fontName;
+
   const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
   // If you generate a font you need to generate a style.
   if (options.website && !options.css) options.css = true;
