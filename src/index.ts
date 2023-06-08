@@ -217,10 +217,10 @@ export default async (options: SvgToFontOptions = {}) => {
   if (fs.pathExistsSync(pkgPath)) {
     const pkg = require(pkgPath);
     if (pkg.svgtofont) {
-      const cssOptions = options.css
-      options = { ...options, ...pkg.svgtofont }
+      const cssOptions = options.css;
+      options = merge(options, pkg.svgtofont);
       if (pkg.svgtofont.css && cssOptions && typeof cssOptions === 'object') {
-        options.css = { ...cssOptions, ...pkg.svgtofont.css }
+        options.css = merge(cssOptions, pkg.svgtofont.css);
       }
     }
     if (options.website && pkg.version) {
