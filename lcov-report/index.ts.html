@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">88.52% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>117/135</span>
+                <span class='fraction'>108/122</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.63% </span>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>81/110</span>
+                <span class='fraction'>68/92</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.8% </span>
+                <span class="strong">91.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>111/125</span>
+                <span class='fraction'>102/112</span>
             </div>
         
             
@@ -471,10 +471,7 @@
 <a name='L406'></a><a href='#L406'>406</a>
 <a name='L407'></a><a href='#L407'>407</a>
 <a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a>
-<a name='L411'></a><a href='#L411'>411</a>
-<a name='L412'></a><a href='#L412'>412</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L409'></a><a href='#L409'>409</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -674,18 +671,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -703,16 +703,10 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -892,8 +886,8 @@ import fs from 'fs-extra';
 import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
+import { autoConf, merge } from 'auto-config-loader';
 import { Config } from 'svgo';
-import * as YAML from 'yaml';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
@@ -1084,19 +1078,22 @@ export type IconInfo = {
 export type InfoData = Record&lt;string, Partial&lt;IconInfo&gt;&gt;
 &nbsp;
 export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> =&gt; {
-  const confPath = path.join(process.cwd(), '.svgtofontrc');
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (fs.pathExistsSync(confPath)) {
-    const conf = <span class="cstat-no" title="statement not covered" >await fs.readJson(confPath);</span>
-<span class="cstat-no" title="statement not covered" >    options = { ...options, ...conf };</span>
-  } else {
-    // load yaml config
-    const confPath = path.join(process.cwd(), '.svgtofontrc.yaml');
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (fs.pathExistsSync(confPath)) {
-      const conf = <span class="cstat-no" title="statement not covered" >await YAML.parse(fs.readFileSync(confPath, 'utf-8'));</span>
-<span class="cstat-no" title="statement not covered" >      options = { ...options, ...conf };</span>
-    }
+  const defaultOptions: SvgToFontOptions = {
+    dist: path.resolve(process.cwd(), 'fonts'),
+    src: path.resolve(process.cwd(), 'svg'),
+    startUnicode: 0xea01,
+    svg2ttf: {},
+    svgicons2svgfont: {
+      fontName: 'iconfont',
+    },
+    fontName: 'iconfont',
+    symbolNameDelimiter: '-',
   }
-&nbsp;
+  const data = autoConf&lt;SvgToFontOptions&gt;('svgtofont', {
+    mustExist: true,
+    default: defaultOptions,
+  });
+  options = merge(defaultOptions, options, data);
   const pkgPath = path.join(process.cwd(), 'package.json');
   <span class="missing-if-branch" title="else path not taken" >E</span>if (fs.pathExistsSync(pkgPath)) {
     const pkg = require(pkgPath);
@@ -1114,16 +1111,10 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
   <span class="missing-if-branch" title="else path not taken" >E</span>if (options.log === undefined) options.log = true;
   log.disabled = !options.log;
   <span class="missing-if-branch" title="if path not taken" >I</span>if (options.logger &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof options.logger === 'function')</span> <span class="cstat-no" title="statement not covered" >log.logger = options.logger;</span>
-  options.dist = options.dist || <span class="branch-1 cbranch-no" title="branch not covered" >path.resolve(process.cwd(), 'fonts');</span>
-  options.src = options.src || <span class="branch-1 cbranch-no" title="branch not covered" >path.resolve(process.cwd(), 'svg');</span>
-  options.startUnicode = options.startUnicode || 0xea01;
-  options.svg2ttf = options.svg2ttf || {};
-  options.emptyDist = options.emptyDist;
-  options.fontName = options.fontName || <span class="branch-1 cbranch-no" title="branch not covered" >'iconfont';</span>
-  options.svgicons2svgfont = options.svgicons2svgfont || {};
+&nbsp;
   options.svgicons2svgfont.fontName = options.fontName;
-  options.symbolNameDelimiter = options.symbolNameDelimiter || '-';
   options.classNamePrefix = options.classNamePrefix || options.fontName;
+&nbsp;
   const fontSize = options.css &amp;&amp; typeof options.css !== 'boolean' &amp;&amp; options.css.fontSize ? options.css.fontSize : <span class="branch-1 cbranch-no" title="branch not covered" >'16px';</span>
   // If you generate a font you need to generate a style.
   <span class="missing-if-branch" title="if path not taken" >I</span>if (options.website &amp;&amp; !options.css) <span class="cstat-no" title="statement not covered" >options.css = true;</span>
@@ -1303,7 +1294,7 @@ module.exports = exports["default"];</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-08T16:27:48.045Z
+                at 2023-06-08T17:00:08.738Z
             </div>
         <script src="prettify.js"></script>
         <script>
