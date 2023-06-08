@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">86.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>114/132</span>
+                <span class='fraction'>120/139</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.54% </span>
+                <span class="strong">52.45% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>30/55</span>
+                <span class='fraction'>32/61</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.45% </span>
+                <span class="strong">95.34% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>42/44</span>
+                <span class='fraction'>41/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">89.39% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>112/126</span>
+                <span class='fraction'>118/132</span>
             </div>
         
             
@@ -396,7 +396,11 @@
 <a name='L331'></a><a href='#L331'>331</a>
 <a name='L332'></a><a href='#L332'>332</a>
 <a name='L333'></a><a href='#L333'>333</a>
-<a name='L334'></a><a href='#L334'>334</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,6 +440,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -459,6 +477,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -531,17 +550,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -769,7 +777,21 @@ export function createSVG(options: SvgToFontOptions = <span class="branch-0 cbra
       // file name
       let _name = path.basename(svgPath, ".svg");
       const glyph = fs.createReadStream(svgPath) as ReadStream &amp; { metadata: { unicode: string[], name: string } };
-      glyph.metadata = { unicode: getIconUnicode(_name, options.useNameAsUnicode), name: _name };
+&nbsp;
+      const curUnicode = String.fromCharCode(startUnicode);
+      const [_curUnicode, _startUnicode] = options.getIconUnicode 
+              ? (<span class="branch-0 cbranch-no" title="branch not covered" >options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode])</span> : [curUnicode];
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (_startUnicode) <span class="cstat-no" title="statement not covered" >startUnicode = _startUnicode;</span>
+&nbsp;
+      const unicode: string[] = [_curUnicode];
+      startUnicode++;
+      UnicodeObj[_name] = unicode[0];
+      if (!!options.useNameAsUnicode)  {
+        unicode[0] = _name;
+        UnicodeObj[_name] = _name;
+      }
+      glyph.metadata = { unicode , name: _name };
       fontStream.write(glyph);
     }
 &nbsp;
@@ -794,6 +816,7 @@ export function createSVG(options: SvgToFontOptions = <span class="branch-0 cbra
     fontStream.end();
   });
 }
+&nbsp;
 /**
  * Converts a string to pascal case.
  * 
@@ -865,17 +888,6 @@ export async function createTypescript(options: Omit&lt;SvgToFontOptions, 'types
   );
   log.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
-&nbsp;
-/*
- * Get icon unicode
- * @return {Array} unicode array
- */
-function getIconUnicode(name: string, useNameAsUnicode: boolean) {
-  let unicode = !useNameAsUnicode ? String.fromCharCode(startUnicode++) : name;
-  UnicodeObj[name] = unicode;
-  return [unicode];
-}
-&nbsp;
 &nbsp;
 /**
  * SVG font to TTF
@@ -1069,7 +1081,7 @@ export function createHTML(outPath: string,data: ejs.Data, options?: ejs.Options
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-16T02:38:36.911Z
+                at 2023-06-08T16:27:48.045Z
             </div>
         <script src="prettify.js"></script>
         <script>
