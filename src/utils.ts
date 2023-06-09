@@ -46,7 +46,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       if (_startUnicode) startUnicode = _startUnicode;
 
       const unicode: string[] = [_curUnicode];
-      if(curUnicode === _curUnicode && startUnicode === _startUnicode) startUnicode++;
+      if(curUnicode === _curUnicode && (!_startUnicode || startUnicode === _startUnicode)) startUnicode++;
 
       UnicodeObj[_name] = unicode[0];
       if (!!options.useNameAsUnicode)  {
