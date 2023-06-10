@@ -206,6 +206,14 @@ async function creatFont() {
 
 > svgtofont(options)
 
+### config
+
+> Type: `config?: AutoConfOption<SvgToFontOptions>`
+
+By default, settings are automatically loaded from `.svgtofontrc` and `package.json`. You can add configuration to `package.json`. [#48](https://github.com/jaywcjlove/svgtofont/issues/48)
+
+Support for `.svgtofontrc` and [more](https://github.com/jaywcjlove/auto-config-loader/blob/add7ae012f5c3903296fbf0ef06e3631e379c2cc/core/README.md?plain=1#L106-L135) configuration files.
+
 ### log
 
 > Type: `Boolean`  

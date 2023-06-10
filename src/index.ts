@@ -5,13 +5,15 @@ import fs from 'fs-extra';
 import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
-import { autoConf, merge } from 'auto-config-loader';
+import { autoConf, merge, AutoConfOption } from 'auto-config-loader';
 import { Config } from 'svgo';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 
 export type SvgToFontOptions = {
+  /** Support for .svgtofontrc and more configuration files. */
+  config?: AutoConfOption<SvgToFontOptions>
   /** A value of `false` disables logging */
   log?: boolean;
   /** log callback function  */
@@ -197,7 +199,7 @@ export type IconInfo = {
 export type InfoData = Record<string, Partial<IconInfo>>
 
 export default async (options: SvgToFontOptions = {}) => {
-  const defaultOptions: SvgToFontOptions = {
+  const defaultOptions: SvgToFontOptions = merge({
     dist: path.resolve(process.cwd(), 'fonts'),
     src: path.resolve(process.cwd(), 'svg'),
     startUnicode: 0xea01,
@@ -207,12 +209,13 @@ export default async (options: SvgToFontOptions = {}) => {
     },
     fontName: 'iconfont',
     symbolNameDelimiter: '-',
-  }
+  }, options);
   const data = autoConf<SvgToFontOptions>('svgtofont', {
     mustExist: true,
     default: defaultOptions,
+    ...options.config,
   });
-  options = merge(defaultOptions, options, data);
+  options = merge(defaultOptions, data);
   const pkgPath = path.join(process.cwd(), 'package.json');
   if (fs.pathExistsSync(pkgPath)) {
     const pkg = require(pkgPath);
