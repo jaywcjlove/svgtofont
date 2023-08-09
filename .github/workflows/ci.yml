@@ -21,11 +21,22 @@ jobs:
       - run: cp -rf test/example/dist coverage/example
       - run: cp -rf test/templates/dist coverage/templates
 
-      - name: Converts Markdown to HTML
-        uses: jaywcjlove/markdown-to-html-cli@main
-        with:
-          output: coverage/index.html
-          github-corners: https://github.com/jaywcjlove/svgtofont.git
+      - name: Create idoc config.
+        run: |
+          cat > idoc.yml << EOF
+          site: "SVG To Font {{version}}"
+          menus:
+            Home: index.html
+          EOF
+
+      - run: npm install idoc@1.26.6 -g
+      - run: idoc --output coverage
+
+      # - name: Converts Markdown to HTML
+      #   uses: jaywcjlove/markdown-to-html-cli@main
+      #   with:
+      #     output: coverage/index.html
+      #     github-corners: https://github.com/jaywcjlove/svgtofont.git
 
       - uses: jaywcjlove/coverage-badges-cli@main
 
