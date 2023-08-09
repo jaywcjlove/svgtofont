@@ -27,7 +27,7 @@
   },
   "svgtofont": {
     "css": {
-      "fontSize": "12px"
+      "fontSize": false
     }
   },
   "keywords": [

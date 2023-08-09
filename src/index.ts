@@ -237,7 +237,9 @@ export default async (options: SvgToFontOptions = {}) => {
   options.svgicons2svgfont.fontName = options.fontName;
   options.classNamePrefix = options.classNamePrefix || options.fontName;
 
-  const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
+  const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
+  const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? 'font-size: 16px;' : '') : `font-size: ${fontSizeOpt};`;
+  console.log('options:fontSize:', fontSize)
   // If you generate a font you need to generate a style.
   if (options.website && !options.css) options.css = true;
 

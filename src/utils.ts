@@ -267,7 +267,7 @@ export type CSSOptions = {
   /**
    * Setting font size.
    */
-  fontSize?: string;
+  fontSize?: string | boolean;
   /**
    * Set the path in the css file
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189

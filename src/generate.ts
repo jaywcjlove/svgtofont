@@ -44,7 +44,7 @@ async function buildPathsObject(files: string[], options: SvgToFontOptions = {})
 
 const reactSource = (name: string, size: string, fontName: string, source: string) => `import React from 'react';
 export const ${name} = props => (
-  <svg viewBox="0 0 20 20" width="${size}" height="${size}" {...props} className={\`${fontName} \${props.className ? props.className : ''}\`}>${source}</svg>
+  <svg viewBox="0 0 20 20" ${size ? `width="${size}" height="${size}"` : ''} {...props} className={\`${fontName} \${props.className ? props.className : ''}\`}>${source}</svg>
 );
 `;
 
@@ -66,8 +66,9 @@ export async function generateReactIcons(options: SvgToFontOptions = {}) {
 }
 
 async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
-  const svgoOptions = options.svgoOptions || {}
-  const fontSize = options.css && typeof options.css !== 'boolean' && options.css.fontSize ? options.css.fontSize : '16px';
+  const svgoOptions = options.svgoOptions || {};
+  const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize
+  const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? '16px' : '') : fontSizeOpt;
   const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
     files.map(async filepath => {
