@@ -108,6 +108,15 @@ Support for `.svgtofontrc` and [more](https://github.com/jaywcjlove/auto-config-
 }
 ```
 
+```js
+/**
+ * @type {import('svgtofont').SvgToFontOptions}
+ */
+export default {
+  fontName: "iconfont",
+}
+```
+
 #### Using With Nodejs
 
 ```js
