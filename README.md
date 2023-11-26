@@ -5,6 +5,9 @@
 </p>
 
 <p align="center">
+  <a href="https://jaywcjlove.github.io/#/sponsor" target="_blank">
+    <img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee" alt="Buy me a coffee">
+  </a>
   <a href="https://github.com/jaywcjlove/svgtofont/actions">
     <img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build & Deploy">
   </a>
