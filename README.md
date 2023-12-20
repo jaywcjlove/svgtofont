@@ -36,7 +36,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
 - Support SVG Symbol file.
-- Support [`React`](https://github.com/facebook/react) & [`TypeScript`](https://github.com/microsoft/TypeScript).
+- Support [`React`](https://github.com/facebook/react), [`ReactNative`](https://github.com/facebook/react-native) & [`TypeScript`](https://github.com/microsoft/TypeScript).
 - Support [`Less`](https://github.com/less/less.js)/[`Sass`](https://github.com/sass/sass)/[`Stylus`](https://github.com/stylus/stylus).
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
@@ -261,6 +261,26 @@ import React from 'react';
 export const Git = props => (
   <svg viewBox="0 0 20 20" {...props}><path d="M2.6 10.59L8.38 4.8l1.69 -." fillRule="evenodd" /></svg>
 );
+```
+
+### outSVGReactNative
+
+> Type: `Boolean`  
+> Default value: `false`
+
+Output `./dist/reactNative/`, SVG generates `reactNative` components.
+
+```js
+git/git.svg
+
+// ↓↓↓↓↓↓↓↓↓↓
+
+import React from 'react';
+import { Text } from 'react-native';
+export const Git = styleProps => (
+  <Text style={{fontFamily: 'svgtofont', fontSize: 16, color: '#000000', ...styleProps}}>&#59907;</Text>
+);
+
 ```
 
 ### outSVGPath
@@ -720,31 +740,16 @@ import { ReactComponent as ComLogo } from './logo.svg';
 <ComLogo />
 ```
 
-#### In the project created by [webpack](https://github.com/webpack/webpack)
+### Using With ReactNative
 
-```bash
-yarn add babel-plugin-named-asset-import
-yarn add @svgr/webpack
-```
+Icons are used as Text component using the generated font family and unicode.
 
-```js
-// webpack.config.js
-[
-  require.resolve('babel-plugin-named-asset-import'),
-  {
-    loaderMap: {
-      svg: {
-        ReactComponent: '@svgr/webpack?-svgo,+ref![path]',
-      },
-    },
-  },
-],
-```
+Props are TextProps and are used as inline style.
 
 ```jsx
-import { ReactComponent as ComLogo } from './logo.svg';
+import { Logo } from './Logo';
 
-<ComLogo />
+<Logo fontSize={32} color="#fefefe"  />
 ```
 
 ## Contributors

@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { optimize } from 'svgo';
 import { filterSvgFiles, toPascalCase } from './utils';
-import { SvgToFontOptions } from './';
+import {InfoData, SvgToFontOptions} from './';
 
 /**
  * Generate Icon SVG Path Source
@@ -95,6 +95,65 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
       const comName = isNaN(Number(name.charAt(0))) ? name : toPascalCase(fontName) + name;
       fs.outputFileSync(outDistPath, reactSource(comName, fontSize, fontName, pathStrings.join(',\n')));
       fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactTypeSource(comName));
+      return `export * from './${name}';`;
+    }),
+  );
+}
+
+const reactNativeSource = (name: string, defaultSize: number = 16, fontName: string, unicode: string) => `import React from 'react';
+import { Text } from 'react-native';
+export const ${name} = props => (
+    <Text style={{fontFamily: '${fontName}', fontSize: ${defaultSize}, color: '#000000', ...props}}>${unicode}</Text>
+);
+`;
+
+const reactNativeTypeSource = (name: string) => `import { TextStyle } from 'react-native';
+export declare const ${name}: (props: Pick<TextStyle, 'color' | 'fontSize'>) => JSX.Element;
+`;
+
+/**
+ * Generate ReactNative Icon
+ * <font-name>.json
+ */
+export async function generateReactNativeIcons(options: SvgToFontOptions = {}, infoData: InfoData) {
+  const ICONS_PATH = filterSvgFiles(options.src);
+  const data = await outputReactNativeFile(ICONS_PATH, options, infoData);
+  const outPath = path.join(options.dist, 'reactNative', 'index.js');
+  fs.outputFileSync(outPath, data.join('\n'));
+  fs.outputFileSync(outPath.replace(/\.js$/, '.d.ts'), data.join('\n'));
+  return outPath;
+}
+
+async function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, infoData: InfoData) {
+  const svgoOptions = options.svgoOptions || {};
+  const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
+  const fontSize = typeof fontSizeOpt === 'boolean' ? 16 : parseInt(fontSizeOpt);
+  const fontName = options.classNamePrefix || options.fontName
+  return Promise.all(
+    files.map(async filepath => {
+      const baseFileName = path.basename(filepath, '.svg');
+      let name = toPascalCase(baseFileName);
+      if (/^[rR]eactNative$/.test(name)) {
+        name = name + toPascalCase(fontName);
+      }
+      const svg = fs.readFileSync(filepath, 'utf-8');
+      const pathData = optimize(svg, {
+        path: filepath,
+        ...svgoOptions,
+        plugins: [
+          'removeXMLNS',
+          'removeEmptyAttrs',
+          'convertTransform',
+          // 'convertShapeToPath',
+          // 'removeViewBox'
+          ...(svgoOptions.plugins || [])
+        ]
+      });
+      const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
+      const outDistPath = path.join(options.dist, 'reactNative', `${name}.js`);
+      const comName = isNaN(Number(name.charAt(0))) ? name : toPascalCase(fontName) + name;
+      fs.outputFileSync(outDistPath, reactNativeSource(comName, fontSize, fontName, infoData[baseFileName].unicode));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactNativeTypeSource(comName));
       return `export * from './${name}';`;
     }),
   );
