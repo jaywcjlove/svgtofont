@@ -8,7 +8,7 @@ import color from 'colors-cli';
 import { autoConf, merge, AutoConfOption } from 'auto-config-loader';
 import { Config } from 'svgo';
 import { log } from './log';
-import { generateIconsSource, generateReactIcons } from './generate';
+import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 
 export type SvgToFontOptions = {
@@ -49,6 +49,10 @@ export type SvgToFontOptions = {
    * Output `./dist/react/`, SVG generates `react` components.
    */
   outSVGReact?: boolean;
+  /**
+   * Output `./dist/reactNative/`, SVG generates `reactNative` component.
+   */
+  outSVGReactNative?: boolean;
   /**
    * Output `./dist/svgtofont.json`, The content is as follows:
    * @example
@@ -109,7 +113,7 @@ export type SvgToFontOptions = {
    */
   useNameAsUnicode?: boolean;
   /**
-   * consoles whenever {{ cssString }} template outputs unicode characters or css vars 
+   * consoles whenever {{ cssString }} template outputs unicode characters or css vars
    * @default false
    */
   useCSSVars?: boolean;
@@ -400,6 +404,10 @@ export default async (options: SvgToFontOptions = {}) => {
     if (options.outSVGReact) {
       const outPath = await generateReactIcons(options);
       log.log(`${color.green('SUCCESS')} Created React Components. `);
+    }
+    if (options.outSVGReactNative) {
+      generateReactNativeIcons(options, unicodeObject);
+      log.log(`${color.green('SUCCESS')} Created React Native Components. `);
     }
 
   } catch (error) {

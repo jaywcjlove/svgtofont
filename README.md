@@ -36,7 +36,7 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 
 - Supported font formats: `WOFF2`, `WOFF`, `EOT`, `TTF` and `SVG`.
 - Support SVG Symbol file.
-- Support [`React`](https://github.com/facebook/react) & [`TypeScript`](https://github.com/microsoft/TypeScript).
+- Support [`React`](https://github.com/facebook/react), [`ReactNative`](https://github.com/facebook/react-native) & [`TypeScript`](https://github.com/microsoft/TypeScript).
 - Support [`Less`](https://github.com/less/less.js)/[`Sass`](https://github.com/sass/sass)/[`Stylus`](https://github.com/stylus/stylus).
 - Allows to use custom templates (example `css`, `less` and etc).
 - Automatically generate a preview site.
@@ -261,6 +261,27 @@ import React from 'react';
 export const Git = props => (
   <svg viewBox="0 0 20 20" {...props}><path d="M2.6 10.59L8.38 4.8l1.69 -." fillRule="evenodd" /></svg>
 );
+```
+
+### outSVGReactNative
+
+> Type: `Boolean`  
+> Default value: `false`
+
+Output `./dist/reactNative/`, SVG generates `reactNative` components.
+
+```js
+import { Text } from 'react-native';
+
+const icons = { "Git": "__GitUnicodeChar__", "Adobe": "__AdobeUnicodeChar__" };
+
+export const RangeIconFont = props => {
+  const { name, ...rest } = props;
+  return (<Text style={{ fontFamily: 'svgtofont', fontSize: 16, color: '#000000', ...rest }}>
+    {icons[name]}
+  </Text>);
+};
+
 ```
 
 ### outSVGPath
@@ -746,6 +767,21 @@ import { ReactComponent as ComLogo } from './logo.svg';
 
 <ComLogo />
 ```
+
+### Using With ReactNative
+
+A unique component named after the font name is generated.
+
+Props are TextProps and are used as inline style.
+
+In addition, the name prop is mandatory and refers to svg names
+
+```jsx
+import { SvgToFont } from './SvgToFont';
+
+<SvgToFont fontSize={32} color="#fefefe" name={"Git"}  />
+```
+
 
 ## Contributors
 
