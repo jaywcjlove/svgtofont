@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.43% </span>
+                <span class="strong">88.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>110/123</span>
+                <span class='fraction'>111/126</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">74.19% </span>
+                <span class="strong">73.68% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>69/93</span>
+                <span class='fraction'>70/95</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.03% </span>
+                <span class="strong">90.51% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>104/113</span>
+                <span class='fraction'>105/116</span>
             </div>
         
             
@@ -475,7 +475,20 @@
 <a name='L410'></a><a href='#L410'>410</a>
 <a name='L411'></a><a href='#L411'>411</a>
 <a name='L412'></a><a href='#L412'>412</a>
-<a name='L413'></a><a href='#L413'>413</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -878,6 +891,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -887,7 +904,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">/// &lt;reference types="./types" /&gt;
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/// &lt;reference types="./types" /&gt;
 &nbsp;
 import path from 'path';
 import fs from 'fs-extra';
@@ -897,7 +915,7 @@ import color from 'colors-cli';
 import { autoConf, merge, AutoConfOption } from 'auto-config-loader';
 import { Config } from 'svgo';
 import { log } from './log';
-import { generateIconsSource, generateReactIcons } from './generate';
+import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
 &nbsp;
 export type SvgToFontOptions = {
@@ -938,6 +956,10 @@ export type SvgToFontOptions = {
    * Output `./dist/react/`, SVG generates `react` components.
    */
   outSVGReact?: boolean;
+  /**
+   * Output `./dist/reactNative/`, SVG generates `reactNative` component.
+   */
+  outSVGReactNative?: boolean;
   /**
    * Output `./dist/svgtofont.json`, The content is as follows:
    * @example
@@ -998,7 +1020,7 @@ export type SvgToFontOptions = {
    */
   useNameAsUnicode?: boolean;
   /**
-   * consoles whenever {{ cssString }} template outputs unicode characters or css vars 
+   * consoles whenever {{ cssString }} template outputs unicode characters or css vars
    * @default false
    */
   useCSSVars?: boolean;
@@ -1290,6 +1312,10 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
       const outPath = await generateReactIcons(options);
       log.log(`${color.green('SUCCESS')} Created React Components. `);
     }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (options.outSVGReactNative) {
+<span class="cstat-no" title="statement not covered" >      generateReactNativeIcons(options, unicodeObject);</span>
+<span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created React Native Components. `);</span>
+    }
 &nbsp;
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    log.log('SvgToFont:CLI:ERR:', error);</span>
@@ -1299,14 +1325,15 @@ export default async (options: SvgToFontOptions = <span class="branch-0 cbranch-
 /**
  * https://github.com/Microsoft/TypeScript/issues/5565#issuecomment-155226290
  */
-module.exports = exports["default"];</pre></td></tr></table></pre>
+module.exports = exports["default"];
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-26T12:00:54.669Z
+                at 2023-12-22T00:10:19.043Z
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -48,7 +48,7 @@
         <ul>
           <li>Supported font formats: <code>WOFF2</code>, <code>WOFF</code>, <code>EOT</code>, <code>TTF</code> and <code>SVG</code>.</li>
           <li>Support SVG Symbol file.</li>
-          <li>Support <a href="https://github.com/facebook/react"><code>React</code></a> &#x26; <a href="https://github.com/microsoft/TypeScript"><code>TypeScript</code></a>.</li>
+          <li>Support <a href="https://github.com/facebook/react"><code>React</code></a>, <a href="https://github.com/facebook/react-native"><code>ReactNative</code></a> &#x26; <a href="https://github.com/microsoft/TypeScript"><code>TypeScript</code></a>.</li>
           <li>Support <a href="https://github.com/less/less.js"><code>Less</code></a>/<a href="https://github.com/sass/sass"><code>Sass</code></a>/<a href="https://github.com/stylus/stylus"><code>Stylus</code></a>.</li>
           <li>Allows to use custom templates (example <code>css</code>, <code>less</code> and etc).</li>
           <li>Automatically generate a preview site.</li>
@@ -372,6 +372,34 @@ import React from &#x27;react&#x27;;
 export const Git = props => (
   <svg viewBox=&#x22;0 0 20 20&#x22; {...props}><path d=&#x22;M2.6 10.59L8.38 4.8l1.69 -.&#x22; fillRule=&#x22;evenodd&#x22; /></svg>
 );
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="outsvgreactnative"><a aria-hidden="true" tabindex="-1" href="#outsvgreactnative" class="anchor"><span class="icon icon-link"></span></a>outSVGReactNative</h3>
+        <blockquote>
+          <p>Type: <code>Boolean</code><br>Default value: <code>false</code></p>
+        </blockquote>
+        <p>Output <code>./dist/reactNative/</code>, SVG generates <code>reactNative</code> components.</p>
+        <pre class="language-js"><code class="language-js code-highlight"><span class="code-line line-number" line="1"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">Text</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">const</span> icons <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string-property property">"Git"</span><span class="token operator">:</span> <span class="token string">"__GitUnicodeChar__"</span><span class="token punctuation">,</span> <span class="token string-property property">"Adobe"</span><span class="token operator">:</span> <span class="token string">"__AdobeUnicodeChar__"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">RangeIconFont</span></span> <span class="token operator">=</span> <span class="token parameter">props</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">  <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> <span class="token spread operator">...</span>rest <span class="token punctuation">}</span> <span class="token operator">=</span> props<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token operator">&#x3C;</span><span class="token maybe-class-name">Text</span> style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token literal-property property">fontFamily</span><span class="token operator">:</span> <span class="token string">'svgtofont'</span><span class="token punctuation">,</span> <span class="token literal-property property">fontSize</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'#000000'</span><span class="token punctuation">,</span> <span class="token spread operator">...</span>rest <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">></span>
+</span><span class="code-line line-number" line="8">    <span class="token punctuation">{</span>icons<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="9">  <span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token maybe-class-name">Text</span><span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11">
+</span></code><input type="hidden" value="import { Text } from &#x27;react-native&#x27;;
+
+const icons = { &#x22;Git&#x22;: &#x22;__GitUnicodeChar__&#x22;, &#x22;Adobe&#x22;: &#x22;__AdobeUnicodeChar__&#x22; };
+
+export const RangeIconFont = props => {
+  const { name, ...rest } = props;
+  return (<Text style={{ fontFamily: &#x27;svgtofont&#x27;, fontSize: 16, color: &#x27;#000000&#x27;, ...rest }}>
+    {icons[name]}
+  </Text>);
+};
+
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h3 id="outsvgpath"><a aria-hidden="true" tabindex="-1" href="#outsvgpath" class="anchor"><span class="icon icon-link"></span></a>outSVGPath</h3>
         <blockquote>
@@ -924,6 +952,17 @@ yarn add @svgr/webpack
 
 <ComLogo />
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="using-with-reactnative"><a aria-hidden="true" tabindex="-1" href="#using-with-reactnative" class="anchor"><span class="icon icon-link"></span></a>Using With ReactNative</h3>
+        <p>A unique component named after the font name is generated.</p>
+        <p>Props are TextProps and are used as inline style.</p>
+        <p>In addition, the name prop is mandatory and refers to svg names</p>
+        <pre class="language-jsx"><code class="language-jsx code-highlight"><span class="code-line line-number" line="1"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">SvgToFont</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'./SvgToFont'</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SvgToFont</span></span> <span class="token attr-name">fontSize</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">32</span><span class="token punctuation">}</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fefefe<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"Git"</span><span class="token punctuation">}</span></span>  <span class="token punctuation">/></span></span>
+</span></code><input type="hidden" value="import { SvgToFont } from &#x27;./SvgToFont&#x27;;
+
+<SvgToFont fontSize={32} color=&#x22;#fefefe&#x22; name={&#x22;Git&#x22;}  />
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="contributors"><a aria-hidden="true" tabindex="-1" href="#contributors" class="anchor"><span class="icon icon-link"></span></a>Contributors</h2>
         <p>As always, thanks to our amazing contributors!</p><a href="https://github.com/jaywcjlove/svgtofont/graphs/contributors"><img src="https://jaywcjlove.github.io/svgtofont/CONTRIBUTORS.svg"></a>
         <p>Made with <a href="https://github.com/jaywcjlove/github-action-contributors">contributors</a>.</p>
@@ -942,6 +981,7 @@ yarn add @svgr/webpack
                 <li><a href="#logger" class="tocs-link">logger</a></li>
                 <li><a href="#dist" class="tocs-link">dist</a></li>
                 <li><a href="#outsvgreact" class="tocs-link">outSVGReact</a></li>
+                <li><a href="#outsvgreactnative" class="tocs-link">outSVGReactNative</a></li>
                 <li><a href="#outsvgpath" class="tocs-link">outSVGPath</a></li>
                 <li><a href="#generateinfodata" class="tocs-link">generateInfoData</a></li>
                 <li><a href="#src" class="tocs-link">src</a></li>
@@ -998,6 +1038,7 @@ yarn add @svgr/webpack
                     <li><a href="#in-the-project-created-by-webpack" class="tocs-link">In the project created by webpack</a></li>
                   </ol>
                 </li>
+                <li><a href="#using-with-reactnative" class="tocs-link">Using With ReactNative</a></li>
               </ol>
             </li>
             <li><a href="#contributors" class="tocs-link">Contributors</a></li>
