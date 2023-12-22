@@ -17,6 +17,7 @@ const options = {
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
   outSVGReact: true,
+  outSVGReactNative: true,
   outSVGPath: true,
   startNumber: 20000, // unicode start number
   svgicons2svgfont: {

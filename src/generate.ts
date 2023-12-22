@@ -99,3 +99,61 @@ async function outputReactFile(files: string[], options: SvgToFontOptions = {}) 
     }),
   );
 }
+
+const reactNativeSource = (fontName: string, defaultSize: number, iconMap: Map<string,string>) => `import { Text } from 'react-native';
+
+const icons = ${JSON.stringify(Object.fromEntries(iconMap))};
+
+export const ${fontName} = props => {
+  const {name, ...rest} = props;
+  return (<Text style={{fontFamily: '${fontName}', fontSize: ${defaultSize}, color: '#000000', ...rest}}>
+    {icons[name]}
+  </Text>);
+};
+`;
+
+const reactNativeTypeSource = (name: string, iconMap: Map<string, string>) => `import { TextStyle } from 'react-native';
+
+export type ${name}Names = ${[...iconMap.keys()].reduce((acc, key, index) => {
+  if (index === 0) {
+    acc = `'${key}'`
+  } else {
+    acc += `| '${key}'`
+  }
+  return acc;
+}, `${'string'}`)}
+
+export interface ${name}Props extends Omit<TextStyle, 'fontFamily' | 'fontStyle' | 'fontWeight'> {
+  name: ${name}Names
+}
+
+export declare const ${name}: (props: ${name}Props) => JSX.Element;
+`;
+
+/**
+ * Generate ReactNative Icon
+ * <font-name>.json
+ */
+export function generateReactNativeIcons(options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
+  const ICONS_PATH = filterSvgFiles(options.src);
+  outputReactNativeFile(ICONS_PATH, options, unicodeObject);
+}
+
+function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
+  const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
+  const fontSize = typeof fontSizeOpt === 'boolean' ? 16 : parseInt(fontSizeOpt);
+  const fontName = options.classNamePrefix || options.fontName
+  const iconMap = new Map<string, string>();
+  files.map(filepath => {
+    const baseFileName = path.basename(filepath, '.svg');
+    let name = toPascalCase(baseFileName);
+    if (/^[rR]eactNative$/.test(name)) {
+      name = name + toPascalCase(fontName);
+    }
+    iconMap.set(name, unicodeObject[baseFileName])
+  });
+  const outDistPath = path.join(options.dist, 'reactNative', `${fontName}.js`);
+  const comName = isNaN(Number(fontName.charAt(0))) ? fontName : toPascalCase(fontName) + name;
+  fs.outputFileSync(outDistPath, reactNativeSource(comName, fontSize, iconMap));
+  fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));
+}
