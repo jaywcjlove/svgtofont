@@ -774,14 +774,30 @@ A unique component named after the font name is generated.
 
 Props are TextProps and are used as inline style.
 
-In addition, the name prop is mandatory and refers to svg names
+In addition, the iconName prop is mandatory and refers to svg names written in camelCase
 
 ```jsx
+SvgToFont.jsx
+// ↓↓↓↓↓↓↓↓↓↓
+
 import { SvgToFont } from './SvgToFont';
 
-<SvgToFont fontSize={32} color="#fefefe" name={"Git"}  />
+<SvgToFont fontSize={32} color="#fefefe" iconName={"git"}  />
 ```
+```ts
+SvgToFont.d.ts
+// ↓↓↓↓↓↓↓↓↓↓
 
+import { TextStyle } from 'react-native';
+
+export type SvgToFontIconNames = 'git'| 'adobe'| 'demo' | 'left' | 'styleInline'
+
+export interface SvgToFontProps extends Omit<TextStyle, 'fontFamily' | 'fontStyle' | 'fontWeight'> {
+  iconName: SvgToFontIconNames
+}
+
+export declare const SvgToFont: (props: SvgToFontProps) => JSX.Element;
+```
 
 ## Contributors
 
