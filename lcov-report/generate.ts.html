@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.15% </span>
+                <span class="strong">68.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/66</span>
+                <span class='fraction'>43/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.9% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/44</span>
+                <span class='fraction'>18/42</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.4% </span>
+                <span class="strong">67.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/59</span>
+                <span class='fraction'>38/56</span>
             </div>
         
             
@@ -217,12 +217,7 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a>
-<a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,7 +330,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -370,10 +364,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -487,27 +477,26 @@ const reactNativeSource = <span class="fstat-no" title="function not covered" >(
 &nbsp;
 const icons = ${JSON.stringify(Object.fromEntries(iconMap))};
 &nbsp;
-export const ${fontName} = props =&gt; {
-  const {name, ...rest} = props;
+export const ${fontName} = ({iconName, ...rest}) =&gt; {
   return (&lt;Text style={{fontFamily: '${fontName}', fontSize: ${defaultSize}, color: '#000000', ...rest}}&gt;
-    {icons[name]}
+    {icons[iconName]}
   &lt;/Text&gt;);
 };
 `;
 &nbsp;
 const reactNativeTypeSource = <span class="fstat-no" title="function not covered" >(n</span>ame: string, iconMap: Map&lt;string, string&gt;) =&gt; <span class="cstat-no" title="statement not covered" >`import { TextStyle } from 'react-native';</span>
 &nbsp;
-export type ${name}Names = ${[...iconMap.keys()].reduce(<span class="fstat-no" title="function not covered" >(a</span>cc, key, index) =&gt; {
+export type ${name}IconNames = ${[...iconMap.keys()].reduce(<span class="fstat-no" title="function not covered" >(a</span>cc, key, index) =&gt; {
 <span class="cstat-no" title="statement not covered" >  if (index === 0) {</span>
 <span class="cstat-no" title="statement not covered" >    acc = `'${key}'`</span>
   } else {
-<span class="cstat-no" title="statement not covered" >    acc += `| '${key}'`</span>
+<span class="cstat-no" title="statement not covered" >    acc += ` | '${key}'`</span>
   }
 <span class="cstat-no" title="statement not covered" >  return acc;</span>
 }, `${'string'}`)}
 &nbsp;
 export interface ${name}Props extends Omit&lt;TextStyle, 'fontFamily' | 'fontStyle' | 'fontWeight'&gt; {
-  name: ${name}Names
+  iconName: ${name}IconNames
 }
 &nbsp;
 export declare const ${name}: (props: ${name}Props) =&gt; JSX.Element;
@@ -529,16 +518,12 @@ function <span class="fstat-no" title="function not covered" >outputReactNativeF
   const iconMap = <span class="cstat-no" title="statement not covered" >new Map&lt;string, string&gt;();</span>
 <span class="cstat-no" title="statement not covered" >  files.map(<span class="fstat-no" title="function not covered" >fi</span>lepath =&gt; {</span>
     const baseFileName = <span class="cstat-no" title="statement not covered" >path.basename(filepath, '.svg');</span>
-    let name = <span class="cstat-no" title="statement not covered" >toPascalCase(baseFileName);</span>
-<span class="cstat-no" title="statement not covered" >    if (/^[rR]eactNative$/.test(name)) {</span>
-<span class="cstat-no" title="statement not covered" >      name = name + toPascalCase(fontName);</span>
-    }
-<span class="cstat-no" title="statement not covered" >    iconMap.set(name, unicodeObject[baseFileName])</span>
+<span class="cstat-no" title="statement not covered" >    iconMap.set(baseFileName, unicodeObject[baseFileName])</span>
   });
-  const outDistPath = <span class="cstat-no" title="statement not covered" >path.join(options.dist, 'reactNative', `${fontName}.js`);</span>
+  const outDistPath = <span class="cstat-no" title="statement not covered" >path.join(options.dist, 'reactNative', `${fontName}.jsx`);</span>
   const comName = <span class="cstat-no" title="statement not covered" >isNaN(Number(fontName.charAt(0))) ? fontName : toPascalCase(fontName) + name;</span>
 <span class="cstat-no" title="statement not covered" >  fs.outputFileSync(outDistPath, reactNativeSource(comName, fontSize, iconMap));</span>
-<span class="cstat-no" title="statement not covered" >  fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));</span>
+<span class="cstat-no" title="statement not covered" >  fs.outputFileSync(outDistPath.replace(/\.jsx$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -547,7 +532,7 @@ function <span class="fstat-no" title="function not covered" >outputReactNativeF
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-22T04:43:10.543Z
+                at 2023-12-26T16:27:29.335Z
             </div>
         <script src="prettify.js"></script>
         <script>

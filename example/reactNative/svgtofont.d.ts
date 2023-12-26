@@ -1,9 +1,9 @@
 import { TextStyle } from 'react-native';
 
-export type svgtofontNames = 'Adobe'| 'Demo'| 'Git'| 'Left'| 'Stylelint'
+export type svgtofontIconNames = 'adobe' | 'demo' | 'git' | 'left' | 'stylelint'
 
 export interface svgtofontProps extends Omit<TextStyle, 'fontFamily' | 'fontStyle' | 'fontWeight'> {
-  name: svgtofontNames
+  iconName: svgtofontIconNames
 }
 
 export declare const svgtofont: (props: svgtofontProps) => JSX.Element;

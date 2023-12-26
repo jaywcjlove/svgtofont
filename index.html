@@ -955,13 +955,44 @@ yarn add @svgr/webpack
         <h3 id="using-with-reactnative"><a aria-hidden="true" tabindex="-1" href="#using-with-reactnative" class="anchor"><span class="icon icon-link"></span></a>Using With ReactNative</h3>
         <p>A unique component named after the font name is generated.</p>
         <p>Props are TextProps and are used as inline style.</p>
-        <p>In addition, the name prop is mandatory and refers to svg names</p>
-        <pre class="language-jsx"><code class="language-jsx code-highlight"><span class="code-line line-number" line="1"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">SvgToFont</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'./SvgToFont'</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SvgToFont</span></span> <span class="token attr-name">fontSize</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">32</span><span class="token punctuation">}</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fefefe<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"Git"</span><span class="token punctuation">}</span></span>  <span class="token punctuation">/></span></span>
-</span></code><input type="hidden" value="import { SvgToFont } from &#x27;./SvgToFont&#x27;;
+        <p>In addition, the iconName prop is mandatory and refers to svg names written in camelCase</p>
+        <pre class="language-jsx"><code class="language-jsx code-highlight"><span class="code-line line-number" line="1"><span class="token maybe-class-name">SvgToFont</span><span class="token punctuation">.</span><span class="token property-access">jsx</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">// ↓↓↓↓↓↓↓↓↓↓</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">SvgToFont</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'./SvgToFont'</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SvgToFont</span></span> <span class="token attr-name">fontSize</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">32</span><span class="token punctuation">}</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#fefefe<span class="token punctuation">"</span></span> <span class="token attr-name">iconName</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"git"</span><span class="token punctuation">}</span></span>  <span class="token punctuation">/></span></span>
+</span></code><input type="hidden" value="SvgToFont.jsx
+// ↓↓↓↓↓↓↓↓↓↓
 
-<SvgToFont fontSize={32} color=&#x22;#fefefe&#x22; name={&#x22;Git&#x22;}  />
+import { SvgToFont } from &#x27;./SvgToFont&#x27;;
+
+<SvgToFont fontSize={32} color=&#x22;#fefefe&#x22; iconName={&#x22;git&#x22;}  />
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <pre class="language-ts"><code class="language-ts code-highlight"><span class="code-line line-number" line="1">SvgToFont<span class="token punctuation">.</span>d<span class="token punctuation">.</span>ts
+</span><span class="code-line line-number" line="2"><span class="token comment">// ↓↓↓↓↓↓↓↓↓↓</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token keyword">import</span> <span class="token punctuation">{</span> TextStyle <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">SvgToFontIconNames</span> <span class="token operator">=</span> <span class="token string">'git'</span><span class="token operator">|</span> <span class="token string">'adobe'</span><span class="token operator">|</span> <span class="token string">'demo'</span> <span class="token operator">|</span> <span class="token string">'left'</span> <span class="token operator">|</span> <span class="token string">'styleInline'</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">SvgToFontProps</span> <span class="token keyword">extends</span> <span class="token class-name">Omit<span class="token operator">&#x3C;</span>TextStyle<span class="token punctuation">,</span> <span class="token string">'fontFamily'</span> <span class="token operator">|</span> <span class="token string">'fontStyle'</span> <span class="token operator">|</span> <span class="token string">'fontWeight'</span><span class="token operator">></span></span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="9">  iconName<span class="token operator">:</span> SvgToFontIconNames
+</span><span class="code-line line-number" line="10"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="11">
+</span><span class="code-line line-number" line="12"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> <span class="token function-variable function">SvgToFont</span><span class="token operator">:</span> <span class="token punctuation">(</span>props<span class="token operator">:</span> SvgToFontProps<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token constant">JSX</span><span class="token punctuation">.</span>Element<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="SvgToFont.d.ts
+// ↓↓↓↓↓↓↓↓↓↓
+
+import { TextStyle } from &#x27;react-native&#x27;;
+
+export type SvgToFontIconNames = &#x27;git&#x27;| &#x27;adobe&#x27;| &#x27;demo&#x27; | &#x27;left&#x27; | &#x27;styleInline&#x27;
+
+export interface SvgToFontProps extends Omit<TextStyle, &#x27;fontFamily&#x27; | &#x27;fontStyle&#x27; | &#x27;fontWeight&#x27;> {
+  iconName: SvgToFontIconNames
+}
+
+export declare const SvgToFont: (props: SvgToFontProps) => JSX.Element;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="contributors"><a aria-hidden="true" tabindex="-1" href="#contributors" class="anchor"><span class="icon icon-link"></span></a>Contributors</h2>
         <p>As always, thanks to our amazing contributors!</p><a href="https://github.com/jaywcjlove/svgtofont/graphs/contributors"><img src="https://jaywcjlove.github.io/svgtofont/CONTRIBUTORS.svg"></a>
