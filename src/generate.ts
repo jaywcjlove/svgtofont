@@ -104,27 +104,26 @@ const reactNativeSource = (fontName: string, defaultSize: number, iconMap: Map<s
 
 const icons = ${JSON.stringify(Object.fromEntries(iconMap))};
 
-export const ${fontName} = props => {
-  const {name, ...rest} = props;
+export const ${fontName} = ({iconName, ...rest}) => {
   return (<Text style={{fontFamily: '${fontName}', fontSize: ${defaultSize}, color: '#000000', ...rest}}>
-    {icons[name]}
+    {icons[iconName]}
   </Text>);
 };
 `;
 
 const reactNativeTypeSource = (name: string, iconMap: Map<string, string>) => `import { TextStyle } from 'react-native';
 
-export type ${name}Names = ${[...iconMap.keys()].reduce((acc, key, index) => {
+export type ${name}IconNames = ${[...iconMap.keys()].reduce((acc, key, index) => {
   if (index === 0) {
     acc = `'${key}'`
   } else {
-    acc += `| '${key}'`
+    acc += ` | '${key}'`
   }
   return acc;
 }, `${'string'}`)}
 
 export interface ${name}Props extends Omit<TextStyle, 'fontFamily' | 'fontStyle' | 'fontWeight'> {
-  name: ${name}Names
+  iconName: ${name}IconNames
 }
 
 export declare const ${name}: (props: ${name}Props) => JSX.Element;
@@ -146,14 +145,10 @@ function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, 
   const iconMap = new Map<string, string>();
   files.map(filepath => {
     const baseFileName = path.basename(filepath, '.svg');
-    let name = toPascalCase(baseFileName);
-    if (/^[rR]eactNative$/.test(name)) {
-      name = name + toPascalCase(fontName);
-    }
-    iconMap.set(name, unicodeObject[baseFileName])
+    iconMap.set(baseFileName, unicodeObject[baseFileName])
   });
-  const outDistPath = path.join(options.dist, 'reactNative', `${fontName}.js`);
+  const outDistPath = path.join(options.dist, 'reactNative', `${fontName}.jsx`);
   const comName = isNaN(Number(fontName.charAt(0))) ? fontName : toPascalCase(fontName) + name;
   fs.outputFileSync(outDistPath, reactNativeSource(comName, fontSize, iconMap));
-  fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));
+  fs.outputFileSync(outDistPath.replace(/\.jsx$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));
 }
