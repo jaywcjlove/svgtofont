@@ -6,6 +6,7 @@ import image2uri from 'image2uri';
 import { SvgIcons2FontOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { autoConf, merge, AutoConfOption } from 'auto-config-loader';
+import type { FontOptions } from 'svg2ttf';
 import { Config } from 'svgo';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate';
@@ -125,7 +126,7 @@ export type SvgToFontOptions = {
   /**
    * This is the setting for [svg2ttf](https://github.com/fontello/svg2ttf/tree/c33a126920f46b030e8ce960cc7a0e38a6946bbc#svg2ttfsvgfontstring-options---buf)
    */
-  svg2ttf?: unknown;
+  svg2ttf?: FontOptions;
   website?: {
     /**
      * Add a Github corner to your website
