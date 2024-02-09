@@ -33,8 +33,8 @@ svgtofont({
     index: "unicode", // Enum{"font-class", "unicode", "symbol"}
     title: "svgtofont",
     favicon: path.resolve(rootPath, "favicon.png"),
-    // Must be a .svg format image.
-    logo: path.resolve(rootPath, "svg", "git.svg"),
+    // Must be a .svg format image. Missing here to ensure the example works without it.
+    // logo: path.resolve(rootPath, "svg", "git.svg"),
     version: pkg.version,
     meta: {
       description: "Converts SVG fonts to TTF/EOT/WOFF/WOFF2/SVG format.",
