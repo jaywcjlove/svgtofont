@@ -10,10 +10,10 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm install
@@ -32,7 +32,7 @@ jobs:
             Home: index.html
           EOF
 
-      - run: npm install idoc@1.26.6 -g
+      - run: npm install idoc@1 -g
       - run: idoc --output coverage
 
       # - name: Converts Markdown to HTML
