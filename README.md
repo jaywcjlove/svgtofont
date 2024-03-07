@@ -65,7 +65,7 @@ graph LR;
     click A "https://www.iconfont.cn" "阿里巴巴矢量图标库" _blank
     click B "https://icomoon.io" "Pixel Perfect Icon Solutions" _blank
     click D "https://icongo.github.io" "Include popular icons in your React projects easily icons." _blank
-    C.->ide1;
+    C .-> ide1
     subgraph ide1 [Project]
         svg -->a2[create font]
         a2 .-> b3[use font]
