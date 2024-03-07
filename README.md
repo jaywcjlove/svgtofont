@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/jaywcjlove/svgtofont/">
-    <img src="https://user-images.githubusercontent.com/1680273/106147487-dfb22880-61b2-11eb-8462-4f443a4c2201.png" alt="SVG To Font" />
+    <img src="https://github.com/jaywcjlove/svgtofont/assets/1680273/8dbdd79a-f39a-4805-bb66-d4c9f51a19e0" alt="SVG To Font" />
   </a>
 </p>
 
