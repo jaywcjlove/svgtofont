@@ -459,6 +459,10 @@ type CSSOptions = {
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
   fileName?: string
+  /**
+   * Ad hoc template variables.
+   */
+  templateVars?: Record<string, any>;
 }
 ```
 

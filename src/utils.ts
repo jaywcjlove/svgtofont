@@ -278,6 +278,10 @@ export type CSSOptions = {
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
   fileName?: string;
+  /**
+   * Ad hoc template variables.
+   */
+  templateVars?: Record<string, any>;
 }
 
 /**
@@ -287,6 +291,7 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
   const removeFiles: Array<string> = [];
   return new Promise((resolve, reject) => {
     copy(inDir, outDir, {
+      ...(_opts.templateVars || {}),
       ...vars,
       cssPath: _opts.cssPath || '',
       filename: _opts.fileName || vars.fontname,
