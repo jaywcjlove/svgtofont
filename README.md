@@ -62,9 +62,11 @@ graph LR;
     A[iconfont]-->C[Download SVG];
     B[icomoon]-->C;
     D[icongo]-->C;
+    E[yesicon]-->C;
     click A "https://www.iconfont.cn" "阿里巴巴矢量图标库" _blank
     click B "https://icomoon.io" "Pixel Perfect Icon Solutions" _blank
     click D "https://icongo.github.io" "Include popular icons in your React projects easily icons." _blank
+    click E "https://yesicon.app/" "216,162 High-Quality Vector Icons from Top Design Teams." _blank
     C .-> ide1
     subgraph ide1 [Project]
         svg -->a2[create font]
