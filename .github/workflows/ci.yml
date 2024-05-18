@@ -30,12 +30,12 @@ jobs:
           site: "SVG To Font {{version}}"
           menus:
             Home: index.html
-          Sponsor: 
-            url: https://wangchujiang.com/#/sponsor
-            target: __blank
-          Demo: 
-            url: example/font-class.html
-            target: __blank
+            Sponsor: 
+              url: https://wangchujiang.com/#/sponsor
+              target: __blank
+            Demo: 
+              url: example/font-class.html
+              target: __blank
           EOF
 
       - run: npm install idoc@1 -g
