@@ -8,7 +8,7 @@ import svg2ttf from 'svg2ttf';
 import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
-import copy from 'copy-template-dir';
+import copy from '@tsbb/copy-template-dir';
 import del from 'del';
 import moveFile from 'move-file';
 import { SvgToFontOptions } from './';

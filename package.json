@@ -67,10 +67,10 @@
     ]
   },
   "dependencies": {
+    "@tsbb/copy-template-dir": "^1.4.0",
     "auto-config-loader": "^1.7.4",
     "cheerio": "~1.0.0-rc.12",
     "colors-cli": "~1.0.28",
-    "copy-template-dir": "~1.4.0",
     "del": "~6.1.0",
     "ejs": "~3.1.6",
     "fs-extra": "~11.2.0",
@@ -88,11 +88,11 @@
     "@types/cheerio": "~0.22.31",
     "@types/ejs": "~3.1.0",
     "@types/fs-extra": "^11.0.1",
+    "@types/svg2ttf": "~5.0.1",
+    "@types/svgicons2svgfont": "~10.0.1",
     "@types/ttf2eot": "~2.0.0",
     "@types/ttf2woff": "~2.0.2",
     "@types/ttf2woff2": "~2.0.0",
-    "@types/svg2ttf": "~5.0.1",
-    "@types/svgicons2svgfont": "~10.0.1",
     "tsbb": "^4.1.5"
   },
   "peerDependencies": {

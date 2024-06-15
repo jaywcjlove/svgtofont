@@ -70,6 +70,7 @@ it('example test case.', async () => {
     'font-class.html',
     'index.html',
     'react',
+    'styles',
     'svgtofont.css',
     'svgtofont.d.ts',
     'svgtofont.eot',
@@ -101,6 +102,7 @@ it('example simple test case.', async () => {
   });
   const fileNames = await fs.readdir(dist);
   expect(fileNames).toEqual([
+    'styles',
     'svgtofont.css',
     'svgtofont.d.ts',
     'svgtofont.eot',
@@ -129,6 +131,7 @@ it('templates simple test case.', async () => {
   });
   const fileNames = await fs.readdir(dist);
   expect(fileNames).toEqual([
+    'styles',
     'svgtofont.css',
     'svgtofont.eot',
     'svgtofont.less',
@@ -161,6 +164,7 @@ it('example simple test case for useNameAsUnicode.', async () => {
   });
   const fileNames = await fs.readdir(dist);
   expect(fileNames).toEqual([
+    'ligature-styles',
     'nameAsUnicode.css',
     'nameAsUnicode.d.ts',
     'nameAsUnicode.eot',
@@ -200,6 +204,7 @@ it('example .svgtofontrc.js test case for useNameAsUnicode', async () => {
   });
   const fileNames = await fs.readdir(dist);
   expect(fileNames).toEqual([
+    'ligature-styles',
     'nameAsUnicode.css',
     'nameAsUnicode.d.ts',
     'nameAsUnicode.eot',
