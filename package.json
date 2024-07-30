@@ -17,6 +17,7 @@
     "watch": "tsbb watch src/*.ts",
     "build": "tsbb build src/*.ts",
     "example": "node examples/example/index.mjs",
+    "example:cli": "node lib/cli.js --sources ./examples/example/svg --output ./dist --fontName uiw-font",
     "example:simple": "node examples/example/simple.mjs",
     "example:templates": "node examples/templates/index.mjs",
     "pretest": "npm run example && npm run example:simple && npm run example:templates",
@@ -86,7 +87,7 @@
     "ttf2eot": "~3.1.0",
     "ttf2woff": "~3.0.0",
     "ttf2woff2": "~6.0.0",
-    "yargs": "~17.7.1"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@types/ejs": "~3.1.0",

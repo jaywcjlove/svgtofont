@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
-
+dist
 examples/example/dist
 examples/templates/dist
 examples/example#211/font

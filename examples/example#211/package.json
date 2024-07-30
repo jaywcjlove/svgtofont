@@ -1,6 +1,6 @@
 {
   "name": "ex211",
-  "version": "4.0.0",
+  "version": "5.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "jaywcjlove",
   "license": "ISC",
   "devDependencies": {
-    "svgtofont": "^4.0.0"
+    "svgtofont": "^5.0.1"
   }
 }

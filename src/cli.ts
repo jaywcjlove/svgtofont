@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import FS from 'fs-extra';
-import yargs, { Arguments } from 'yargs';
+import { Arguments } from 'yargs';
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
 import path from 'path';
 import svgtofont from './index.js';
 import { log } from './log.js';
@@ -12,7 +14,7 @@ type ArgvResult = Arguments<{
   fontName: string;
 }>
 
-const argv = yargs
+const argv = yargs(hideBin(process.argv))
   .alias('s', 'sources')
   .describe('s', 'The root from which all sources are relative.')
   .alias('o', 'output')

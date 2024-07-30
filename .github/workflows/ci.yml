@@ -19,6 +19,7 @@ jobs:
       - run: npm install
       - run: npm run checked
       - run: npm run example
+      - run: npm run example:cli
       - run: npm run example:simple
       - run: npm run example:templates
       - run: npm run coverage
