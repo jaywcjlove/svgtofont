@@ -18,9 +18,9 @@ jobs:
 
       - run: npm install
       - run: npm run checked
-      - run: npm run coverage
       - run: npm run example
       - run: npm run example:templates
+      - run: npm run coverage
       - run: cp -rf test/example/dist coverage/example
       - run: cp -rf test/templates/dist coverage/templates
 

@@ -41,11 +41,11 @@ Read a set of SVG icons and ouput a TTF/EOT/WOFF/WOFF2/SVG font, Generator of fo
 ```bash
                                 ╭┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈╮
                                 ┆      Project       ┆
-                                ┆                    ┆
-╭┈┈┈┈┈┈┈┈╮                      ┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮    ┆
-┆iconfont┆┈┈╮                   ┆   ┆    svg    ┆┈┈╮ ┆
-╰┈┈┈┈┈┈┈┈╯  ┆  ╭┈┈┈┈┈┈┈┈┈┈┈┈╮   ┆   ╰┈┈┈┈┈┈┈┈┈┈┈╯  ┆ ┆
-            ├┈▶┆download svg┆┈┈▶┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮  ┆ ┆
+                                ┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮    ┆
+╭┈┈┈┈┈┈┈┈╮                      ┆   ┆    svg    ┆┈┈╮ ┆
+┆iconfont┆┈┈╮                   ┆   ╰┈┈┈┈┈┈┈┈┈┈┈╯  ┆ ┆
+╰┈┈┈┈┈┈┈┈╯  ┆  ╭┈┈┈┈┈┈┈┈┈┈┈┈╮   ┆   ╭┈┈┈┈┈┈┈┈┈┈┈╮  ┆ ┆
+            ├┈▶┆download svg┆┈┈▶┆   ┆┈svgtofont┈┆  ┆ ┆
 ╭┈┈┈┈┈┈┈┈╮  ┆  ╰┈┈┈┈┈┈┈┈┈┈┈┈╯   ┆╭┈┈┆create font┆◀┈╯ ┆
 ┆icomoon ┆┈┈╯                   ┆┆  ╰┈┈┈┈┈┈┈┈┈┈┈╯    ┆
 ╰┈┈┈┈┈┈┈┈╯                      ┆┆  ╭┈┈┈┈┈┈┈┈┈┈┈╮    ┆
@@ -66,7 +66,7 @@ graph LR;
     click E "https://yesicon.app/" "216,162 High-Quality Vector Icons from Top Design Teams." _blank
     C .-> ide1
     subgraph ide1 [Project]
-        svg -->a2[create font]
+        svg -->a2[svgtofont\ncreate font]
         a2 .-> b3[use font]
     end
 ```
