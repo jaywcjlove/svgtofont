@@ -3,14 +3,14 @@
 import path from 'path';
 import fs from 'fs-extra';
 import image2uri from 'image2uri';
-import { SvgIcons2FontOptions } from 'svgicons2svgfont';
+import { type SVGIcons2SVGFontStreamOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
-import { autoConf, merge, AutoConfOption } from 'auto-config-loader';
+import { autoConf, merge, type AutoConfOption } from 'auto-config-loader';
 import type { FontOptions } from 'svg2ttf';
 import { Config } from 'svgo';
 import { log } from './log';
 import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, CSSOptions, createHTML, createTypescript, TypescriptOptions } from './utils';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils';
 
 export type SvgToFontOptions = {
   /** Support for .svgtofontrc and more configuration files. */
@@ -85,7 +85,7 @@ export type SvgToFontOptions = {
   /**
    * This is the setting for [svgicons2svgfont](https://github.com/nfroidure/svgicons2svgfont/tree/dd713bea4f97afa59f7dba6a21ff7f22db565bcf#api)
    */
-  svgicons2svgfont?: SvgIcons2FontOptions;
+  svgicons2svgfont?: Partial<SVGIcons2SVGFontStreamOptions>;
   /** Some options can be configured with svgoOptions though it. [svgo](https://github.com/svg/svgo#configuration) */
   svgoOptions?: Config;
   /**
