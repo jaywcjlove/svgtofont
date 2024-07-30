@@ -1,0 +1,24 @@
+@font-face {font-family: "svgtofont";
+  src: url('svgtofont.eot?t=1722362009835'); /* IE9*/
+  src: url('svgtofont.eot?t=1722362009835#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("svgtofont.woff2?t=1722362009835") format("woff2"),
+  url("svgtofont.woff?t=1722362009835") format("woff"),
+  url('svgtofont.ttf?t=1722362009835') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('svgtofont.svg?t=1722362009835#svgtofont') format('svg'); /* iOS 4.1- */
+}
+
+[class^="svgtofont-"], [class*=" svgtofont-"] {
+  font-family: 'svgtofont' !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+--svgtofont-adobe: "\ea01";
+--svgtofont-git: "\ea02";
+--svgtofont-stylelint: "\ea03";
+}
+.svgtofont-adobe:before { content: var(--svgtofont-adobe); }
+.svgtofont-git:before { content: var(--svgtofont-git); }
+.svgtofont-stylelint:before { content: var(--svgtofont-stylelint); }
