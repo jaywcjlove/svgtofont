@@ -81,7 +81,7 @@
     "svgo": "~3.2.0",
     "ttf2eot": "~3.1.0",
     "ttf2woff": "~3.0.0",
-    "ttf2woff2": "~5.0.0",
+    "ttf2woff2": "~6.0.0",
     "yargs": "~17.7.1"
   },
   "devDependencies": {
@@ -92,7 +92,7 @@
     "@types/svgicons2svgfont": "~10.0.1",
     "@types/ttf2eot": "~2.0.0",
     "@types/ttf2woff": "~2.0.2",
-    "@types/ttf2woff2": "~2.0.0",
+    "@types/ttf2woff2": "~6.0.0",
     "tsbb": "^4.1.5"
   },
   "peerDependencies": {
