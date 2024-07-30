@@ -1,4 +1,4 @@
-import SVGIcons2SVGFont from 'svgicons2svgfont';
+import { SVGIcons2SVGFontStream } from 'svgicons2svgfont';
 import fs, { ReadStream } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
@@ -9,8 +9,8 @@ import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import copy from '@tsbb/copy-template-dir';
-import del from 'del';
-import moveFile from 'move-file';
+import { deleteAsync } from 'del';
+import { moveFile } from 'move-file';
 import { type SvgToFontOptions } from './';
 import { log } from './log.js';
 
@@ -28,8 +28,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
   startUnicode = options.startUnicode
   UnicodeObj = {}
   return new Promise(async (resolve, reject) => {
-    const fontStream = new SVGIcons2SVGFont({
-      log: (message) => log.log(message),
+    const fontStream = new SVGIcons2SVGFontStream({
       ...options.svgicons2svgfont
     });
 
@@ -304,7 +303,7 @@ export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: 
         }
       }).filter(Boolean);
       if (removeFiles.length > 0) {
-        await del([...removeFiles]);
+        await deleteAsync([...removeFiles]);
       }
       createdFiles = await Promise.all(createdFiles.map(async (file) => {
         if (!file.endsWith('.template')) {
