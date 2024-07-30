@@ -23,7 +23,7 @@ jobs:
       - run: npm run example:templates
       - run: npm run coverage
       - run: cp -rf examples/example/dist coverage/example
-      - run: cp -rf examples/templates/dist coverage/templates
+      - run: cp -rf examples/templates/dist2 coverage/templates
 
       - name: Create idoc config.
         run: |
