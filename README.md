@@ -88,7 +88,6 @@ npm i svgtofont
 > This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c): Node 18+ is needed to use it and it must be `import` instead of `require`.  
 > ```js
 > import svgtofont from 'svgtofont';
-> import path from 'node:path';
 > ```
 
 #### Using With Command
@@ -127,6 +126,9 @@ export default {
 ```
 
 #### Using With Nodejs
+
+> [!NOTE]  
+> This package is now pure ESM. Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 ```js
 import svgtofont from 'svgtofont';
