@@ -3,8 +3,8 @@
 import FS from 'fs-extra';
 import yargs, { Arguments } from 'yargs';
 import path from 'path';
-import svgtofont from './';
-import { log } from './log';
+import svgtofont from './index.js';
+import { log } from './log.js';
 
 type ArgvResult = Arguments<{
   sources: string;

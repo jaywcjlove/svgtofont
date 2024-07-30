@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ESNext",
+    "target": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "declaration": true,
-    "target": "es2017",
-    "noImplicitAny": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -17,7 +18,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "test/index.test.mjs", "test/index.test.js"  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",

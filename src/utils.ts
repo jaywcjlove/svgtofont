@@ -11,8 +11,8 @@ import ttf2woff2 from 'ttf2woff2';
 import copy from '@tsbb/copy-template-dir';
 import del from 'del';
 import moveFile from 'move-file';
-import { SvgToFontOptions } from './';
-import { log } from './log';
+import { type SvgToFontOptions } from './';
+import { log } from './log.js';
 
 let UnicodeObj: Record<string, string> = {};
 /**
@@ -27,8 +27,7 @@ let startUnicode = 0xea01;
 export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string, string>> {
   startUnicode = options.startUnicode
   UnicodeObj = {}
-  return new Promise((resolve, reject) => {
-    // init
+  return new Promise(async (resolve, reject) => {
     const fontStream = new SVGIcons2SVGFont({
       log: (message) => log.log(message),
       ...options.svgicons2svgfont

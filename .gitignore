@@ -1,8 +1,9 @@
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 
-test/example/dist
-test/templates/dist
+examples/example/dist
+examples/templates/dist
+examples/example#211/font
 lib
 package-lock.json
 __snapshots__

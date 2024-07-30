@@ -11,9 +11,6 @@
   <a href="https://github.com/jaywcjlove/svgtofont/actions">
     <img src="https://github.com/jaywcjlove/svgtofont/workflows/Build/badge.svg" alt="Build & Deploy">
   </a>
-  <a href="https://jaywcjlove.github.io/svgtofont/lcov-report/">
-    <img src="https://jaywcjlove.github.io/svgtofont/badges.svg" alt="Coverage Status">
-  </a>
   <a href="https://gitee.com/jaywcjlove/svgtofont">
     <img src="https://jaywcjlove.github.io/sb/ico/gitee.svg" alt="Gitee Repo">
   </a>
@@ -87,6 +84,13 @@ graph LR;
 npm i svgtofont
 ```
 
+> [!NOTE]  
+> This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c): Node 18+ is needed to use it and it must be `import` instead of `require`.  
+> ```js
+> import svgtofont from 'svgtofont';
+> import path from 'node:path';
+> ```
+
 #### Using With Command
 
 ```json
@@ -125,8 +129,8 @@ export default {
 #### Using With Nodejs
 
 ```js
-const svgtofont = require('svgtofont');
-const path = require('path');
+import svgtofont from 'svgtofont';
+import path from 'node:path';
  
 svgtofont({
   src: path.resolve(process.cwd(), 'icon'), // svg path
@@ -141,8 +145,8 @@ svgtofont({
 Or
 
 ```js
-const svgtofont = require("svgtofont");
-const path = require("path");
+import svgtofont from 'svgtofont';
+import path from 'node:path';
 
 svgtofont({
   src: path.resolve(process.cwd(), "icon"), // svg path

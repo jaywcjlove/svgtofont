@@ -1,10 +1,15 @@
-const path = require('path');
-const svgtofont = require("../../lib");
-const pkg = require('../../package.json');
+import path from 'path';
+import fs from 'fs-extra';
+import { fileURLToPath } from 'url';
+import svgtofont from '../../lib/index.js';
 
-const rootPath = path.resolve(process.cwd(), "test", "templates");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pkg = fs.readJSONSync(path.resolve(__dirname, "../../package.json"));
+
+const rootPath = path.resolve(process.cwd(), "examples", "templates");
 /**
- * @type {import('../../lib').SvgToFontOptions}
+ * @type {import('../../lib/index.js').SvgToFontOptions}
  */
 const options = {
   config: {

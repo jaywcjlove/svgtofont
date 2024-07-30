@@ -4,7 +4,10 @@
   "description": "Converts SVG to TTF/EOT/WOFF/WOFF2/SVG format fonts.",
   "homepage": "https://jaywcjlove.github.io/svgtofont/",
   "funding": "https://jaywcjlove.github.io/#/sponsor",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
   "bin": {
     "svgtofont": "lib/cli.js"
   },
@@ -13,9 +16,10 @@
     "start": "node lib/index.js",
     "watch": "tsbb watch src/*.ts",
     "build": "tsbb build src/*.ts",
-    "example": "node test/example/index.js",
-    "example:templates": "node test/templates/index.js",
-    "pretest": "npm run example && npm run example:templates",
+    "example": "node examples/example/index.mjs",
+    "example:simple": "node examples/example/simple.mjs",
+    "example:templates": "node examples/templates/index.mjs",
+    "pretest": "npm run example && npm run example:simple && npm run example:templates",
     "checked": "tsc --noEmit",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage"
@@ -62,9 +66,9 @@
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/?!(.*)"
     ],
-    "testMatch": [
-      "<rootDir>/test/*.test.{js,ts}"
-    ]
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
   },
   "dependencies": {
     "@tsbb/copy-template-dir": "^1.4.0",
@@ -74,7 +78,7 @@
     "del": "~6.1.0",
     "ejs": "~3.1.6",
     "fs-extra": "~11.2.0",
-    "image2uri": "~1.0.5",
+    "image2uri": "^2.1.2",
     "move-file": "~2.1.0",
     "svg2ttf": "~6.0.3",
     "svgicons2svgfont": "~13.0.0",
@@ -91,7 +95,7 @@
     "@types/svg2ttf": "~5.0.1",
     "@types/ttf2eot": "~2.0.0",
     "@types/ttf2woff": "~2.0.2",
-    "tsbb": "^4.1.5"
+    "tsbb": "^4.4.0"
   },
   "peerDependencies": {
     "@types/svg2ttf": "~5.0.1"

@@ -1,16 +1,20 @@
-/// <reference types="./types" />
+/// <reference types="../src/types" />
 
 import path from 'path';
+import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
 import image2uri from 'image2uri';
 import { type SVGIcons2SVGFontStreamOptions } from 'svgicons2svgfont';
 import color from 'colors-cli';
 import { autoConf, merge, type AutoConfOption } from 'auto-config-loader';
 import type { FontOptions } from 'svg2ttf';
-import { Config } from 'svgo';
-import { log } from './log';
-import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils';
+import type { Config } from 'svgo';
+import { log } from './log.js';
+import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate.js';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export type SvgToFontOptions = {
   /** Support for .svgtofontrc and more configuration files. */
@@ -223,7 +227,7 @@ export default async (options: SvgToFontOptions = {}) => {
   options = merge(defaultOptions, data);
   const pkgPath = path.join(process.cwd(), 'package.json');
   if (fs.pathExistsSync(pkgPath)) {
-    const pkg = require(pkgPath);
+    const pkg = fs.readJSONSync(pkgPath);
     if (pkg.svgtofont) {
       const cssOptions = options.css;
       options = merge(options, pkg.svgtofont);
@@ -377,7 +381,7 @@ export default async (options: SvgToFontOptions = {}) => {
       }
       // website favicon
       if (options.website.favicon && fs.pathExistsSync(options.website.favicon)) {
-        tempData.favicon = image2uri(options.website.favicon);
+        tempData.favicon = await image2uri(options.website.favicon);
       } else {
         tempData.favicon = '';
       }
@@ -415,8 +419,3 @@ export default async (options: SvgToFontOptions = {}) => {
     log.log('SvgToFont:CLI:ERR:', error);
   }
 }
-
-/**
- * https://github.com/Microsoft/TypeScript/issues/5565#issuecomment-155226290
- */
-module.exports = exports["default"];

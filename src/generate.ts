@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { optimize } from 'svgo';
-import { filterSvgFiles, toPascalCase } from './utils';
-import { SvgToFontOptions } from './';
+import { filterSvgFiles, toPascalCase } from './utils.js';
+import { type SvgToFontOptions } from './';
 
 /**
  * Generate Icon SVG Path Source

@@ -1,9 +1,17 @@
-const path = require('path');
-/** @type {(option: import('../../').SvgToFontOptions) => void} */
-const svgtofont = require("../../lib");
-const pkg = require('../../package.json');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import fs from 'fs-extra';
 
-const rootPath = path.resolve(process.cwd(), "test", "example");
+import svgtofont from '../../lib/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pkg = fs.readJSONSync(path.resolve(__dirname, "../../package.json"));
+
+console.log(pkg.name);  // 输出: example
+console.log(pkg.version);  // 输出: 1.0.0
+
+const rootPath = path.resolve(process.cwd(), "examples", "example");
 
 svgtofont({
   src: path.resolve(rootPath, "svg"), // svg path
