@@ -3,7 +3,7 @@ import fs, { ReadStream } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 import color from 'colors-cli';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import svg2ttf from 'svg2ttf';
 import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
@@ -227,7 +227,7 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
  */
 export function createSvgSymbol(options: SvgToFontOptions = {}) {
   const DIST_PATH = path.join(options.dist, `${options.fontName}.symbol.svg`);
-  const $ = cheerio.load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>');
+  const $ = load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>');
   return new Promise((resolve, reject) => {
     filterSvgFiles(options.src).forEach(svgPath => {
       const fileName = path.basename(svgPath, path.extname(svgPath));
