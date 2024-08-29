@@ -6,7 +6,16 @@
   "funding": "https://jaywcjlove.github.io/#/sponsor",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/utils": {
+      "default": "./lib/utils.js",
+      "types": "./lib/utils.d.ts"
+    }
+  },
   "type": "module",
   "bin": {
     "svgtofont": "lib/cli.js"
