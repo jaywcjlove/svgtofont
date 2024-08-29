@@ -8,12 +8,13 @@
   url('{{cssPath}}{{fontname}}.svg?t={{timestamp}}#{{fontname}}') format('svg'); /* iOS 4.1- */
 }
 
-[class^="{{prefix}}-"], [class*=" {{prefix}}-"] {
+{% if nameAsUnicode %}.{{prefix}}{% else %}[class^="{{prefix}}-"], [class*=" {{prefix}}-"]{% endif %} {
   font-family: '{{fontname}}' !important;{{fontSize}}
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+{% if not nameAsUnicode %}
 {{cssString}}
+{% endif %}
