@@ -81,15 +81,12 @@
     }
   },
   "dependencies": {
-    "@tsbb/copy-template-dir": "^1.4.0",
     "auto-config-loader": "^1.7.4",
     "cheerio": "~1.0.0-rc.12",
     "colors-cli": "~1.0.28",
-    "del": "~7.1.0",
-    "ejs": "~3.1.6",
     "fs-extra": "~11.2.0",
     "image2uri": "^2.1.2",
-    "move-file": "~3.1.0",
+    "nunjucks": "^3.2.4",
     "svg2ttf": "~6.0.3",
     "svgicons2svgfont": "~14.0.0",
     "svgo": "~3.3.0",
@@ -99,8 +96,8 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/ejs": "~3.1.0",
     "@types/fs-extra": "^11.0.1",
+    "@types/nunjucks": "^3.2.6",
     "@types/svg2ttf": "~5.0.1",
     "@types/ttf2eot": "~2.0.0",
     "@types/ttf2woff": "~2.0.2",

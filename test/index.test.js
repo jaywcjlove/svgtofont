@@ -19,7 +19,6 @@ it('example test case.', async () => {
     'index.html',
     'react',
     'reactNative',
-    'styles',
     'svgtofont.css',
     'svgtofont.d.ts',
     'svgtofont.eot',
@@ -41,7 +40,6 @@ it('example simple test case.', async () => {
   const dist = path.resolve(process.cwd(), 'examples', 'example', 'example');
   const fileNames = await fs.readdir(dist);
   expect(fileNames).toEqual([
-    'styles',
     'svgtofont.css',
     'svgtofont.eot',
     'svgtofont.less',
@@ -64,7 +62,6 @@ it('templates templates test case.', async () => {
     'index.html',
     'react',
     'reactNative',
-    'styles',
     'svgtofont.css',
     'svgtofont.eot',
     'svgtofont.json',
