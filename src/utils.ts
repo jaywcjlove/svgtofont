@@ -1,16 +1,13 @@
 import { SVGIcons2SVGFontStream } from 'svgicons2svgfont';
 import fs, { ReadStream } from 'fs-extra';
 import path from 'path';
-import ejs from 'ejs';
 import color from 'colors-cli';
 import { load } from 'cheerio';
 import svg2ttf from 'svg2ttf';
 import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
-import copy from '@tsbb/copy-template-dir';
-import { deleteAsync } from 'del';
-import { moveFile } from 'move-file';
+import nunjucks from 'nunjucks';
 import { type SvgToFontOptions } from './';
 import { log } from './log.js';
 
@@ -38,20 +35,20 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       const glyph = fs.createReadStream(svgPath) as ReadStream & { metadata: { unicode: string[], name: string } };
 
       const curUnicode = String.fromCharCode(startUnicode);
-      const [_curUnicode, _startUnicode] = options.getIconUnicode 
-              ? (options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
+      const [_curUnicode, _startUnicode] = options.getIconUnicode
+        ? (options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
 
       if (_startUnicode) startUnicode = _startUnicode;
 
       const unicode: string[] = [_curUnicode];
-      if(curUnicode === _curUnicode && (!_startUnicode || startUnicode === _startUnicode)) startUnicode++;
+      if (curUnicode === _curUnicode && (!_startUnicode || startUnicode === _startUnicode)) startUnicode++;
 
       UnicodeObj[_name] = unicode[0];
-      if (!!options.useNameAsUnicode)  {
+      if (!!options.useNameAsUnicode) {
         unicode[0] = _name;
         UnicodeObj[_name] = _name;
       }
-      glyph.metadata = { unicode , name: _name };
+      glyph.metadata = { unicode, name: _name };
       fontStream.write(glyph);
     }
 
@@ -139,12 +136,14 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
   const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
   await fs.writeFile(
     DIST_PATH,
-    `export enum ${enumName} {\n` +
-      fileNames.map(name => `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}"`).join(',\n') +
-    '\n}\n\n' +
-    `export type ${enumName}Classname = ${fileNames.map(name => `"${options.classNamePrefix}-${name}"`).join(' | ')}\n` +
-    `export type ${enumName}Icon = ${fileNames.map(name => `"${name}"`).join(' | ')}\n` +
-    `export const ${enumName}Prefix = "${options.classNamePrefix}-"`
+    [
+      `export enum ${enumName} {`,
+      ...fileNames.map(name => `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}",`),
+      '}',
+      `export type ${enumName}Classname = ${fileNames.map(name => `"${options.classNamePrefix}-${name}"`).join(' | ')}`,
+      `export type ${enumName}Icon = ${fileNames.map(name => `"${name}"`).join(' | ')}`,
+      `export const ${enumName}Prefix = "${options.classNamePrefix}-"`,
+    ].join('\n'),
   );
   log.log(`${color.green('SUCCESS')} Created ${DIST_PATH}`);
 }
@@ -282,60 +281,48 @@ export type CSSOptions = {
   templateVars?: Record<string, any>;
 }
 
+// As we are processing css files, we need to eacape HTML entities.
+const safeNunjucks = nunjucks.configure({ autoescape: false });
+
 /**
  * Copy template files
  */
-export function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: Record<string, any> & { _opts: CSSOptions}) {
-  const removeFiles: Array<string> = [];
-  return new Promise((resolve, reject) => {
-    copy(inDir, outDir, {
-      ...(_opts.templateVars || {}),
-      ...vars,
-      cssPath: _opts.cssPath || '',
-      filename: _opts.fileName || vars.fontname,
-    }, async (err, createdFiles) => {
-      if (err) reject(err);
-      createdFiles = createdFiles.map(filePath => {
-        if (_opts.include && (new RegExp(_opts.include)).test(filePath) || !_opts.include) {
-          return filePath;
-        } else {
-          removeFiles.push(filePath);
-        }
-      }).filter(Boolean);
-      if (removeFiles.length > 0) {
-        await deleteAsync([...removeFiles]);
-      }
-      createdFiles = await Promise.all(createdFiles.map(async (file) => {
-        if (!file.endsWith('.template')) {
-          return file;
-        }
-
-        const changedFile = file.replace('.template', '');
-        await moveFile(file, changedFile);
-        return changedFile;
-      }));
-      if (_opts.output) {
-        const output = path.join(process.cwd(), _opts.output);
-        await Promise.all(createdFiles.map(async (file) => {
-          await moveFile(file, path.join(output, path.basename(file)));
-          return null;
-        }));
-      }
-      createdFiles.forEach(filePath => log.log(`${color.green('SUCCESS')} Created ${filePath} `));
-      resolve(createdFiles);
-    })
-  });
+export async function copyTemplate(inDir: string, outDir: string, { _opts, ...vars }: Record<string, any> & { _opts: CSSOptions }) {
+  const files = await fs.readdir(inDir, { withFileTypes: true });
+  const context = {
+    ...(_opts.templateVars || {}),
+    ...vars,
+    cssPath: _opts.cssPath || '',
+    filename: _opts.fileName || vars.fontname,
+  }
+  await fs.ensureDir(outDir);
+  for (const file of files) {
+    if (!file.isFile()) continue;
+    if (_opts.include && !(new RegExp(_opts.include)).test(file.name)) continue;
+    let newFileName = file.name.replace(/\.template$/, '').replace(/^_/, '');
+    for (const key in context) newFileName = newFileName.replace(`{{${key}}}`, `${context[key]}`);
+    const template = await fs.readFile(path.join(inDir, file.name), 'utf8');
+    const content = safeNunjucks.renderString(template, context);
+    const filePath = path.join(outDir, newFileName)
+    await fs.writeFile(filePath, content);
+    log.log(`${color.green('SUCCESS')} Created ${filePath} `);
+  }
 };
 
 /**
  * Create HTML
  */
-export function createHTML(outPath: string,data: ejs.Data, options?: ejs.Options): Promise<string> {
-  return new Promise((resolve, reject) => {
-    ejs.renderFile(outPath, data, options, (err, str) => {
-      if (err) reject(err);
-      resolve(str);
-    });
+export function createHTML(templatePath: string, data: Record<string, any>): string {
+  return nunjucks.renderString(fs.readFileSync(templatePath, 'utf8'), {
+    ...data,
+    Date: Date,
+    JSON: JSON,
+    Math: Math,
+    Number: Number,
+    Object: Object,
+    RegExp: RegExp,
+    String: String,
+    typeof: (v: any) => typeof v,
   });
 };
 

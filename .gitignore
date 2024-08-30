@@ -6,6 +6,7 @@ examples/templates/dist
 examples/example#211/font
 lib
 package-lock.json
+yarn.lock
 __snapshots__
 
 ### Node ###

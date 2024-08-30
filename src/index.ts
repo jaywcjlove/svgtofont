@@ -1,5 +1,3 @@
-/// <reference types="../src/types" />
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
@@ -260,6 +258,7 @@ export default async (options: SvgToFontOptions = {}) => {
     await fs.ensureDir(options.dist);
     const unicodeObject = await createSVG(options);
 
+    /** @deprecated */
     let cssToVars: string[] = [];
     let cssString: string[] = [];
     let cssRootVars: string[] = [];
@@ -322,14 +321,17 @@ export default async (options: SvgToFontOptions = {}) => {
     await createSvgSymbol(options);
 
     if (options.css) {
-      const styleTemplatePath = options.styleTemplates || (!options.useNameAsUnicode ? path.resolve(__dirname, 'styles') : path.resolve(__dirname, 'ligature-styles'));
-      await copyTemplate(styleTemplatePath, options.dist, {
+      const styleTemplatePath = options.styleTemplates || path.resolve(__dirname, 'styles')
+      const outDir = typeof options.css === 'object' ? options.css.output || options.dist : options.dist;
+      await copyTemplate(styleTemplatePath, outDir, {
         fontname: options.fontName,
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),
+        infoData,
         fontSize: fontSize,
         timestamp: new Date().getTime(),
         prefix,
+        nameAsUnicode: options.useNameAsUnicode,
         _opts: typeof options.css === 'boolean' ? {} : { ...options.css }
       });
     }
@@ -352,7 +354,7 @@ export default async (options: SvgToFontOptions = {}) => {
         if (name === 'symbol') symbolPath = _path;
       });
       // default template
-      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.ejs');
+      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.html');
       // template data
       const tempData: SvgToFontOptions['website'] & {
         fontname: string;
@@ -415,6 +417,7 @@ export default async (options: SvgToFontOptions = {}) => {
       log.log(`${color.green('SUCCESS')} Created React Native Components. `);
     }
 
+    return infoData;
   } catch (error) {
     log.log('SvgToFont:CLI:ERR:', error);
   }
