@@ -354,7 +354,7 @@ export default async (options: SvgToFontOptions = {}) => {
         if (name === 'symbol') symbolPath = _path;
       });
       // default template
-      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.html');
+      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.njk');
       // template data
       const tempData: SvgToFontOptions['website'] & {
         fontname: string;

@@ -135,11 +135,9 @@
       {{ description|default(meta.description) }}
     </div>
     <p>
-      {% if links.length %}
-        {% for idx, linkItem in links %}
-          <a href="{{ linkItem.url }}">{{ linkItem.title }}</a>{% if not loop.last %} · {% endif %}
-        {% endfor %}
-      {% endif %}
+      {% for linkItem in links|default([]) %}
+        <a href="{{ linkItem.url }}">{{ linkItem.title }}</a>{% if not loop.last %} · {% endif %}
+      {% endfor %}
     </p>
   </div>
   <div class="icons">
@@ -148,11 +146,9 @@
     </ul>
   </div>
   <p class="links">
-    {% if links.length %}
-      {% for idx, linkItem in links %}
-        <a href="{{ linkItem.url }}">{{ linkItem.title }}</a>{% if not loop.last %} · {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% for linkItem in links|default([]) %}
+      <a href="{{ linkItem.url }}">{{ linkItem.title }}</a>{% if not loop.last %} · {% endif %}
+    {% endfor %}
   </p>
   <div class="footer">
     {{ footerInfo|safe }}
