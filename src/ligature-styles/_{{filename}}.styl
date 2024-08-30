@@ -7,12 +7,9 @@
   url('{{cssPath}}{{fontname}}.svg?t={{timestamp}}#{{fontname}}') format('svg'); /* iOS 4.1- */
 }
 
-[class^="{{prefix}}-"], [class*=" {{prefix}}-"] {
+.{{prefix}} {
   font-family: '{{fontname}}' !important;{{fontSize}}
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-{{cssString}}
-{{cssToVars}}
