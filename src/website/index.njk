@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ title }}</title>
+  <title>{{ _title }}</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   {% for k, v in meta|default({}) %}
     <meta name="{{ k }}" content="{{ v }}">
@@ -11,7 +11,7 @@
     <link rel="icon" type="image/x-icon" href="{{ favicon }}">
   {% endif %}
   {% if _type === 'font-class' and _link %}
-    <link rel="stylesheet" href="{{ link }}" />
+    <link rel="stylesheet" href="{{ _link }}" />
   {% endif %}
   <style>
     *{margin: 0;padding: 0;list-style: none;}
@@ -130,7 +130,7 @@
       <a href="./">{{ logo }}</a>
     </div>
     {% endif %}
-    <h1>{{ title }}<sup>{{ version }}</sup></h1>
+    <h1>{{ _title }}<sup>{{ version }}</sup></h1>
     <div class="info">
       {{ description|default(meta.description) }}
     </div>
@@ -142,7 +142,7 @@
   </div>
   <div class="icons">
     <ul>
-      {{ IconHtml|safe }}
+      {{ _IconHtml|safe }}
     </ul>
   </div>
   <p class="links">

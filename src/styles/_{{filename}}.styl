@@ -17,6 +17,6 @@
 {% if not nameAsUnicode %}
 {{ cssString }}
 {% for name, value in infoData %}
-${{ name }} = '{{ value.encodedCode }}'
+${{prefix}}-{{ name }} = '{{ value.encodedCode }}'
 {%- endfor %}
 {% endif %}
