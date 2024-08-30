@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/129</span>
+                <span class='fraction'>0/127</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/97</span>
+                <span class='fraction'>0/95</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/119</span>
+                <span class='fraction'>0/117</span>
             </div>
         
             
@@ -484,10 +484,7 @@
 <a name='L419'></a><a href='#L419'>419</a>
 <a name='L420'></a><a href='#L420'>420</a>
 <a name='L421'></a><a href='#L421'>421</a>
-<a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a>
-<a name='L424'></a><a href='#L424'>424</a>
-<a name='L425'></a><a href='#L425'>425</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L422'></a><a href='#L422'>422</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -500,6 +497,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -746,7 +745,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -812,8 +810,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -824,7 +820,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -906,12 +901,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import path from 'path';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/// &lt;reference types="../src/types" /&gt;
+&nbsp;
+import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs-extra';
 import image2uri from 'image2uri';
@@ -1171,7 +1167,6 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >    await fs.ensureDir(options.dist);</span>
     const unicodeObject = <span class="cstat-no" title="statement not covered" >await createSVG(options);</span>
 &nbsp;
-    /** @deprecated */
     let cssToVars: string[] = <span class="cstat-no" title="statement not covered" >[];</span>
     let cssString: string[] = <span class="cstat-no" title="statement not covered" >[];</span>
     let cssRootVars: string[] = <span class="cstat-no" title="statement not covered" >[];</span>
@@ -1234,17 +1229,14 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >    await createSvgSymbol(options);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.css) {</span>
-      const styleTemplatePath = <span class="cstat-no" title="statement not covered" >options.styleTemplates || path.resolve(__dirname, 'styles')</span>
-      const outDir = <span class="cstat-no" title="statement not covered" >typeof options.css === 'object' ? options.css.output || options.dist : options.dist;</span>
-<span class="cstat-no" title="statement not covered" >      await copyTemplate(styleTemplatePath, outDir, {</span>
+      const styleTemplatePath = <span class="cstat-no" title="statement not covered" >options.styleTemplates || (!options.useNameAsUnicode ? path.resolve(__dirname, 'styles') : path.resolve(__dirname, 'ligature-styles'));</span>
+<span class="cstat-no" title="statement not covered" >      await copyTemplate(styleTemplatePath, options.dist, {</span>
         fontname: options.fontName,
         cssString: cssString.join(''),
         cssToVars: cssToVars.join(''),
-        infoData,
         fontSize: fontSize,
         timestamp: new Date().getTime(),
         prefix,
-        nameAsUnicode: options.useNameAsUnicode,
         _opts: typeof options.css === 'boolean' ? {} : { ...options.css }
       });
     }
@@ -1267,7 +1259,7 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >        if (name === 'symbol') <span class="cstat-no" title="statement not covered" >symbolPath = _path;</span></span>
       });
       // default template
-<span class="cstat-no" title="statement not covered" >      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.html');</span>
+<span class="cstat-no" title="statement not covered" >      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.ejs');</span>
       // template data
       const tempData: SvgToFontOptions['website'] &amp; {
         fontname: string;
@@ -1330,7 +1322,6 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created React Native Components. `);</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return infoData;</span>
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    log.log('SvgToFont:CLI:ERR:', error);</span>
   }
@@ -1342,7 +1333,7 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-30T02:49:10.794Z
+                at 2024-08-30T08:18:21.937Z
             </div>
         <script src="prettify.js"></script>
         <script>
