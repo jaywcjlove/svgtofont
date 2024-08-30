@@ -341,18 +341,18 @@ export default async (options: SvgToFontOptions = {}) => {
     }
 
     if (options.website) {
-      const pageName = ['font-class', 'unicode', 'symbol'];
-      let fontClassPath = path.join(options.dist, 'index.html');
-      let unicodePath = path.join(options.dist, 'unicode.html');
-      let symbolPath = path.join(options.dist, 'symbol.html');
+      const pageNames = ['font-class', 'unicode', 'symbol'];
+      const htmlPaths: Record<string, string> = {};
       // setting default home page.
-      const indexName = pageName.includes(options.website.index) ? pageName.indexOf(options.website.index) : 0;
-      pageName.forEach((name, index) => {
-        const _path = path.join(options.dist, indexName === index ? 'index.html' : `${name}.html`);
-        if (name === 'font-class') fontClassPath = _path;
-        if (name === 'unicode') unicodePath = _path;
-        if (name === 'symbol') symbolPath = _path;
+      const indexName = pageNames.includes(options.website.index) ? options.website.index : 'font-class';
+      pageNames.forEach(name => {
+          const fileName = name === indexName ? 'index.html' : `${name}.html`;
+          htmlPaths[name] = path.join(options.dist, fileName);
       });
+      const fontClassPath = htmlPaths['font-class'];
+      const unicodePath = htmlPaths['unicode'];
+      const symbolPath = htmlPaths['symbol'];
+
       // default template
       options.website.template = options.website.template || path.join(__dirname, 'website', 'index.njk');
       // template data
@@ -401,7 +401,7 @@ export default async (options: SvgToFontOptions = {}) => {
       tempData._type = 'symbol';
       const symbolHtmlStr = await createHTML(options.website.template, tempData);
       fs.outputFileSync(symbolPath, symbolHtmlStr);
-      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);
+      log.log(`${color.green('SUCCESS')} Created ${symbolPath} `);
     }
 
     if (options.outSVGPath) {
