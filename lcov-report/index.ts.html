@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/129</span>
+                <span class='fraction'>0/125</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/97</span>
+                <span class='fraction'>0/91</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/119</span>
+                <span class='fraction'>0/118</span>
             </div>
         
             
@@ -832,12 +832,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1254,18 +1254,18 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.website) {</span>
-      const pageName = <span class="cstat-no" title="statement not covered" >['font-class', 'unicode', 'symbol'];</span>
-      let fontClassPath = <span class="cstat-no" title="statement not covered" >path.join(options.dist, 'index.html');</span>
-      let unicodePath = <span class="cstat-no" title="statement not covered" >path.join(options.dist, 'unicode.html');</span>
-      let symbolPath = <span class="cstat-no" title="statement not covered" >path.join(options.dist, 'symbol.html');</span>
+      const pageNames = <span class="cstat-no" title="statement not covered" >['font-class', 'unicode', 'symbol'];</span>
+      const htmlPaths: Record&lt;string, string&gt; = <span class="cstat-no" title="statement not covered" >{};</span>
       // setting default home page.
-      const indexName = <span class="cstat-no" title="statement not covered" >pageName.includes(options.website.index) ? pageName.indexOf(options.website.index) : 0;</span>
-<span class="cstat-no" title="statement not covered" >      pageName.forEach(<span class="fstat-no" title="function not covered" >(n</span>ame, index) =&gt; {</span>
-        const _path = <span class="cstat-no" title="statement not covered" >path.join(options.dist, indexName === index ? 'index.html' : `${name}.html`);</span>
-<span class="cstat-no" title="statement not covered" >        if (name === 'font-class') <span class="cstat-no" title="statement not covered" >fontClassPath = _path;</span></span>
-<span class="cstat-no" title="statement not covered" >        if (name === 'unicode') <span class="cstat-no" title="statement not covered" >unicodePath = _path;</span></span>
-<span class="cstat-no" title="statement not covered" >        if (name === 'symbol') <span class="cstat-no" title="statement not covered" >symbolPath = _path;</span></span>
+      const indexName = <span class="cstat-no" title="statement not covered" >pageNames.includes(options.website.index) ? options.website.index : 'font-class';</span>
+<span class="cstat-no" title="statement not covered" >      pageNames.forEach(<span class="fstat-no" title="function not covered" >na</span>me =&gt; {</span>
+          const fileName = <span class="cstat-no" title="statement not covered" >name === indexName ? 'index.html' : `${name}.html`;</span>
+<span class="cstat-no" title="statement not covered" >          htmlPaths[name] = path.join(options.dist, fileName);</span>
       });
+      const fontClassPath = <span class="cstat-no" title="statement not covered" >htmlPaths['font-class'];</span>
+      const unicodePath = <span class="cstat-no" title="statement not covered" >htmlPaths['unicode'];</span>
+      const symbolPath = <span class="cstat-no" title="statement not covered" >htmlPaths['symbol'];</span>
+&nbsp;
       // default template
 <span class="cstat-no" title="statement not covered" >      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.njk');</span>
       // template data
@@ -1314,7 +1314,7 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >      tempData._type = 'symbol';</span>
       const symbolHtmlStr = <span class="cstat-no" title="statement not covered" >await createHTML(options.website.template, tempData);</span>
 <span class="cstat-no" title="statement not covered" >      fs.outputFileSync(symbolPath, symbolHtmlStr);</span>
-<span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created ${unicodePath} `);</span>
+<span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created ${symbolPath} `);</span>
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (options.outSVGPath) {</span>
@@ -1342,7 +1342,7 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-08-30T19:38:00.643Z
+                at 2024-08-30T20:11:40.630Z
             </div>
         <script src="prettify.js"></script>
         <script>
