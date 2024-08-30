@@ -655,14 +655,14 @@ Define preview web content. Example:
 #### website.template
 
 > Type: `String`  
-> Default value: [index.html](src/website/index.html)  
+> Default value: [index.njk](src/website/index.njk)  
 
-Custom template can customize parameters. You can define your own template based on the [default template](src/website/index.html).
+Custom template can customize parameters. You can define your own template based on the [default template](src/website/index.njk).
 
 ```js
 {
   website: {
-    template: path.join(process.cwd(), "my-template.html")
+    template: path.join(process.cwd(), "my-template.njk")
   }
 }
 ```
