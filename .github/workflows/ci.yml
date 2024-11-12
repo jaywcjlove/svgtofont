@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - v4
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -66,12 +66,12 @@ jobs:
         id: tag_version
         uses: jaywcjlove/changelog-generator@main
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./coverage
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./coverage
 
       - name: Generate Changelog
         id: changelog
