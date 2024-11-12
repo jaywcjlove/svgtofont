@@ -3,7 +3,7 @@ import fs, { ReadStream } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 import color from 'colors-cli';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import svg2ttf from 'svg2ttf';
 import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
