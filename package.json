@@ -69,7 +69,7 @@
   "dependencies": {
     "@tsbb/copy-template-dir": "^1.4.0",
     "auto-config-loader": "^1.7.4",
-    "cheerio": "~1.0.0-rc.12",
+    "cheerio": "^1.0.0",
     "colors-cli": "~1.0.28",
     "del": "~6.1.0",
     "ejs": "~3.1.6",
