@@ -234,7 +234,7 @@ export default async (options: SvgToFontOptions = {}) => {
       }
     }
     if (options.website && pkg.version) {
-      options.website.version = pkg.version;
+      options.website.version = options.website.version ?? pkg.version;
     }
   }
   if (options.log === undefined) options.log = true;
