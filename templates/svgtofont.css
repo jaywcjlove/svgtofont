@@ -1,12 +1,12 @@
 /* Hello CSS! */
 @font-face {
   font-family: "svgtofont";
-  src: url('svgtofont.eot?t=1725049646292'); /* IE9*/
-  src: url('svgtofont.eot?t=1725049646292#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url("svgtofont.woff2?t=1725049646292") format("woff2"),
-  url("svgtofont.woff?t=1725049646292") format("woff"),
-  url('svgtofont.ttf?t=1725049646292') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('svgtofont.svg?t=1725049646292#svgtofont') format('svg'); /* iOS 4.1- */
+  src: url('svgtofont.eot?t=1731480983271'); /* IE9*/
+  src: url('svgtofont.eot?t=1731480983271#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("svgtofont.woff2?t=1731480983271") format("woff2"),
+  url("svgtofont.woff?t=1731480983271") format("woff"),
+  url('svgtofont.ttf?t=1731480983271') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('svgtofont.svg?t=1731480983271#svgtofont') format('svg'); /* iOS 4.1- */
 }
 
 [class^="svgtofont-"], [class*=" svgtofont-"] {
