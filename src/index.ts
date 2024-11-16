@@ -9,7 +9,7 @@ import type { FontOptions } from 'svg2ttf';
 import type { Config } from 'svgo';
 import { log } from './log.js';
 import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate.js';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, generateFontFaceCSS, createTypescript, type TypescriptOptions } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -129,6 +129,11 @@ export type SvgToFontOptions = {
    * This is the setting for [svg2ttf](https://github.com/fontello/svg2ttf/tree/c33a126920f46b030e8ce960cc7a0e38a6946bbc#svg2ttfsvgfontstring-options---buf)
    */
   svg2ttf?: FontOptions;
+  /**
+   * You can configure which font files to exclude from generation. By default, all font files will be generated.
+   * https://github.com/jaywcjlove/svgtofont/issues/238
+   */
+  excludeFormat?: Array<"eot" | "woff" | "woff2" | "ttf" | "svg" | "symbol.svg">;
   website?: {
     /**
      * Add a Github corner to your website
@@ -243,6 +248,8 @@ export default async (options: SvgToFontOptions = {}) => {
 
   options.svgicons2svgfont.fontName = options.fontName;
   options.classNamePrefix = options.classNamePrefix || options.fontName;
+  
+  const excludeFormat = options.excludeFormat || [];
 
   const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
   const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? 'font-size: 16px;' : '') : `font-size: ${fontSizeOpt};`;
@@ -314,15 +321,25 @@ export default async (options: SvgToFontOptions = {}) => {
       await fs.writeJSON(infoDataPath, infoData, { spaces: 2 });
       log.log(`${color.green('SUCCESS')} Created ${infoDataPath} `);
     }
+
     const ttf = await createTTF(options);
-    await createEOT(options, ttf);
-    await createWOFF(options, ttf);
-    await createWOFF2(options, ttf);
-    await createSvgSymbol(options);
+    if (!excludeFormat.includes('eot')) await createEOT(options, ttf);
+    if (!excludeFormat.includes('woff')) await createWOFF(options, ttf);
+    if (!excludeFormat.includes('woff2')) await createWOFF2(options, ttf);
+    if (!excludeFormat.includes('symbol.svg')) await createSvgSymbol(options);
+
+    const ttfPath = path.join(options.dist, options.fontName + ".ttf");
+    if (excludeFormat.includes('ttf')) {
+      fs.removeSync(ttfPath);
+    }
 
     if (options.css) {
       const styleTemplatePath = options.styleTemplates || path.resolve(__dirname, 'styles')
       const outDir = typeof options.css === 'object' ? options.css.output || options.dist : options.dist;
+
+      const cssOptions = typeof options.css === 'object' ? options.css : {};
+      const fontFamilyString = generateFontFaceCSS(options.fontName, cssOptions.cssPath || "", Date.now(), excludeFormat);
+
       await copyTemplate(styleTemplatePath, outDir, {
         fontname: options.fontName,
         cssString: cssString.join(''),
@@ -331,8 +348,9 @@ export default async (options: SvgToFontOptions = {}) => {
         fontSize: fontSize,
         timestamp: new Date().getTime(),
         prefix,
+        fontFamily: fontFamilyString,
         nameAsUnicode: options.useNameAsUnicode,
-        _opts: typeof options.css === 'boolean' ? {} : { ...options.css }
+        _opts: cssOptions
       });
     }
 

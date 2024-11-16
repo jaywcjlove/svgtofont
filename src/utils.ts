@@ -326,3 +326,27 @@ export function createHTML(templatePath: string, data: Record<string, any>): str
   });
 };
 
+export function generateFontFaceCSS(fontName: string, cssPath: string, timestamp: number, excludeFormat: string[]): string {
+  const formats = [
+    { ext: 'eot', format: 'embedded-opentype', ieFix: true },
+    { ext: 'woff2', format: 'woff2' },
+    { ext: 'woff', format: 'woff' },
+    { ext: 'ttf', format: 'truetype' },
+    { ext: 'svg', format: 'svg' }
+  ];
+  let cssString = `  font-family: "${fontName}";\n`;
+  if (!excludeFormat.includes('eot')) {
+    cssString += `  src: url('${cssPath}${fontName}.eot?t=${timestamp}'); /* IE9*/\n`;
+  }
+  cssString += '  src: ';
+  const srcParts = formats
+    .filter(format => !excludeFormat.includes(format.ext))
+    .map(format => {
+      if (format.ext === 'eot') {
+        return `url('${cssPath}${fontName}.eot?t=${timestamp}#iefix') format('${format.format}') /* IE6-IE8 */`;
+      }
+      return `url('${cssPath}${fontName}.${format.ext}?t=${timestamp}') format('${format.format}')`;
+    });
+  cssString += srcParts.join(',\n  ') + ';';
+  return cssString;
+}
