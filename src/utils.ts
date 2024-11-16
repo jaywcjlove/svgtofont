@@ -8,6 +8,7 @@ import ttf2eot from 'ttf2eot';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import nunjucks from 'nunjucks';
+import { merge } from 'auto-config-loader';
 import { type SvgToFontOptions } from './';
 import { log } from './log.js';
 
@@ -350,3 +351,17 @@ export function generateFontFaceCSS(fontName: string, cssPath: string, timestamp
   cssString += srcParts.join(',\n  ') + ';';
   return cssString;
 }
+
+export const getDefaultOptions = (options: SvgToFontOptions): SvgToFontOptions => {
+  return merge({
+    dist: path.resolve(process.cwd(), 'fonts'),
+    src: path.resolve(process.cwd(), 'svg'),
+    startUnicode: 0xea01,
+    svg2ttf: {},
+    svgicons2svgfont: {
+      fontName: 'iconfont',
+    },
+    fontName: 'iconfont',
+    symbolNameDelimiter: '-',
+  }, options);
+};

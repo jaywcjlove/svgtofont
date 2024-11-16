@@ -9,7 +9,8 @@ import type { FontOptions } from 'svg2ttf';
 import type { Config } from 'svgo';
 import { log } from './log.js';
 import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate.js';
-import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, generateFontFaceCSS, createTypescript, type TypescriptOptions } from './utils.js';
+import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
+import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -210,24 +211,17 @@ export type IconInfo = {
 }
 export type InfoData = Record<string, Partial<IconInfo>>
 
-export default async (options: SvgToFontOptions = {}) => {
-  const defaultOptions: SvgToFontOptions = merge({
-    dist: path.resolve(process.cwd(), 'fonts'),
-    src: path.resolve(process.cwd(), 'svg'),
-    startUnicode: 0xea01,
-    svg2ttf: {},
-    svgicons2svgfont: {
-      fontName: 'iconfont',
-    },
-    fontName: 'iconfont',
-    symbolNameDelimiter: '-',
-  }, options);
+const loadConfig = async (options: SvgToFontOptions): Promise<SvgToFontOptions> => {
+  const defaultOptions = getDefaultOptions(options);
   const data = autoConf<SvgToFontOptions>('svgtofont', {
     mustExist: true,
     default: defaultOptions,
     ...options.config,
   });
-  options = merge(defaultOptions, data);
+  return merge(defaultOptions, data);
+};
+
+const handlePkgConfig = (options: SvgToFontOptions): SvgToFontOptions => {
   const pkgPath = path.join(process.cwd(), 'package.json');
   if (fs.pathExistsSync(pkgPath)) {
     const pkg = fs.readJSONSync(pkgPath);
@@ -242,6 +236,12 @@ export default async (options: SvgToFontOptions = {}) => {
       options.website.version = options.website.version ?? pkg.version;
     }
   }
+  return options;
+};
+
+export default async (options: SvgToFontOptions = {}) => {
+  options = await loadConfig(options);
+  options = handlePkgConfig(options);
   if (options.log === undefined) options.log = true;
   log.disabled = !options.log;
   if (options.logger && typeof options.logger === 'function') log.logger = options.logger;
