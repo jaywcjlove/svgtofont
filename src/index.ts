@@ -332,6 +332,10 @@ export default async (options: SvgToFontOptions = {}) => {
     if (excludeFormat.includes('ttf')) {
       fs.removeSync(ttfPath);
     }
+    const svgPath = path.join(options.dist, options.fontName + ".svg");
+    if (excludeFormat.includes('svg')) {
+      fs.removeSync(svgPath)
+    }
 
     if (options.css) {
       const styleTemplatePath = options.styleTemplates || path.resolve(__dirname, 'styles')
