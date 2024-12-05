@@ -68,7 +68,7 @@ graph LR;
     click E "https://yesicon.app/" "216,162 High-Quality Vector Icons from Top Design Teams." _blank
     C .-> ide1
     subgraph ide1 [Project]
-        svg -->a2[svgtofont\ncreate font]
+        svg -->a2[svgtofont create font]
         a2 .-> b3[use font]
     end
 ```
