@@ -248,7 +248,7 @@ export default async (options: SvgToFontOptions = {}) => {
 
   options.svgicons2svgfont.fontName = options.fontName;
   options.classNamePrefix = options.classNamePrefix || options.fontName;
-  
+
   const excludeFormat = options.excludeFormat || [];
 
   const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
@@ -340,9 +340,10 @@ export default async (options: SvgToFontOptions = {}) => {
     if (options.css) {
       const styleTemplatePath = options.styleTemplates || path.resolve(__dirname, 'styles')
       const outDir = typeof options.css === 'object' ? options.css.output || options.dist : options.dist;
+      const hasTimestamp = typeof options.css === 'object' ? options.css.hasTimestamp : true;
 
       const cssOptions = typeof options.css === 'object' ? options.css : {};
-      const fontFamilyString = generateFontFaceCSS(options.fontName, cssOptions.cssPath || "", Date.now(), excludeFormat);
+      const fontFamilyString = generateFontFaceCSS(options.fontName, cssOptions.cssPath || "", Date.now(), excludeFormat, hasTimestamp);
 
       await copyTemplate(styleTemplatePath, outDir, {
         fontname: options.fontName,

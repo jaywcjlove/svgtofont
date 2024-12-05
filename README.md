@@ -458,21 +458,27 @@ type CSSOptions = {
   /**
    * Setting font size.
    */
-  fontSize?: string;
+  fontSize?: string | boolean;
   /**
    * Set the path in the css file
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
-  cssPath?: string
+  cssPath?: string;
   /**
    * Set file name
    * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
    */
-  fileName?: string
+  fileName?: string;
   /**
    * Ad hoc template variables.
    */
   templateVars?: Record<string, any>;
+  /**
+   * When including CSS files in a CSS file,
+   * you can add a timestamp parameter or custom text to the file path to prevent browser caching issues and ensure style updates are applied. @default true
+   * @example `path/to/iconfont.css?t=1612345678`
+   */
+  hasTimestamp?: boolean | string;
 }
 ```
 
@@ -583,6 +589,7 @@ Allows you to provide your own logging function. Set to `function(){}` to
 > Default value: `undefined` 
 
 Some options can be configured with `svgoOptions` though it. [svgo](https://github.com/svg/svgo#configuration)
+
 ### svg2ttf
 
 This is the setting for [svg2ttf](https://github.com/fontello/svg2ttf/tree/c33a126920f46b030e8ce960cc7a0e38a6946bbc#svg2ttfsvgfontstring-options---buf)

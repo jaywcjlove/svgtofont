@@ -280,6 +280,12 @@ export type CSSOptions = {
    * Ad hoc template variables.
    */
   templateVars?: Record<string, any>;
+  /**
+   * When including CSS files in a CSS file,
+   * you can add a timestamp parameter or custom text to the file path to prevent browser caching issues and ensure style updates are applied. @default true
+   * @example `path/to/iconfont.css?t=1612345678`
+   */
+  hasTimestamp?: boolean | string;
 }
 
 // As we are processing css files, we need to eacape HTML entities.
@@ -327,7 +333,8 @@ export function createHTML(templatePath: string, data: Record<string, any>): str
   });
 };
 
-export function generateFontFaceCSS(fontName: string, cssPath: string, timestamp: number, excludeFormat: string[]): string {
+export function generateFontFaceCSS(fontName: string, cssPath: string, timestamp: number, excludeFormat: string[], hasTimestamp: boolean | string = true): string {
+  const timestamString = hasTimestamp === true ? `?t=${timestamp}` : (typeof hasTimestamp == 'string' ? `?t=${hasTimestamp}` : undefined);
   const formats = [
     { ext: 'eot', format: 'embedded-opentype', ieFix: true },
     { ext: 'woff2', format: 'woff2' },
@@ -337,16 +344,16 @@ export function generateFontFaceCSS(fontName: string, cssPath: string, timestamp
   ];
   let cssString = `  font-family: "${fontName}";\n`;
   if (!excludeFormat.includes('eot')) {
-    cssString += `  src: url('${cssPath}${fontName}.eot?t=${timestamp}'); /* IE9*/\n`;
+    cssString += `  src: url('${cssPath}${fontName}.eot${timestamString || ''}'); /* IE9*/\n`;
   }
   cssString += '  src: ';
   const srcParts = formats
     .filter(format => !excludeFormat.includes(format.ext))
     .map(format => {
       if (format.ext === 'eot') {
-        return `url('${cssPath}${fontName}.eot?t=${timestamp}#iefix') format('${format.format}') /* IE6-IE8 */`;
+        return `url('${cssPath}${fontName}.eot${timestamString || '?'}#iefix') format('${format.format}') /* IE6-IE8 */`;
       }
-      return `url('${cssPath}${fontName}.${format.ext}?t=${timestamp}') format('${format.format}')`;
+      return `url('${cssPath}${fontName}.${format.ext}${timestamString || ''}') format('${format.format}')`;
     });
   cssString += srcParts.join(',\n  ') + ';';
   return cssString;
