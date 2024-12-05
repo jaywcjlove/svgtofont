@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/142</span>
+                <span class='fraction'>0/143</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/63</span>
+                <span class='fraction'>0/74</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/134</span>
+                <span class='fraction'>0/135</span>
             </div>
         
             
@@ -429,7 +429,14 @@
 <a name='L364'></a><a href='#L364'>364</a>
 <a name='L365'></a><a href='#L365'>365</a>
 <a name='L366'></a><a href='#L366'>366</a>
-<a name='L367'></a><a href='#L367'>367</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -714,6 +721,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -759,6 +772,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1077,6 +1091,12 @@ export type CSSOptions = {
    * Ad hoc template variables.
    */
   templateVars?: Record&lt;string, any&gt;;
+  /**
+   * When including CSS files in a CSS file,
+   * you can add a timestamp parameter or custom text to the file path to prevent browser caching issues and ensure style updates are applied. @default true
+   * @example `path/to/iconfont.css?t=1612345678`
+   */
+  hasTimestamp?: boolean | string;
 }
 &nbsp;
 // As we are processing css files, we need to eacape HTML entities.
@@ -1124,7 +1144,8 @@ export function <span class="fstat-no" title="function not covered" >createHTML(
   });
 };
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >generateFontFaceCSS(</span>fontName: string, cssPath: string, timestamp: number, excludeFormat: string[]): string {
+export function <span class="fstat-no" title="function not covered" >generateFontFaceCSS(</span>fontName: string, cssPath: string, timestamp: number, excludeFormat: string[], hasTimestamp: boolean | string = <span class="branch-0 cbranch-no" title="branch not covered" >true)</span>: string {
+  const timestamString = <span class="cstat-no" title="statement not covered" >hasTimestamp === true ? `?t=${timestamp}` : (typeof hasTimestamp == 'string' ? `?t=${hasTimestamp}` : undefined);</span>
   const formats = <span class="cstat-no" title="statement not covered" >[</span>
     { ext: 'eot', format: 'embedded-opentype', ieFix: true },
     { ext: 'woff2', format: 'woff2' },
@@ -1134,16 +1155,16 @@ export function <span class="fstat-no" title="function not covered" >generateFon
   ];
   let cssString = <span class="cstat-no" title="statement not covered" >`  font-family: "${fontName}";\n`;</span>
 <span class="cstat-no" title="statement not covered" >  if (!excludeFormat.includes('eot')) {</span>
-<span class="cstat-no" title="statement not covered" >    cssString += `  src: url('${cssPath}${fontName}.eot?t=${timestamp}'); /* IE9*/\n`;</span>
+<span class="cstat-no" title="statement not covered" >    cssString += `  src: url('${cssPath}${fontName}.eot${timestamString || ''}'); /* IE9*/\n`;</span>
   }
 <span class="cstat-no" title="statement not covered" >  cssString += '  src: ';</span>
   const srcParts = <span class="cstat-no" title="statement not covered" >formats</span>
     .filter(<span class="fstat-no" title="function not covered" >fo</span>rmat =&gt; <span class="cstat-no" title="statement not covered" >!excludeFormat.includes(format.ext))</span>
     .map(<span class="fstat-no" title="function not covered" >fo</span>rmat =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (format.ext === 'eot') {</span>
-<span class="cstat-no" title="statement not covered" >        return `url('${cssPath}${fontName}.eot?t=${timestamp}#iefix') format('${format.format}') /* IE6-IE8 */`;</span>
+<span class="cstat-no" title="statement not covered" >        return `url('${cssPath}${fontName}.eot${timestamString || '?'}#iefix') format('${format.format}') /* IE6-IE8 */`;</span>
       }
-<span class="cstat-no" title="statement not covered" >      return `url('${cssPath}${fontName}.${format.ext}?t=${timestamp}') format('${format.format}')`;</span>
+<span class="cstat-no" title="statement not covered" >      return `url('${cssPath}${fontName}.${format.ext}${timestamString || ''}') format('${format.format}')`;</span>
     });
 <span class="cstat-no" title="statement not covered" >  cssString += srcParts.join(',\n  ') + ';';</span>
 <span class="cstat-no" title="statement not covered" >  return cssString;</span>
@@ -1168,7 +1189,7 @@ export const getDefaultOptions = <span class="cstat-no" title="statement not cov
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-20T03:06:24.767Z
+                at 2024-12-05T02:08:43.061Z
             </div>
         <script src="prettify.js"></script>
         <script>
