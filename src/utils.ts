@@ -100,19 +100,23 @@ export const toPascalCase = (str: string) =>
  * @return {Array} svg files
  */
 export function filterSvgFiles(svgFolderPath: string): string[] {
-  let files = fs.readdirSync(svgFolderPath, 'utf-8');
-  let svgArr = [];
+  const files = fs.readdirSync(svgFolderPath, 'utf-8');
   if (!files) {
     throw new Error(`Error! Svg folder is empty.${svgFolderPath}`);
   }
+  const svgSet = new Set<string>();
+  for (const file of files) {
+    const filePath = path.join(svgFolderPath, file);
+    const stat = fs.statSync(filePath);
 
-  for (let i in files) {
-    if (typeof files[i] !== 'string' || path.extname(files[i]) !== '.svg') continue;
-    if (!~svgArr.indexOf(files[i])) {
-      svgArr.push(path.join(svgFolderPath, files[i]));
+    if (stat.isDirectory()) {
+      const nestedFiles = filterSvgFiles(filePath);
+      nestedFiles.forEach(svg => svgSet.add(svg));
+    } else if (path.extname(file) === '.svg') {
+      svgSet.add(filePath);
     }
   }
-  return svgArr;
+  return Array.from(svgSet);
 }
 
 export function snakeToUppercase(str: string) {
