@@ -137,7 +137,7 @@ import svgtofont from 'svgtofont';
 import path from 'node:path';
  
 svgtofont({
-  src: path.resolve(process.cwd(), 'icon'), // svg path
+  src: path.resolve(process.cwd(), 'icon'), // svg path, only searches one level, not recursive
   dist: path.resolve(process.cwd(), 'fonts'), // output path
   fontName: 'svgtofont', // font name
   css: true, // Create CSS files.
@@ -153,7 +153,7 @@ import svgtofont from 'svgtofont';
 import path from 'node:path';
 
 svgtofont({
-  src: path.resolve(process.cwd(), "icon"), // svg path
+  src: path.resolve(process.cwd(), "icon"), // svg path, only searches one level, not recursive
   dist: path.resolve(process.cwd(), "fonts"), // output path
   styleTemplates: path.resolve(rootPath, "styles"), // file templates path (optional)
   fontName: "svgtofont", // font name
