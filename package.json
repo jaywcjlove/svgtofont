@@ -81,7 +81,7 @@
     }
   },
   "dependencies": {
-    "auto-config-loader": "^1.7.4",
+    "auto-config-loader": "^2.0.0",
     "cheerio": "~1.0.0-rc.12",
     "colors-cli": "~1.0.28",
     "fs-extra": "~11.2.0",
