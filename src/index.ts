@@ -117,6 +117,11 @@ export type SvgToFontOptions = {
    */
   useNameAsUnicode?: boolean;
   /**
+   * adds possibility to use name (file name) in addition to codepoints. adds support of ligatures.
+   * @default false
+   */
+  addLigatures?: boolean
+  /**
    * consoles whenever {{ cssString }} template outputs unicode characters or css vars
    * @default false
    */
