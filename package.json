@@ -84,7 +84,7 @@
     "auto-config-loader": "^2.0.0",
     "cheerio": "~1.0.0-rc.12",
     "colors-cli": "~1.0.28",
-    "fs-extra": "~11.2.0",
+    "fs-extra": "~11.3.0",
     "image2uri": "^2.1.2",
     "nunjucks": "^3.2.4",
     "svg2ttf": "~6.0.3",
