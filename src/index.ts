@@ -218,7 +218,7 @@ export type InfoData = Record<string, Partial<IconInfo>>
 
 const loadConfig = async (options: SvgToFontOptions): Promise<SvgToFontOptions> => {
   const defaultOptions = getDefaultOptions(options);
-  const data = autoConf<SvgToFontOptions>('svgtofont', {
+  const data = await autoConf<SvgToFontOptions>('svgtofont', {
     mustExist: true,
     default: defaultOptions,
     ...options.config,
