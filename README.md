@@ -424,6 +424,20 @@ as you add more svgs and process them into your font you would just use the same
 <i class="icons">edit</i>
 ```
 
+### addLigatures
+
+> Type: `Boolean`  
+> Default value: `false`  
+
+adds possibility to use name (file name) in addition to codepoints. adds support of ligatures.
+
+let's say you have some svgs and you want to use codepoints but for some of them for example with a file name of `add` you want to use ligatures for it. this option only adds ligatures and still allows for using codepoints as usual. this is in contrary to useNameAsUnicode which basically removes support for codepoints in favour of ligatures.
+```js
+{
+  ...
+  addLigatures: true
+}
+
 ### useCSSVars
 
 > Type: `Boolean`  

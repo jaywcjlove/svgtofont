@@ -49,6 +49,9 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
         unicode[0] = _name;
         UnicodeObj[_name] = _name;
       }
+      if (!!options.addLigatures) {
+        unicode.push(_name)
+      }
       glyph.metadata = { unicode, name: _name };
       fontStream.write(glyph);
     }
