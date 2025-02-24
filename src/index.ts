@@ -296,10 +296,10 @@ export default async (options: SvgToFontOptions = {}) => {
         if (options.useCSSVars) {
           if (index === 0) cssRootVars.push(`:root {\n`)
           cssRootVars.push(`--${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
-          cssString.push(`.${symbolName}:before { content: var(--${symbolName}); }\n`);
+          cssString.push(`.${symbolName}::before { content: var(--${symbolName}); }\n`);
           if (index === self.length - 1) cssRootVars.push(`}\n`)
         } else {
-          cssString.push(`.${symbolName}:before { content: "\\${encodedCodes.toString(16)}"; }\n`);
+          cssString.push(`.${symbolName}::before { content: "\\${encodedCodes.toString(16)}"; }\n`);
         }
       }
       infoData[name].encodedCode = `\\${encodedCodes.toString(16)}`;
