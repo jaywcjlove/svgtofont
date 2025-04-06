@@ -214,7 +214,7 @@ import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymb
 
 const options = { ... };
 
-async function creatFont() {
+async function createFont() {
   const unicodeObject = await createSVG(options); 
   const ttf = await createTTF(options); // SVG Font => TTF
   await createEOT(options, ttf); // TTF => EOT
