@@ -437,6 +437,7 @@ let's say you have some svgs and you want to use codepoints but for some of them
   ...
   addLigatures: true
 }
+```
 
 ### useCSSVars
 
