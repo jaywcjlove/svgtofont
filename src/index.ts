@@ -285,12 +285,12 @@ export default async (options: SvgToFontOptions = {}) => {
       const _code = unicodeObject[name];
       let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
       let iconPart = symbolName + '">';
-      let encodedCodes: string | number = _code.charCodeAt(0);
+      let encodedCodes: string | number = _code.codePointAt(0);
 
       if (options.useNameAsUnicode) {
         symbolName = name;
         iconPart = prefix + '">' + name;
-        encodedCodes = _code.split('').map(x => x.charCodeAt(0)).join(';&amp;#');
+        encodedCodes = [..._code].map(x => x.codePointAt(0)).join(';&amp;#');
       } else {
         cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
         if (options.useCSSVars) {

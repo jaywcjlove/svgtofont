@@ -35,7 +35,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       let _name = path.basename(svgPath, ".svg");
       const glyph = fs.createReadStream(svgPath) as ReadStream & { metadata: { unicode: string[], name: string } };
 
-      const curUnicode = String.fromCharCode(startUnicode);
+      const curUnicode = String.fromCodePoint(startUnicode);
       const [_curUnicode, _startUnicode] = options.getIconUnicode
         ? (options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
 
