@@ -235,6 +235,10 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
     filterSvgFiles(options.src).forEach(svgPath => {
       const fileName = path.basename(svgPath, path.extname(svgPath));
       const file = fs.readFileSync(svgPath, "utf8");
+
+      // trim xml declaration
+      file = file.replace(/<\?xml.*?\?>\s*/g, '').trim();
+
       const svgNode = $(file);
       const symbolNode = $("<symbol></symbol>");
       symbolNode.attr("viewBox", svgNode.attr("viewBox"));
