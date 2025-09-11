@@ -234,7 +234,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
   return new Promise((resolve, reject) => {
     filterSvgFiles(options.src).forEach(svgPath => {
       const fileName = path.basename(svgPath, path.extname(svgPath));
-      const file = fs.readFileSync(svgPath, "utf8");
+      let file = fs.readFileSync(svgPath, "utf8");
 
       // trim xml declaration
       file = file.replace(/<\?xml.*?\?>\s*/g, '').trim();
