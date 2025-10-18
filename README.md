@@ -141,6 +141,7 @@ svgtofont({
   dist: path.resolve(process.cwd(), 'fonts'), // output path
   fontName: 'svgtofont', // font name
   css: true, // Create CSS files.
+  sortSource: 'by-name', // Sort SVG files alphabetically by name
 }).then(() => {
   console.log('done!');
 });
@@ -158,6 +159,7 @@ svgtofont({
   styleTemplates: path.resolve(rootPath, "styles"), // file templates path (optional)
   fontName: "svgtofont", // font name
   css: true, // Create CSS files.
+  sortSource: 'no-sort', // Keep original file system order
   startUnicode: 0xea01, // unicode start number
   svgicons2svgfont: {
     fontHeight: 1000,
@@ -351,6 +353,33 @@ Output `./dist/info.json`, The content is as follows:
 > Default value: `svg`  
 
 output path
+
+### sortSource
+
+> Type: `'no-sort' | 'by-name'`  
+> Default value: `'no-sort'`  
+
+Sort SVG files processing order:
+- `'no-sort'`: Keep original file system order (default)
+- `'by-name'`: Sort files alphabetically by filename
+
+```js
+svgtofont({
+  src: './svg',
+  dist: './fonts',
+  fontName: 'my-font',
+  sortSource: 'by-name' // Sort files alphabetically
+});
+```
+
+**CLI Usage:**
+```bash
+# Sort files alphabetically by name
+svgtofont --sources ./svg --output ./fonts --fontName my-font --sortByName
+
+# Keep original order (default)
+svgtofont --sources ./svg --output ./fonts --fontName my-font
+```
 
 ### emptyDist
 

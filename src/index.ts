@@ -15,6 +15,8 @@ import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+export type SortSource = 'no-sort' | 'by-name';
+
 export type SvgToFontOptions = {
   /** Support for .svgtofontrc and more configuration files. */
   config?: AutoConfOption<SvgToFontOptions>
@@ -40,6 +42,11 @@ export type SvgToFontOptions = {
    * ```
    */
   src?: string;
+  /**
+   * Sort SVG files by name or no sorting (original order).
+   * @default 'no-sort'
+   */
+  sortSource?: SortSource;
   /**
    * The font family name you want.
    * @default iconfont

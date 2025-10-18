@@ -12,6 +12,7 @@ type ArgvResult = Arguments<{
   sources: string;
   output: string;
   fontName: string;
+  sortSource: 'no-sort' | 'by-name';
 }>
 
 const argv = yargs(hideBin(process.argv))
@@ -21,10 +22,12 @@ const argv = yargs(hideBin(process.argv))
   .describe('o', 'Output directory.')
   .alias('f', 'fontName')
   .describe('f', 'Font Name.')
+  .alias('s', 'sortByName')
+  .describe('s', 'sort sources by name')
   .demandOption(['output', 'sources'])
   .help('h')
   .alias('h', 'help')
-  .epilog('copyright 2019')
+  .epilog('copyright 2019')  
   .argv as ArgvResult;
 
 const sourcesPath = path.resolve(process.cwd(), argv.sources);
@@ -48,6 +51,7 @@ svgtofont({
   outSVGReact: true,
   outSVGReactNative: false,
   outSVGPath: true,
+  sortSource: (argv.sortByName as 'no-sort' | 'by-name') || 'no-sort', // Sort SVG files
   svgicons2svgfont: {
     fontHeight: 1000,
     normalize: true,

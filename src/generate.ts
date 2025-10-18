@@ -9,7 +9,7 @@ import { type SvgToFontOptions } from './';
  * <font-name>.json
  */
 export async function generateIconsSource(options: SvgToFontOptions = {}){
-  const ICONS_PATH = filterSvgFiles(options.src)
+  const ICONS_PATH = filterSvgFiles(options.src, options.sortSource)
   const data = await buildPathsObject(ICONS_PATH, options);
   const outPath = path.join(options.dist, `${options.fontName}.json`);
   await fs.outputFile(outPath, `{${data}\n}`);
@@ -57,7 +57,7 @@ export declare const ${name}: (props: React.SVGProps<SVGSVGElement>) => JSX.Elem
  * <font-name>.json
  */
 export async function generateReactIcons(options: SvgToFontOptions = {}) {
-  const ICONS_PATH = filterSvgFiles(options.src);
+  const ICONS_PATH = filterSvgFiles(options.src, options.sortSource);
   const data = await outputReactFile(ICONS_PATH, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
@@ -134,7 +134,7 @@ export declare const ${name}: (props: ${name}Props) => JSX.Element;
  * <font-name>.json
  */
 export function generateReactNativeIcons(options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
-  const ICONS_PATH = filterSvgFiles(options.src);
+  const ICONS_PATH = filterSvgFiles(options.src, options.sortSource);
   outputReactNativeFile(ICONS_PATH, options, unicodeObject);
 }
 

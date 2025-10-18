@@ -9,7 +9,7 @@ import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import nunjucks from 'nunjucks';
 import { merge } from 'auto-config-loader';
-import { type SvgToFontOptions } from './';
+import { type SvgToFontOptions, type SortSource } from './';
 import { log } from './log.js';
 
 let UnicodeObj: Record<string, string> = {};
@@ -68,7 +68,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
           reject(err);
         }
       });
-    filterSvgFiles(options.src).forEach((svg: string) => {
+    filterSvgFiles(options.src, options.sortSource).forEach((svg: string) => {
       if (typeof svg !== 'string') return false;
       writeFontStream(svg);
     });
@@ -102,7 +102,7 @@ export const toPascalCase = (str: string) =>
  * Filter svg files
  * @return {Array} svg files
  */
-export function filterSvgFiles(svgFolderPath: string): string[] {
+export function filterSvgFiles(svgFolderPath: string, sortSource: SortSource = 'no-sort'): string[] {
   let files = fs.readdirSync(svgFolderPath, 'utf-8');
   let svgArr = [];
   if (!files) {
@@ -115,6 +115,17 @@ export function filterSvgFiles(svgFolderPath: string): string[] {
       svgArr.push(path.join(svgFolderPath, files[i]));
     }
   }
+
+  // Sort SVG files based on the chosen sorting method
+  if (sortSource === 'by-name') {
+    svgArr.sort((a, b) => {
+        const nameA = path.basename(a).toLowerCase();
+        const nameB = path.basename(b).toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+  }
+  // For 'no-sort', we keep the original order
+
   return svgArr;
 }
 
@@ -137,7 +148,7 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
   const uppercaseFontName = snakeToUppercase(options.fontName);
   const { extension = 'd.ts', enumName = uppercaseFontName } = tsOptions;
   const DIST_PATH = path.join(options.dist, `${options.fontName}.${extension}`);
-  const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
+  const fileNames = filterSvgFiles(options.src, options.sortSource).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
   await fs.writeFile(
     DIST_PATH,
     [
@@ -232,7 +243,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
   const DIST_PATH = path.join(options.dist, `${options.fontName}.symbol.svg`);
   const $ = load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>');
   return new Promise((resolve, reject) => {
-    filterSvgFiles(options.src).forEach(svgPath => {
+    filterSvgFiles(options.src, options.sortSource).forEach(svgPath => {
       const fileName = path.basename(svgPath, path.extname(svgPath));
       let file = fs.readFileSync(svgPath, "utf8");
 
