@@ -24,6 +24,7 @@ const options = {
   outSVGReact: true,
   outSVGReactNative: true,
   outSVGPath: true,
+  outSVGVue: true,
   startNumber: 20000, // unicode start number
   svgicons2svgfont: {
     fontHeight: 1000,
