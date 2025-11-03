@@ -216,12 +216,29 @@ export const ${name} = defineComponent({
       'svg',
       {
         viewBox: '0 0 20 20',
-        width: ${size ? `'${size}'` : 'undefined'},
-        height: ${size ? `'${size}'` : 'undefined'},
+        ${size ? `width: '${size}', height: '${size}',` : ''}
         class: \`${fontName} \${props.class}\`,
         ...attrs
       },
-      [${source}]
+      [
+        ${source
+            .split('\n')
+            .filter(Boolean)
+            .map(path => {
+              const attrPairs = [];
+              const attrRegex = /([a-zA-Z\-:]+)=("[^"]*"|'[^']*'|[^\s"']+)/g;
+              let match;
+              const pathContent = path.replace(/^<path\s*|\s*\/?>$/g, '');
+              while ((match = attrRegex.exec(pathContent)) !== null) {
+                const key = match[1];
+                const value = match[2];
+                attrPairs.push(`"${key}": ${value}`);
+              }
+              return `h('path', {${attrPairs.join(', ')}})`;
+            })
+            .join(',\n        ')
+          }
+      ]
     );
   }
 });
