@@ -8,7 +8,7 @@ import { autoConf, merge, type AutoConfOption } from 'auto-config-loader';
 import type { FontOptions } from 'svg2ttf';
 import type { Config } from 'svgo';
 import { log } from './log.js';
-import {generateIconsSource, generateReactIcons, generateReactNativeIcons, generateVueIcons} from './generate.js';
+import { generateIconsSource, generateReactIcons, generateReactNativeIcons, generateVueIcons } from './generate.js';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
 import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 

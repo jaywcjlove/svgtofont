@@ -153,10 +153,8 @@ function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, 
   fs.outputFileSync(outDistPath.replace(/\.jsx$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));
 }
 
-/** Vue support */
-
 /**
- * Generate React Icon
+ * Generate Vue Icon
  * <font-name>.json
  */
 export async function generateVueIcons(options: SvgToFontOptions = {}) {
