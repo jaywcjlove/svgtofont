@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/144</span>
+                <span class='fraction'>0/147</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/111</span>
+                <span class='fraction'>0/113</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/133</span>
+                <span class='fraction'>0/136</span>
             </div>
         
             
@@ -515,7 +515,15 @@
 <a name='L450'></a><a href='#L450'>450</a>
 <a name='L451'></a><a href='#L451'>451</a>
 <a name='L452'></a><a href='#L452'>452</a>
-<a name='L453'></a><a href='#L453'>453</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -733,6 +741,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -948,6 +960,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -977,7 +993,7 @@ import { autoConf, merge, type AutoConfOption } from 'auto-config-loader';
 import type { FontOptions } from 'svg2ttf';
 import type { Config } from 'svgo';
 import { log } from './log.js';
-import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate.js';
+import { generateIconsSource, generateReactIcons, generateReactNativeIcons, generateVueIcons } from './generate.js';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
 import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 &nbsp;
@@ -1026,6 +1042,10 @@ export type SvgToFontOptions = {
    * Output `./dist/reactNative/`, SVG generates `reactNative` component.
    */
   outSVGReactNative?: boolean;
+  /**
+   * Output `./dist/vue/`, SVG generates `vue` components.
+   */
+  outSVGVue?: boolean;
   /**
    * Output `./dist/svgtofont.json`, The content is as follows:
    * @example
@@ -1413,6 +1433,10 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
 <span class="cstat-no" title="statement not covered" >      generateReactNativeIcons(options, unicodeObject);</span>
 <span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created React Native Components. `);</span>
     }
+<span class="cstat-no" title="statement not covered" >    if (options.outSVGVue) {</span>
+      const outPath = <span class="cstat-no" title="statement not covered" >await generateVueIcons(options);</span>
+<span class="cstat-no" title="statement not covered" >      log.log(`${color.green('SUCCESS')} Created Vue Components. `);</span>
+    }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return infoData;</span>
   } catch (error) {
@@ -1426,7 +1450,7 @@ export default <span class="fstat-no" title="function not covered" >as</span>ync
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-03T07:27:37.722Z
+                at 2025-11-03T17:57:35.400Z
             </div>
         <script src="prettify.js"></script>
         <script>
