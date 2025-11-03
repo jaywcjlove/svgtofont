@@ -32,7 +32,8 @@ it('example test case.', async () => {
     'svgtofont.ttf',
     'svgtofont.woff',
     'svgtofont.woff2',
-    'symbol.html'
+    'symbol.html',
+    'vue',
   ]);
 });
 
@@ -74,7 +75,8 @@ it('templates templates test case.', async () => {
     'svgtofont.ttf',
     'svgtofont.woff',
     'svgtofont.woff2',
-    'symbol.html'
+    'symbol.html',
+    'vue'
   ]);
   const css = await fs.readFile(path.resolve(dist, 'svgtofont.css'));
   expect(css.toString().indexOf('Hello CSS!') > -1).toBeTruthy();

@@ -8,7 +8,7 @@ import { autoConf, merge, type AutoConfOption } from 'auto-config-loader';
 import type { FontOptions } from 'svg2ttf';
 import type { Config } from 'svgo';
 import { log } from './log.js';
-import { generateIconsSource, generateReactIcons, generateReactNativeIcons } from './generate.js';
+import {generateIconsSource, generateReactIcons, generateReactNativeIcons, generateVueIcons} from './generate.js';
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
 import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 
@@ -57,6 +57,10 @@ export type SvgToFontOptions = {
    * Output `./dist/reactNative/`, SVG generates `reactNative` component.
    */
   outSVGReactNative?: boolean;
+  /**
+   * Output `./dist/vue/`, SVG generates `vue` components.
+   */
+  outSVGVue?: boolean;
   /**
    * Output `./dist/svgtofont.json`, The content is as follows:
    * @example
@@ -443,6 +447,10 @@ export default async (options: SvgToFontOptions = {}) => {
     if (options.outSVGReactNative) {
       generateReactNativeIcons(options, unicodeObject);
       log.log(`${color.green('SUCCESS')} Created React Native Components. `);
+    }
+    if (options.outSVGVue) {
+      const outPath = await generateVueIcons(options);
+      log.log(`${color.green('SUCCESS')} Created Vue Components. `);
     }
 
     return infoData;

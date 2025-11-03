@@ -47,6 +47,7 @@ svgtofont({
   css: true, // Create CSS files.
   outSVGReact: true,
   outSVGReactNative: false,
+  outSVGVue: true,
   outSVGPath: true,
   svgicons2svgfont: {
     fontHeight: 1000,

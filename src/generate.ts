@@ -152,3 +152,84 @@ function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, 
   fs.outputFileSync(outDistPath, reactNativeSource(comName, fontSize, iconMap));
   fs.outputFileSync(outDistPath.replace(/\.jsx$/, '.d.ts'), reactNativeTypeSource(comName, iconMap));
 }
+
+/** Vue support */
+
+/**
+ * Generate React Icon
+ * <font-name>.json
+ */
+export async function generateVueIcons(options: SvgToFontOptions = {}) {
+  const ICONS_PATH = filterSvgFiles(options.src);
+  const data = await outputVueFile(ICONS_PATH, options);
+  const outPath = path.join(options.dist, 'vue', 'index.js');
+  fs.outputFileSync(outPath, data.join('\n'));
+  fs.outputFileSync(outPath.replace(/\.js$/, '.d.ts'), data.join('\n'));
+  return outPath;
+}
+
+async function outputVueFile(files: string[], options: SvgToFontOptions = {}) {
+  const svgoOptions = options.svgoOptions || {};
+  const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize
+  const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? '16px' : '') : fontSizeOpt;
+  const fontName = options.classNamePrefix || options.fontName
+  return Promise.all(
+    files.map(async filepath => {
+      let name = toPascalCase(path.basename(filepath, '.svg'));
+      if (/^[vV]ue$/.test(name)) {
+        name = name + toPascalCase(fontName);
+      }
+      const svg = fs.readFileSync(filepath, 'utf-8');
+      const pathData = optimize(svg, {
+        path: filepath,
+        ...svgoOptions,
+        plugins: [
+          'removeXMLNS',
+          'removeEmptyAttrs',
+          'convertTransform',
+          // 'convertShapeToPath',
+          // 'removeViewBox'
+          ...(svgoOptions.plugins || [])
+        ]
+      });
+      const str: string[] = (pathData.data.match(/ d="[^"]+"/g) || []).map(s => s.slice(3));
+      const outDistPath = path.join(options.dist, 'vue', `${name}.js`);
+      const pathStrings = str.map((d, i) => `<path d=${d} fillRule="evenodd" />`);
+      const comName = isNaN(Number(name.charAt(0))) ? name : toPascalCase(fontName) + name;
+      fs.outputFileSync(outDistPath, vueSource(comName, fontSize, fontName, pathStrings.join(',\n')));
+      fs.outputFileSync(outDistPath.replace(/\.js$/, '.d.ts'), vueTypeSource(comName));
+      return `export * from './${name}';`;
+    }),
+  );
+}
+
+const vueSource = (name: string, size: string, fontName: string, source: string) => `import { defineComponent, h } from 'vue';
+
+export const ${name} = defineComponent({
+  name: '${name}',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        width: ${size ? `'${size}'` : 'undefined'},
+        height: ${size ? `'${size}'` : 'undefined'},
+        class: \`${fontName} \${props.class}\`,
+        ...attrs
+      },
+      [${source}]
+    );
+  }
+});
+`;
+
+const vueTypeSource = (name: string) => `import type { DefineComponent } from 'vue';
+declare const ${name}: DefineComponent<Record<string, any>>;
+export { ${name} };
+`;
