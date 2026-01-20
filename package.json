@@ -37,7 +37,7 @@
   "author": "Kenny <wowohoo@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaywcjlove/svgtofont.git"
+    "url": "git+https://github.com/jaywcjlove/svgtofont.git"
   },
   "svgtofont": {
     "css": {
