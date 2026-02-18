@@ -9,6 +9,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+{% if hasMulticolor %}
+[class^="{{prefix}}-"] [class^="path"]::before,
+[class*=" {{prefix}}-"] [class^="path"]::before {
+  font-family: '{{fontname}}' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+{% endif %}
+
 {% if not nameAsUnicode %}
 {{cssString}}
 {% endif %}

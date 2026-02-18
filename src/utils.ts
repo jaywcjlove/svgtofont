@@ -11,6 +11,7 @@ import nunjucks from 'nunjucks';
 import { merge } from 'auto-config-loader';
 import { type SvgToFontOptions } from './';
 import { log } from './log.js';
+import { analyzeSvgColors, generateLayerSvgs, type MulticolorMap, type CreateSVGResult } from './multicolor.js';
 
 let UnicodeObj: Record<string, string> = {};
 /**
@@ -22,9 +23,15 @@ let startUnicode = 0xea01;
 /**
  * SVG to SVG font
  */
-export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string, string>> {
+export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResult> {
   startUnicode = options.startUnicode
   UnicodeObj = {}
+  const multicolorMap: MulticolorMap = {};
+
+  // Temp directory for multicolor layer SVGs
+  const tempDir = options.multicolor ? path.join(options.dist, '.multicolor-tmp') : null;
+  if (tempDir) fs.ensureDirSync(tempDir);
+
   return new Promise(async (resolve, reject) => {
     const fontStream = new SVGIcons2SVGFontStream({
       ...options.svgicons2svgfont
@@ -56,12 +63,25 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       fontStream.write(glyph);
     }
 
+    function writeGlyphFromFile(filePath: string, glyphName: string): { unicode: string; codepoint: number } {
+      const glyph = fs.createReadStream(filePath) as ReadStream & { metadata: { unicode: string[], name: string } };
+      const curUnicode = String.fromCodePoint(startUnicode);
+      const unicode: string[] = [curUnicode];
+      UnicodeObj[glyphName] = unicode[0];
+      startUnicode++;
+      glyph.metadata = { unicode, name: glyphName };
+      fontStream.write(glyph);
+      return { unicode: curUnicode, codepoint: curUnicode.codePointAt(0)! };
+    }
+
     const DIST_PATH = path.join(options.dist, options.fontName + ".svg");
     // Setting the font destination
     fontStream.pipe(fs.createWriteStream(DIST_PATH))
       .on("finish", () => {
+        // Clean up temp directory
+        if (tempDir) fs.removeSync(tempDir);
         log.log(`${color.green('SUCCESS')} ${color.blue_bt('SVG')} font successfully created!\n  ╰┈▶ ${DIST_PATH}`);
-        resolve(UnicodeObj);
+        resolve({ unicodeObject: UnicodeObj, multicolorMap });
       })
       .on("error", (err) => {
         if (err) {
@@ -70,6 +90,41 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<Record<string
       });
     filterSvgFiles(options.src).forEach((svg: string) => {
       if (typeof svg !== 'string') return false;
+
+      if (options.multicolor) {
+        const iconName = path.basename(svg, '.svg');
+        const svgContent = fs.readFileSync(svg, 'utf-8');
+        const analysis = analyzeSvgColors(svgContent);
+
+        if (analysis.isMulticolor) {
+          const layerSvgs = generateLayerSvgs(analysis);
+          const layers: import('./multicolor.js').MulticolorLayerInfo[] = [];
+
+          layerSvgs.forEach((layer, idx) => {
+            const glyphName = `${iconName}-path${idx + 1}`;
+            const tmpPath = path.join(tempDir!, glyphName + '.svg');
+            fs.writeFileSync(tmpPath, layer.svgContent);
+            const result = writeGlyphFromFile(tmpPath, glyphName);
+
+            layers.push({
+              layerIndex: idx,
+              glyphName,
+              unicode: result.unicode,
+              color: layer.color,
+              encodedCode: result.codepoint,
+            });
+          });
+
+          multicolorMap[iconName] = {
+            originalName: iconName,
+            layerCount: layers.length,
+            layers,
+          };
+
+          return; // Skip normal processing for this multicolor icon
+        }
+      }
+
       writeFontStream(svg);
     });
 
@@ -377,5 +432,6 @@ export const getDefaultOptions = (options: SvgToFontOptions): SvgToFontOptions =
     },
     fontName: 'iconfont',
     symbolNameDelimiter: '-',
+    multicolor: false,
   }, options);
 };
