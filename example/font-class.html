@@ -70,6 +70,9 @@
     .icons ul li.class-icon { font-size: 21px; line-height: 21px; padding-bottom: 20px; }
     .icons ul li.class-icon p{ font-size: 12px; }
     .icons ul li.class-icon [class^="svgtofont-"]{ font-size: 26px; }
+    .icons ul li.class-icon [class^="svgtofont-"] [class^="path"]::before {
+      font-family: 'svgtofont' !important;
+    }
     
     
     .github-corner:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
