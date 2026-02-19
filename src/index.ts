@@ -209,6 +209,13 @@ export type SvgToFontOptions = {
    * @default false
    */
   typescript?: boolean | TypescriptOptions
+  /**
+   * Enable multicolor icon support. When true, SVGs with multiple
+   * fill colors are automatically split into separate layers in the font,
+   * with CSS that overlays them using IcoMoon-style span elements.
+   * @default false
+   */
+  multicolor?: boolean;
 }
 
 export type IconInfo = {
@@ -217,6 +224,14 @@ export type IconInfo = {
   unicode: string;
   className: string;
   encodedCode: string | number;
+  multicolor?: boolean;
+  layers?: Array<{
+    path: string;
+    className: string;
+    encodedCode: string;
+    unicode: string;
+    color: string;
+  }>;
 }
 export type InfoData = Record<string, Partial<IconInfo>>
 
@@ -272,7 +287,17 @@ export default async (options: SvgToFontOptions = {}) => {
     }
     // Ensures that the directory exists.
     await fs.ensureDir(options.dist);
-    const unicodeObject = await createSVG(options);
+    const { unicodeObject, multicolorMap } = await createSVG(options);
+
+    // Set of multicolor layer glyph names to skip in standard CSS loop
+    const multicolorGlyphNames = new Set<string>();
+    if (options.multicolor) {
+      for (const duo of Object.values(multicolorMap)) {
+        for (const layer of duo.layers) {
+          multicolorGlyphNames.add(layer.glyphName);
+        }
+      }
+    }
 
     /** @deprecated */
     let cssToVars: string[] = [];
@@ -285,6 +310,9 @@ export default async (options: SvgToFontOptions = {}) => {
     const infoData: InfoData = {}
 
     Object.keys(unicodeObject).forEach((name, index, self) => {
+      // Skip multicolor layer glyphs from standard CSS generation
+      if (multicolorGlyphNames.has(name)) return;
+
       if (!infoData[name]) infoData[name] = {};
       const _code = unicodeObject[name];
       let symbolName = options.classNamePrefix + options.symbolNameDelimiter + name
@@ -321,6 +349,61 @@ export default async (options: SvgToFontOptions = {}) => {
         </li>
       `);
     });
+
+    // Generate multicolor CSS and HTML
+    if (options.multicolor) {
+      for (const [iconName, mcInfo] of Object.entries(multicolorMap)) {
+        const symbolName = prefix + options.symbolNameDelimiter + iconName;
+
+        // Base positioning class for the multicolor icon
+        cssString.push(`.${symbolName} { display: inline-block; position: relative; }\n`);
+
+        // infoData for the original icon name
+        if (!infoData[iconName]) infoData[iconName] = {};
+        infoData[iconName].prefix = prefix;
+        infoData[iconName].className = symbolName;
+        infoData[iconName].multicolor = true;
+        infoData[iconName].layers = [];
+        infoData[iconName].encodedCode = `\\${mcInfo.layers[0].encodedCode.toString(16)}`;
+        infoData[iconName].unicode = `&#${mcInfo.layers[0].encodedCode};`;
+
+        mcInfo.layers.forEach((layer, idx) => {
+          const pathClass = `path${idx + 1}`;
+          const hex = layer.encodedCode.toString(16);
+
+          if (idx === 0) {
+            // First layer: establishes the size, no overlay
+            cssString.push(`.${symbolName} .${pathClass}::before { content: "\\${hex}"; color: ${layer.color}; }\n`);
+          } else {
+            // Subsequent layers: overlay with margin-left: -1em
+            cssString.push(`.${symbolName} .${pathClass}::before { content: "\\${hex}"; color: ${layer.color}; margin-left: -1em; }\n`);
+          }
+
+          infoData[iconName].layers!.push({
+            path: pathClass,
+            className: `${symbolName} ${pathClass}`,
+            encodedCode: `\\${hex}`,
+            unicode: `&#${layer.encodedCode};`,
+            color: layer.color,
+          });
+        });
+
+        // HTML for font-class preview
+        const spans = mcInfo.layers.map((_, i) =>
+          `<span class="path${i + 1}"></span>`
+        ).join('');
+        cssIconHtml.push(
+          `<li class="class-icon"><i class="${symbolName}">${spans}</i><p class="name">${iconName}</p></li>`
+        );
+
+        // HTML for unicode preview (show each layer separately)
+        mcInfo.layers.forEach((layer, idx) => {
+          unicodeHtml.push(
+            `<li class="unicode-icon"><span class="iconfont">${layer.unicode}</span><h4>${iconName}-path${idx + 1}</h4><span class="unicode">&amp;#${layer.encodedCode};</span></li>`
+          );
+        });
+      }
+    }
 
     if (options.useCSSVars) {
       cssString = [...cssRootVars, ...cssString]
@@ -364,6 +447,7 @@ export default async (options: SvgToFontOptions = {}) => {
         prefix,
         fontFamily: fontFamilyString,
         nameAsUnicode: options.useNameAsUnicode,
+        hasMulticolor: options.multicolor && Object.keys(multicolorMap).length > 0,
         _opts: cssOptions
       });
     }

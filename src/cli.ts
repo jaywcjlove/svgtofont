@@ -12,6 +12,7 @@ type ArgvResult = Arguments<{
   sources: string;
   output: string;
   fontName: string;
+  multicolor: boolean;
 }>
 
 const argv = yargs(hideBin(process.argv))
@@ -21,6 +22,9 @@ const argv = yargs(hideBin(process.argv))
   .describe('o', 'Output directory.')
   .alias('f', 'fontName')
   .describe('f', 'Font Name.')
+  .describe('multicolor', 'Enable multicolor icon support.')
+  .boolean('multicolor')
+  .default('multicolor', false)
   .demandOption(['output', 'sources'])
   .help('h')
   .alias('h', 'help')
@@ -49,6 +53,7 @@ svgtofont({
   outSVGReactNative: false,
   outSVGVue: true,
   outSVGPath: true,
+  multicolor: argv.multicolor || false,
   svgicons2svgfont: {
     fontHeight: 1000,
     normalize: true,

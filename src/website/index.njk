@@ -68,6 +68,9 @@
     .icons ul li.class-icon { font-size: 21px; line-height: 21px; padding-bottom: 20px; }
     .icons ul li.class-icon p{ font-size: 12px; }
     .icons ul li.class-icon [class^="{{ classNamePrefix }}-"]{ font-size: 26px; }
+    .icons ul li.class-icon [class^="{{ classNamePrefix }}-"] [class^="path"]::before {
+      font-family: '{{ fontname }}' !important;
+    }
     {% elif _type === 'unicode' %}
     .icons ul .unicode-icon span { display: block; }
     .icons ul .unicode-icon h4 { font-size: 12px; }
