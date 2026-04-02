@@ -95,6 +95,11 @@
     "ttf2woff2": "~8.0.0",
     "yargs": "^17.7.2"
   },
+  "overrides": {
+    "svg2ttf": {
+      "@xmldom/xmldom": "^0.8.12"
+    }
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/nunjucks": "^3.2.6",
