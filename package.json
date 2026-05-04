@@ -87,18 +87,13 @@
     "fs-extra": "~11.2.0",
     "image2uri": "^2.1.2",
     "nunjucks": "^3.2.4",
-    "svg2ttf": "~6.0.3",
+    "svg2ttf": "~6.1.0",
     "svgicons2svgfont": "~15.0.0",
     "svgo": "~3.3.0",
     "ttf2eot": "~3.1.0",
     "ttf2woff": "~3.0.0",
     "ttf2woff2": "~8.0.0",
     "yargs": "^17.7.2"
-  },
-  "overrides": {
-    "svg2ttf": {
-      "@xmldom/xmldom": "^0.8.12"
-    }
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
