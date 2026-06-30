@@ -232,7 +232,8 @@ export function createTTF(options: SvgToFontOptions = {}): Promise<Buffer> {
 export function createEOT(options: SvgToFontOptions = {}, ttf: Buffer) {
   return new Promise((resolve, reject) => {
     const DIST_PATH = path.join(options.dist, options.fontName + '.eot');
-    const eot = Buffer.from(ttf2eot(ttf).buffer);
+    const ttf2eotResult = ttf2eot(ttf);
+    const eot = Buffer.from(ttf2eotResult.buffer, ttf2eotResult.byteOffset, ttf2eotResult.byteLength);
 
     fs.writeFile(DIST_PATH, eot, (err: NodeJS.ErrnoException) => {
       if (err) {
