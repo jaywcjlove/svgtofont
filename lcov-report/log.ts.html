@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,59 +90,59 @@
 <a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">127x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">122x</span>
+<span class="cline-any cline-yes">122x</span>
+<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export class Log {
+<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">export class Log {
   _disabled?:boolean;
-<span class="fstat-no" title="function not covered" >  co</span>nstructor(disabled?: boolean) {
-<span class="cstat-no" title="statement not covered" >    this.disabled = disabled || false</span>
+  constructor(disabled?: boolean) {
+    this.disabled = disabled || false
   }
-<span class="fstat-no" title="function not covered" >  ge</span>t disabled () {
-<span class="cstat-no" title="statement not covered" >    return this._disabled;</span>
+  get disabled () {
+    return this._disabled;
   }
-<span class="fstat-no" title="function not covered" >  se</span>t disabled(val: boolean) {
-<span class="cstat-no" title="statement not covered" >    this._disabled = val;</span>
+  set disabled(val: boolean) {
+    this._disabled = val;
   }
-  log = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(m</span>essage?: any, ...optionalParams: any[]) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (this.logger) <span class="cstat-no" title="statement not covered" >this.logger(message);</span></span>
-<span class="cstat-no" title="statement not covered" >    if (this.disabled) <span class="cstat-no" title="statement not covered" >return <span class="fstat-no" title="function not covered" >()</span> =&gt; {}</span></span>
-<span class="cstat-no" title="statement not covered" >    return console.log(message, ...optionalParams)</span>
+  log = (message?: any, ...optionalParams: any[]) =&gt; {
+    if (this.logger) this.logger(message);
+    if (this.disabled) return <span class="fstat-no" title="function not covered" >()</span> =&gt; {}
+    return console.log(message, ...optionalParams)
   }
-  error = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(m</span>essage?: any, ...optionalParams: any[]) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (this.logger) <span class="cstat-no" title="statement not covered" >this.logger(message);</span></span>
-<span class="cstat-no" title="statement not covered" >    if (this.disabled) <span class="cstat-no" title="statement not covered" >return <span class="fstat-no" title="function not covered" >()</span> =&gt; {}</span></span>
-<span class="cstat-no" title="statement not covered" >    return console.error(message, ...optionalParams)</span>
+  error = (message?: any, ...optionalParams: any[]) =&gt; {
+    if (this.logger) this.logger(message);
+    if (this.disabled) return <span class="fstat-no" title="function not covered" >()</span> =&gt; {}
+    return console.error(message, ...optionalParams)
   }
-  logger = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(m</span>essage?: string) =&gt; {}</span>
+  logger = (message?: string) =&gt; {}
 }
 &nbsp;
-export const log = <span class="cstat-no" title="statement not covered" >new Log();</span></pre></td></tr></table></pre>
+export const log = new Log();</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-30T15:00:21.263Z
+                at 2026-11-19T15:32:50.772Z
             </div>
         <script src="prettify.js"></script>
         <script>

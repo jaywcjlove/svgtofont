@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -146,7 +146,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,21 +162,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,9 +189,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">#!/usr/bin/env node
 &nbsp;
@@ -212,7 +212,7 @@ type ArgvResult = Arguments&lt;{
   multicolor: boolean;
 }&gt;
 &nbsp;
-const argv = <span class="cstat-no" title="statement not covered" >yargs(hideBin(process.argv))</span>
+const argv = yargs(hideBin(process.argv))
   .alias('s', 'sources')
   .describe('s', 'The root from which all sources are relative.')
   .alias('o', 'output')
@@ -228,19 +228,19 @@ const argv = <span class="cstat-no" title="statement not covered" >yargs(hideBin
   .epilog('copyright 2019')
   .argv as ArgvResult;
 &nbsp;
-const sourcesPath = <span class="cstat-no" title="statement not covered" >path.resolve(process.cwd(), argv.sources);</span>
-const outputPath = <span class="cstat-no" title="statement not covered" >path.resolve(process.cwd(), argv.output);</span>
+const sourcesPath = path.resolve(process.cwd(), argv.sources);
+const outputPath = path.resolve(process.cwd(), argv.output);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >if (!FS.pathExistsSync(sourcesPath)) {</span>
-<span class="cstat-no" title="statement not covered" >  log.error('The directory does not exist!', sourcesPath);</span>
-<span class="cstat-no" title="statement not covered" >  process.exit();</span>
+if (!FS.pathExistsSync(sourcesPath)) {
+  log.error('The directory does not exist!', sourcesPath);
+  process.exit();
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >if (!FS.pathExistsSync(outputPath)) {</span>
-<span class="cstat-no" title="statement not covered" >  FS.mkdirpSync(outputPath);</span>
+if (!FS.pathExistsSync(outputPath)) {
+  FS.mkdirpSync(outputPath);
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >svgtofont({</span>
+svgtofont({
   src: sourcesPath, // svg path
   dist: outputPath, // output path
   // emptyDist: true, // Clear output directory contents
@@ -256,10 +256,10 @@ const outputPath = <span class="cstat-no" title="statement not covered" >path.re
     normalize: true,
   },
 })
-.then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >  log.log('done!');</span>
-}).catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >  log.log('SvgToFont:ERR:', err);</span>
+.then(() =&gt; {
+  log.log('done!');
+}).catch((err) =&gt; {
+  log.log('SvgToFont:ERR:', err);
 });
 &nbsp;</pre></td></tr></table></pre>
 
@@ -268,7 +268,7 @@ const outputPath = <span class="cstat-no" title="statement not covered" >path.re
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-30T15:00:21.263Z
+                at 2026-11-19T15:32:50.772Z
             </div>
         <script src="prettify.js"></script>
         <script>
