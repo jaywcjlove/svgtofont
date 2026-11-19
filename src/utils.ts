@@ -164,8 +164,10 @@ export function filterSvgFiles(svgFolderPath: string): string[] {
 
   for (let i in files) {
     if (typeof files[i] !== 'string' || path.extname(files[i]) !== '.svg') continue;
-    if (!~svgArr.indexOf(files[i])) {
-      svgArr.push(path.join(svgFolderPath, files[i]));
+    const filePath = path.join(svgFolderPath, files[i]);
+    // Directory entries are basenames, so compare the path that is stored.
+    if (!svgArr.includes(filePath)) {
+      svgArr.push(filePath);
     }
   }
   return svgArr;
