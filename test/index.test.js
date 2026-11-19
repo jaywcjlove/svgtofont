@@ -1,19 +1,29 @@
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import fs from 'fs-extra';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import pkg from '../package.json';
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// const pkg = fs.readJSONSync(path.resolve(__dirname, "../package.json"));
+const execFileAsync = promisify(execFile);
 
-// const fs = require('fs-extra');
-// const path = require('path');
-// const svgtofont = require('../lib/index.js');
+// `npm test` builds these in `pretest`. `npm run coverage` does not, so create
+// any missing example output before reading it.
+async function ensureExampleOutput(script, dist) {
+  if (await fs.pathExists(dist)) return;
+  await execFileAsync(process.execPath, [script], { cwd: process.cwd() });
+}
+
+const exampleDist = path.resolve(process.cwd(), 'examples', 'example', 'dist');
+const exampleSimpleDist = path.resolve(process.cwd(), 'examples', 'example', 'example');
+const templatesDist = path.resolve(process.cwd(), 'examples', 'templates', 'dist2');
+
+beforeAll(async () => {
+  await ensureExampleOutput('examples/example/index.mjs', exampleDist);
+  await ensureExampleOutput('examples/example/simple.mjs', exampleSimpleDist);
+  await ensureExampleOutput('examples/templates/index.mjs', templatesDist);
+}, 120000);
 
 it('example test case.', async () => {
-  const dist = path.resolve(process.cwd(), 'examples', 'example', 'dist');
-  const fileNames = await fs.readdir(dist);
+  const fileNames = (await fs.readdir(exampleDist)).sort();
   expect(fileNames).toEqual([
     'font-class.html',
     'index.html',
@@ -38,8 +48,7 @@ it('example test case.', async () => {
 });
 
 it('example simple test case.', async () => {
-  const dist = path.resolve(process.cwd(), 'examples', 'example', 'example');
-  const fileNames = await fs.readdir(dist);
+  const fileNames = (await fs.readdir(exampleSimpleDist)).sort();
   expect(fileNames).toEqual([
     'svgtofont.css',
     'svgtofont.eot',
@@ -56,8 +65,7 @@ it('example simple test case.', async () => {
 })
 
 it('templates templates test case.', async () => {
-  const dist = path.resolve(process.cwd(), 'examples', 'templates', 'dist2');
-  const fileNames = await fs.readdir(dist);
+  const fileNames = (await fs.readdir(templatesDist)).sort();
   expect(fileNames).toEqual([
     'font-class.html',
     'index.html',
@@ -78,6 +86,6 @@ it('templates templates test case.', async () => {
     'symbol.html',
     'vue'
   ]);
-  const css = await fs.readFile(path.resolve(dist, 'svgtofont.css'));
+  const css = await fs.readFile(path.resolve(templatesDist, 'svgtofont.css'));
   expect(css.toString().indexOf('Hello CSS!') > -1).toBeTruthy();
 })
