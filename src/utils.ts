@@ -9,7 +9,7 @@ import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import nunjucks from 'nunjucks';
 import { merge } from 'auto-config-loader';
-import { type SvgToFontOptions } from './';
+import { type SvgToFontOptions } from './index.js';
 import { log } from './log.js';
 import { analyzeSvgColors, generateLayerSvgs, type MulticolorMap, type CreateSVGResult } from './multicolor.js';
 

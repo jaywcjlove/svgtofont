@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "ESNext",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "declaration": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "strict": false,
     "skipLibCheck": true,
-    "outDir": "lib",
-    "baseUrl": "."
+    "rootDir": "src",
+    "outDir": "lib"
   },
   "include": [
     "src/**/*"
-, "test/index.test.mjs", "test/index.test.js"  ],
+  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
