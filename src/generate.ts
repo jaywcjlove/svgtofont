@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { optimize } from 'svgo';
-import { filterSvgFiles, toPascalCase } from './utils.js';
+import { listIconFiles, toPascalCase, type IconFile } from './utils.js';
 import { type SvgToFontOptions } from './';
 
 /**
@@ -9,8 +9,8 @@ import { type SvgToFontOptions } from './';
  * <font-name>.json
  */
 export async function generateIconsSource(options: SvgToFontOptions = {}){
-  const ICONS_PATH = filterSvgFiles(options.src)
-  const data = await buildPathsObject(ICONS_PATH, options);
+  const icons = listIconFiles(options.src);
+  const data = await buildPathsObject(icons, options);
   const outPath = path.join(options.dist, `${options.fontName}.json`);
   await fs.outputFile(outPath, `{${data}\n}`);
   return outPath;
@@ -21,14 +21,13 @@ export async function generateIconsSource(options: SvgToFontOptions = {}){
  * and constructs map of icon name to array of path strings.
  * @param {array} files
  */
-async function buildPathsObject(files: string[], options: SvgToFontOptions = {}) {
+async function buildPathsObject(files: IconFile[], options: SvgToFontOptions = {}) {
   const svgoOptions = options.svgoOptions || {};
   return Promise.all(
-    files.map(async filepath => {
-      const name = path.basename(filepath, '.svg');
-      const svg = fs.readFileSync(filepath, 'utf-8');
+    files.map(async ({ filePath, name }) => {
+      const svg = fs.readFileSync(filePath, 'utf-8');
       const pathStrings = optimize(svg, {
-        path: filepath,
+        path: filePath,
         ...options,
         plugins: [
           'convertTransform',
@@ -57,28 +56,28 @@ export declare const ${name}: (props: React.SVGProps<SVGSVGElement>) => JSX.Elem
  * <font-name>.json
  */
 export async function generateReactIcons(options: SvgToFontOptions = {}) {
-  const ICONS_PATH = filterSvgFiles(options.src);
-  const data = await outputReactFile(ICONS_PATH, options);
+  const icons = listIconFiles(options.src);
+  const data = await outputReactFile(icons, options);
   const outPath = path.join(options.dist, 'react', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
   fs.outputFileSync(outPath.replace(/\.js$/, '.d.ts'), data.join('\n'));
   return outPath;
 }
 
-async function outputReactFile(files: string[], options: SvgToFontOptions = {}) {
+async function outputReactFile(files: IconFile[], options: SvgToFontOptions = {}) {
   const svgoOptions = options.svgoOptions || {};
   const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize
   const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? '16px' : '') : fontSizeOpt;
   const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
-    files.map(async filepath => {
-      let name = toPascalCase(path.basename(filepath, '.svg'));
+    files.map(async ({ filePath, name: iconName }) => {
+      let name = toPascalCase(iconName);
       if (/^[rR]eact$/.test(name)) {
         name = name + toPascalCase(fontName);
       }
-      const svg = fs.readFileSync(filepath, 'utf-8');
+      const svg = fs.readFileSync(filePath, 'utf-8');
       const pathData = optimize(svg, {
-        path: filepath,
+        path: filePath,
         ...svgoOptions,
         plugins: [
           'removeXMLNS',
@@ -134,18 +133,17 @@ export declare const ${name}: (props: ${name}Props) => JSX.Element;
  * <font-name>.json
  */
 export function generateReactNativeIcons(options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
-  const ICONS_PATH = filterSvgFiles(options.src);
-  outputReactNativeFile(ICONS_PATH, options, unicodeObject);
+  const icons = listIconFiles(options.src);
+  outputReactNativeFile(icons, options, unicodeObject);
 }
 
-function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
+function outputReactNativeFile(files: IconFile[], options: SvgToFontOptions = {}, unicodeObject: Record<string, string>) {
   const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize;
   const fontSize = typeof fontSizeOpt === 'boolean' ? 16 : parseInt(fontSizeOpt);
   const fontName = options.classNamePrefix || options.fontName
   const iconMap = new Map<string, string>();
-  files.map(filepath => {
-    const baseFileName = path.basename(filepath, '.svg');
-    iconMap.set(baseFileName, unicodeObject[baseFileName])
+  files.map(({ name }) => {
+    iconMap.set(name, unicodeObject[name])
   });
   const outDistPath = path.join(options.dist, 'reactNative', `${fontName}.jsx`);
   const comName = isNaN(Number(fontName.charAt(0))) ? fontName : toPascalCase(fontName) + name;
@@ -158,28 +156,28 @@ function outputReactNativeFile(files: string[], options: SvgToFontOptions = {}, 
  * <font-name>.json
  */
 export async function generateVueIcons(options: SvgToFontOptions = {}) {
-  const ICONS_PATH = filterSvgFiles(options.src);
-  const data = await outputVueFile(ICONS_PATH, options);
+  const icons = listIconFiles(options.src);
+  const data = await outputVueFile(icons, options);
   const outPath = path.join(options.dist, 'vue', 'index.js');
   fs.outputFileSync(outPath, data.join('\n'));
   fs.outputFileSync(outPath.replace(/\.js$/, '.d.ts'), data.join('\n'));
   return outPath;
 }
 
-async function outputVueFile(files: string[], options: SvgToFontOptions = {}) {
+async function outputVueFile(files: IconFile[], options: SvgToFontOptions = {}) {
   const svgoOptions = options.svgoOptions || {};
   const fontSizeOpt = typeof options.css !== 'boolean' && options.css.fontSize
   const fontSize = typeof fontSizeOpt === 'boolean' ? (fontSizeOpt === true ? '16px' : '') : fontSizeOpt;
   const fontName = options.classNamePrefix || options.fontName
   return Promise.all(
-    files.map(async filepath => {
-      let name = toPascalCase(path.basename(filepath, '.svg'));
+    files.map(async ({ filePath, name: iconName }) => {
+      let name = toPascalCase(iconName);
       if (/^[vV]ue$/.test(name)) {
         name = name + toPascalCase(fontName);
       }
-      const svg = fs.readFileSync(filepath, 'utf-8');
+      const svg = fs.readFileSync(filePath, 'utf-8');
       const pathData = optimize(svg, {
-        path: filepath,
+        path: filePath,
         ...svgoOptions,
         plugins: [
           'removeXMLNS',

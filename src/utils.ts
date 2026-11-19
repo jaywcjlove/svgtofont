@@ -24,6 +24,7 @@ let startUnicode = 0xea01;
  * SVG to SVG font
  */
 export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResult> {
+  const icons = listIconFiles(options.src);
   startUnicode = options.startUnicode
   UnicodeObj = {}
   const multicolorMap: MulticolorMap = {};
@@ -37,29 +38,29 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResu
       ...options.svgicons2svgfont
     });
 
-    function writeFontStream(svgPath: string) {
-      // file name
-      let _name = path.basename(svgPath, ".svg");
+    function writeFontStream(svgPath: string, originalName: string, name: string) {
       const glyph = fs.createReadStream(svgPath) as ReadStream & { metadata: { unicode: string[], name: string } };
 
       const curUnicode = String.fromCodePoint(startUnicode);
+      // Callbacks keep matching on the SVG file name. Classes use `name`.
       const [_curUnicode, _startUnicode] = options.getIconUnicode
-        ? (options.getIconUnicode(_name, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
+        ? (options.getIconUnicode(originalName, curUnicode, startUnicode) || [curUnicode]) : [curUnicode];
 
       if (_startUnicode) startUnicode = _startUnicode;
 
       const unicode: string[] = [_curUnicode];
       if (curUnicode === _curUnicode && (!_startUnicode || startUnicode === _startUnicode)) startUnicode++;
 
-      UnicodeObj[_name] = unicode[0];
+      UnicodeObj[name] = unicode[0];
       if (!!options.useNameAsUnicode) {
-        unicode[0] = _name;
-        UnicodeObj[_name] = _name;
+        unicode[0] = originalName;
+        UnicodeObj[name] = originalName;
       }
+      // Ligatures stay the original file name. That string is font text, not a class.
       if (!!options.addLigatures) {
-        unicode.push(_name)
+        unicode.push(originalName)
       }
-      glyph.metadata = { unicode, name: _name };
+      glyph.metadata = { unicode, name };
       fontStream.write(glyph);
     }
 
@@ -88,12 +89,9 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResu
           reject(err);
         }
       });
-    filterSvgFiles(options.src).forEach((svg: string) => {
-      if (typeof svg !== 'string') return false;
-
+    icons.forEach(({ filePath, originalName, name }) => {
       if (options.multicolor) {
-        const iconName = path.basename(svg, '.svg');
-        const svgContent = fs.readFileSync(svg, 'utf-8');
+        const svgContent = fs.readFileSync(filePath, 'utf-8');
         const analysis = analyzeSvgColors(svgContent);
 
         if (analysis.isMulticolor) {
@@ -101,7 +99,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResu
           const layers: import('./multicolor.js').MulticolorLayerInfo[] = [];
 
           layerSvgs.forEach((layer, idx) => {
-            const glyphName = `${iconName}-path${idx + 1}`;
+            const glyphName = `${name}-path${idx + 1}`;
             const tmpPath = path.join(tempDir!, glyphName + '.svg');
             fs.writeFileSync(tmpPath, layer.svgContent);
             const result = writeGlyphFromFile(tmpPath, glyphName);
@@ -115,8 +113,8 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResu
             });
           });
 
-          multicolorMap[iconName] = {
-            originalName: iconName,
+          multicolorMap[name] = {
+            originalName,
             layerCount: layers.length,
             layers,
           };
@@ -125,7 +123,7 @@ export function createSVG(options: SvgToFontOptions = {}): Promise<CreateSVGResu
         }
       }
 
-      writeFontStream(svg);
+      writeFontStream(filePath, originalName, name);
     });
 
     // Do not forget to end the stream
@@ -179,6 +177,72 @@ export function snakeToUppercase(str: string) {
     .join('')
 }
 
+/** Enum member for a normalized icon name. Leading digits are not valid identifiers. */
+export function toEnumMember(name: string): string {
+  const member = snakeToUppercase(name);
+  if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(member)) return member;
+  return `_${member}`;
+}
+
+/**
+ * CSS-ident-safe icon name. Characters outside [A-Za-z0-9_-] become "-".
+ * Leading and trailing hyphens are removed. A leading digit is prefixed
+ * with "_" so the result can be a class, a SCSS variable, and an SVG id.
+ * Names that are already valid are left unchanged. Ligatures keep using
+ * the original file name.
+ */
+export function normalizeIconName(fileName: string): string {
+  const name = fileName
+    .replace(/[^A-Za-z0-9_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  if (/^[0-9]/.test(name)) return `_${name}`;
+  return name;
+}
+
+export type IconFile = {
+  filePath: string;
+  /** SVG file name without the extension. */
+  originalName: string;
+  /** Normalized name used for classes, variables, and ids. */
+  name: string;
+};
+
+/**
+ * SVG icons in a folder, with file names normalized to one shared identifier.
+ * Throws when a file name cannot be normalized, or when two files normalize
+ * to the same name.
+ */
+export function listIconFiles(svgFolderPath: string): IconFile[] {
+  const icons = filterSvgFiles(svgFolderPath).map((filePath) => {
+    const originalName = path.basename(filePath, path.extname(filePath));
+    const name = normalizeIconName(originalName);
+    if (!name) {
+      throw new Error(
+        `Cannot derive a valid icon name from "${originalName}". ` +
+        `Use a file name that contains a letter, digit, "_" or "-".`
+      );
+    }
+    return { filePath, originalName, name };
+  });
+
+  const groups = new Map<string, string[]>();
+  for (const icon of icons) {
+    const originals = groups.get(icon.name);
+    if (originals) originals.push(icon.originalName);
+    else groups.set(icon.name, [icon.originalName]);
+  }
+  const collisions = [...groups.entries()].filter(([, originals]) => originals.length > 1);
+  if (collisions.length > 0) {
+    const details = collisions
+      .map(([name, originals]) => `${originals.map((original) => `"${original}"`).join(', ')} → "${name}"`)
+      .join('; ');
+    throw new Error(
+      `Icon names collide after normalization: ${details}. Rename the SVG files so each icon name is unique.`
+    );
+  }
+  return icons;
+}
+
 export type TypescriptOptions = {
   extension?: 'd.ts' | 'ts' | 'tsx',
   enumName?: string
@@ -192,12 +256,12 @@ export async function createTypescript(options: Omit<SvgToFontOptions, 'typescri
   const uppercaseFontName = snakeToUppercase(options.fontName);
   const { extension = 'd.ts', enumName = uppercaseFontName } = tsOptions;
   const DIST_PATH = path.join(options.dist, `${options.fontName}.${extension}`);
-  const fileNames = filterSvgFiles(options.src).map(svgPath => path.basename(svgPath, path.extname(svgPath)));
+  const fileNames = listIconFiles(options.src).map(icon => icon.name);
   await fs.writeFile(
     DIST_PATH,
     [
       `export enum ${enumName} {`,
-      ...fileNames.map(name => `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}",`),
+      ...fileNames.map(name => `  ${toEnumMember(name)} = "${options.classNamePrefix}-${name}",`),
       '}',
       `export type ${enumName}Classname = ${fileNames.map(name => `"${options.classNamePrefix}-${name}"`).join(' | ')}`,
       `export type ${enumName}Icon = ${fileNames.map(name => `"${name}"`).join(' | ')}`,
@@ -287,10 +351,10 @@ export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
 export function createSvgSymbol(options: SvgToFontOptions = {}) {
   const DIST_PATH = path.join(options.dist, `${options.fontName}.symbol.svg`);
   const $ = load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>');
+  const icons = listIconFiles(options.src);
   return new Promise((resolve, reject) => {
-    filterSvgFiles(options.src).forEach(svgPath => {
-      const fileName = path.basename(svgPath, path.extname(svgPath));
-      let file = fs.readFileSync(svgPath, "utf8");
+    icons.forEach(({ filePath, name }) => {
+      let file = fs.readFileSync(filePath, "utf8");
 
       // trim xml declaration
       file = file.replace(/<\?xml.*?\?>\s*/g, '').trim();
@@ -298,7 +362,7 @@ export function createSvgSymbol(options: SvgToFontOptions = {}) {
       const svgNode = $(file);
       const symbolNode = $("<symbol></symbol>");
       symbolNode.attr("viewBox", svgNode.attr("viewBox"));
-      symbolNode.attr("id", `${options.classNamePrefix}-${fileName}`);
+      symbolNode.attr("id", `${options.classNamePrefix}-${name}`);
       symbolNode.append(svgNode.html());
       $('svg').append(symbolNode);
     });

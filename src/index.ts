@@ -12,8 +12,10 @@ import { generateIconsSource, generateReactIcons, generateReactNativeIcons, gene
 import { createSVG, createTTF, createEOT, createWOFF, createWOFF2, createSvgSymbol, copyTemplate, type CSSOptions, createHTML, createTypescript, type TypescriptOptions } from './utils.js';
 import { generateFontFaceCSS, getDefaultOptions } from './utils.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Not named `__filename`: Jest's import.meta transform reads that binding and
+// would throw "Cannot access '__filename' before initialization".
+const sourceFile = fileURLToPath(import.meta.url);
+const sourceDir = path.dirname(sourceFile);
 
 export type SvgToFontOptions = {
   /** Support for .svgtofontrc and more configuration files. */
@@ -321,7 +323,8 @@ export default async (options: SvgToFontOptions = {}) => {
 
       if (options.useNameAsUnicode) {
         symbolName = name;
-        iconPart = prefix + '">' + name;
+        // `_code` is the original file name, which is the ligature text.
+        iconPart = prefix + '">' + _code;
         encodedCodes = [..._code].map(x => x.codePointAt(0)).join(';&amp;#');
       } else {
         cssToVars.push(`$${symbolName}: "\\${encodedCodes.toString(16)}";\n`);
@@ -430,7 +433,7 @@ export default async (options: SvgToFontOptions = {}) => {
     }
 
     if (options.css) {
-      const styleTemplatePath = options.styleTemplates || path.resolve(__dirname, 'styles')
+      const styleTemplatePath = options.styleTemplates || path.resolve(sourceDir, 'styles')
       const outDir = typeof options.css === 'object' ? options.css.output || options.dist : options.dist;
       const hasTimestamp = typeof options.css === 'object' ? options.css.hasTimestamp : true;
 
@@ -470,7 +473,7 @@ export default async (options: SvgToFontOptions = {}) => {
       const symbolPath = htmlPaths['symbol'];
 
       // default template
-      options.website.template = options.website.template || path.join(__dirname, 'website', 'index.njk');
+      options.website.template = options.website.template || path.join(sourceDir, 'website', 'index.njk');
       // template data
       const tempData: SvgToFontOptions['website'] & {
         fontname: string;
@@ -540,5 +543,6 @@ export default async (options: SvgToFontOptions = {}) => {
     return infoData;
   } catch (error) {
     log.log('SvgToFont:CLI:ERR:', error);
+    throw error;
   }
 }
